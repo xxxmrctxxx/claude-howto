@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by data-theme on <html> (set before paint by an inline
+   script in layout.tsx), so the user's choice wins over the OS setting. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Brand palette: cam đất (terracotta), kem (cream), trắng, xám đậm.
+   Contrast checked (WCAG AA): primary #A04A29 on white 6.0:1, on primary-soft 4.9:1; muted text 5.5:1. */
+:root {
+  --background: #fbf7f1;
+  --foreground: #2a2622;
+  --card: #ffffff;
+  --card-foreground: #2a2622;
+  --muted: #f3ece2;
+  --muted-foreground: #6b635a;
+  --primary: #a04a29;
+  --primary-hover: #8a3f22;
+  --primary-foreground: #ffffff;
+  --primary-soft: #f6e4da;
+  --accent: #efe6da;
+  --accent-foreground: #2a2622;
+  --border: #e5dbcf;
+  --ring: #a04a29;
+  --success: #276b43;
+  --success-soft: #e3f1e8;
+  --warning: #855610;
+  --warning-soft: #fbf0d9;
+  --danger: #b4372f;
+  --danger-soft: #f9e3e1;
+  --info: #2f6690;
+  --info-soft: #e2edf6;
+  /* Prompt component colours (Role, Context, Task, Constraints, Output). */
+  --c-role: #8a4fb0;
+  --c-context: #2f6690;
+  --c-task: #b05430;
+  --c-constraints: #9a6512;
+  --c-output: #276b43;
+  --terminal-bg: #1f1d1b;
+  --terminal-fg: #e9e3da;
+  --radius: 1rem;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --background: #1c1a18;
+  --foreground: #f2ede6;
+  --card: #252220;
+  --card-foreground: #f2ede6;
+  --muted: #2e2a27;
+  --muted-foreground: #a89f95;
+  --primary: #e8845c;
+  --primary-hover: #f09872;
+  --primary-foreground: #1c1a18;
+  --primary-soft: #3a2a22;
+  --accent: #34302c;
+  --accent-foreground: #f2ede6;
+  --border: #3d3833;
+  --ring: #e8845c;
+  --success: #6cc08f;
+  --success-soft: #1f3327;
+  --warning: #e0b05a;
+  --warning-soft: #3a3020;
+  --danger: #ef8a80;
+  --danger-soft: #3d2422;
+  --info: #7fb2dc;
+  --info-soft: #1f2d3a;
+  --c-role: #c79be6;
+  --c-context: #7fb2dc;
+  --c-task: #e8845c;
+  --c-constraints: #e0b05a;
+  --c-output: #6cc08f;
+  --terminal-bg: #121110;
+  --terminal-fg: #e9e3da;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-role: var(--c-role);
+  --color-context: var(--c-context);
+  --color-task: var(--c-task);
+  --color-constraints: var(--c-constraints);
+  --color-output: var(--c-output);
+  --color-terminal-bg: var(--terminal-bg);
+  --color-terminal-fg: var(--terminal-fg);
+  --font-sans: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    scroll-padding-top: 5rem;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--primary-soft);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mermaid output inherits the site font and never overflows its card. */
+.mermaid-diagram svg {
+  max-width: 100%;
+  height: auto;
+  font-family: var(--font-sans);
+}

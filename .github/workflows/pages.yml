@@ -9,6 +9,7 @@ on:
       - 'scripts/build_website.py'
       - 'scripts/vendor_assets.py'
       - 'scripts/website_templates/**'
+      - 'academy/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -41,6 +42,29 @@ jobs:
 
       - name: Build website
         run: uv run scripts/build_website.py --verbose
+
+      # Claude HowTo Academy (Next.js static export) is published next to the
+      # docs site, under <pages base path>/academy/.
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: academy/package-lock.json
+
+      - name: Build academy
+        working-directory: academy
+        env:
+          ACADEMY_BASE_PATH: ${{ steps.pages.outputs.base_path }}/academy
+        run: |
+          npm ci
+          npm run build
+          mkdir -p ../site/academy
+          cp -r out/. ../site/academy/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

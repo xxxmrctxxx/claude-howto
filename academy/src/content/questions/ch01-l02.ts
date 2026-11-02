@@ -1,0 +1,193 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch01-l02";
+
+/** 15 questions for "Claude khác chatbot thông thường ra sao?" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh01L02: Question[] = [
+  {
+    questionId: "ch01-l02-q01", lessonId: L, conceptId: "rule-based", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Chatbot kịch bản (rule-based) thường hoạt động bằng cách nào?",
+    options: [
+      { id: "a", text: "So khớp từ khoá với các quy tắc viết sẵn rồi trả câu trả lời soạn sẵn", feedback: "Đúng." },
+      { id: "b", text: "Đọc hiểu cả câu và tạo câu trả lời mới mỗi lần", feedback: "Đó là cách một trợ lý dựa trên LLM như Claude làm việc." },
+      { id: "c", text: "Gọi điện cho nhân viên để hỏi", feedback: "Không phải cơ chế của chatbot." },
+    ],
+    answer: "a",
+    explanation: "Bot kịch bản chỉ đi theo các nhánh đã lập trình; câu hỏi ngoài kịch bản sẽ không được hiểu.",
+  },
+  {
+    questionId: "ch01-l02-q02", lessonId: L, conceptId: "conversation", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Trong cùng một cuộc hội thoại, bạn có thể nói với Claude “viết ngắn hơn nữa” mà không cần dán lại nội dung, vì Claude nhìn thấy các tin nhắn trước đó.",
+    answer: true,
+    explanation: "Đúng. Các lượt trước trong cùng cuộc hội thoại nằm trong context của Claude.",
+  },
+  {
+    questionId: "ch01-l02-q03", lessonId: L, conceptId: "multimodal", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Theo tài liệu của Anthropic, các model Claude hiện tại nhận được những loại đầu vào nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Văn bản", feedback: "Đúng." },
+      { id: "b", text: "Hình ảnh", feedback: "Đúng — tất cả model hiện tại đều hỗ trợ đầu vào hình ảnh." },
+      { id: "c", text: "Mùi hương", feedback: "Không." },
+      { id: "d", text: "Nhiều ngôn ngữ khác nhau", feedback: "Đúng — có khả năng đa ngôn ngữ." },
+    ],
+    answer: ["a", "b", "d"],
+    explanation: "Trang Models overview ghi: mọi model hiện tại hỗ trợ đầu vào văn bản và hình ảnh, đầu ra văn bản, đa ngôn ngữ và dùng công cụ.",
+  },
+  {
+    questionId: "ch01-l02-q04", lessonId: L, conceptId: "keyword", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "predict-output",
+    prompt: "Một bot kịch bản có quy tắc: nếu tin nhắn chứa “giờ” → trả lời “Chúng tôi làm việc 8h–17h”. Khách gửi câu dưới đây. Bot sẽ làm gì?",
+    context: { label: "Tin nhắn của khách", content: "Máy tôi mua năm ngoái giờ bị hỏng, có được sửa miễn phí không?" },
+    options: [
+      { id: "a", text: "Trả lời giờ làm việc 8h–17h — sai hoàn toàn ý khách", feedback: "Đúng: từ “giờ” (nghĩa là “bây giờ”) kích hoạt nhầm quy tắc." },
+      { id: "b", text: "Trả lời đúng chính sách bảo hành", feedback: "Bot không có quy tắc nào nhận ra ý “bảo hành” trong câu này." },
+      { id: "c", text: "Hỏi lại ngày mua và số seri", feedback: "Bot kịch bản không tự suy luận được thông tin cần hỏi." },
+    ],
+    answer: "a",
+    explanation: "Bắt từ khoá không hiểu nghĩa: một từ có nhiều nghĩa có thể kích hoạt nhầm câu trả lời.",
+  },
+  {
+    questionId: "ch01-l02-q05", lessonId: L, conceptId: "generation", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền từ còn thiếu.",
+    template: "Khác với câu trả lời soạn sẵn của bot kịch bản, Claude [[b1]] nội dung mới phù hợp với từng yêu cầu, ví dụ soạn email hay tóm tắt biên bản.",
+    blanks: [{ id: "b1", accepted: ["tạo", "tạo ra", "sinh", "sinh ra", "viết", "soạn"], width: 8 }],
+    explanation: "Claude là mô hình sinh văn bản (generative): nó tạo ra câu trả lời mới thay vì chọn từ danh sách có sẵn.",
+  },
+  {
+    questionId: "ch01-l02-q06", lessonId: L, conceptId: "understanding", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Ba tin nhắn nào dưới đây có CÙNG ý định (intent) mà một trợ lý như Claude có thể nhận ra? Chọn tất cả.",
+    options: [
+      { id: "a", text: "“Tôi muốn trả lại hàng vì giao nhầm mẫu”", feedback: "Đúng — ý định đổi trả." },
+      { id: "b", text: "“Hàng gửi sai loại rồi, giờ xử lý sao?”", feedback: "Đúng — cùng ý định, khác cách diễn đạt." },
+      { id: "c", text: "“Cho mình hoàn hàng nhé, không đúng cái đã đặt”", feedback: "Đúng." },
+      { id: "d", text: "“Công ty làm việc đến mấy giờ?”", feedback: "Đây là hỏi giờ làm việc, khác ý định." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Hiểu ý định bất kể cách diễn đạt là điểm mạnh lớn của mô hình ngôn ngữ so với bắt từ khoá.",
+  },
+  {
+    questionId: "ch01-l02-q07", lessonId: L, conceptId: "predictability", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Trong tình huống nào chatbot kịch bản (câu trả lời cố định) có LỢI THẾ rõ ràng?",
+    options: [
+      { id: "a", text: "Trả lời một câu duy nhất phải đúng nguyên văn theo quy định, ví dụ hotline khẩn cấp", feedback: "Đúng — cố định, dễ kiểm soát, không diễn giải lại." },
+      { id: "b", text: "Tóm tắt biên bản họp dài", feedback: "Cần hiểu và tạo nội dung — thế mạnh của Claude." },
+      { id: "c", text: "Viết lại email cho lịch sự", feedback: "Cần diễn đạt lại — thế mạnh của Claude." },
+      { id: "d", text: "Trả lời câu hỏi diễn đạt theo nhiều cách khác nhau", feedback: "Bot kịch bản yếu ở đây." },
+    ],
+    answer: "a",
+    explanation: "Câu trả lời cố định có ưu điểm: luôn giống nhau, đã được duyệt trước. Phù hợp với nội dung bắt buộc chính xác tuyệt đối.",
+  },
+  {
+    questionId: "ch01-l02-q08", lessonId: L, conceptId: "rule-based", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi đặc điểm với công cụ phù hợp nhất.",
+    pairs: [
+      { id: "fixed", left: "Câu trả lời giống hệt nhau mọi lần", right: "Chatbot kịch bản" },
+      { id: "context", left: "Nhớ điều bạn nói ở tin nhắn trước trong cùng hội thoại", right: "Claude" },
+      { id: "image", left: "Đọc ảnh chụp bảng số đo và chuyển thành bảng", right: "Claude (đầu vào hình ảnh)" },
+      { id: "menu", left: "Chỉ hiểu các lựa chọn trong menu đã định sẵn", right: "Menu tự động bấm phím" },
+    ],
+    explanation: "Mỗi công cụ có thế mạnh riêng; hiểu điều đó giúp bạn chọn đúng.",
+  },
+  {
+    questionId: "ch01-l02-q09", lessonId: L, conceptId: "tool-choice", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Chọn phương án hợp lý nhất cho tình huống sau.",
+    context: {
+      label: "Tình huống",
+      content: "Phòng kinh doanh muốn trả lời tự động câu hỏi của đại lý về thông số và tình trạng đơn hàng. Giá bán phải đúng tuyệt đối theo bảng giá hiện hành.",
+    },
+    options: [
+      { id: "a", text: "Dùng Claude hiểu câu hỏi và soạn câu trả lời, nhưng lấy giá từ bảng giá chuẩn đưa vào và yêu cầu trích đúng", feedback: "Đúng — kết hợp hiểu ngôn ngữ với dữ liệu chuẩn." },
+      { id: "b", text: "Để Claude tự nhớ giá từ kiến thức đã học", feedback: "Giá nội bộ không có trong dữ liệu huấn luyện và thay đổi theo thời gian." },
+      { id: "c", text: "Chỉ dùng bot từ khoá cho mọi câu hỏi", feedback: "Bot từ khoá sẽ bế tắc với câu hỏi diễn đạt tự do." },
+      { id: "d", text: "Không cần dữ liệu, Claude sẽ tự tra cứu hệ thống đơn hàng", feedback: "Claude chỉ truy cập hệ thống khi được kết nối công cụ." },
+    ],
+    answer: "a",
+    explanation: "Phần cần hiểu ngôn ngữ giao cho Claude; phần phải chính xác tuyệt đối lấy từ nguồn dữ liệu chuẩn.",
+  },
+  {
+    questionId: "ch01-l02-q10", lessonId: L, conceptId: "keyword", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Đây là quy tắc của một bot kịch bản. Chọn các quy tắc sẽ gây trả lời SAI ý với câu “Tôi muốn đổi giờ giao hàng sang chiều mai”.",
+    segments: [
+      { id: "s1", text: "Nếu có “giờ” → trả lời giờ làm việc.", isError: true, why: "Câu hỏi là đổi lịch giao, không phải hỏi giờ làm việc." },
+      { id: "s2", text: "Nếu có “đổi” → trả lời chính sách đổi trả hàng.", isError: true, why: "“Đổi” ở đây là đổi lịch, không phải đổi trả sản phẩm." },
+      { id: "s3", text: "Nếu có “bảo hành” → trả lời thời hạn bảo hành.", isError: false },
+      { id: "s4", text: "Nếu có “hoá đơn” → hướng dẫn xuất hoá đơn.", isError: false },
+    ],
+    explanation: "Câu này kích hoạt nhầm hai quy tắc vì từ khoá có nhiều nghĩa — minh hoạ giới hạn của bắt từ khoá.",
+  },
+  {
+    questionId: "ch01-l02-q11", lessonId: L, conceptId: "multimodal", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp các bước dùng Claude để số hoá một phiếu đo viết tay bạn chụp ảnh lại.",
+    items: [
+      { id: "s1", text: "Chụp ảnh phiếu đo rõ nét, đủ sáng" },
+      { id: "s2", text: "Tải ảnh lên cuộc hội thoại với Claude" },
+      { id: "s3", text: "Yêu cầu chuyển thành bảng với các cột cụ thể" },
+      { id: "s4", text: "Đối chiếu từng số trong bảng với ảnh gốc" },
+      { id: "s5", text: "Lưu bảng đã kiểm tra vào hồ sơ" },
+    ],
+    explanation: "Claude đọc được ảnh, nhưng số đọc từ chữ viết tay có thể sai — bước đối chiếu là bắt buộc trước khi lưu.",
+  },
+  {
+    questionId: "ch01-l02-q12", lessonId: L, conceptId: "predictability", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Vì Claude thông minh hơn bot kịch bản, nên mọi câu trả lời về điều khoản hợp đồng có thể giao hoàn toàn cho Claude mà không cần dữ liệu chuẩn hay người duyệt.",
+    answer: false,
+    explanation: "Sai. Câu trả lời của Claude không cố định và có thể sai; nội dung pháp lý cần dữ liệu chuẩn, trích dẫn nguyên văn và người chịu trách nhiệm duyệt.",
+  },
+  {
+    questionId: "ch01-l02-q13", lessonId: L, conceptId: "conversation", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "single-choice",
+    prompt: "Bạn mở một cuộc hội thoại MỚI và gõ “làm tiếp bảng hôm qua nhé”. Claude không biết bảng nào. Giải thích hợp lý nhất?",
+    options: [
+      { id: "a", text: "Mỗi cuộc hội thoại có context riêng; nội dung hôm qua không tự có trong hội thoại mới trừ khi dùng tính năng như Projects/bộ nhớ hoặc bạn dán lại", feedback: "Đúng." },
+      { id: "b", text: "Claude đã xoá bảng của bạn", feedback: "Không — chỉ là bảng không nằm trong context của hội thoại mới." },
+      { id: "c", text: "Claude cố tình không trả lời", feedback: "Không có lý do như vậy." },
+    ],
+    answer: "a",
+    explanation: "Ngữ cảnh được giữ trong cùng một cuộc hội thoại. Muốn làm tiếp, hãy quay lại hội thoại cũ, dùng Projects, hoặc dán lại nội dung cần thiết.",
+  },
+  {
+    questionId: "ch01-l02-q14", lessonId: L, conceptId: "tool-choice", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Nhiệm vụ thực tế: thiết kế cách phân chia việc giữa chatbot kịch bản và Claude cho trang hỗ trợ khách hàng.",
+    source: "Trang hỗ trợ của nhà máy nhận 3 loại câu hỏi: (1) giờ làm việc và hotline, (2) câu hỏi kỹ thuật về lắp đặt máy biến áp, diễn đạt rất đa dạng, (3) khiếu nại về chất lượng. Viết đề xuất phân chia và lý do cho từng loại.",
+    rubric: [
+      { id: "fixed", label: "Loại (1) dùng câu trả lời cố định", weight: 1, check: { kind: "allGroups", groups: [["giờ làm việc", "hotline", "loại 1", "(1)"], ["cố định", "kịch bản", "soạn sẵn", "quy tắc", "menu"]] }, pass: "Loại (1) giữ cố định.", fail: "Thông tin như giờ làm việc, hotline nên trả lời cố định." },
+      { id: "claude", label: "Loại (2) dùng Claude + tài liệu", weight: 1, check: { kind: "allGroups", groups: [["kỹ thuật", "lắp đặt", "loại 2", "(2)"], ["claude", "ai", "trợ lý"]] }, pass: "Loại (2) dùng Claude.", fail: "Câu hỏi kỹ thuật đa dạng nên dùng Claude kèm tài liệu hướng dẫn." },
+      { id: "human", label: "Loại (3) có con người xử lý", weight: 1, check: { kind: "allGroups", groups: [["khiếu nại", "loại 3", "(3)"], ["nhân viên", "con người", "người phụ trách", "chuyển", "qa"]] }, pass: "Khiếu nại có người xử lý.", fail: "Khiếu nại cần chuyển cho người phụ trách." },
+      { id: "doc", label: "Đưa tài liệu chuẩn cho Claude", weight: 1, check: { kind: "anyKeyword", keywords: ["tài liệu", "hướng dẫn lắp đặt", "dữ liệu", "trích dẫn", "nguồn"] }, pass: "Có nguồn tài liệu cho Claude.", fail: "Nêu rằng Claude cần tài liệu hướng dẫn chuẩn để trả lời." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "(1) Giờ làm việc và hotline: dùng câu trả lời cố định (kịch bản) vì thông tin ngắn, phải đúng nguyên văn.\n(2) Câu hỏi kỹ thuật lắp đặt: dùng Claude vì khách diễn đạt rất đa dạng; đưa tài liệu hướng dẫn lắp đặt chuẩn vào và yêu cầu trích dẫn mục liên quan.\n(3) Khiếu nại chất lượng: Claude có thể giúp ghi nhận thông tin ban đầu, nhưng phải chuyển cho nhân viên QA phụ trách xử lý và phản hồi.",
+    explanation: "Thiết kế tốt dùng mỗi công cụ cho đúng thế mạnh và luôn có con người ở các điểm cần trách nhiệm.",
+  },
+  {
+    questionId: "ch01-l02-q15", lessonId: L, conceptId: "understanding", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Đánh giá nhận định của trưởng phòng trong tình huống sau.",
+    context: {
+      label: "Tình huống",
+      content: "Trưởng phòng nói: “Claude hiểu được mọi cách diễn đạt, nên ta không cần ghi rõ sản phẩm, ngày mua hay mô tả lỗi trong câu hỏi nữa.”",
+    },
+    options: [
+      { id: "a", text: "Sai: hiểu cách diễn đạt không có nghĩa là biết thông tin bạn chưa cung cấp", feedback: "Đúng — hiểu ngôn ngữ ≠ biết dữ kiện." },
+      { id: "b", text: "Đúng: Claude sẽ tự suy ra sản phẩm và ngày mua", feedback: "Claude không thể biết dữ kiện riêng của khách nếu không được cung cấp." },
+      { id: "c", text: "Đúng, miễn là viết câu hỏi bằng tiếng Anh", feedback: "Ngôn ngữ không thay đổi việc thiếu dữ kiện." },
+    ],
+    answer: "a",
+    explanation: "Claude giỏi hiểu ý định, nhưng dữ kiện cụ thể vẫn phải nằm trong context. Thiếu dữ kiện → câu trả lời chung chung hoặc đoán.",
+  },
+];
