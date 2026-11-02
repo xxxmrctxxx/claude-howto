@@ -1,0 +1,192 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch01-l04";
+
+/** 15 questions for "Claude có thể làm gì?" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh01L04: Question[] = [
+  {
+    questionId: "ch01-l04-q01", lessonId: L, conceptId: "writing", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Những việc nào Claude làm tốt ngay khi bạn cung cấp nội dung? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Viết lại thông báo nội bộ cho dễ hiểu", feedback: "Đúng." },
+      { id: "b", text: "Tóm tắt biên bản họp bạn dán vào", feedback: "Đúng." },
+      { id: "c", text: "Giải thích một đoạn code", feedback: "Đúng." },
+      { id: "d", text: "Ký thay bạn vào biên bản nghiệm thu", feedback: "Không — chữ ký và trách nhiệm là của con người." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Viết, tóm tắt, giải thích là thế mạnh khi nội dung đã có trong hội thoại.",
+  },
+  {
+    questionId: "ch01-l04-q02", lessonId: L, conceptId: "artifacts", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "“Artifact” trong ứng dụng Claude là gì?",
+    options: [
+      { id: "a", text: "Nội dung độc lập Claude tạo trong hội thoại, như tài liệu, trang web nhỏ, biểu đồ, ứng dụng tương tác", feedback: "Đúng." },
+      { id: "b", text: "Lỗi hệ thống của Claude", feedback: "Không." },
+      { id: "c", text: "Gói trả phí của Claude", feedback: "Không." },
+    ],
+    answer: "a",
+    explanation: "Artifacts hiển thị nội dung có thể dùng ngay hoặc tiếp tục chỉnh sửa bên cạnh cuộc trò chuyện.",
+  },
+  {
+    questionId: "ch01-l04-q03", lessonId: L, conceptId: "tools", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Claude tự động truy cập được phần mềm quản lý kho của công ty bạn mà không cần thiết lập kết nối nào.",
+    answer: false,
+    explanation: "Sai. Claude chỉ làm việc với hệ thống khác khi được kết nối (connector, MCP, công cụ) và được cho phép.",
+  },
+  {
+    questionId: "ch01-l04-q04", lessonId: L, conceptId: "tools", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền tên viết tắt của giao thức.",
+    template: "[[b1]] là giao thức mở chuẩn hoá cách kết nối mô hình AI với nguồn dữ liệu và công cụ — Anthropic ví như “cổng USB-C cho ứng dụng AI”.",
+    blanks: [{ id: "b1", accepted: ["MCP", "Model Context Protocol"], width: 8 }],
+    explanation: "MCP (Model Context Protocol) giúp kết nối Claude với cơ sở dữ liệu, GitHub, công cụ nội bộ… theo một chuẩn chung.",
+  },
+  {
+    questionId: "ch01-l04-q05", lessonId: L, conceptId: "human-judgment", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Việc nào phải do con người quyết định và chịu trách nhiệm?",
+    options: [
+      { id: "a", text: "Ký duyệt báo cáo 8D gửi khách hàng", feedback: "Đúng." },
+      { id: "b", text: "Định dạng lại bảng số liệu", feedback: "Việc rủi ro thấp — có thể giao cho Claude rồi kiểm tra nhanh." },
+      { id: "c", text: "Soạn bản nháp email cảm ơn đối tác", feedback: "Có thể giao cho Claude; bạn đọc lại trước khi gửi." },
+    ],
+    answer: "a",
+    explanation: "Claude có thể soạn nháp báo cáo 8D, nhưng nội dung gửi khách hàng cần người có thẩm quyền kiểm chứng và ký duyệt.",
+  },
+  {
+    questionId: "ch01-l04-q06", lessonId: L, conceptId: "vision", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Chọn cách làm tốt nhất.",
+    context: { label: "Tình huống", content: "Bạn có 12 ảnh chụp phiếu đo điện trở cách điện viết tay và cần chuyển thành bảng Excel." },
+    options: [
+      { id: "a", text: "Tải ảnh lên Claude, yêu cầu bảng với cột cụ thể, rồi đối chiếu từng số với ảnh gốc", feedback: "Đúng — tận dụng khả năng đọc ảnh và vẫn kiểm chứng." },
+      { id: "b", text: "Tải ảnh lên và dùng ngay bảng kết quả", feedback: "Chữ viết tay có thể bị đọc sai; cần đối chiếu." },
+      { id: "c", text: "Claude không đọc được ảnh nên phải gõ tay", feedback: "Các model hiện tại đều nhận đầu vào hình ảnh." },
+    ],
+    answer: "a",
+    explanation: "Claude đọc được hình ảnh, nhưng số liệu quan trọng phải được đối chiếu với bản gốc.",
+  },
+  {
+    questionId: "ch01-l04-q07", lessonId: L, conceptId: "claude-code", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn muốn Claude sửa một lỗi nằm rải rác trong nhiều file của dự án phần mềm và chạy lại bộ test. Công cụ nào phù hợp nhất?",
+    options: [
+      { id: "a", text: "Claude Code — đọc codebase, sửa file và chạy lệnh trong dự án", feedback: "Đúng." },
+      { id: "b", text: "Dán từng file vào ứng dụng chat rồi tự chép lại", feedback: "Làm được nhưng chậm, dễ sót và tốn token." },
+      { id: "c", text: "Không công cụ nào làm được", feedback: "Claude Code được thiết kế cho đúng việc này." },
+    ],
+    answer: "a",
+    explanation: "Claude Code là công cụ lập trình có tác tử: làm việc trực tiếp với file và lệnh trong dự án (với quyền bạn cho phép).",
+  },
+  {
+    questionId: "ch01-l04-q08", lessonId: L, conceptId: "analysis", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp quy trình phân tích một file số liệu cùng Claude.",
+    items: [
+      { id: "s1", text: "Che các cột chứa thông tin nhạy cảm" },
+      { id: "s2", text: "Tải file lên và mô tả ý nghĩa các cột" },
+      { id: "s3", text: "Yêu cầu phân tích cụ thể và định dạng kết quả" },
+      { id: "s4", text: "Đối chiếu vài con số quan trọng với file gốc" },
+      { id: "s5", text: "Dùng kết quả cho báo cáo" },
+    ],
+    explanation: "Bảo vệ dữ liệu trước, cung cấp ngữ cảnh rõ, yêu cầu cụ thể, rồi kiểm chứng trước khi dùng.",
+  },
+  {
+    questionId: "ch01-l04-q09", lessonId: L, conceptId: "tools", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi nhu cầu với cách giúp Claude tiếp cận thông tin.",
+    pairs: [
+      { id: "web", left: "Tin tức thị trường đồng tuần này", right: "Bật tính năng tìm kiếm web và kiểm tra nguồn" },
+      { id: "file", left: "Nội dung một hợp đồng bạn đang có", right: "Tải file lên hội thoại" },
+      { id: "mcp", left: "Danh sách ticket trong hệ thống quản lý công việc", right: "Kết nối qua connector/MCP" },
+      { id: "code", left: "Toàn bộ mã nguồn dự án trên máy", right: "Dùng Claude Code trong thư mục dự án" },
+    ],
+    explanation: "Thông tin nằm ở đâu quyết định cách đưa nó vào context của Claude.",
+  },
+  {
+    questionId: "ch01-l04-q10", lessonId: L, conceptId: "privacy", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Một nhân viên chuẩn bị dán dữ liệu vào Claude. Chọn các phần NÊN che hoặc bỏ trước (giả sử quy định công ty yêu cầu bảo vệ dữ liệu cá nhân).",
+    segments: [
+      { id: "s1", text: "Mã lỗi và công đoạn phát sinh lỗi.", isError: false },
+      { id: "s2", text: "Số điện thoại cá nhân của khách hàng.", isError: true, why: "Thông tin cá nhân — che trước khi dán." },
+      { id: "s3", text: "Số lượng sản phẩm lỗi theo tuần.", isError: false },
+      { id: "s4", text: "Số căn cước công dân của công nhân.", isError: true, why: "Thông tin định danh cá nhân — không cần cho phân tích." },
+    ],
+    explanation: "Chỉ đưa vào những gì cần cho nhiệm vụ. Thông tin cá nhân thường không cần cho phân tích lỗi và nên được che.",
+  },
+  {
+    questionId: "ch01-l04-q11", lessonId: L, conceptId: "coding", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Người chưa biết lập trình vẫn có thể nhờ Claude tạo một trang web nhỏ (ví dụ dạng Artifact) và yêu cầu giải thích từng phần.",
+    answer: true,
+    explanation: "Đúng. Đây là cách học rất hiệu quả: mô tả điều mình muốn, xem kết quả, rồi hỏi Claude giải thích và sửa dần.",
+  },
+  {
+    questionId: "ch01-l04-q12", lessonId: L, conceptId: "human-judgment", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Đánh giá cách làm sau.",
+    context: {
+      label: "Tình huống",
+      content: "Trưởng ca nhờ Claude phân tích kết quả thử nghiệm và để Claude tự gửi email thông báo “lô hàng đạt” cho khách mà không ai đọc lại.",
+    },
+    options: [
+      { id: "a", text: "Rủi ro cao: kết quả thông báo cho khách cần người có thẩm quyền kiểm chứng trước khi gửi", feedback: "Đúng." },
+      { id: "b", text: "Ổn, vì Claude phân tích nhanh hơn người", feedback: "Nhanh không có nghĩa là đúng; sai sót ở đây ảnh hưởng uy tín và an toàn." },
+      { id: "c", text: "Ổn, nếu dùng model mạnh nhất", feedback: "Model mạnh vẫn có thể sai; trách nhiệm vẫn cần con người." },
+    ],
+    answer: "a",
+    explanation: "Tự động hoá phần chuẩn bị, giữ bước duyệt của con người ở những điểm ảnh hưởng đến khách hàng, an toàn, pháp lý.",
+  },
+  {
+    questionId: "ch01-l04-q13", lessonId: L, conceptId: "analysis", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Bạn gửi prompt dưới đây kèm bảng 20 máy. Kết quả hợp lý nhất bạn nên mong đợi là gì?",
+    context: {
+      label: "Prompt",
+      lang: "text",
+      content: "So sánh tổn hao không tải của từng máy trong bảng với ngưỡng 420 W. Đánh dấu máy vượt ngưỡng và máy sát ngưỡng (trong 2%). Không đưa ra kết luận xuất xưởng.",
+    },
+    options: [
+      { id: "a", text: "Bảng so sánh có đánh dấu máy vượt/sát ngưỡng, không kèm quyết định xuất xưởng", feedback: "Đúng — đúng phạm vi yêu cầu." },
+      { id: "b", text: "Thông báo “cả lô đạt, có thể xuất xưởng”", feedback: "Prompt đã loại trừ việc đưa kết luận xuất xưởng." },
+      { id: "c", text: "Danh sách tiêu chuẩn quốc tế về máy biến áp", feedback: "Không phải nhiệm vụ được yêu cầu." },
+    ],
+    answer: "a",
+    explanation: "Prompt tách rõ phần Claude làm (so sánh, đánh dấu) và phần con người quyết định (xuất xưởng).",
+  },
+  {
+    questionId: "ch01-l04-q14", lessonId: L, conceptId: "privacy", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "multiple-choice",
+    prompt: "Trước khi đưa tài liệu công việc vào bất kỳ công cụ AI nào, bạn nên làm gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Kiểm tra quy định của công ty về dữ liệu và công cụ AI được phép dùng", feedback: "Đúng." },
+      { id: "b", text: "Chỉ đưa phần dữ liệu cần cho nhiệm vụ", feedback: "Đúng." },
+      { id: "c", text: "Che thông tin cá nhân không cần thiết", feedback: "Đúng." },
+      { id: "d", text: "Đưa toàn bộ thư mục dự án cho chắc", feedback: "Đưa thừa dữ liệu làm tăng rủi ro và tốn token." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Nguyên tắc tối thiểu: tuân thủ quy định, chỉ đưa dữ liệu cần thiết, che thông tin cá nhân.",
+  },
+  {
+    questionId: "ch01-l04-q15", lessonId: L, conceptId: "writing", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Nhiệm vụ thực tế: viết “bản giao việc” cho Claude cho một việc văn phòng hằng tuần, có ranh giới trách nhiệm rõ ràng.",
+    source: "Chọn một việc (ví dụ: tổng hợp báo cáo tuần). Viết prompt nêu: dữ liệu bạn cung cấp, việc Claude làm, việc Claude KHÔNG làm (để bạn quyết định), và định dạng kết quả.",
+    rubric: [
+      { id: "data", label: "Nêu dữ liệu cung cấp", weight: 1, check: { kind: "anyKeyword", keywords: ["dữ liệu", "file", "bảng", "báo cáo", "dưới đây", "đính kèm"] }, pass: "Có dữ liệu.", fail: "Nêu rõ dữ liệu bạn đưa vào." },
+      { id: "task", label: "Việc Claude làm", weight: 1, check: { kind: "anyKeyword", keywords: ["tổng hợp", "tóm tắt", "so sánh", "liệt kê", "soạn", "phân tích"] }, pass: "Có nhiệm vụ.", fail: "Nêu việc cụ thể Claude cần làm." },
+      { id: "boundary", label: "Ranh giới: việc Claude không làm", weight: 1, check: { kind: "anyKeyword", keywords: ["không đưa ra quyết định", "không kết luận", "tôi sẽ quyết định", "không quyết định", "để tôi", "không gửi"] }, pass: "Có ranh giới trách nhiệm.", fail: "Ghi rõ phần bạn giữ lại để quyết định, ví dụ “không đưa ra kết luận, tôi sẽ quyết định”." },
+      { id: "format", label: "Định dạng kết quả", weight: 1, check: { kind: "anyKeyword", keywords: ["bảng", "gạch đầu dòng", "danh sách", "trình bày", "mục"] }, pass: "Có định dạng.", fail: "Mô tả định dạng kết quả." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Dưới đây là bảng phiếu lỗi tuần 44 (dữ liệu đã che tên khách hàng). Hãy tổng hợp số lỗi theo công đoạn và loại lỗi, chỉ ra 3 điểm bất thường so với tuần trước. Không đưa ra kết luận về nguyên nhân hay hình thức xử lý — tôi sẽ quyết định trong cuộc họp. Trình bày: bảng tổng hợp và 3 gạch đầu dòng bất thường.",
+    explanation: "Bản giao việc tốt nói rõ cả điều cần làm lẫn điều không làm, giúp phân định trách nhiệm giữa bạn và Claude.",
+  },
+];

@@ -1,0 +1,46 @@
+name: Academy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'academy/**'
+      - '.github/workflows/academy.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'academy/**'
+      - '.github/workflows/academy.yml'
+
+concurrency:
+  group: academy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: academy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: academy/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+        env:
+          CI: 'true'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-traces
+          path: academy/test-results
+          retention-days: 7
