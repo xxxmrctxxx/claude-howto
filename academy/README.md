@@ -31,6 +31,14 @@ npm run build
 npm run serve        # http://localhost:4321
 ```
 
+## Triển khai (GitHub Pages)
+
+Workflow `.github/workflows/pages.yml` build academy cùng trang tài liệu và đặt vào thư mục `academy/` của site, với base path lấy từ cấu hình Pages (ví dụ `/claude-howto/academy`). Để build thủ công dưới một đường dẫn con:
+
+```bash
+ACADEMY_BASE_PATH=/claude-howto/academy npm run build
+```
+
 ## Kiểm thử
 
 ```bash

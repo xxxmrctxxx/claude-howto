@@ -55,7 +55,11 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 3. Chương 2 (Bắt đầu sử dụng Claude): cần đối chiếu giao diện hiện hành của ứng dụng Claude; không dùng ảnh chụp giả.
 4. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
 
+## Triển khai
+
+- GitHub Pages: `pages.yml` build academy với `ACADEMY_BASE_PATH=<base path của Pages>/academy` và chép vào `site/academy/`. Đã chạy thử bản build dưới `/claude-howto/academy/` trên máy chủ tĩnh: điều hướng, Mermaid, Monaco, terminal hoạt động, không có lỗi tải file.
+- Cần: merge vào `main` và bật Pages (Settings → Pages → Source: GitHub Actions).
+
 ## Ghi chú cho phiên làm việc sau
 
 - Kiểm tra Mermaid bằng hook Pele (`scripts/check_mermaid.py --strict`) chưa chạy được trong môi trường này vì mạng chặn tải bundle Pele; sơ đồ trong `ARCHITECTURE.md` đã được render thử thành công bằng thư viện Mermaid.
-- Thay đổi chưa được commit/push: chờ người dùng cho phép (quy tắc trong `CLAUDE.md` gốc của repo).
