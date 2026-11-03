@@ -1,0 +1,191 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch03-l03";
+
+/** 15 questions for "Role, Context, Task, Constraints, Output" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh03L03: Question[] = [
+  {
+    questionId: "ch03-l03-q01", lessonId: L, conceptId: "role-specific", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Vai trò nào hiệu quả nhất cho yêu cầu soạn báo cáo 8D về lỗi máy biến áp?",
+    options: [
+      { id: "a", text: "“Bạn là kỹ sư QA của nhà máy sản xuất máy biến áp.”", feedback: "Đúng — có chuyên môn và bối cảnh làm việc." },
+      { id: "b", text: "“Bạn là chuyên gia.”", feedback: "Quá chung, không định hướng thuật ngữ hay góc nhìn." },
+      { id: "c", text: "“Bạn là AI giỏi nhất thế giới.”", feedback: "Phóng đại không thêm thông tin hữu ích." },
+    ],
+    answer: "a",
+    explanation: "Vai trò tốt nêu chuyên môn cụ thể và nơi làm việc, giúp Claude chọn đúng thuật ngữ và mức độ chuyên sâu.",
+  },
+  {
+    questionId: "ch03-l03-q02", lessonId: L, conceptId: "system-prompt", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Theo Anthropic, khi dùng API, đặt vai trò trong system prompt giúp tập trung hành vi và giọng văn của Claude, và chỉ một câu cũng có thể tạo khác biệt.",
+    answer: true,
+    explanation: "Đúng — mục “Give Claude a role” trong Prompting best practices.",
+  },
+  {
+    questionId: "ch03-l03-q03", lessonId: L, conceptId: "context-audience", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Những thông tin nào thuộc phần CONTEXT về người đọc và mục đích? Chọn tất cả.",
+    options: [
+      { id: "a", text: "“Báo cáo dùng cho buổi giao ban 7h với quản đốc.”", feedback: "Đúng." },
+      { id: "b", text: "“Người đọc là khách hàng không chuyên kỹ thuật.”", feedback: "Đúng." },
+      { id: "c", text: "“Tối đa 120 từ.”", feedback: "Đây là Constraint." },
+      { id: "d", text: "“Bảng sẽ được in khổ A4 dán ở xưởng.”", feedback: "Đúng — mục đích sử dụng ảnh hưởng đến cách trình bày." },
+    ],
+    answer: ["a", "b", "d"],
+    explanation: "Ai đọc, đọc ở đâu, dùng để làm gì là phần bối cảnh quan trọng nhất cho giọng văn và độ sâu.",
+  },
+  {
+    questionId: "ch03-l03-q04", lessonId: L, conceptId: "task-verb", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền loại từ còn thiếu.",
+    template: "Một Task rõ ràng thường bắt đầu bằng một [[b1]] cụ thể như “so sánh”, “trích xuất”, “đề xuất”.",
+    blanks: [{ id: "b1", accepted: ["động từ", "dong tu", "verb"], width: 9 }],
+    explanation: "Động từ cụ thể cho Claude biết phải tạo ra loại kết quả nào.",
+  },
+  {
+    questionId: "ch03-l03-q05", lessonId: L, conceptId: "output-structure", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Câu nào là mô tả OUTPUT (đầu ra) rõ ràng?",
+    options: [
+      { id: "a", text: "“Trình bày bảng 3 cột (Mã máy | Lỗi | Hành động), sau đó 2 câu kết luận.”", feedback: "Đúng." },
+      { id: "b", text: "“Viết cho hay.”", feedback: "Cảm tính, không mô tả hình thức." },
+      { id: "c", text: "“Bạn là trưởng phòng QA.”", feedback: "Đây là Role." },
+    ],
+    answer: "a",
+    explanation: "Output tốt nêu cấu trúc cụ thể (bảng, cột, số câu) để bạn kiểm tra kết quả bằng mắt ngay.",
+  },
+  {
+    questionId: "ch03-l03-q06", lessonId: L, conceptId: "constraint-feasible", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Phân tích vấn đề của ràng buộc trong tình huống sau.",
+    context: {
+      label: "Tình huống",
+      content: "Bảng dữ liệu chỉ có các cột: Ngày, Công đoạn, Số lỗi. Prompt yêu cầu: “Tính tỷ lệ lỗi theo từng ca làm việc, chỉ dùng số liệu trong bảng.”",
+    },
+    options: [
+      { id: "a", text: "Ràng buộc không khả thi: bảng không có cột ca làm việc, nên hoặc phải bổ sung dữ liệu, hoặc đổi yêu cầu", feedback: "Đúng." },
+      { id: "b", text: "Không có vấn đề — Claude sẽ tự chia ca", feedback: "Tự chia ca là suy đoán, trái với “chỉ dùng số liệu trong bảng”." },
+      { id: "c", text: "Vấn đề là prompt quá ngắn", feedback: "Độ dài không phải vấn đề chính." },
+    ],
+    answer: "a",
+    explanation: "Trước khi gửi, kiểm tra dữ liệu có đủ để đáp ứng ràng buộc không. Ràng buộc bất khả thi buộc Claude chọn giữa đoán và không làm.",
+  },
+  {
+    questionId: "ch03-l03-q07", lessonId: L, conceptId: "context-data", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn nhờ Claude “đề xuất cách giảm tồn kho”. Bổ sung bối cảnh nào giúp nhiều nhất?",
+    context: { label: "Tình huống", content: "Claude trả lời bằng các lời khuyên chung chung có thể áp dụng cho bất kỳ công ty nào." },
+    options: [
+      { id: "a", text: "Dán số liệu tồn kho theo mã vật tư, mức tồn tối thiểu, thời gian giao hàng của nhà cung cấp", feedback: "Đúng — dữ liệu thật giúp đề xuất cụ thể." },
+      { id: "b", text: "Thêm “hãy trả lời thật chuyên sâu”", feedback: "Không có dữ liệu thì vẫn chung chung." },
+      { id: "c", text: "Đổi vai trò thành “chuyên gia hàng đầu”", feedback: "Vai trò không thay thế dữ liệu." },
+    ],
+    answer: "a",
+    explanation: "Câu trả lời chung chung thường là dấu hiệu thiếu dữ liệu nền trong Context.",
+  },
+  {
+    questionId: "ch03-l03-q08", lessonId: L, conceptId: "role-specific", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi nhiệm vụ với vai trò phù hợp nhất.",
+    pairs: [
+      { id: "tax", left: "Giải thích hoá đơn VAT bị sai mã số thuế", right: "Kế toán thuế của doanh nghiệp sản xuất" },
+      { id: "safety", left: "Soạn hướng dẫn an toàn khi thay dầu máy biến áp", right: "Chuyên viên an toàn lao động" },
+      { id: "cs", left: "Trả lời email khiếu nại giao hàng trễ", right: "Trưởng phòng chăm sóc khách hàng" },
+      { id: "dev", left: "Rà soát đoạn code tính tổng sản lượng", right: "Lập trình viên kiểm thử phần mềm" },
+    ],
+    explanation: "Vai trò khớp với nhiệm vụ giúp Claude dùng đúng thuật ngữ và ưu tiên đúng điều quan trọng.",
+  },
+  {
+    questionId: "ch03-l03-q09", lessonId: L, conceptId: "output-template", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn dùng cùng một prompt báo cáo ca mỗi ngày nhưng định dạng kết quả mỗi hôm một kiểu. Cách khắc phục tốt nhất?",
+    options: [
+      { id: "a", text: "Đưa khung mẫu đầu ra với các tiêu đề và ô cần điền cố định", feedback: "Đúng." },
+      { id: "b", text: "Nhắc “làm giống hôm qua”", feedback: "Hội thoại mới không có “hôm qua” trong context." },
+      { id: "c", text: "Đổi model mỗi ngày", feedback: "Không giải quyết nguyên nhân." },
+    ],
+    answer: "a",
+    explanation: "Khung mẫu (template) là cách đơn giản để giữ định dạng ổn định qua nhiều lần dùng.",
+  },
+  {
+    questionId: "ch03-l03-q10", lessonId: L, conceptId: "constraint-positive", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Những ràng buộc nào ĐO ĐƯỢC và viết dạng KHẲNG ĐỊNH? Chọn tất cả.",
+    options: [
+      { id: "a", text: "“Tối đa 150 từ.”", feedback: "Đúng." },
+      { id: "b", text: "“Đừng viết dài dòng.”", feedback: "Không đo được và chỉ nói điều cấm." },
+      { id: "c", text: "“Chỉ dùng số liệu trong bảng đính kèm.”", feedback: "Đúng — phạm vi rõ ràng." },
+      { id: "d", text: "“Nêu đúng 3 đề xuất, mỗi đề xuất 1 câu.”", feedback: "Đúng." },
+    ],
+    answer: ["a", "c", "d"],
+    explanation: "Ràng buộc tốt kiểm tra được bằng mắt và nói điều cần làm.",
+  },
+  {
+    questionId: "ch03-l03-q11", lessonId: L, conceptId: "context-audience", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Cùng nội dung về sự cố rò dầu, chỉ đổi người đọc trong Context. Khác biệt nào hợp lý nhất?",
+    context: { label: "Hai phiên bản Context", content: "A: “Người đọc là công nhân vận hành ca đêm.”\nB: “Người đọc là ban giám đốc, cần quyết định ngân sách sửa chữa.”" },
+    options: [
+      { id: "a", text: "A tập trung việc cần làm ngay, ngôn ngữ đơn giản; B tập trung tác động, chi phí và phương án cần quyết định", feedback: "Đúng." },
+      { id: "b", text: "Hai kết quả giống hệt nhau", feedback: "Người đọc khác thường dẫn tới trọng tâm và giọng văn khác." },
+      { id: "c", text: "B sẽ dài hơn gấp 10 lần A", feedback: "Không có cơ sở về độ dài." },
+    ],
+    answer: "a",
+    explanation: "Người đọc là một trong những thông tin bối cảnh ảnh hưởng mạnh nhất đến nội dung và giọng văn.",
+  },
+  {
+    questionId: "ch03-l03-q12", lessonId: L, conceptId: "task-verb", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "matching",
+    prompt: "Bạn có một hợp đồng dài. Ghép mỗi mục tiêu với động từ nhiệm vụ phù hợp nhất.",
+    pairs: [
+      { id: "extract", left: "Lấy ra ngày giao hàng và mức phạt trễ hạn", right: "Trích xuất" },
+      { id: "summarize", left: "Cho sếp đọc nhanh nội dung chính trong 1 phút", right: "Tóm tắt" },
+      { id: "compare", left: "Xem điều khoản bảo hành khác bản hợp đồng năm ngoái ở đâu", right: "So sánh" },
+      { id: "risk", left: "Tìm điều khoản có thể gây bất lợi cho công ty", right: "Rà soát rủi ro" },
+    ],
+    explanation: "“Xem giúp hợp đồng” có thể nghĩa là bất kỳ việc nào ở trên. Động từ chính xác quyết định kết quả.",
+  },
+  {
+    questionId: "ch03-l03-q13", lessonId: L, conceptId: "role-specific", learningObjective: "o1", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Vai trò càng phóng đại (ví dụ “chuyên gia số 1 thế giới, không bao giờ sai”) thì câu trả lời càng chính xác.",
+    answer: false,
+    explanation: "Sai. Vai trò giúp định hướng góc nhìn và giọng văn; lời phóng đại không thêm thông tin và không làm câu trả lời đúng hơn. Dữ liệu và chỉ dẫn rõ mới quan trọng.",
+  },
+  {
+    questionId: "ch03-l03-q14", lessonId: L, conceptId: "context-data", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "fix-prompt",
+    prompt: "Bổ sung Context (dữ liệu, người đọc, mục đích) cho prompt dưới đây, giữ các thành phần khác hợp lý.",
+    source: "Bạn là chuyên viên mua hàng. Hãy so sánh các nhà cung cấp.",
+    rubric: [
+      { id: "data", label: "Có dữ liệu nền", weight: 1, check: { kind: "anyKeyword", keywords: ["bảng", "báo giá", "dữ liệu", "dưới đây", "đính kèm"] }, pass: "Có dữ liệu.", fail: "Nêu dữ liệu: bảng báo giá của các nhà cung cấp." },
+        { id: "reader", label: "Có người đọc / mục đích", weight: 1, check: { kind: "anyKeyword", keywords: ["người đọc", "trưởng phòng", "ban giám đốc", "để quyết định", "dùng cho", "họp"] }, pass: "Có người đọc/mục đích.", fail: "Nêu ai dùng kết quả và để làm gì." },
+      { id: "criteria", label: "Có tiêu chí so sánh", weight: 1, check: { kind: "anyKeyword", keywords: ["giá", "thời gian giao", "bảo hành", "tiêu chí", "chất lượng"] }, pass: "Có tiêu chí.", fail: "Nêu tiêu chí so sánh: giá, thời gian giao hàng, bảo hành…" },
+      { id: "output", label: "Có định dạng", weight: 1, check: { kind: "anyKeyword", keywords: ["bảng", "cột", "gạch đầu dòng", "trình bày"] }, pass: "Có định dạng.", fail: "Mô tả định dạng kết quả." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Bạn là chuyên viên mua hàng của nhà máy. Dưới đây là bảng báo giá dầu biến áp của 3 nhà cung cấp. Kết quả dùng cho trưởng phòng mua hàng để quyết định nhà cung cấp quý 1. Hãy so sánh theo tiêu chí: giá, thời gian giao hàng, điều kiện bảo hành. Chỉ dùng thông tin trong báo giá. Trình bày bảng 4 cột và 2 gạch đầu dòng đề xuất.",
+    explanation: "Prompt gốc có Role và Task nhưng thiếu dữ liệu, người đọc và tiêu chí — Claude sẽ phải trả lời chung chung.",
+  },
+  {
+    questionId: "ch03-l03-q15", lessonId: L, conceptId: "output-template", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Nhiệm vụ thực tế: viết prompt có khung mẫu đầu ra để dùng hằng ngày cho báo cáo kiểm tra xuất xưởng.",
+    source: "Mỗi ngày bạn dán bảng kết quả kiểm tra xuất xưởng và cần báo cáo có định dạng giống hệt nhau để lưu hồ sơ.",
+    rubric: [
+      { id: "template", label: "Có khung mẫu với tiêu đề/mục cố định", weight: 1, check: { kind: "minMatches", pattern: "(^|\\n)\\s*([1-9][.)]|tieu de|muc)", value: 3 }, pass: "Có khung mẫu nhiều mục.", fail: "Đưa khung mẫu với các mục cố định (1., 2., 3.)." },
+      { id: "placeholder", label: "Có chỗ để điền thay đổi", weight: 1, check: { kind: "regex", pattern: "<[^>]+>|\\[[^\\]]+\\]|\\{[^}]+\\}" }, pass: "Có ô điền.", fail: "Đánh dấu chỗ điền như <ngày>, [số máy]." },
+      { id: "follow", label: "Yêu cầu theo đúng khung", weight: 1, check: { kind: "anyKeyword", keywords: ["đúng khung", "theo khung", "theo mẫu", "đúng mẫu", "giữ nguyên"] }, pass: "Có yêu cầu bám khung.", fail: "Yêu cầu “trình bày theo đúng khung sau”." },
+      { id: "data", label: "Giới hạn dữ liệu", weight: 1, check: { kind: "anyKeyword", keywords: ["chỉ dùng", "dữ liệu", "bảng"] }, pass: "Có giới hạn dữ liệu.", fail: "Nêu chỉ dùng dữ liệu trong bảng." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Bạn là kỹ sư QA. Dưới đây là bảng kết quả kiểm tra xuất xưởng ngày <ngày>. Chỉ dùng dữ liệu trong bảng.\nTrình bày theo đúng khung sau, giữ nguyên tiêu đề:\n1. Tổng số máy kiểm tra: <số>\n2. Số máy đạt / không đạt: <số> / <số>\n3. Danh sách không đạt: <bảng Mã máy | Hạng mục | Kết quả>\n4. Ghi chú: <tối đa 2 câu>",
+    explanation: "Khung mẫu + ô điền + yêu cầu bám khung giúp mỗi báo cáo giống nhau, dễ lưu và so sánh.",
+  },
+];

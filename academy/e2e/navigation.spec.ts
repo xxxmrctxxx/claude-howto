@@ -14,9 +14,10 @@ test("home shows the main sections and links to the course", async ({ page }) =>
 test("course page: published lessons link, planned lessons are labelled and not links", async ({ page }) => {
   await page.goto("/hoc/");
   await expect(page.getByRole("link", { name: /Prompt là gì\?/ }).first()).toBeVisible();
-  const planned = page.getByText("Few-shot prompting").first();
+  const planned = page.locator("section", { hasText: "Chương 9: Xây dựng website bằng Claude" }).locator("li", { hasText: "Phân tích yêu cầu" });
   await expect(planned).toBeVisible();
-  expect(await planned.evaluate((el) => el.closest("a"))).toBeNull();
+  await expect(planned.locator("a")).toHaveCount(0);
+  await expect(planned).toContainText("Sắp ra mắt");
   await expect(page.getByText("Sắp ra mắt").first()).toBeVisible();
 });
 

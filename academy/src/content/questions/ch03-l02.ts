@@ -1,0 +1,195 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch03-l02";
+
+/** 15 questions for "Cấu trúc prompt tốt" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh03L02: Question[] = [
+  {
+    questionId: "ch03-l02-q01", lessonId: L, conceptId: "clarity", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Nguyên tắc “rõ ràng, trực tiếp” khi viết prompt có nghĩa là gì?",
+    options: [
+      { id: "a", text: "Nói cụ thể điều bạn muốn bằng câu khẳng định, không bắt Claude phải đoán", feedback: "Đúng." },
+      { id: "b", text: "Viết thật ngắn, càng ít chữ càng tốt", feedback: "Ngắn không đồng nghĩa với rõ ràng." },
+      { id: "c", text: "Dùng nhiều từ lịch sự như “làm ơn”, “cảm ơn”", feedback: "Lịch sự không sai nhưng không làm yêu cầu rõ hơn." },
+    ],
+    answer: "a",
+    explanation: "Anthropic: Claude phản hồi tốt với chỉ dẫn rõ ràng, cụ thể. Nói chính xác điều bạn muốn giúp kết quả tốt hơn.",
+  },
+  {
+    questionId: "ch03-l02-q02", lessonId: L, conceptId: "explicit-scope", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Theo Anthropic, nếu bạn muốn Claude làm nhiều hơn mức nhiệm vụ yêu cầu tối thiểu, hãy yêu cầu điều đó một cách rõ ràng thay vì mong Claude tự suy ra.",
+    answer: true,
+    explanation: "Đúng. Ví dụ trong tài liệu: “Create an analytics dashboard” kém hiệu quả hơn khi thêm “Include as many relevant features and interactions as possible”.",
+  },
+  {
+    questionId: "ch03-l02-q03", lessonId: L, conceptId: "numbered-steps", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Khi nào nên viết chỉ dẫn thành danh sách bước đánh số?",
+    options: [
+      { id: "a", text: "Khi thứ tự hoặc sự đầy đủ của các bước là quan trọng", feedback: "Đúng." },
+      { id: "b", text: "Với mọi prompt, kể cả câu hỏi một dòng", feedback: "Không cần thiết cho yêu cầu đơn giản." },
+      { id: "c", text: "Chỉ khi viết bằng tiếng Anh", feedback: "Ngôn ngữ không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Anthropic khuyên dùng danh sách đánh số hoặc gạch đầu dòng khi thứ tự hay sự đầy đủ của các bước quan trọng.",
+  },
+  {
+    questionId: "ch03-l02-q04", lessonId: L, conceptId: "motivation", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Vì sao nên giải thích LÝ DO đằng sau một chỉ dẫn?",
+    options: [
+      { id: "a", text: "Claude hiểu mục đích và có thể áp dụng hợp lý cả ở những trường hợp bạn không nêu ra", feedback: "Đúng — Anthropic: “Claude can generalize from the explanation”." },
+      { id: "b", text: "Để prompt dài hơn nên trông chuyên nghiệp hơn", feedback: "Độ dài không phải mục tiêu." },
+      { id: "c", text: "Vì Claude từ chối mọi chỉ dẫn không có lý do", feedback: "Không đúng." },
+    ],
+    answer: "a",
+    explanation: "Ví dụ chính thức: thay vì “NEVER use ellipses”, hãy nói câu trả lời sẽ được đọc bằng máy chuyển văn bản thành giọng nói nên không dùng dấu ba chấm.",
+  },
+  {
+    questionId: "ch03-l02-q05", lessonId: L, conceptId: "style-matching", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền từ còn thiếu.",
+    template: "Phong cách định dạng bạn dùng trong prompt có thể ảnh hưởng tới phong cách của [[b1]] mà Claude trả về.",
+    blanks: [{ id: "b1", accepted: ["đầu ra", "câu trả lời", "output", "kết quả"], width: 10 }],
+    explanation: "Tài liệu Anthropic: bỏ markdown khỏi prompt có thể giảm lượng markdown trong câu trả lời.",
+  },
+  {
+    questionId: "ch03-l02-q06", lessonId: L, conceptId: "clarity", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp các bước tái cấu trúc một prompt lộn xộn.",
+    items: [
+      { id: "s1", text: "Viết mục tiêu chính trong một câu" },
+      { id: "s2", text: "Thêm lý do và người đọc" },
+      { id: "s3", text: "Chuyển chỉ dẫn có thứ tự thành bước đánh số" },
+      { id: "s4", text: "Ghi phạm vi bằng con số cụ thể" },
+      { id: "s5", text: "Chọn định dạng và phong cách đầu ra" },
+    ],
+    explanation: "Đi từ mục tiêu (cái gì) → lý do (vì sao) → cách làm (các bước) → giới hạn → hình thức kết quả.",
+  },
+  {
+    questionId: "ch03-l02-q07", lessonId: L, conceptId: "motivation", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Những câu nào dưới đây đóng vai trò LÝ DO (động cơ) trong prompt? Chọn tất cả.",
+    options: [
+      { id: "a", text: "“Báo cáo được đọc trên điện thoại nên mỗi ý tối đa 1 dòng.”", feedback: "Đúng — giải thích vì sao cần ngắn." },
+      { id: "b", text: "“Người đọc là khách hàng không chuyên, nên tránh thuật ngữ.”", feedback: "Đúng." },
+      { id: "c", text: "“Trình bày dạng bảng 3 cột.”", feedback: "Đây là định dạng, không nêu lý do." },
+      { id: "d", text: "“Nội dung sẽ được máy đọc thành giọng nói, nên không dùng ký hiệu đặc biệt.”", feedback: "Đúng." },
+    ],
+    answer: ["a", "b", "d"],
+    explanation: "Câu nêu lý do thường có cấu trúc “… nên/vì …”, giúp Claude hiểu mục đích của ràng buộc.",
+  },
+  {
+    questionId: "ch03-l02-q08", lessonId: L, conceptId: "explicit-scope", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Chọn cách sửa hiệu quả nhất.",
+    context: { label: "Tình huống", content: "Bạn gõ “Tạo trang theo dõi đơn hàng” và nhận được một bảng HTML rất cơ bản, không có lọc, tìm kiếm hay thống kê." },
+    options: [
+      { id: "a", text: "Nêu rõ các chức năng mong muốn: lọc theo trạng thái, tìm theo mã, thống kê số đơn — và yêu cầu làm đầy đủ", feedback: "Đúng — muốn nhiều hơn mức tối thiểu thì yêu cầu rõ." },
+      { id: "b", text: "Gửi lại đúng câu cũ và hy vọng lần sau tốt hơn", feedback: "Thiếu thông tin vẫn thiếu." },
+      { id: "c", text: "Thêm “làm cho xịn vào”", feedback: "Cảm tính, không nói rõ cần gì." },
+    ],
+    answer: "a",
+    explanation: "Claude làm đúng phạm vi bạn yêu cầu. Liệt kê chức năng cụ thể là cách đáng tin cậy nhất để có sản phẩm đầy đủ.",
+  },
+  {
+    questionId: "ch03-l02-q09", lessonId: L, conceptId: "style-matching", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Prompt dưới đây viết hoàn toàn bằng gạch đầu dòng và chữ đậm, không nói gì về định dạng. Bạn dự đoán gì về câu trả lời?",
+    context: {
+      label: "Prompt",
+      lang: "text",
+      content: "- **Chủ đề**: kết quả QA tuần 44\n- **Người đọc**: ban giám đốc\n- **Nội dung**: số lỗi, nguyên nhân chính",
+    },
+    options: [
+      { id: "a", text: "Có xu hướng trả lời cũng bằng gạch đầu dòng và chữ đậm", feedback: "Đúng — phong cách prompt ảnh hưởng phong cách đầu ra." },
+      { id: "b", text: "Chắc chắn là văn xuôi liền mạch", feedback: "Không có gì trong prompt yêu cầu văn xuôi." },
+      { id: "c", text: "Chắc chắn là bảng Excel", feedback: "Không có cơ sở." },
+    ],
+    answer: "a",
+    explanation: "Muốn văn xuôi, hãy viết prompt bằng văn xuôi và nói rõ: “viết thành các đoạn văn liền mạch”.",
+  },
+  {
+    questionId: "ch03-l02-q10", lessonId: L, conceptId: "specificity", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Chọn các đoạn mơ hồ hoặc mâu thuẫn trong prompt.",
+    segments: [
+      { id: "s1", text: "Soạn hướng dẫn vận hành máy ép cho công nhân ca đêm.", isError: false },
+      { id: "s2", text: "Viết chi tiết vào nhưng phải thật ngắn gọn.", isError: true, why: "Hai yêu cầu mâu thuẫn và không đo được. Nên ghi số bước, số dòng cụ thể." },
+      { id: "s3", text: "Sắp xếp theo đúng thứ tự thao tác, đánh số từng bước.", isError: false },
+      { id: "s4", text: "Làm sao cho chuyên nghiệp.", isError: true, why: "Cảm tính — thay bằng tiêu chí cụ thể (giọng văn, mẫu trình bày)." },
+    ],
+    explanation: "Cấu trúc tốt loại bỏ các yêu cầu cảm tính và mâu thuẫn, thay bằng tiêu chí đo được.",
+  },
+  {
+    questionId: "ch03-l02-q11", lessonId: L, conceptId: "numbered-steps", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi loại nội dung với cách trình bày chỉ dẫn phù hợp nhất.",
+    pairs: [
+      { id: "proc", left: "Quy trình thay dầu theo đúng thứ tự", right: "Danh sách bước đánh số" },
+      { id: "req", left: "Các yêu cầu không phụ thuộc thứ tự (giọng văn, ngôn ngữ, độ dài)", right: "Gạch đầu dòng" },
+      { id: "ctx", left: "Bối cảnh dự án và lý do", right: "Một đoạn văn ngắn" },
+      { id: "cmp", left: "So sánh 3 nhà cung cấp theo nhiều tiêu chí", right: "Bảng có cột rõ ràng" },
+    ],
+    explanation: "Hình thức chỉ dẫn nên phản ánh bản chất thông tin: thứ tự → đánh số; song song → gạch đầu dòng; bối cảnh → văn xuôi.",
+  },
+  {
+    questionId: "ch03-l02-q12", lessonId: L, conceptId: "single-goal", learningObjective: "o1", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Đánh giá prompt sau và chọn cách xử lý tốt nhất.",
+    context: {
+      label: "Prompt",
+      content: "Phân tích doanh số quý 3, viết email xin lỗi khách An Phát, soạn kế hoạch đào tạo an toàn tháng 12 và dịch hợp đồng sang tiếng Anh.",
+    },
+    options: [
+      { id: "a", text: "Tách thành các prompt riêng, mỗi prompt một mục tiêu chính với bối cảnh và định dạng riêng", feedback: "Đúng." },
+      { id: "b", text: "Giữ nguyên, Claude sẽ tự sắp xếp", feedback: "Bốn việc không liên quan khiến mỗi việc đều thiếu bối cảnh." },
+      { id: "c", text: "Thêm “làm hết thật nhanh”", feedback: "Không giải quyết việc thiếu thông tin cho từng nhiệm vụ." },
+    ],
+    answer: "a",
+    explanation: "Một prompt nên có một mục tiêu chính rõ ràng. Nhiều việc không liên quan nên tách ra; việc nhiều bước liên quan có thể chia thành chuỗi prompt.",
+  },
+  {
+    questionId: "ch03-l02-q13", lessonId: L, conceptId: "motivation", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "true-false",
+    prompt: "Đúng hay sai?",
+    statement: "Thêm lý do vào prompt chỉ làm prompt dài hơn, không ảnh hưởng đến cách Claude áp dụng chỉ dẫn.",
+    answer: false,
+    explanation: "Sai. Anthropic cho biết lý do giúp Claude hiểu mục tiêu và đưa ra câu trả lời đúng trọng tâm hơn; Claude có thể khái quát từ lời giải thích.",
+  },
+  {
+    questionId: "ch03-l02-q14", lessonId: L, conceptId: "numbered-steps", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "fix-prompt",
+    prompt: "Viết lại prompt dưới đây với các bước đánh số, lý do và phạm vi đo được.",
+    source: "Hướng dẫn nhân viên mới cách nhập phiếu kiểm tra lên hệ thống, đầy đủ nhưng đừng dài.",
+    rubric: [
+      { id: "steps", label: "Có ít nhất 3 bước đánh số", weight: 1, check: { kind: "minMatches", pattern: "(^|\\n|\\s)[1-9][.)]\\s", value: 3 }, pass: "Có bước đánh số.", fail: "Viết các bước thành 1., 2., 3." },
+      { id: "why", label: "Có lý do / người đọc", weight: 1, check: { kind: "anyKeyword", keywords: ["vì", "nhân viên mới", "người đọc", "để", "dùng cho"] }, pass: "Có lý do.", fail: "Nêu ai đọc và vì sao." },
+      { id: "scope", label: "Phạm vi đo được", weight: 1, check: { kind: "regex", pattern: "(toi da|khong qua|\\d+\\s*(tu|buoc|dong|cau|trang))" }, pass: "Có phạm vi đo được.", fail: "Thay “đầy đủ nhưng đừng dài” bằng con số." },
+      { id: "format", label: "Định dạng đầu ra", weight: 1, check: { kind: "anyKeyword", keywords: ["trình bày", "danh sách", "bảng", "tiêu đề", "định dạng", "ảnh chụp màn hình"] }, pass: "Có định dạng.", fail: "Mô tả định dạng kết quả." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Hãy soạn hướng dẫn nhập phiếu kiểm tra lên hệ thống QA cho nhân viên mới, vì họ chưa từng dùng hệ thống và sẽ tự làm từ tuần sau.\n1. Đăng nhập và mở mục Phiếu kiểm tra.\n2. Chọn lô và mã máy.\n3. Nhập kết quả từng hạng mục.\n4. Đính kèm ảnh và lưu.\nTối đa 6 bước, mỗi bước không quá 2 câu. Trình bày dạng danh sách đánh số có tiêu đề.",
+    explanation: "Thay yêu cầu mâu thuẫn bằng bước đánh số, lý do rõ ràng và giới hạn đo được.",
+  },
+  {
+    questionId: "ch03-l02-q15", lessonId: L, conceptId: "style-matching", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Nhiệm vụ thực tế: viết prompt để nhận một đoạn tóm tắt dạng văn xuôi (không gạch đầu dòng) gửi ban giám đốc.",
+    source: "Bạn cần Claude tóm tắt kết quả QA tháng 10 thành 2 đoạn văn để dán vào email gửi ban giám đốc. Các lần trước Claude toàn trả về gạch đầu dòng.",
+    rubric: [
+      { id: "prose", label: "Yêu cầu văn xuôi / đoạn văn", weight: 1, check: { kind: "anyKeyword", keywords: ["đoạn văn", "văn xuôi", "liền mạch"] }, pass: "Có yêu cầu văn xuôi.", fail: "Nói rõ muốn các đoạn văn liền mạch." },
+      { id: "why", label: "Có lý do (email cho ban giám đốc)", weight: 1, check: { kind: "anyKeyword", keywords: ["email", "ban giám đốc", "vì", "để dán"] }, pass: "Có lý do.", fail: "Nêu vì sao cần văn xuôi: dán vào email gửi ban giám đốc." },
+      { id: "count", label: "Số đoạn / độ dài", weight: 1, check: { kind: "regex", pattern: "(\\d+|hai|ba)\\s*doan|toi da|khong qua" }, pass: "Có độ dài cụ thể.", fail: "Nêu số đoạn hoặc số từ." },
+      { id: "positive", label: "Nói điều cần làm (không chỉ điều cấm)", weight: 1, check: { kind: "anyKeyword", keywords: ["viết thành", "trình bày thành", "dạng đoạn văn", "các đoạn văn"] }, pass: "Có chỉ dẫn khẳng định.", fail: "Dùng câu khẳng định: “viết thành 2 đoạn văn…”." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Dưới đây là số liệu QA tháng 10. Hãy viết thành 2 đoạn văn liền mạch (tổng tối đa 180 từ), vì nội dung sẽ được dán trực tiếp vào email gửi ban giám đốc: đoạn 1 nêu kết quả chính, đoạn 2 nêu vấn đề cần quyết định. Viết bằng văn xuôi, giọng trang trọng, không dùng gạch đầu dòng hay chữ đậm.",
+    explanation: "Kết hợp: chỉ dẫn khẳng định (viết thành đoạn văn), lý do (email), độ dài và viết prompt bằng văn xuôi.",
+  },
+];

@@ -1,6 +1,6 @@
 # Trạng thái dự án — Claude HowTo Academy
 
-Cập nhật: 02/11/2026. File này được cập nhật sau mỗi phase để phiên làm việc sau có thể tiếp tục.
+Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để phiên làm việc sau có thể tiếp tục.
 
 ## Tổng quan
 
@@ -11,7 +11,7 @@ Cập nhật: 02/11/2026. File này được cập nhật sau mỗi phase để 
 | 3 | Lesson Engine + bài mẫu đầy đủ | Hoàn thành (bài “Prompt là gì?”) |
 | 4 | Question Engine, chống trùng, kiểm tra | Hoàn thành |
 | 5 | 5 Practice Labs | Hoàn thành |
-| 6 | Nội dung các chương còn lại | Đang làm — Chương 1 hoàn thành (6/6 bài); các chương khác xem bảng |
+| 6 | Nội dung các chương còn lại | Đang làm — Chương 1 (6/6) và Chương 3 (8/8) hoàn thành; các chương khác xem bảng |
 | 7 | Gamification, cá nhân hoá, tìm kiếm, UX | Hoàn thành phần nền tảng |
 | 8 | Kiểm thử tổng thể, chuẩn bị production | Có CI + bộ test; xem giới hạn |
 
@@ -20,9 +20,11 @@ Cập nhật: 02/11/2026. File này được cập nhật sau mỗi phase để 
 | Chương | Bài đã phát hành | Câu hỏi |
 | --- | --- | --- |
 | 1. Claude AI là gì? | Đủ 6/6 bài: AI hoạt động như thế nào? · Claude khác chatbot ra sao? · Các phiên bản và khả năng · Claude làm được gì? · Giới hạn của AI · Lỗi thường gặp | 6 × 15 = 90 |
-| 3. Prompt Engineering | 1/8 bài: Prompt là gì? | 15 |
+| 3. Prompt Engineering | Đủ 8/8 bài: Prompt là gì? · Cấu trúc prompt tốt · RCTCO · Few-shot · Chain-of-thought · Prompt có cấu trúc · Giảm hiểu nhầm · Thực hành tối ưu | 8 × 15 = 120 |
 | Các chương khác | Đề cương hiển thị “Sắp ra mắt”, không có trang rỗng | — |
-| **Tổng** | **7 bài đầy đủ 12 phần** | **105 câu, 0 cảnh báo trùng** |
+| **Tổng** | **14 bài đầy đủ 12 phần (2 chương trọn vẹn)** | **210 câu, 0 cảnh báo trùng chưa duyệt** |
+
+Chương 3 dùng hạ tầng **bài học thuần dữ liệu**: infographic (`flow`, `compare`, `cards`, `table`, `annotated`) và mô phỏng (`classify`, `choose`, `sequence`, `highlight`, `verify`, `terminal`, `prompt-lab`) được khai báo ngay trong file bài học, không cần viết component mới. Nội dung đối chiếu trang Prompting best practices và Prompt engineering overview của Anthropic (03/11/2026).
 
 Mỗi bài Chương 1 có infographic riêng và một mô phỏng tương tác thật: đoán từ tiếp theo (lấy mẫu theo xác suất minh hoạ), chatbot từ khoá chạy thật, chọn model theo hướng dẫn chính thức, phân loại 8 công việc, xếp tài liệu vào context window, kiểm chứng khẳng định với phiếu thông số.
 
@@ -36,7 +38,9 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 - **Debug Challenge**: code lỗi trượt test, lời giải qua hết test; lỗi cú pháp và vòng lặp vô hạn được xử lý.
 - **Tiến độ**: XP chỉ tính một lần, mốc chương, streak, huy hiệu, dữ liệu hỏng được sao lưu.
 - **Nội dung**: mọi bài phát hành đủ 12 phần, có hình và mô phỏng đăng ký, mỗi mục tiêu học tập có câu hỏi; mọi đáp án tham khảo đạt rubric của chính nó.
-- **Số lượng**: 88 unit test (Vitest) và 121 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
+- **Bài tập**: đáp án tham khảo đạt rubric của chính nó, còn khung gợi ý (placeholder) thì không — chống rubric quá dễ.
+- **Mô phỏng dữ liệu**: mỗi mô phỏng giải được đúng như khai báo (nhãn tồn tại, nhiệm vụ terminal hoàn thành bằng lệnh gợi ý, prompt-lab: đáp án ≥ 80%, khung ban đầu < 80%).
+- **Số lượng**: 123 unit test (Vitest) và 147 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
 - **E2E** (Playwright, desktop + mobile): 6 mô phỏng Chương 1, mốc hoàn thành chương (6 bài × 50 XP + 100 XP), điều hướng, 404, tìm kiếm bằng bàn phím, quiz thích ứng đủ 15 câu không lặp + reload giữa chừng, mô phỏng lắp ráp prompt, bài tập, ghi chú/bookmark/hoàn thành sau reload, 5 lab, dark mode, responsive (không tràn ngang), ngân sách hiệu năng trang chủ, axe WCAG 2.1 AA ở chế độ sáng và tối.
 
 ## Giới hạn hiện tại (trung thực)
@@ -50,15 +54,19 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 
 ## Bước tiếp theo đề xuất
 
-1. Chương 3: 7 bài còn lại (cấu trúc prompt, RCTCO, few-shot, chain-of-thought, prompt có cấu trúc, giảm hiểu nhầm, thực hành tối ưu) để hoàn thành chương.
-2. Chương 5: bài “Terminal là gì?” dùng dạng câu hỏi `terminal-task` (engine và giao diện đã sẵn sàng, đã có test).
-3. Chương 2 (Bắt đầu sử dụng Claude): cần đối chiếu giao diện hiện hành của ứng dụng Claude; không dùng ảnh chụp giả.
-4. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
+Thứ tự còn lại (69 bài), mỗi chương một PR, kiểm thử trước khi sang chương sau:
+
+1. Chương 5 — Claude Code cơ bản (9 bài): nguồn là các module `01-`…`10-` của repo và code.claude.com; dùng mô phỏng `terminal` và câu hỏi `terminal-task`.
+2. Chương 8 — Tối ưu token và chi phí (8 bài): nguồn Context windows, Models overview, Token counting.
+3. Chương 6 — Claude Code nâng cao (9 bài), Chương 7 — Skills, MCP (8 bài): nguồn module `03-skills`, `05-mcp`… của repo.
+4. Chương 2 — Bắt đầu sử dụng Claude (7 bài) và Chương 4 — Artifacts (7 bài): cần đối chiếu Help Center hiện hành; không dùng ảnh chụp giả.
+5. Chương 9–12: dự án thực hành, xây trên Project Builder và Debug Challenge.
+6. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
 
 ## Triển khai
 
 - GitHub Pages: `pages.yml` build academy với `ACADEMY_BASE_PATH=<base path của Pages>/academy` và chép vào `site/academy/`. Đã chạy thử bản build dưới `/claude-howto/academy/` trên máy chủ tĩnh: điều hướng, Mermaid, Monaco, terminal hoạt động, không có lỗi tải file.
-- Cần: merge vào `main` và bật Pages (Settings → Pages → Source: GitHub Actions).
+- Đã bật Pages; site chạy tại `https://xxxmrctxxx.github.io/claude-howto/academy/`. Mỗi lần merge thay đổi trong `academy/` vào `main` sẽ tự deploy lại.
 
 ## Ghi chú cho phiên làm việc sau
 
