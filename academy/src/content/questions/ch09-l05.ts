@@ -1,0 +1,186 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch09-l05";
+
+/** 15 questions for "Xây dựng backend" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh09L05: Question[] = [
+  {
+    questionId: "ch09-l05-q01", lessonId: L, conceptId: "status-codes", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "matching",
+    prompt: "Ghép mã trạng thái HTTP với ý nghĩa.",
+    pairs: [
+      { id: "p1", left: "201", right: "Đã tạo thành công" },
+      { id: "p2", left: "400", right: "Dữ liệu gửi lên không hợp lệ" },
+      { id: "p3", left: "403", right: "Đã đăng nhập nhưng không có quyền" },
+      { id: "p4", left: "404", right: "Không tìm thấy" },
+    ],
+    explanation: "401 là chưa đăng nhập (chưa xác thực).",
+  },
+  {
+    questionId: "ch09-l05-q02", lessonId: L, conceptId: "server-validation", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Frontend đã kiểm tra dữ liệu rồi thì máy chủ không cần kiểm tra lại.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Ai cũng có thể gửi yêu cầu thẳng tới API, bỏ qua frontend — máy chủ phải kiểm tra lại.",
+  },
+  {
+    questionId: "ch09-l05-q03", lessonId: L, conceptId: "env-secrets", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Mật khẩu cơ sở dữ liệu nên được đưa vào backend thế nào?",
+    options: [
+      { id: "a", text: "Đọc từ biến môi trường (ví dụ DATABASE_URL), không viết cứng trong code", feedback: "Đúng." },
+      { id: "b", text: "Viết thẳng trong file server.js", feedback: "Bí mật lọt vào git." },
+      { id: "c", text: "Ghi trong README", feedback: "Ai đọc README cũng thấy." },
+    ],
+    answer: "a",
+    explanation: ".env nằm trong .gitignore; .env.example chỉ có tên biến.",
+  },
+  {
+    questionId: "ch09-l05-q04", lessonId: L, conceptId: "api-list", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Một dòng trong bảng API nên có những gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Phương thức và đường dẫn, ví dụ POST /api/loi", feedback: "Đúng." },
+      { id: "b", text: "Dữ liệu vào và dữ liệu ra", feedback: "Đúng." },
+      { id: "c", text: "Các lỗi có thể xảy ra kèm mã trạng thái", feedback: "Đúng." },
+      { id: "d", text: "Màu nút trên giao diện", feedback: "Thuộc frontend." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Bảng API là hợp đồng giữa frontend và backend.",
+  },
+  {
+    questionId: "ch09-l05-q05", lessonId: L, conceptId: "no-pii-logs", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Không nên ghi log toàn bộ dữ liệu cá nhân (tên, số điện thoại) của người dùng khi xử lý yêu cầu.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Log thường được nhiều người đọc và giữ lâu.",
+  },
+  {
+    questionId: "ch09-l05-q06", lessonId: L, conceptId: "parameterized", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Vì sao phải dùng truy vấn tham số hoá thay vì ghép chuỗi người dùng nhập vào câu SQL?",
+    options: [
+      { id: "a", text: "Để dữ liệu người dùng không bị hiểu thành lệnh SQL — chống SQL injection", feedback: "Đúng." },
+      { id: "b", text: "Để truy vấn chạy đẹp hơn", feedback: "Không phải lý do." },
+      { id: "c", text: "Vì cơ sở dữ liệu không nhận chuỗi", feedback: "Không đúng." },
+    ],
+    answer: "a",
+    explanation: "Ghi rõ ràng buộc này trong yêu cầu và kiểm tra trong /diff.",
+  },
+  {
+    questionId: "ch09-l05-q07", lessonId: L, conceptId: "authorization", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Chỉ tổ trưởng được xoá lỗi. Claude đã ẩn nút Xoá với công nhân trên giao diện. Như vậy đã đủ chưa?",
+    options: [
+      { id: "a", text: "Chưa — máy chủ phải kiểm tra quyền và trả 403 nếu không phải tổ trưởng", feedback: "Đúng." },
+      { id: "b", text: "Đủ, vì không thấy nút thì không xoá được", feedback: "Vẫn gọi API trực tiếp được." },
+      { id: "c", text: "Đủ, nếu nút màu xám", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Phân quyền phải nằm ở máy chủ.",
+  },
+  {
+    questionId: "ch09-l05-q08", lessonId: L, conceptId: "test-first", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp quy trình xây một API theo hướng test trước.",
+    items: [
+      { id: "a", text: "Duyệt bảng API trong plan mode" },
+      { id: "b", text: "Viết test: hợp lệ, sai dữ liệu, không có quyền" },
+      { id: "c", text: "Chạy test, xác nhận đang trượt" },
+      { id: "d", text: "Viết code tới khi test đạt" },
+      { id: "e", text: "Xem lệnh và kết quả, /diff, commit" },
+    ],
+    explanation: "Test trượt trước chứng tỏ test thật sự kiểm tra điều cần kiểm tra.",
+  },
+  {
+    questionId: "ch09-l05-q09", lessonId: L, conceptId: "error-messages", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "API trả lỗi 400 cho mọi trường hợp với thông báo “Error”. Cải thiện nào tốt nhất?",
+    options: [
+      { id: "a", text: "Thông báo nói rõ trường nào sai và vì sao, ví dụ “Thiếu công đoạn”, để frontend hiển thị dưới đúng ô", feedback: "Đúng." },
+      { id: "b", text: "Trả 500 cho mọi lỗi", feedback: "500 là lỗi máy chủ, gây hiểu nhầm." },
+      { id: "c", text: "Không trả lỗi, im lặng bỏ qua", feedback: "Người dùng tưởng đã lưu." },
+    ],
+    answer: "a",
+    explanation: "Thông báo rõ giúp cả người dùng và người sửa lỗi.",
+  },
+  {
+    questionId: "ch09-l05-q10", lessonId: L, conceptId: "data-model", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Một bạn đề xuất mô hình dữ liệu cho bảng loi. Chọn các trường KHÔNG nên có theo SPEC.md (không lưu dữ liệu cá nhân thừa).",
+    segments: [
+      { id: "s1", text: "id, ngày ghi, công đoạn, mô tả, mức độ", isError: false },
+      { id: "s2", text: "mã nhân viên người ghi", isError: false },
+      { id: "s3", text: "số điện thoại cá nhân người ghi", isError: true, why: "SPEC.md yêu cầu không lưu số điện thoại cá nhân." },
+      { id: "s4", text: "số CCCD người ghi", isError: true, why: "Dữ liệu nhạy cảm không cần cho nghiệp vụ." },
+    ],
+    explanation: "Chỉ lưu dữ liệu cần cho nghiệp vụ.",
+  },
+  {
+    questionId: "ch09-l05-q11", lessonId: L, conceptId: "api-tests", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Bộ test cho DELETE /api/loi/:id nên có những ca nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Tổ trưởng xoá lỗi có thật → 204", feedback: "Đúng." },
+      { id: "b", text: "Công nhân xoá → 403", feedback: "Đúng." },
+      { id: "c", text: "Xoá id không tồn tại → 404", feedback: "Đúng." },
+      { id: "d", text: "Kiểm tra màu nút Xoá", feedback: "Thuộc kiểm tra giao diện." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Mỗi nhánh lỗi là một ca kiểm thử.",
+  },
+  {
+    questionId: "ch09-l05-q12", lessonId: L, conceptId: "env-secrets", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Khi xem /diff phần backend, bạn thấy những dòng dưới đây. Chọn các dòng cần sửa.",
+    segments: [
+      { id: "s1", text: "const db = connect(process.env.DATABASE_URL)", isError: false },
+      { id: "s2", text: "db.query(\"SELECT * FROM loi WHERE cong_doan = '\" + req.query.cd + \"'\")", isError: true, why: "Ghép chuỗi người dùng nhập vào SQL — dùng tham số." },
+      { id: "s3", text: "const ADMIN_PASSWORD = \"Abc@123\"", isError: true, why: "Bí mật viết cứng trong code." },
+      { id: "s4", text: "if (user.role !== \"to_truong\") return res.status(403).json({ loi: \"Chỉ tổ trưởng được xoá\" })", isError: false },
+    ],
+    explanation: "Rà /diff tìm bí mật viết cứng và ghép chuỗi SQL trước khi commit.",
+  },
+  {
+    questionId: "ch09-l05-q13", lessonId: L, conceptId: "backend-plan", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Claude đề xuất 12 API, trong đó có API gửi email và xuất PDF, trong khi SPEC.md chỉ có 3 story “Phải có”. Phản hồi hợp lý?",
+    options: [
+      { id: "a", text: "Giữ các API phục vụ 3 story, bỏ phần ngoài phạm vi; ghi các API khác vào mục “để sau”", feedback: "Đúng." },
+      { id: "b", text: "Làm đủ 12 API cho chắc", feedback: "Mở rộng phạm vi, thêm thứ phải test và bảo trì." },
+      { id: "c", text: "Bỏ luôn bảng API, code trực tiếp", feedback: "Mất hợp đồng giữa frontend và backend." },
+    ],
+    answer: "a",
+    explanation: "SPEC.md là thước đo phạm vi.",
+  },
+  {
+    questionId: "ch09-l05-q14", lessonId: L, conceptId: "test-first", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Claude viết test cho API và test đạt ngay lần chạy đầu, trước khi có code xử lý. Bạn nên nghĩ gì?",
+    options: [
+      { id: "a", text: "Nghi ngờ test không kiểm tra đúng điều cần — xem lại test, cố tình làm sai code để chắc test bắt được lỗi", feedback: "Đúng." },
+      { id: "b", text: "Tốt quá, bỏ qua bước viết code", feedback: "Test đạt khi chưa có code là dấu hiệu bất thường." },
+      { id: "c", text: "Xoá test cho gọn", feedback: "Mất phép kiểm tra." },
+    ],
+    answer: "a",
+    explanation: "Vì vậy quy trình yêu cầu xác nhận test trượt trước.",
+  },
+  {
+    questionId: "ch09-l05-q15", lessonId: L, conceptId: "api-tests", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết yêu cầu cho Claude Code xây API dưới đây theo hướng test trước, có ràng buộc an toàn và yêu cầu bằng chứng.",
+    source: "API PATCH /api/loi/:id cho phép tổ trưởng đổi mức độ của một lỗi (Thấp/Trung bình/Cao). Công nhân không được đổi. Lệnh test: npm test.",
+    rubric: [
+      { id: "tests", label: "Viết test trước", weight: 1, check: { kind: "anyKeyword", keywords: ["viết test", "test trước", "test đang trượt"] }, pass: "Có test trước.", fail: "Yêu cầu viết test trước và xác nhận trượt." },
+      { id: "cases", label: "Ca 400 và 403", weight: 1, check: { kind: "allGroups", groups: [["400", "không hợp lệ"], ["403", "không có quyền"]] }, pass: "Có ca lỗi.", fail: "Thêm ca mức độ không hợp lệ (400) và công nhân đổi (403)." },
+      { id: "safety", label: "Ràng buộc an toàn", weight: 1, check: { kind: "anyKeyword", keywords: ["tham số hoá", "kiểm tra quyền", "máy chủ", "biến môi trường"] }, pass: "Có an toàn.", fail: "Nêu truy vấn tham số hoá, kiểm tra quyền ở máy chủ." },
+      { id: "evidence", label: "Bằng chứng", weight: 1, check: { kind: "anyKeyword", keywords: ["npm test", "cho tôi xem", "kết quả"] }, pass: "Có bằng chứng.", fail: "Yêu cầu chạy npm test và cho xem kết quả." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Viết test trước cho PATCH /api/loi/:id: tổ trưởng đổi mức độ hợp lệ → 200; mức độ ngoài Thấp/Trung bình/Cao → 400; công nhân đổi → 403; id không tồn tại → 404. Chạy npm test và cho tôi xem các test đang trượt.\nSau đó viết code tới khi đạt: kiểm tra quyền ở máy chủ, truy vấn tham số hoá, không log dữ liệu cá nhân. Chạy npm test, cho tôi xem lệnh và kết quả, rồi liệt kê file đã sửa.",
+    explanation: "Test trước + an toàn + bằng chứng là khuôn làm backend với Claude.",
+  },
+];

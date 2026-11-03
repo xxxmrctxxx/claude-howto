@@ -1,0 +1,182 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch09-l07";
+
+/** 15 questions for "Sửa lỗi" (chương 9) — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh09L07: Question[] = [
+  {
+    questionId: "ch09-l07-q01", lessonId: L, conceptId: "bug-report", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Một báo lỗi đủ để tái hiện nên có những gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Các bước đã làm", feedback: "Đúng." },
+      { id: "b", text: "Thiết bị và trình duyệt", feedback: "Đúng." },
+      { id: "c", text: "Thông báo nguyên văn hoặc ảnh chụp", feedback: "Đúng." },
+      { id: "d", text: "Ý kiến về màu logo", feedback: "Không giúp tái hiện." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Thêm thời điểm và điều người dùng mong đợi.",
+  },
+  {
+    questionId: "ch09-l07-q02", lessonId: L, conceptId: "need-info", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Khi chưa tái hiện được lỗi, nên hỏi thêm thông tin thay vì đoán rồi sửa.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Không tái hiện được thì cũng không chứng minh được đã sửa.",
+  },
+  {
+    questionId: "ch09-l07-q03", lessonId: L, conceptId: "security-bug", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Công nhân xoá được lỗi do người khác ghi (lẽ ra chỉ tổ trưởng được xoá). Mức ưu tiên?",
+    options: [
+      { id: "a", text: "Sửa ngay — lỗ hổng phân quyền", feedback: "Đúng." },
+      { id: "b", text: "Để sau", feedback: "Lỗi bảo mật không để sau." },
+      { id: "c", text: "Không phải lỗi", feedback: "Trái với SPEC.md." },
+    ],
+    answer: "a",
+    explanation: "Lỗi bảo mật luôn ưu tiên cao.",
+  },
+  {
+    questionId: "ch09-l07-q04", lessonId: L, conceptId: "pipe-logs", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền cờ của lệnh claude.",
+    template: "Đưa log vào Claude từ shell: cat error.log | claude [[b1]] \"chuyện gì đang xảy ra\"",
+    blanks: [{ id: "b1", accepted: ["-p"], width: 4 }],
+    explanation: "Ví dụ có trong Best practices.",
+  },
+  {
+    questionId: "ch09-l07-q05", lessonId: L, conceptId: "close-loop", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Sửa và triển khai xong thì nên báo lại người báo lỗi và nhờ họ xác nhận.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Người dùng thật là người kiểm chứng cuối cùng.",
+  },
+  {
+    questionId: "ch09-l07-q06", lessonId: L, conceptId: "priority", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép báo lỗi với mức ưu tiên.",
+    pairs: [
+      { id: "p1", left: "Không ai lưu được lỗi từ sáng", right: "Sửa ngay" },
+      { id: "p2", left: "Thống kê sai, tạm đếm tay được", right: "Đợt tới" },
+      { id: "p3", left: "Nút lệch 2px, vẫn bấm được", right: "Để sau" },
+      { id: "p4", left: "“Web bị lỗi rồi!”", right: "Cần thêm thông tin" },
+    ],
+    explanation: "Mức ảnh hưởng tới công việc quyết định ưu tiên.",
+  },
+  {
+    questionId: "ch09-l07-q07", lessonId: L, conceptId: "failing-test-first", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp vòng sửa một lỗi đã tái hiện được.",
+    items: [
+      { id: "a", text: "Viết test tái hiện lỗi" },
+      { id: "b", text: "Chạy test, xác nhận đang trượt" },
+      { id: "c", text: "Sửa nguyên nhân gốc" },
+      { id: "d", text: "Chạy test đó và toàn bộ test, tất cả đạt" },
+      { id: "e", text: "Commit, triển khai, báo lại người dùng" },
+    ],
+    explanation: "Test trượt trước chứng minh lỗi có thật; đạt sau chứng minh đã sửa.",
+  },
+  {
+    questionId: "ch09-l07-q08", lessonId: L, conceptId: "root-cause", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Mô tả có dấu nháy kép thì không lưu được. Claude đề xuất “xoá mọi dấu nháy trước khi gửi”. Đánh giá?",
+    options: [
+      { id: "a", text: "Đó là vá triệu chứng; cần tìm vì sao dấu nháy làm hỏng việc lưu (ví dụ ghép chuỗi SQL) và sửa đúng chỗ", feedback: "Đúng." },
+      { id: "b", text: "Ổn, vì người dùng không cần dấu nháy", feedback: "Mất dữ liệu và che lỗi có thể nguy hiểm." },
+      { id: "c", text: "Cấm gõ dấu nháy trên giao diện", feedback: "Vẫn là vá triệu chứng." },
+    ],
+    answer: "a",
+    explanation: "Dấu nháy gây lỗi thường là dấu hiệu ghép chuỗi SQL — một lỗ hổng.",
+  },
+  {
+    questionId: "ch09-l07-q09", lessonId: L, conceptId: "attach-evidence", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Người dùng gửi ảnh chụp màn hình lỗi. Cách đưa cho Claude tốt nhất?",
+    options: [
+      { id: "a", text: "Dán ảnh vào prompt kèm mô tả bước và file nghi ngờ (@file)", feedback: "Đúng." },
+      { id: "b", text: "Tả lại ảnh bằng lời ngắn gọn", feedback: "Mất chi tiết." },
+      { id: "c", text: "Không cần ảnh", feedback: "Ảnh là bằng chứng giá trị." },
+    ],
+    answer: "a",
+    explanation: "Best practices: có thứ Claude cần thì đưa trực tiếp thay vì mô tả.",
+  },
+  {
+    questionId: "ch09-l07-q10", lessonId: L, conceptId: "regression-test", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Sau khi sửa, có thể xoá test tái hiện vì lỗi đã hết.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Giữ test làm test hồi quy để lỗi không quay lại.",
+  },
+  {
+    questionId: "ch09-l07-q11", lessonId: L, conceptId: "environment-info", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Trang Thống kê trắng trên iPhone (Safari) nhưng bình thường trên Android (Chrome). Thông tin này gợi ý gì?",
+    options: [
+      { id: "a", text: "Lỗi có thể do khác biệt trình duyệt — thu hẹp tìm kiếm vào phần code có thể không chạy trên Safari", feedback: "Đúng." },
+      { id: "b", text: "Máy chủ bị sập", feedback: "Android vẫn bình thường nên khó là máy chủ." },
+      { id: "c", text: "Người dùng iPhone dùng sai", feedback: "Cần kiểm chứng, không đổ lỗi." },
+    ],
+    answer: "a",
+    explanation: "Thông tin thiết bị/trình duyệt giúp khoanh vùng rất nhanh.",
+  },
+  {
+    questionId: "ch09-l07-q12", lessonId: L, conceptId: "failing-test-first", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "fix-prompt",
+    prompt: "Viết lại yêu cầu dưới đây theo vòng sửa lỗi của bài.",
+    source: "có người bảo không lưu được, sửa đi",
+    rubric: [
+      { id: "symptom", label: "Triệu chứng cụ thể", weight: 1, check: { kind: "anyKeyword", keywords: ["khi", "báo", "thông báo", "dấu nháy", "thiết bị"] }, pass: "Có triệu chứng.", fail: "Nêu triệu chứng cụ thể: khi nào, thấy gì." },
+      { id: "test", label: "Test tái hiện trước", weight: 1, check: { kind: "anyKeyword", keywords: ["test trượt", "tái hiện", "test tái hiện"] }, pass: "Có test tái hiện.", fail: "Yêu cầu viết test trượt tái hiện." },
+      { id: "evidence", label: "Bằng chứng", weight: 1, check: { kind: "anyKeyword", keywords: ["npm test", "cho tôi xem", "kết quả"] }, pass: "Có bằng chứng.", fail: "Yêu cầu chạy toàn bộ test và cho xem kết quả." },
+    ],
+    passScore: 0.67,
+    referenceAnswer:
+      "Người dùng báo: mô tả có dấu nháy kép thì bấm Lưu báo “Không lưu được” (Android, Chrome, sáng 03/11). Xem POST /api/loi trong @server/loi.js. Viết test trượt tái hiện với mô tả có dấu nháy kép, rồi sửa nguyên nhân gốc. Chạy toàn bộ npm test và cho tôi xem kết quả.",
+    explanation: "Triệu chứng + nơi nghi ngờ + test tái hiện + bằng chứng.",
+  },
+  {
+    questionId: "ch09-l07-q13", lessonId: L, conceptId: "pipe-logs", learningObjective: "o4", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Lệnh dưới đây làm gì?",
+    context: { label: "Terminal", content: "tail -n 200 logs/server.log | claude -p \"Tóm tắt các lỗi liên quan tới POST /api/loi sáng nay\"", lang: "bash" },
+    options: [
+      { id: "a", text: "Lấy 200 dòng cuối của log, đưa cho Claude chạy một lần không tương tác và in bản tóm tắt", feedback: "Đúng." },
+      { id: "b", text: "Mở phiên Claude tương tác và xoá log", feedback: "-p chạy một lần; không xoá gì." },
+      { id: "c", text: "Gửi log lên GitHub", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Pipe log giúp Claude thấy đúng dữ liệu thay vì bạn kể lại.",
+  },
+  {
+    questionId: "ch09-l07-q14", lessonId: L, conceptId: "priority", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn xử lý danh sách lỗi như dưới đây. Chọn các quyết định SAI.",
+    segments: [
+      { id: "s1", text: "Sửa lệch 2px của nút trước, vì dễ làm.", isError: true, why: "Lỗi chặn công việc và bảo mật phải ưu tiên trước." },
+      { id: "s2", text: "Hỏi thêm thông tin cho báo lỗi “Web bị lỗi rồi!”.", isError: false },
+      { id: "s3", text: "Để lỗ hổng xoá lỗi của người khác sang tháng sau.", isError: true, why: "Lỗi bảo mật sửa ngay." },
+      { id: "s4", text: "Ghi cách tránh tạm cho lỗi thống kê và báo các tổ trưởng.", isError: false },
+    ],
+    explanation: "Ưu tiên theo ảnh hưởng, không theo độ dễ.",
+  },
+  {
+    questionId: "ch09-l07-q15", lessonId: L, conceptId: "bug-report", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết báo lỗi đủ thông tin (tiêu đề, bước, thấy/mong đợi, thiết bị/thời điểm, ưu tiên) cho tình huống dưới đây.",
+    source: "Sáng 04/11, nhân viên C dùng laptop Windows, trình duyệt Edge, đặt phòng họp B lúc 9h–10h thì thấy “Đặt thành công”, nhưng mở Lịch của tôi không thấy lượt đặt; đồng nghiệp sau đó đặt trùng được phòng B lúc 9h.",
+    rubric: [
+      { id: "title", label: "Tiêu đề cụ thể", weight: 1, check: { kind: "regex", pattern: "tieu de\\s*:\\s*\\S+" }, pass: "Có tiêu đề.", fail: "Thêm “Tiêu đề: …” cụ thể." },
+      { id: "steps", label: "Có bước", weight: 1, check: { kind: "anyKeyword", keywords: ["bước"] }, pass: "Có bước.", fail: "Liệt kê các bước tái hiện." },
+      { id: "expected", label: "Thấy / mong đợi", weight: 1, check: { kind: "allGroups", groups: [["thấy", "thực tế"], ["mong đợi"]] }, pass: "Có thấy/mong đợi.", fail: "Ghi “Thấy: …” và “Mong đợi: …”." },
+      { id: "env", label: "Thiết bị/thời điểm", weight: 1, check: { kind: "allGroups", groups: [["edge", "windows"], ["04/11", "9h"]] }, pass: "Có bối cảnh.", fail: "Ghi Edge/Windows và thời điểm." },
+      { id: "priority", label: "Ưu tiên hợp lý", weight: 1, check: { kind: "anyKeyword", keywords: ["sửa ngay", "ưu tiên cao"] }, pass: "Có ưu tiên.", fail: "Đặt trùng làm hỏng nghiệp vụ chính → sửa ngay." },
+    ],
+    passScore: 0.8,
+    referenceAnswer:
+      "Tiêu đề: Báo “Đặt thành công” nhưng lượt đặt không được lưu, phòng bị đặt trùng\nBước: 1) Đặt phòng họp B, 9h–10h ngày 04/11 2) Thấy “Đặt thành công” 3) Mở Lịch của tôi\nThấy: không có lượt đặt; đồng nghiệp sau đó đặt trùng phòng B lúc 9h được. Mong đợi: lượt đặt hiện trong Lịch của tôi và chặn đặt trùng.\nThiết bị/thời điểm: laptop Windows, Edge, sáng 04/11, khoảng 8h50.\nƯu tiên: sửa ngay — sai nghiệp vụ chính, gây đặt trùng.",
+    explanation: "Báo lỗi tốt cho phép tái hiện và quyết định ưu tiên ngay.",
+  },
+];

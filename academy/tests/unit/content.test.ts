@@ -118,7 +118,11 @@ describe("search", () => {
     expect(search("zzzz-khong-co")).toEqual([]);
   });
   it("planned lessons are findable but have no link", () => {
-    const planned = search("deploy").find((h) => h.doc.kind === "planned");
+    // Pick whichever outline entry is still unpublished so the test keeps working as chapters ship.
+    const plannedTitle = course.chapters.flatMap((c) => c.outline).find((o) => !o.lessonId)?.title;
+    if (!plannedTitle) return;
+    const planned = search(plannedTitle).find((h) => h.doc.kind === "planned" && h.doc.title === plannedTitle);
+    expect(planned).toBeDefined();
     expect(planned?.doc.href).toBeNull();
   });
 });

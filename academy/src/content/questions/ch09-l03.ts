@@ -1,0 +1,182 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch09-l03";
+
+/** 15 questions for "Tạo project" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh09L03: Question[] = [
+  {
+    questionId: "ch09-l03-q01", lessonId: L, conceptId: "init-claude-md", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Lệnh nào trong Claude Code đọc dự án và tạo CLAUDE.md ban đầu?",
+    options: [
+      { id: "a", text: "/init", feedback: "Đúng." },
+      { id: "b", text: "/clear", feedback: "/clear xoá hội thoại." },
+      { id: "c", text: "/plan", feedback: "/plan lập kế hoạch cho một yêu cầu." },
+    ],
+    answer: "a",
+    explanation: "Sau /init, bổ sung lệnh chạy, lệnh test, quy ước.",
+  },
+  {
+    questionId: "ch09-l03-q02", lessonId: L, conceptId: "gitignore", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "File .env chứa mật khẩu nên được liệt kê trong .gitignore trước commit đầu tiên.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Đã commit thì bí mật nằm trong lịch sử git, rất khó gỡ sạch.",
+  },
+  {
+    questionId: "ch09-l03-q03", lessonId: L, conceptId: "test-command-line", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Theo Best practices, dòng hữu ích nhất trong CLAUDE.md khi repo có test hoặc linter là gì?",
+    options: [
+      { id: "a", text: "Lệnh chạy phép kiểm tra đó, ví dụ npm test", feedback: "Đúng." },
+      { id: "b", text: "Lời chào Claude", feedback: "Không giúp gì." },
+      { id: "c", text: "Danh sách mọi file trong repo", feedback: "Claude tự đọc được." },
+    ],
+    answer: "a",
+    explanation: "Có lệnh kiểm tra, Claude tự chạy và sửa tới khi đạt.",
+  },
+  {
+    questionId: "ch09-l03-q04", lessonId: L, conceptId: "readme-run", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "README.md của dự án nên có gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Dự án làm gì", feedback: "Đúng." },
+      { id: "b", text: "Cách chạy thử", feedback: "Đúng." },
+      { id: "c", text: "Cách chạy test", feedback: "Đúng." },
+      { id: "d", text: "Mật khẩu cơ sở dữ liệu", feedback: "Không bao giờ ghi bí mật vào README." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "README cho người, CLAUDE.md cho Claude.",
+  },
+  {
+    questionId: "ch09-l03-q05", lessonId: L, conceptId: "first-commit", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Commit sớm ngay sau khi có khung dự án giúp có điểm quay lại nếu bước sau làm hỏng.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Xem lại Chương 6 bài Git và GitHub.",
+  },
+  {
+    questionId: "ch09-l03-q06", lessonId: L, conceptId: "first-commit", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "terminal-task",
+    prompt: "Trong terminal mô phỏng (dự án web-qa đã có một commit): tạo file .gitignore chứa dòng .env, rồi commit thay đổi đó.",
+    preset: "git-committed",
+    checks: [
+      { kind: "file", path: "~/web-qa/.gitignore", contains: ".env", label: ".gitignore có .env" },
+      { kind: "commitCount", path: "~/web-qa", min: 2, label: "Có commit mới" },
+      { kind: "cleanTree", path: "~/web-qa", label: "Không còn thay đổi chưa commit" },
+    ],
+    referenceCommands: ['echo ".env" > .gitignore', "git add .gitignore", 'git commit -m "chore: bo qua file .env"'],
+    hint: "echo \".env\" > .gitignore, rồi git add và git commit -m.",
+    explanation: "Bí mật được chặn khỏi git trước khi kịp tạo .env.",
+  },
+  {
+    questionId: "ch09-l03-q07", lessonId: L, conceptId: "plan-structure", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn muốn Claude đề xuất cấu trúc thư mục và công nghệ cho dự án nhưng chưa tạo file nào. Cách làm hợp lý?",
+    options: [
+      { id: "a", text: "Dùng plan mode (Shift+Tab hoặc /plan) và dặn “chưa tạo file”", feedback: "Đúng." },
+      { id: "b", text: "Bảo Claude tạo luôn rồi xoá nếu không ưng", feedback: "Tốn công và dễ sót file thừa." },
+      { id: "c", text: "Dùng chat ẩn danh", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Duyệt kế hoạch trước, tạo file sau.",
+  },
+  {
+    questionId: "ch09-l03-q08", lessonId: L, conceptId: "no-extra-deps", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Vì sao nên dặn Claude “không thêm thư viện ngoài danh sách đã duyệt”?",
+    options: [
+      { id: "a", text: "Thư viện thừa làm dự án nặng, khó bảo trì và thêm rủi ro bảo mật", feedback: "Đúng." },
+      { id: "b", text: "Vì Claude không biết dùng thư viện", feedback: "Không phải lý do." },
+      { id: "c", text: "Vì thư viện làm chạy test chậm gấp đôi", feedback: "Không phải lý do chính." },
+    ],
+    answer: "a",
+    explanation: "Dự án nhỏ nên chọn giải pháp đơn giản bạn bảo trì được.",
+  },
+  {
+    questionId: "ch09-l03-q09", lessonId: L, conceptId: "secrets-out", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Đồng đội cần biết dự án dùng những biến môi trường nào, nhưng không được thấy giá trị thật. Làm gì?",
+    options: [
+      { id: "a", text: "Commit file .env.example chỉ có tên biến; .env thật nằm trong .gitignore", feedback: "Đúng." },
+      { id: "b", text: "Commit .env thật cho tiện", feedback: "Lộ bí mật." },
+      { id: "c", text: "Gửi .env qua nhóm chat chung", feedback: "Bí mật lan rộng, khó kiểm soát." },
+    ],
+    answer: "a",
+    explanation: "Mỗi người tự điền giá trị trong .env của mình.",
+  },
+  {
+    questionId: "ch09-l03-q10", lessonId: L, conceptId: "check-from-start", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Theo Best practices, khi có thứ chạy được và trả về đạt/không đạt, Claude có thể tự sửa, chạy lại và tiếp tục mà bạn không phải canh.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Vì vậy nên có phép kiểm tra từ ngày đầu.",
+  },
+  {
+    questionId: "ch09-l03-q11", lessonId: L, conceptId: "project-skeleton", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép file với vai trò của nó trong dự án.",
+    pairs: [
+      { id: "p1", left: "README.md", right: "Cho người: dự án làm gì, cách chạy" },
+      { id: "p2", left: "CLAUDE.md", right: "Cho Claude: lệnh, quy ước, nạp mỗi phiên" },
+      { id: "p3", left: "SPEC.md", right: "Yêu cầu và tiêu chí — định nghĩa “xong”" },
+      { id: "p4", left: ".env.example", right: "Tên biến môi trường, không có giá trị thật" },
+    ],
+    explanation: "Mỗi file một vai trò rõ ràng.",
+  },
+  {
+    questionId: "ch09-l03-q12", lessonId: L, conceptId: "secrets-out", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn dựng khung dự án như dưới đây. Chọn các bước SAI.",
+    segments: [
+      { id: "s1", text: "Tạo .env có mật khẩu, commit đầu tiên, rồi mới thêm .gitignore.", isError: true, why: "Mật khẩu đã vào lịch sử git; .gitignore phải có trước." },
+      { id: "s2", text: "Hỏi cấu trúc trong plan mode và duyệt trước.", isError: false },
+      { id: "s3", text: "Để Claude cài thêm thư viện tuỳ ý cho nhanh.", isError: true, why: "Thư viện thừa khó bảo trì; dặn chỉ dùng danh sách đã duyệt." },
+      { id: "s4", text: "Ghi lệnh npm test vào CLAUDE.md.", isError: false },
+    ],
+    explanation: "Thứ tự đúng: .gitignore trước, bí mật sau; thư viện có duyệt.",
+  },
+  {
+    questionId: "ch09-l03-q13", lessonId: L, conceptId: "spec-in-repo", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Claude đề xuất cấu trúc có cả mục “gửi tin nhắn khi lỗi nặng” dù SPEC.md ghi tính năng này “để sau”. Phản hồi hợp lý?",
+    options: [
+      { id: "a", text: "Yêu cầu bỏ phần đó, bám phạm vi “Phải có” trong SPEC.md", feedback: "Đúng." },
+      { id: "b", text: "Đồng ý vì càng nhiều tính năng càng tốt", feedback: "Mở rộng phạm vi, chậm có bản dùng được." },
+      { id: "c", text: "Xoá SPEC.md cho khỏi vướng", feedback: "Mất định nghĩa “xong”." },
+    ],
+    answer: "a",
+    explanation: "SPEC.md là thước đo để duyệt kế hoạch.",
+  },
+  {
+    questionId: "ch09-l03-q14", lessonId: L, conceptId: "simple-stack", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Web theo dõi lỗi cho khoảng 60 người, bạn và một đồng nghiệp sẽ bảo trì. Claude đưa hai phương án: (A) vài file HTML/JS + API nhỏ + cơ sở dữ liệu đơn giản; (B) 6 dịch vụ riêng, hàng đợi tin nhắn, cụm container. Chọn gì?",
+    options: [
+      { id: "a", text: "(A) — đủ cho phạm vi, nhóm nhỏ bảo trì được", feedback: "Đúng." },
+      { id: "b", text: "(B) — chuẩn bị cho tương lai", feedback: "Quá phức tạp cho nhu cầu hiện tại." },
+      { id: "c", text: "Làm cả hai rồi so", feedback: "Tốn gấp đôi công." },
+    ],
+    answer: "a",
+    explanation: "Chọn giải pháp đơn giản nhất đủ cho phạm vi và người bảo trì.",
+  },
+  {
+    questionId: "ch09-l03-q15", lessonId: L, conceptId: "plan-structure", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết yêu cầu (plan mode) nhờ Claude đề xuất cấu trúc cho dự án dưới đây, có ràng buộc về công nghệ, thư viện và kiểm thử.",
+    source: "Dự án web đặt phòng họp (SPEC.md đã có). Người bảo trì: một nhân viên IT biết JavaScript cơ bản. Cần chạy được trên máy chủ nội bộ, có test cho phần kiểm tra đặt trùng giờ.",
+    rubric: [
+      { id: "plan", label: "Plan mode / chưa tạo file", weight: 1, check: { kind: "anyKeyword", keywords: ["/plan", "plan mode", "chưa tạo file", "chưa viết code"] }, pass: "Có lập kế hoạch trước.", fail: "Dùng /plan hoặc dặn chưa tạo file." },
+      { id: "spec", label: "Dựa trên SPEC.md", weight: 1, check: { kind: "anyKeyword", keywords: ["spec.md", "@spec.md"] }, pass: "Có SPEC.md.", fail: "Yêu cầu đọc @SPEC.md." },
+      { id: "simple", label: "Ràng buộc đơn giản", weight: 1, check: { kind: "anyKeyword", keywords: ["javascript", "đơn giản", "ít thư viện", "không thêm thư viện"] }, pass: "Có ràng buộc công nghệ.", fail: "Nêu: JavaScript, đơn giản, hạn chế thư viện." },
+      { id: "test", label: "Kế hoạch test", weight: 1, check: { kind: "anyKeyword", keywords: ["test", "kiểm thử"] }, pass: "Có kiểm thử.", fail: "Yêu cầu nêu cách chạy test cho phần đặt trùng giờ." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "/plan Đọc @SPEC.md. Đề xuất cấu trúc thư mục và công nghệ đơn giản nhất cho web đặt phòng họp, người bảo trì chỉ biết JavaScript cơ bản, chạy trên máy chủ nội bộ. Không thêm thư viện ngoài những thứ thật cần — liệt kê từng thư viện và lý do. Nêu cách chạy test và đề xuất các test cho phần kiểm tra đặt trùng giờ. Chưa tạo file.",
+    explanation: "Yêu cầu tốt: kế hoạch trước, bám SPEC, ràng buộc phù hợp người bảo trì, có kiểm thử.",
+  },
+];
