@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch07-l05";
+
+/** 15 questions for "Cách cấu hình" (chương 7) — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh07L05: Question[] = [
+  {
+    questionId: "ch07-l05-q01", lessonId: L, conceptId: "mcp-scopes", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Chạy claude mcp add mà không ghi --scope thì server được thêm ở phạm vi nào?",
+    options: [
+      { id: "a", text: "local — chỉ bạn, chỉ dự án hiện tại", feedback: "Đúng." },
+      { id: "b", text: "project — cả nhóm qua .mcp.json", feedback: "Phải ghi --scope project." },
+      { id: "c", text: "user — mọi dự án của bạn", feedback: "Phải ghi --scope user." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: Local scope is the default.",
+  },
+  {
+    questionId: "ch07-l05-q02", lessonId: L, conceptId: "mcp-json", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "MCP server phạm vi project được lưu trong .mcp.json ở gốc dự án; commit file này thì cả nhóm có cùng server.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Đây là phạm vi duy nhất trong ba phạm vi được chia sẻ qua git.",
+  },
+  {
+    questionId: "ch07-l05-q03", lessonId: L, conceptId: "disable-model-invocation", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền tên trường frontmatter.",
+    template: "Thêm [[b1]]: true vào frontmatter để Claude không tự dùng skill; skill chỉ chạy khi bạn gõ /tên.",
+    blanks: [{ id: "b1", accepted: ["disable-model-invocation"], width: 24 }],
+    explanation: "Nên dùng cho skill có tác dụng phụ như triển khai hay gửi tin nhắn.",
+  },
+  {
+    questionId: "ch07-l05-q04", lessonId: L, conceptId: "settings-scopes", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "File settings nào được commit để cả nhóm dùng chung quyền, hook và plugin?",
+    options: [
+      { id: "a", text: ".claude/settings.json", feedback: "Đúng." },
+      { id: "b", text: ".claude/settings.local.json", feedback: "File này là của riêng bạn, không commit." },
+      { id: "c", text: "~/.claude/settings.json", feedback: "File này nằm trong thư mục home của bạn." },
+    ],
+    answer: "a",
+    explanation: "Mỗi người vẫn có thể ghi đè cho riêng mình trong .claude/settings.local.json.",
+  },
+  {
+    questionId: "ch07-l05-q05", lessonId: L, conceptId: "project-approval", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Trong phiên tương tác, Claude Code hỏi bạn duyệt trước khi dùng các server được khai báo trong .mcp.json của dự án.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Vì lý do an toàn; đặt lại các lựa chọn bằng claude mcp reset-project-choices.",
+  },
+  {
+    questionId: "ch07-l05-q06", lessonId: L, conceptId: "mcp-scopes", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi lựa chọn với kết quả của nó.",
+    pairs: [
+      { id: "p1", left: "--scope local (mặc định)", right: "Chỉ bạn, dự án hiện tại; lưu trong ~/.claude.json" },
+      { id: "p2", left: "--scope project", right: "Cả nhóm; lưu trong .mcp.json ở gốc dự án" },
+      { id: "p3", left: "--scope user", right: "Chỉ bạn, mọi dự án; lưu trong ~/.claude.json" },
+      { id: "p4", left: "claude mcp reset-project-choices", right: "Đặt lại các lựa chọn duyệt server dự án" },
+    ],
+    explanation: "Theo bảng phạm vi và mục bảo mật trong tài liệu MCP.",
+  },
+  {
+    questionId: "ch07-l05-q07", lessonId: L, conceptId: "env-expansion", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Biến API_BASE_URL chưa được đặt trên máy bạn. Claude Code sẽ kết nối tới URL nào?",
+    context: { label: ".mcp.json (trích)", content: "\"url\": \"${API_BASE_URL:-https://api.vi-du.com}/mcp\"", lang: "json" },
+    options: [
+      { id: "a", text: "https://api.vi-du.com/mcp", feedback: "Đúng — dùng giá trị sau :-." },
+      { id: "b", text: "${API_BASE_URL}/mcp nguyên văn", feedback: "Có giá trị mặc định nên không dùng nguyên văn." },
+      { id: "c", text: "Không nạp cấu hình", feedback: "Cấu hình vẫn nạp." },
+    ],
+    answer: "a",
+    explanation: "${VAR:-mặc_định} dùng mặc định khi VAR chưa đặt.",
+  },
+  {
+    questionId: "ch07-l05-q08", lessonId: L, conceptId: "user-invocable", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Skill “he-thong-cu” chỉ chứa kiến thức nền về hệ thống cũ. Gõ /he-thong-cu không có ý nghĩa; bạn chỉ muốn Claude tự dùng khi liên quan. Thêm gì?",
+    options: [
+      { id: "a", text: "user-invocable: false", feedback: "Đúng — ẩn khỏi menu /, Claude vẫn tự dùng." },
+      { id: "b", text: "disable-model-invocation: true", feedback: "Làm ngược lại: Claude không tự dùng được." },
+      { id: "c", text: "context: fork", feedback: "Chỉ đổi nơi chạy skill." },
+    ],
+    answer: "a",
+    explanation: "Theo bảng Control who invokes a skill.",
+  },
+  {
+    questionId: "ch07-l05-q09", lessonId: L, conceptId: "allowed-tools", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Trường allowed-tools trong frontmatter của skill có tác dụng gì?",
+    options: [
+      { id: "a", text: "Cho Claude dùng các công cụ đó mà không hỏi quyền trong lượt gọi skill; hết hiệu lực khi bạn gửi tin nhắn tiếp", feedback: "Đúng." },
+      { id: "b", text: "Cấm Claude dùng mọi công cụ khác vĩnh viễn", feedback: "Không phải danh sách cấm." },
+      { id: "c", text: "Cài thêm công cụ mới vào máy", feedback: "Không cài gì cả." },
+    ],
+    answer: "a",
+    explanation: "Ví dụ trong tài liệu: allowed-tools: Bash(python3 *).",
+  },
+  {
+    questionId: "ch07-l05-q10", lessonId: L, conceptId: "settings-precedence", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "File .claude/settings.json của nhóm bật một tuỳ chọn mà riêng bạn muốn tắt trong dự án này, không ảnh hưởng đồng đội. Ghi ở đâu?",
+    options: [
+      { id: "a", text: ".claude/settings.local.json trong dự án", feedback: "Đúng — local ưu tiên hơn project." },
+      { id: "b", text: "~/.claude/settings.json", feedback: "User thấp hơn project nên không thắng." },
+      { id: "c", text: "Sửa .claude/settings.json rồi commit", feedback: "Đổi cho cả nhóm." },
+    ],
+    answer: "a",
+    explanation: "Thứ tự: managed > --settings > local > project > user.",
+  },
+  {
+    questionId: "ch07-l05-q11", lessonId: L, conceptId: "context-fork", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Thêm context: fork vào frontmatter của skill thì điều gì thay đổi?",
+    options: [
+      { id: "a", text: "Skill chạy trong một subagent tách riêng, nhận nội dung skill làm prompt", feedback: "Đúng." },
+      { id: "b", text: "Skill được sao chép sang mọi dự án", feedback: "Không liên quan đến phạm vi." },
+      { id: "c", text: "Skill bị tắt", feedback: "Skill vẫn chạy." },
+    ],
+    answer: "a",
+    explanation: "Trường agent chọn loại subagent dùng khi có context: fork.",
+  },
+  {
+    questionId: "ch07-l05-q12", lessonId: L, conceptId: "mcp-precedence", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Server tên db được định nghĩa ở hai nơi như dưới đây. Claude Code kết nối thế nào?",
+    context: {
+      label: "Hai định nghĩa",
+      content: "Phạm vi local:   db → https://db-thu.vi-du.com/mcp (có header của bạn)\n.mcp.json:       db → https://db.vi-du.com/mcp (có thêm timeout)",
+      lang: "text",
+    },
+    options: [
+      { id: "a", text: "Kết nối một lần, dùng nguyên định nghĩa local: db-thu, không lấy thêm trường nào từ .mcp.json", feedback: "Đúng." },
+      { id: "b", text: "Dùng URL của .mcp.json và header của local", feedback: "Các trường không được trộn." },
+      { id: "c", text: "Kết nối cả hai server cùng tên", feedback: "Chỉ kết nối một lần." },
+    ],
+    answer: "a",
+    explanation: "Thứ tự local > project > user; toàn bộ mục của nguồn thắng được dùng.",
+  },
+  {
+    questionId: "ch07-l05-q13", lessonId: L, conceptId: "mcp-json", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Kế hoạch cấu hình MCP cho nhóm dưới đây có những ý SAI nào?",
+    segments: [
+      { id: "s1", text: "Commit .mcp.json kèm token thật để đồng đội khỏi phải cấu hình.", isError: true, why: "Lộ bí mật cho mọi người đọc được repo." },
+      { id: "s2", text: "Dùng ${TICKETS_TOKEN} trong headers; mỗi người tự đặt biến trong máy.", isError: false },
+      { id: "s3", text: "Server mình đang thử nghiệm riêng thì thêm ở phạm vi project cho tiện.", isError: true, why: "Thử nghiệm riêng nên ở local; project áp cho cả nhóm." },
+      { id: "s4", text: "Dùng ${API_BASE_URL:-https://api.vi-du.com} để URL có giá trị mặc định.", isError: false },
+    ],
+    explanation: "File dùng chung: không bí mật, chỉ chứa server cả nhóm cần.",
+  },
+  {
+    questionId: "ch07-l05-q14", lessonId: L, conceptId: "skill-overrides", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Một skill do người khác viết, ít dùng. Bạn muốn vẫn thấy nó trong menu / và Claude vẫn có thể dùng, nhưng mô tả dài của nó không chiếm chỗ trong context. Không sửa file skill. Chọn gì?",
+    options: [
+      { id: "a", text: "skillOverrides: \"name-only\"", feedback: "Đúng — Claude chỉ thấy tên." },
+      { id: "b", text: "skillOverrides: \"off\"", feedback: "Ẩn hẳn, kể cả khỏi menu." },
+      { id: "c", text: "Xoá thư mục skill", feedback: "Mất luôn skill." },
+    ],
+    answer: "a",
+    explanation: "\"user-invocable-only\" thì ẩn với Claude — không đúng yêu cầu “Claude vẫn có thể dùng”.",
+  },
+  {
+    questionId: "ch07-l05-q15", lessonId: L, conceptId: "disable-model-invocation", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết frontmatter cho skill /trien-khai-thu dưới đây.",
+    source: "Skill /trien-khai-thu chạy npm run build rồi npm run deploy:staging để đưa bản build lên máy chủ thử nghiệm. Chỉ được chạy khi người dùng tự gõ lệnh. Trong lượt chạy skill, không muốn bị hỏi quyền cho hai lệnh npm run đó.",
+    rubric: [
+      { id: "fm", label: "Có hai dòng ---", weight: 1, check: { kind: "minMatches", pattern: "^---\\s*$", value: 2 }, pass: "Có frontmatter.", fail: "Đặt nội dung giữa hai dòng ---." },
+      { id: "desc", label: "Có description", weight: 1, check: { kind: "regex", pattern: "^description:\\s*\\S+" }, pass: "Có description.", fail: "Thêm description: …" },
+      { id: "dmi", label: "disable-model-invocation: true", weight: 1, check: { kind: "regex", pattern: "^disable-model-invocation:\\s*true" }, pass: "Chỉ chạy khi gọi tay.", fail: "Thêm disable-model-invocation: true." },
+      { id: "tools", label: "allowed-tools cho npm run", weight: 1, check: { kind: "regex", pattern: "^allowed-tools:[^\\n]*bash\\(npm run" }, pass: "Có allowed-tools.", fail: "Thêm allowed-tools: Bash(npm run *)." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "---\ndescription: Build và triển khai lên máy chủ thử nghiệm (staging).\ndisable-model-invocation: true\nallowed-tools: Bash(npm run *)\n---",
+    explanation: "Tác dụng phụ → chỉ gọi tay; allowed-tools tránh hỏi quyền lặp lại trong lượt đó.",
+  },
+];

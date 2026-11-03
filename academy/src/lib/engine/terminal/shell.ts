@@ -561,6 +561,17 @@ export function runCommand(state: ShellState, line: string): RunResult {
         );
         break;
       }
+      if (args[0] === "mcp" || args[0] === "plugin") {
+        lines.push(
+          hint(
+            args[0] === "mcp"
+              ? "Trên máy thật, `claude mcp …` quản lý MCP server: add, list, get, remove."
+              : "Trên máy thật, `claude plugin …` quản lý plugin: install, list, enable, disable, uninstall.",
+          ),
+          hint("Đây là môi trường MÔ PHỎNG nên không kết nối hay cài đặt gì thật."),
+        );
+        break;
+      }
       lines.push(
         hint(`Trên máy thật, lệnh \`claude\` mở Claude Code trong thư mục hiện tại (${displayPath(s.cwd, s.home)}).`),
         hint("Đây là môi trường MÔ PHỎNG nên không chạy Claude. Hãy luyện các lệnh cơ bản ở đây trước."),

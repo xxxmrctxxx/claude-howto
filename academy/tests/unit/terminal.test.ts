@@ -131,4 +131,13 @@ describe("claude-project preset", () => {
     expect(s).toContain("~/du-an/web-loi-qa");
     expect(run(createShell("home-basic"), "claude --version").out.join(" ")).toContain("(Claude Code)");
   });
+  it("labels claude mcp and claude plugin subcommands as simulated", () => {
+    const mcp = run(createShell("home-basic"), "claude mcp list").out.join(" ");
+    expect(mcp).toContain("claude mcp");
+    expect(mcp).toContain("MÔ PHỎNG");
+    expect(mcp).not.toContain("mở Claude Code");
+    const plugin = run(createShell("home-basic"), "claude plugin install x@y").out.join(" ");
+    expect(plugin).toContain("claude plugin");
+    expect(plugin).toContain("MÔ PHỎNG");
+  });
 });

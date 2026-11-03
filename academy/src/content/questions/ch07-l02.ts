@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch07-l02";
+
+/** 15 questions for "MCP là gì?" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh07L02: Question[] = [
+  {
+    questionId: "ch07-l02-q01", lessonId: L, conceptId: "mcp-def", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "MCP (Model Context Protocol) là gì?",
+    options: [
+      { id: "a", text: "Chuẩn mở để nối Claude Code với công cụ và nguồn dữ liệu bên ngoài", feedback: "Đúng." },
+      { id: "b", text: "Một model Claude mới chạy nhanh hơn", feedback: "MCP là giao thức kết nối, không phải model." },
+      { id: "c", text: "Định dạng file để lưu lịch sử chat", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu gọi MCP là chuẩn mã nguồn mở cho việc tích hợp AI với công cụ.",
+  },
+  {
+    questionId: "ch07-l02-q02", lessonId: L, conceptId: "mcp-server", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Sau khi kết nối một MCP server, Claude Code có thêm công cụ để làm việc với hệ thống mà server đó nối tới, ví dụ truy vấn cơ sở dữ liệu.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Server cung cấp công cụ; kết nối và xác thực do server đảm nhận.",
+  },
+  {
+    questionId: "ch07-l02-q03", lessonId: L, conceptId: "mcp-use-cases", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Theo tài liệu Claude Code, MCP giúp làm những việc nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Làm tính năng từ mô tả trong issue tracker", feedback: "Đúng." },
+      { id: "b", text: "Phân tích dữ liệu giám sát", feedback: "Đúng." },
+      { id: "c", text: "Truy vấn cơ sở dữ liệu", feedback: "Đúng." },
+      { id: "d", text: "Tăng giới hạn context window của model", feedback: "MCP không đổi context window." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Danh sách còn có tích hợp bản thiết kế và tự động hoá quy trình.",
+  },
+  {
+    questionId: "ch07-l02-q04", lessonId: L, conceptId: "transport-http", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Kiểu kết nối nào được khuyên dùng cho MCP server từ xa?",
+    options: [
+      { id: "a", text: "HTTP", feedback: "Đúng." },
+      { id: "b", text: "SSE", feedback: "SSE đã lỗi thời." },
+      { id: "c", text: "stdio", feedback: "stdio dành cho server chạy trên máy bạn." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: HTTP servers are the recommended option for connecting to remote MCP servers.",
+  },
+  {
+    questionId: "ch07-l02-q05", lessonId: L, conceptId: "transport-sse", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "SSE là kiểu kết nối được khuyến nghị cho mọi MCP server mới.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "SSE đã lỗi thời (deprecated); dùng HTTP khi server hỗ trợ.",
+  },
+  {
+    questionId: "ch07-l02-q06", lessonId: L, conceptId: "transport-stdio", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Server stdio khác server HTTP ở điểm nào?",
+    options: [
+      { id: "a", text: "Server stdio chạy như một tiến trình trên máy bạn; server HTTP được kết nối từ xa qua URL", feedback: "Đúng." },
+      { id: "b", text: "stdio chỉ dùng được trên điện thoại", feedback: "Không đúng." },
+      { id: "c", text: "Hai kiểu giống hệt nhau, chỉ khác tên", feedback: "Khác nhau ở nơi server chạy và cách kết nối." },
+    ],
+    answer: "a",
+    explanation: "Ví dụ stdio trong tài liệu khởi chạy server bằng npx trên máy.",
+  },
+  {
+    questionId: "ch07-l02-q07", lessonId: L, conceptId: "mcp-vs-skill", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi nhu cầu với cách đáp ứng phù hợp nhất.",
+    pairs: [
+      { id: "p1", left: "Truy vấn cơ sở dữ liệu của nhóm", right: "MCP server" },
+      { id: "p2", left: "Sơ đồ bảng và mẫu câu truy vấn hay dùng", right: "Skill" },
+      { id: "p3", left: "Quy tắc “luôn dùng pnpm” cần ở mọi phiên", right: "CLAUDE.md" },
+      { id: "p4", left: "Đọc và sửa file trong repo", right: "Công cụ có sẵn" },
+    ],
+    explanation: "MCP cho công cụ và dữ liệu; skill cho kiến thức theo nhu cầu; CLAUDE.md cho quy ước mọi phiên.",
+  },
+  {
+    questionId: "ch07-l02-q08", lessonId: L, conceptId: "mcp-trigger", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Hằng ngày bạn mở trang giám sát lỗi trên trình duyệt, copy danh sách lỗi và dán vào Claude Code. Theo tài liệu, dấu hiệu này gợi ý nên thêm gì?",
+    options: [
+      { id: "a", text: "Kết nối hệ thống đó bằng một MCP server", feedback: "Đúng." },
+      { id: "b", text: "Thêm danh sách lỗi vào CLAUDE.md", feedback: "Dữ liệu thay đổi hằng ngày, không phải quy ước." },
+      { id: "c", text: "Viết hook chạy sau mỗi lần sửa file", feedback: "Hook dành cho tự động hoá theo sự kiện." },
+    ],
+    answer: "a",
+    explanation: "Build your setup over time: copy dữ liệu từ tab trình duyệt Claude không thấy → MCP server.",
+  },
+  {
+    questionId: "ch07-l02-q09", lessonId: L, conceptId: "mcp-tools-context", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Khi mở phiên, các MCP server đã kết nối đưa gì vào context của Claude?",
+    options: [
+      { id: "a", text: "Tên công cụ (và hướng dẫn của server); schema đầy đủ chỉ nạp khi Claude cần", feedback: "Đúng." },
+      { id: "b", text: "Toàn bộ dữ liệu trong hệ thống được kết nối", feedback: "Dữ liệu chỉ được lấy khi Claude gọi công cụ." },
+      { id: "c", text: "Toàn bộ schema của mọi công cụ, luôn luôn", feedback: "Tool search bật mặc định nên schema được hoãn." },
+    ],
+    answer: "a",
+    explanation: "Vì vậy server chưa dùng tốn rất ít context.",
+  },
+  {
+    questionId: "ch07-l02-q10", lessonId: L, conceptId: "prompt-injection", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "MCP server lấy nội dung từ bên ngoài (trang web, email, ticket do người khác tạo) có thể khiến bạn gặp rủi ro prompt injection.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Tài liệu cảnh báo đúng điều này và yêu cầu chỉ kết nối server đáng tin.",
+  },
+  {
+    questionId: "ch07-l02-q11", lessonId: L, conceptId: "skill-plus-mcp", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Đã kết nối MCP tới cơ sở dữ liệu, nhưng Claude hay đặt sai tên bảng và không theo quy ước truy vấn của nhóm. Nên bổ sung gì?",
+    options: [
+      { id: "a", text: "Một skill ghi sơ đồ bảng và các mẫu truy vấn của nhóm", feedback: "Đúng — Skill + MCP." },
+      { id: "b", text: "Thêm một MCP server thứ hai giống hệt", feedback: "Thiếu kiến thức chứ không thiếu kết nối." },
+      { id: "c", text: "Ngắt MCP và copy dữ liệu thủ công", feedback: "Quay lại cách làm tốn công." },
+    ],
+    answer: "a",
+    explanation: "MCP lo kết nối; skill dạy Claude dùng kết nối đó cho đúng.",
+  },
+  {
+    questionId: "ch07-l02-q12", lessonId: L, conceptId: "trust-servers", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Một MCP server trên diễn đàn hứa “200 công cụ”, không rõ tác giả, cần quyền đọc email của bạn. Quyết định hợp lý nhất?",
+    options: [
+      { id: "a", text: "Chưa kết nối cho đến khi xác minh tác giả và dữ liệu nó chạm tới; ưu tiên server chính thức", feedback: "Đúng." },
+      { id: "b", text: "Kết nối ngay vì càng nhiều công cụ càng tốt", feedback: "Nhiều công cụ không bù được rủi ro." },
+      { id: "c", text: "Thêm vào cấu hình chung của dự án để cả nhóm thử", feedback: "Đẩy rủi ro sang cả nhóm." },
+    ],
+    answer: "a",
+    explanation: "Email là nội dung từ người ngoài — đúng kiểu nguồn có thể mang prompt injection.",
+  },
+  {
+    questionId: "ch07-l02-q13", lessonId: L, conceptId: "mcp-vs-skill", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các nhận định SAI về MCP và skill.",
+    segments: [
+      { id: "s1", text: "MCP cung cấp công cụ cho một hệ thống bên ngoài; kết nối và xác thực do server lo.", isError: false },
+      { id: "s2", text: "Đã có MCP thì không bao giờ cần skill nữa.", isError: true, why: "Skill bổ sung kiến thức về cách dùng các công cụ đó." },
+      { id: "s3", text: "Một skill có thể ghi quy tắc định dạng tin nhắn của nhóm trước khi đăng qua MCP.", isError: false },
+      { id: "s4", text: "MCP server là một file markdown hướng dẫn mà Claude đọc.", isError: true, why: "Đó là mô tả của skill; MCP server là chương trình cung cấp công cụ." },
+    ],
+    explanation: "Tài liệu: MCP provides tools and data access; skills provide knowledge, workflows, reference material.",
+  },
+  {
+    questionId: "ch07-l02-q14", lessonId: L, conceptId: "transport-stdio", learningObjective: "o2", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Đọc lệnh dưới đây. Server được thêm theo kiểu nào và chạy ở đâu?",
+    context: {
+      label: "Terminal",
+      content: "claude mcp add --env AIRTABLE_API_KEY=YOUR_KEY --transport stdio airtable \\\n  -- npx -y airtable-mcp-server",
+      lang: "bash",
+    },
+    options: [
+      { id: "a", text: "Kiểu stdio: Claude Code khởi chạy npx -y airtable-mcp-server thành tiến trình trên máy bạn", feedback: "Đúng." },
+      { id: "b", text: "Kiểu HTTP: kết nối tới một URL từ xa", feedback: "Lệnh không có URL; transport là stdio." },
+      { id: "c", text: "Lệnh cài Airtable vào trình duyệt", feedback: "Không — lệnh thêm một MCP server." },
+    ],
+    answer: "a",
+    explanation: "Phần sau dấu -- là lệnh chạy server; --env truyền biến môi trường cho server.",
+  },
+  {
+    questionId: "ch07-l02-q15", lessonId: L, conceptId: "skill-plus-mcp", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết đề xuất ngắn (3–4 dòng) cho nhu cầu dưới đây: có dùng MCP không, kiểu kết nối nào, cần skill gì đi kèm, và rủi ro cần lưu ý.",
+    source: "Nhóm CSKH muốn Claude đọc ticket khách hàng trên hệ thống hỗ trợ (có MCP server chính thức, URL https) và soạn trả lời theo giọng văn, mẫu câu của công ty. Ticket do khách hàng bên ngoài viết.",
+    rubric: [
+      { id: "mcp", label: "Dùng MCP qua HTTP", weight: 1, check: { kind: "regex", pattern: "mcp[^\\n]*http|http[^\\n]*mcp" }, pass: "Có MCP qua HTTP.", fail: "Đề xuất MCP server chính thức qua HTTP." },
+      { id: "skill", label: "Skill cho giọng văn/mẫu câu", weight: 1, check: { kind: "regex", pattern: "skill[^\\n]*(giong van|mau|quy tac|van phong)" }, pass: "Có skill đi kèm.", fail: "Thêm skill ghi giọng văn và mẫu câu trả lời." },
+      { id: "risk", label: "Nêu rủi ro prompt injection", weight: 1, check: { kind: "anyKeyword", keywords: ["prompt injection", "chỉ thị độc hại", "nội dung độc hại"] }, pass: "Có rủi ro.", fail: "Ticket do người ngoài viết → rủi ro prompt injection." },
+      { id: "review", label: "Người duyệt trước khi gửi", weight: 1, check: { kind: "anyKeyword", keywords: ["duyệt", "kiểm tra trước", "không tự gửi", "bản nháp"] }, pass: "Có bước duyệt.", fail: "Để Claude soạn bản nháp, người duyệt rồi mới gửi." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Dùng MCP server chính thức của hệ thống hỗ trợ qua HTTP để đọc ticket.\nThêm skill /tra-loi-khach ghi giọng văn, mẫu câu và quy tắc trả lời của công ty.\nRủi ro: ticket do khách bên ngoài viết có thể chứa prompt injection — Claude chỉ soạn bản nháp, không tự gửi.\nNhân viên duyệt bản nháp trước khi gửi.",
+    explanation: "Kết hợp Skill + MCP, cộng với biện pháp giảm rủi ro cho nội dung bên ngoài.",
+  },
+];

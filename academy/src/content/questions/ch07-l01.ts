@@ -1,0 +1,186 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch07-l01";
+
+/** 15 questions for "Skill là gì?" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh07L01: Question[] = [
+  {
+    questionId: "ch07-l01-q01", lessonId: L, conceptId: "skill-def", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Trong Claude Code, một skill là gì?",
+    options: [
+      { id: "a", text: "Một thư mục chứa SKILL.md với hướng dẫn; Claude dùng khi liên quan hoặc khi bạn gõ /tên-skill", feedback: "Đúng." },
+      { id: "b", text: "Một phiên bản model Claude riêng được huấn luyện thêm", feedback: "Skill là hướng dẫn dạng file, không phải model." },
+      { id: "c", text: "Một tiện ích cài vào trình duyệt", feedback: "Skill nằm trong thư mục skills của Claude Code." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: tạo SKILL.md chứa hướng dẫn, Claude thêm vào bộ công cụ và dùng khi liên quan.",
+  },
+  {
+    questionId: "ch07-l01-q02", lessonId: L, conceptId: "on-demand-loading", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Có thể giữ nhiều skill dài trong dự án mà phiên làm việc không phải gánh toàn bộ nội dung của chúng ngay từ đầu, khác hẳn việc dồn hết vào CLAUDE.md.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Đầu phiên chỉ có mô tả ngắn của từng skill; phần thân nạp khi skill được dùng. CLAUDE.md thì nạp đầy đủ mỗi phiên.",
+  },
+  {
+    questionId: "ch07-l01-q03", lessonId: L, conceptId: "skill-md", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền tên file bắt buộc.",
+    template: "Mỗi skill là một thư mục, và bên trong bắt buộc có file [[b1]].",
+    blanks: [{ id: "b1", accepted: ["SKILL.md"], width: 9 }],
+    explanation: "SKILL.md gồm frontmatter YAML và nội dung markdown.",
+  },
+  {
+    questionId: "ch07-l01-q04", lessonId: L, conceptId: "skill-locations", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Bạn muốn một skill dùng được trong mọi dự án trên máy mình. Đặt SKILL.md ở đâu?",
+    options: [
+      { id: "a", text: "~/.claude/skills/<tên-skill>/SKILL.md", feedback: "Đúng — skill cá nhân." },
+      { id: "b", text: ".claude/skills/<tên-skill>/SKILL.md trong một repo", feedback: "Đó là skill dự án, chỉ có trong repo đó." },
+      { id: "c", text: "Dán vào cuối CLAUDE.md", feedback: "CLAUDE.md không phải nơi khai báo skill." },
+    ],
+    answer: "a",
+    explanation: "Skill cá nhân nằm trong thư mục home, áp dụng cho mọi dự án của bạn.",
+  },
+  {
+    questionId: "ch07-l01-q05", lessonId: L, conceptId: "invoke-slash", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Skill đặt tại .claude/skills/bao-cao-loi/SKILL.md (không khai báo trường name) được gọi trực tiếp bằng lệnh /bao-cao-loi.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Tên thư mục, hoặc trường name nếu có, trở thành lệnh bạn gõ.",
+  },
+  {
+    questionId: "ch07-l01-q06", lessonId: L, conceptId: "frontmatter-description", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Claude dựa vào phần nào của SKILL.md để tự quyết định có dùng skill cho yêu cầu của bạn hay không?",
+    options: [
+      { id: "a", text: "Trường description trong frontmatter", feedback: "Đúng." },
+      { id: "b", text: "Ngày tạo file", feedback: "Claude không dựa vào ngày tạo." },
+      { id: "c", text: "Dòng cuối cùng của phần thân", feedback: "Phần thân chỉ nạp sau khi skill được chọn." },
+    ],
+    answer: "a",
+    explanation: "Description luôn có trong context; nếu mơ hồ, Claude khó khớp yêu cầu với skill.",
+  },
+  {
+    questionId: "ch07-l01-q07", lessonId: L, conceptId: "skill-locations", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép nơi đặt skill với người được dùng nó.",
+    pairs: [
+      { id: "p1", left: "~/.claude/skills/", right: "Chỉ bạn, ở mọi dự án trên máy" },
+      { id: "p2", left: ".claude/skills/ đã commit", right: "Mọi người làm việc trong repo đó" },
+      { id: "p3", left: "Thư mục skills/ của plugin", right: "Ai cài plugin, gọi dạng /tên-plugin:tên-skill" },
+      { id: "p4", left: "Managed settings của tổ chức", right: "Mọi người trong tổ chức" },
+    ],
+    explanation: "Theo bảng Where skills live trong tài liệu Skills.",
+  },
+  {
+    questionId: "ch07-l01-q08", lessonId: L, conceptId: "vs-claude-md", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Nhóm có quy trình 8 bước để chuẩn bị bản phát hành, khoảng một tháng mới làm một lần. Nên đặt hướng dẫn này ở đâu?",
+    options: [
+      { id: "a", text: "Trong một skill, ví dụ /phat-hanh", feedback: "Đúng — chỉ nạp khi cần." },
+      { id: "b", text: "Trong CLAUDE.md", feedback: "CLAUDE.md nạp mỗi phiên; 8 bước này chiếm context cả tháng mà hiếm khi dùng." },
+      { id: "c", text: "Gõ lại từ đầu mỗi lần phát hành", feedback: "Dễ quên bước và mất công." },
+    ],
+    answer: "a",
+    explanation: "Quy trình dài, dùng thỉnh thoảng hợp với skill; quy ước cần mỗi phiên mới để trong CLAUDE.md.",
+  },
+  {
+    questionId: "ch07-l01-q09", lessonId: L, conceptId: "skill-md", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Thư mục của một skill có thể chứa những gì? Chọn tất cả ý đúng.",
+    options: [
+      { id: "a", text: "SKILL.md với frontmatter YAML giữa hai dòng ---", feedback: "Đúng — bắt buộc." },
+      { id: "b", text: "Phần hướng dẫn dạng markdown trong SKILL.md", feedback: "Đúng." },
+      { id: "c", text: "File hỗ trợ như mẫu, tài liệu tham khảo, script", feedback: "Đúng." },
+      { id: "d", text: "Một file .exe bắt buộc để skill chạy", feedback: "Không có yêu cầu này." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Chỉ SKILL.md là bắt buộc; file hỗ trợ là tuỳ chọn.",
+  },
+  {
+    questionId: "ch07-l01-q10", lessonId: L, conceptId: "skill-precedence", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Máy bạn có hai skill cùng tên như dưới đây. Bạn mở Claude Code trong repo web-loi-qa và gõ /trien-khai. Bản nào được dùng?",
+    context: {
+      label: "Các file SKILL.md",
+      content: "~/.claude/skills/trien-khai/SKILL.md        (cá nhân)\n~/du-an/web-loi-qa/.claude/skills/trien-khai/SKILL.md   (dự án)",
+      lang: "text",
+    },
+    options: [
+      { id: "a", text: "Bản cá nhân trong ~/.claude/skills", feedback: "Đúng — cá nhân được ưu tiên hơn dự án." },
+      { id: "b", text: "Bản dự án vì nằm gần thư mục làm việc hơn", feedback: "Thứ tự là tổ chức > cá nhân > dự án." },
+      { id: "c", text: "Claude chạy cả hai bản lần lượt", feedback: "Chỉ một bản được dùng." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: Enterprise over personal, and personal over project.",
+  },
+  {
+    questionId: "ch07-l01-q11", lessonId: L, conceptId: "commands-merged", learningObjective: "o1", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Dự án cũ có file .claude/commands/deploy.md. Sau khi lệnh tự tạo được gộp vào skill, file này thế nào?",
+    options: [
+      { id: "a", text: "Vẫn chạy và tạo /deploy giống một skill; tài liệu khuyên dùng skill cho việc mới", feedback: "Đúng." },
+      { id: "b", text: "Bị bỏ qua, phải xoá đi", feedback: "File cũ vẫn hoạt động." },
+      { id: "c", text: "Chỉ chạy trong plan mode", feedback: "Không liên quan đến plan mode." },
+    ],
+    answer: "a",
+    explanation: "Skill có thêm thư mục cho file hỗ trợ và các tuỳ chọn điều khiển cách gọi.",
+  },
+  {
+    questionId: "ch07-l01-q12", lessonId: L, conceptId: "auto-invoke", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Skill /bao-cao-loi có description “Hỗ trợ báo cáo.”. Khi bạn nói “ghi lại lỗi nút Lưu không phản hồi”, Claude không dùng skill; gõ /bao-cao-loi thì vẫn chạy. Nguyên nhân hợp lý nhất?",
+    options: [
+      { id: "a", text: "Description quá mơ hồ, thiếu từ khoá như “ghi lại lỗi”, “bug report” nên Claude không khớp được", feedback: "Đúng." },
+      { id: "b", text: "Skill phải đặt trong /etc mới tự chạy", feedback: "Không có quy định này." },
+      { id: "c", text: "Claude không bao giờ tự dùng skill", feedback: "Claude tự dùng khi yêu cầu khớp description." },
+    ],
+    answer: "a",
+    explanation: "Gọi tay vẫn chạy chứng tỏ skill tồn tại; vấn đề nằm ở description.",
+  },
+  {
+    questionId: "ch07-l01-q13", lessonId: L, conceptId: "vs-claude-md", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn lên kế hoạch sắp xếp lại hướng dẫn cho Claude. Chọn các ý SAI.",
+    segments: [
+      { id: "s1", text: "Dồn cả 6 quy trình dài (phát hành, báo cáo tháng, kiểm kê…) vào CLAUDE.md cho chắc.", isError: true, why: "CLAUDE.md nạp mỗi phiên; quy trình dùng thỉnh thoảng nên thành skill." },
+      { id: "s2", text: "Giữ trong CLAUDE.md lệnh build, lệnh test và quy tắc đặt tên.", isError: false },
+      { id: "s3", text: "Chuyển quy trình báo cáo tháng thành skill /bao-cao-thang.", isError: false },
+      { id: "s4", text: "Tránh tạo skill vì mỗi skill nạp toàn bộ nội dung vào context ở mọi phiên.", isError: true, why: "Chỉ mô tả luôn có trong context; phần thân nạp khi dùng." },
+    ],
+    explanation: "Quy ước mọi phiên → CLAUDE.md; quy trình theo nhu cầu → skill.",
+  },
+  {
+    questionId: "ch07-l01-q14", lessonId: L, conceptId: "first-skill", learningObjective: "o4", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "ordering",
+    prompt: "Sắp xếp các bước tạo và hoàn thiện skill đầu tiên.",
+    items: [
+      { id: "a", text: "Chọn một việc bạn đã dán cùng hướng dẫn nhiều lần" },
+      { id: "b", text: "Tạo thư mục .claude/skills/<tên-skill>/" },
+      { id: "c", text: "Viết SKILL.md: description rõ ràng và các bước" },
+      { id: "d", text: "Thử gọi bằng /tên-skill và bằng câu nói tự nhiên" },
+      { id: "e", text: "Chỉnh description nếu Claude không tự chọn đúng" },
+    ],
+    explanation: "Chọn việc → tạo thư mục → viết → thử → tinh chỉnh.",
+  },
+  {
+    questionId: "ch07-l01-q15", lessonId: L, conceptId: "frontmatter-description", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết frontmatter (giữa hai dòng ---) cho skill dưới đây sao cho Claude tự dùng đúng lúc.",
+    source: "Skill /kiem-tra-hoa-don: đọc file hoá đơn CSV, kiểm tra tổng tiền từng dòng, thuế VAT và tổng cộng, rồi liệt kê dòng sai. Kế toán thường nói: “soát hoá đơn”, “kiểm tra VAT”, “đối chiếu tổng tiền”.",
+    rubric: [
+      { id: "fm", label: "Có hai dòng ---", weight: 1, check: { kind: "minMatches", pattern: "^---\\s*$", value: 2 }, pass: "Có frontmatter.", fail: "Đặt nội dung giữa hai dòng ---." },
+      { id: "desc", label: "Có description", weight: 1, check: { kind: "regex", pattern: "^description:\\s*\\S+" }, pass: "Có description.", fail: "Thêm dòng description: …" },
+      { id: "what", label: "Nói skill làm gì", weight: 1, check: { kind: "regex", pattern: "description:[^\\n]*(hoa don|vat|tong tien)" }, pass: "Có việc skill làm.", fail: "Nêu việc: kiểm tra hoá đơn, VAT, tổng tiền." },
+      { id: "when", label: "Có từ khoá kích hoạt", weight: 1, check: { kind: "regex", pattern: "description:[^\\n]*(dung khi|khi nguoi dung|use when)[^\\n]*(soat|kiem tra vat|doi chieu)" }, pass: "Có tình huống và từ khoá.", fail: "Thêm “Dùng khi người dùng nhờ soát hoá đơn, kiểm tra VAT, đối chiếu tổng tiền”." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "---\ndescription: Kiểm tra file hoá đơn CSV — tổng tiền từng dòng, thuế VAT và tổng cộng — rồi liệt kê dòng sai. Dùng khi người dùng nhờ soát hoá đơn, kiểm tra VAT hoặc đối chiếu tổng tiền.\n---",
+    explanation: "Description tốt: việc skill làm + tình huống + từ khoá người dùng hay nói, ý quan trọng đặt đầu.",
+  },
+];
