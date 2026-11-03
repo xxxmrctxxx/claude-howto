@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch06-l01";
+
+/** 15 questions for "Quản lý context" (chương 6) — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh06L01: Question[] = [
+  {
+    questionId: "ch06-l01-q01", lessonId: L, conceptId: "context-view", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Trước khi quyết định dọn dẹp một phiên dài, lệnh nào giúp bạn thấy cái gì đang chiếm chỗ?",
+    options: [
+      { id: "a", text: "/context", feedback: "Đúng." },
+      { id: "b", text: "/btw", feedback: "/btw dùng để hỏi bên lề." },
+      { id: "c", text: "/branch", feedback: "/branch tách phiên." },
+    ],
+    answer: "a",
+    explanation: "Nhìn trước khi dọn: biết phần nào lớn mới chọn đúng cách xử lý.",
+  },
+  {
+    questionId: "ch06-l01-q02", lessonId: L, conceptId: "summarize-rewind", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Trong menu /rewind, lựa chọn “Summarize from here” làm gì?",
+    options: [
+      { id: "a", text: "Nén phần hội thoại từ điểm chọn trở về sau thành bản tóm tắt, giữ nguyên phần trước", feedback: "Đúng." },
+      { id: "b", text: "Xoá toàn bộ hội thoại", feedback: "Đó gần với /clear." },
+      { id: "c", text: "Khôi phục file về trạng thái cũ", feedback: "Đó là Restore code." },
+    ],
+    answer: "a",
+    explanation: "Tóm tắt không thay đổi file trên đĩa; bản ghi gốc vẫn nằm trong transcript.",
+  },
+  {
+    questionId: "ch06-l01-q03", lessonId: L, conceptId: "btw", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Bạn muốn hỏi nhanh một câu ngoài lề mà không làm dài thêm lịch sử hội thoại. Dùng lệnh nào?",
+    options: [
+      { id: "a", text: "/btw", feedback: "Đúng — câu trả lời không thêm vào lịch sử." },
+      { id: "b", text: "/compact", feedback: "/compact tóm tắt hội thoại, không phải để hỏi bên lề." },
+      { id: "c", text: "/model", feedback: "/model đổi model." },
+    ],
+    answer: "a",
+    explanation: "Theo Best practices: /btw trả lời câu hỏi nhanh mà không thêm gì vào history.",
+  },
+  {
+    questionId: "ch06-l01-q04", lessonId: L, conceptId: "branch-fork", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "/branch sao chép lịch sử hội thoại sang một phiên mới, còn phiên gốc được giữ nguyên.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Tách phiên (fork) cho phép thử hướng khác mà vẫn quay lại được phiên ban đầu.",
+  },
+  {
+    questionId: "ch06-l01-q05", lessonId: L, conceptId: "persist-notes", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Ghi kết luận của một việc dài ra file trong dự án giúp phiên sau đọc lại được mà không cần lịch sử hội thoại cũ.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Tóm tắt có thể làm rơi chi tiết; file trong dự án thì không.",
+  },
+  {
+    questionId: "ch06-l01-q06", lessonId: L, conceptId: "compact-focus", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn muốn tóm tắt cả hội thoại nhưng giữ lại các đoạn code mẫu và cách dùng API. Gõ gì?",
+    options: [
+      { id: "a", text: "/compact Focus on code samples and API usage", feedback: "Đúng — ví dụ có trong tài liệu." },
+      { id: "b", text: "/clear code samples", feedback: "/clear xoá hội thoại, không giữ gì." },
+      { id: "c", text: "/btw giữ code mẫu", feedback: "/btw chỉ hỏi bên lề." },
+    ],
+    answer: "a",
+    explanation: "Trọng tâm sau /compact cho Claude biết điều cần giữ khi tóm tắt.",
+  },
+  {
+    questionId: "ch06-l01-q07", lessonId: L, conceptId: "summarize-rewind", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Buổi debug dài: yêu cầu và lệnh tái hiện lỗi ở đầu phiên vẫn cần, phía sau là hàng chục lần thử–sai. Cách tốt nhất để giải phóng context?",
+    options: [
+      { id: "a", text: "/rewind, chọn tin nhắn ngay sau yêu cầu ban đầu → Summarize from here", feedback: "Đúng — giữ nguyên phần đầu, nén phần thử–sai." },
+      { id: "b", text: "/clear rồi giải thích lại", feedback: "Mất cả yêu cầu ban đầu và các giả thuyết đã loại trừ." },
+      { id: "c", text: "Không làm gì", feedback: "Context rot khiến Claude dễ lẫn." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu Checkpointing nêu đúng trường hợp này: tóm tắt buổi debug từ giữa trở đi, giữ nguyên chỉ dẫn ban đầu.",
+  },
+  {
+    questionId: "ch06-l01-q08", lessonId: L, conceptId: "subagent-explore", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn cần hiểu hệ thống xác thực xử lý refresh token thế nào trong một codebase lớn, nhưng không muốn hội thoại chính đầy file. Yêu cầu nào phù hợp?",
+    options: [
+      { id: "a", text: "“Dùng một subagent tìm hiểu hệ thống xác thực xử lý refresh token thế nào, báo lại ngắn gọn”", feedback: "Đúng." },
+      { id: "b", text: "“Đọc hết mọi file trong src/ cho tôi”", feedback: "Đổ hàng loạt file vào hội thoại chính." },
+      { id: "c", text: "/clear rồi hỏi", feedback: "Không giảm lượng file phải đọc." },
+    ],
+    answer: "a",
+    explanation: "Subagent đọc file trong context riêng và chỉ trả về bản tóm tắt.",
+  },
+  {
+    questionId: "ch06-l01-q09", lessonId: L, conceptId: "choose-tool", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép công cụ với tác dụng.",
+    pairs: [
+      { id: "p1", left: "/clear", right: "Bắt đầu hội thoại mới" },
+      { id: "p2", left: "/compact", right: "Tóm tắt cả hội thoại, có thể kèm trọng tâm" },
+      { id: "p3", left: "Summarize up to here", right: "Nén phần trước điểm chọn, giữ các tin nhắn sau" },
+      { id: "p4", left: "/btw", right: "Hỏi nhanh, không thêm vào lịch sử" },
+    ],
+    explanation: "Mỗi công cụ giữ lại một phần khác nhau của context.",
+  },
+  {
+    questionId: "ch06-l01-q10", lessonId: L, conceptId: "guide-summary", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Khi dùng Summarize trong menu /rewind, làm sao hướng bản tóm tắt vào điều bạn cần giữ?",
+    options: [
+      { id: "a", text: "Dùng mũi tên chọn dòng Summarize rồi gõ hướng dẫn ở chỗ “add context (optional)”, nhấn Enter", feedback: "Đúng." },
+      { id: "b", text: "Không thể hướng dẫn bản tóm tắt", feedback: "Có thể gõ hướng dẫn." },
+      { id: "c", text: "Nhấn phím số để có tuỳ chọn hướng dẫn", feedback: "Phím số tóm tắt ngay, không kèm hướng dẫn." },
+    ],
+    answer: "a",
+    explanation: "Theo mục Guide a summary trong tài liệu Checkpointing.",
+  },
+  {
+    questionId: "ch06-l01-q11", lessonId: L, conceptId: "context-view", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "/context cho thấy phần lớn chỗ bị chiếm bởi một file JSON rất lớn Claude đọc ở đầu phiên; các tin nhắn sau đó vẫn cần. Cách xử lý hợp lý?",
+    options: [
+      { id: "a", text: "/rewind, chọn tin nhắn ngay sau lần đọc file → Summarize up to here", feedback: "Đúng — nén phần đầu chứa file lớn, giữ nguyên phần sau." },
+      { id: "b", text: "Summarize from here tại tin nhắn đầu tiên", feedback: "Sẽ nén cả phần sau mà bạn còn cần." },
+      { id: "c", text: "/branch", feedback: "Phiên mới vẫn mang theo file lớn đó." },
+    ],
+    answer: "a",
+    explanation: "Chọn đúng hướng tóm tắt dựa vào việc phần thừa nằm trước hay sau điểm chọn.",
+  },
+  {
+    questionId: "ch06-l01-q12", lessonId: L, conceptId: "choose-tool", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Tính năng đang chạy đúng. Bạn muốn thử một cách viết lại táo bạo nhưng chắc chắn quay lại được trạng thái hội thoại hiện tại. Lựa chọn nào tốt nhất?",
+    options: [
+      { id: "a", text: "/branch để thử ở phiên mới, phiên gốc giữ nguyên (kết hợp git để giữ code)", feedback: "Đúng." },
+      { id: "b", text: "/compact rồi thử ngay", feedback: "Tóm tắt không tạo điểm quay lại cho hội thoại." },
+      { id: "c", text: "/clear", feedback: "Mất ngữ cảnh hiện tại." },
+    ],
+    answer: "a",
+    explanation: "/branch bảo toàn phiên gốc; với code, commit trước khi thử là lưới an toàn bền vững.",
+  },
+  {
+    questionId: "ch06-l01-q13", lessonId: L, conceptId: "persist-notes", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các thói quen KHÔNG an toàn khi làm việc trong phiên dài.",
+    segments: [
+      { id: "s1", text: "Ghi quyết định kiến trúc vừa chốt vào CLAUDE.md.", isError: false },
+      { id: "s2", text: "Tin rằng mọi chi tiết từ 3 giờ trước vẫn còn nguyên sau nhiều lần compact.", isError: true, why: "Tóm tắt có thể làm rơi chi tiết; điều quan trọng cần ghi ra file." },
+      { id: "s3", text: "Dùng /btw cho câu hỏi cú pháp nhanh.", isError: false },
+      { id: "s4", text: "Đang sửa dở thì /clear cho gọn.", isError: true, why: "Mất ngữ cảnh của việc đang làm; dùng Summarize hoặc /compact." },
+    ],
+    explanation: "Dọn có chọn lọc và ghi điều quan trọng ra file.",
+  },
+  {
+    questionId: "ch06-l01-q14", lessonId: L, conceptId: "btw", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Bạn gõ dòng dưới đây giữa lúc đang làm tính năng. Điều gì xảy ra với lịch sử hội thoại?",
+    context: { label: "Ô nhập", content: "/btw lệnh nào xem dung lượng thư mục trên Linux?", lang: "text" },
+    options: [
+      { id: "a", text: "Bạn nhận câu trả lời, nhưng lịch sử hội thoại không thay đổi", feedback: "Đúng." },
+      { id: "b", text: "Câu hỏi và câu trả lời được thêm vào lịch sử như bình thường", feedback: "Đó là khi hỏi không có /btw." },
+      { id: "c", text: "Toàn bộ lịch sử bị xoá", feedback: "Không — đó là /clear." },
+    ],
+    answer: "a",
+    explanation: "Câu hỏi bên lề không làm loãng context của việc chính.",
+  },
+  {
+    questionId: "ch06-l01-q15", lessonId: L, conceptId: "choose-tool", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết kế hoạch quản lý context cho một ngày chuyển đổi module báo cáo sang thư viện mới bằng Claude Code (5–6 bước, có lệnh).",
+    source: "Sáng: tìm hiểu module cũ. Trưa: chuyển đổi từng file, nhiều lần chạy test. Chiều: viết tài liệu thay đổi. Hay có câu hỏi bên lề về thư viện mới.",
+    rubric: [
+      { id: "explore", label: "Khám phá bằng subagent", weight: 1, check: { kind: "anyKeyword", keywords: ["subagent"] }, pass: "Có subagent.", fail: "Buổi sáng nhờ subagent tìm hiểu module cũ." },
+      { id: "side", label: "Câu hỏi bên lề", weight: 1, check: { kind: "regex", pattern: "/btw" }, pass: "Có /btw.", fail: "Dùng /btw cho câu hỏi bên lề." },
+      { id: "trim", label: "Nén có chọn lọc giữa chừng", weight: 1, check: { kind: "regex", pattern: "(/compact|summarize|/rewind)" }, pass: "Có nén context.", fail: "Dùng /compact có trọng tâm hoặc /rewind → Summarize." },
+      { id: "switch", label: "Clear khi đổi việc", weight: 1, check: { kind: "regex", pattern: "/clear" }, pass: "Có /clear.", fail: "/clear trước khi chuyển sang viết tài liệu." },
+      { id: "persist", label: "Ghi lại kết luận", weight: 1, check: { kind: "regex", pattern: "(claude\\.md|ghi chu|\\.md\\b)" }, pass: "Có ghi lại.", fail: "Ghi kết luận/quy ước ra file." },
+    ],
+    passScore: 0.8,
+    referenceAnswer:
+      "1. Sáng: dùng một subagent tìm hiểu module báo cáo cũ, ghi tóm tắt vào ghi-chu-chuyen-doi.md.\n2. Câu hỏi bên lề về thư viện mới: /btw.\n3. Trưa: chuyển từng file, chạy test sau mỗi file; khi hội thoại dài thì /compact giữ danh sách file đã chuyển và kết quả test.\n4. Nếu một đoạn thử–sai quá dài: /rewind → Summarize from here.\n5. Quy ước mới với thư viện thì thêm vào CLAUDE.md.\n6. Chiều: /clear rồi viết tài liệu thay đổi dựa trên ghi-chu-chuyen-doi.md.",
+    explanation: "Kế hoạch tốt kết hợp đúng công cụ cho từng giai đoạn và không phụ thuộc vào lịch sử hội thoại.",
+  },
+];

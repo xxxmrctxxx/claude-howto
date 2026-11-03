@@ -33,6 +33,28 @@ export async function solveSim(page: Page, sim: GenericSim) {
       await w.getByTestId("sim-check").click();
       await expect(w.getByTestId("sim-result")).toContainText("Chính xác");
       return;
+    case "sequence":
+      for (let target = 0; target < sim.items.length; target++) {
+        const item = sim.items[target];
+        const texts = await w.locator("ol > li > span.flex-1").allTextContents();
+        let at = texts.indexOf(item.text);
+        while (at > target) {
+          await w.getByRole("button", { name: `Đưa lên: ${item.text}` }).click();
+          at--;
+        }
+      }
+      await w.getByTestId("sim-check").click();
+      await expect(w.getByTestId("sim-result")).toContainText("Đúng thứ tự");
+      return;
+    case "terminal":
+      await expect(w.getByTestId("terminal")).toContainText("MÔ PHỎNG");
+      for (const step of sim.steps) {
+        const input = w.getByTestId("terminal-input");
+        await input.fill(step.hint);
+        await input.press("Enter");
+      }
+      await expect(w.getByTestId("sim-result")).toContainText("Hoàn thành nhiệm vụ terminal");
+      return;
     default:
       throw new Error(`solveSim: ${sim.kind} not handled here`);
   }
