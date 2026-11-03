@@ -1,0 +1,190 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch05-l08";
+
+/** 15 questions for "Tạo ứng dụng đầu tiên" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh05L08: Question[] = [
+  {
+    questionId: "ch05-l08-q01", lessonId: L, conceptId: "spec", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Một đặc tả ngắn cho ứng dụng đầu tiên nên có những phần nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Mục đích và người dùng", feedback: "Đúng." },
+      { id: "b", text: "Tính năng chính", feedback: "Đúng." },
+      { id: "c", text: "Ràng buộc (công nghệ, ngôn ngữ, số file…)", feedback: "Đúng." },
+      { id: "d", text: "Tiêu chí hoàn thành kiểm tra được", feedback: "Đúng." },
+      { id: "e", text: "Tên tất cả các hàm trong code", feedback: "Không cần — để Claude đề xuất trong kế hoạch." },
+    ],
+    answer: ["a", "b", "c", "d"],
+    explanation: "Bạn mô tả “cái gì” và “khi nào xong”; Claude lo “làm thế nào” trong kế hoạch.",
+  },
+  {
+    questionId: "ch05-l08-q02", lessonId: L, conceptId: "plan-mode", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Ở chế độ Plan, Claude Code làm gì?",
+    options: [
+      { id: "a", text: "Khám phá dự án và đề xuất kế hoạch, không sửa file nguồn", feedback: "Đúng." },
+      { id: "b", text: "Sửa mọi file ngay không hỏi", feedback: "Ngược lại — Plan không sửa file nguồn." },
+      { id: "c", text: "Tắt kết nối internet", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Nhấn Shift+Tab để chuyển chế độ; Plan giúp bạn duyệt hướng làm trước khi có thay đổi.",
+  },
+  {
+    questionId: "ch05-l08-q03", lessonId: L, conceptId: "permission-prompt", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Claude xin phép tạo file index.html trong thư mục dự án. Bạn nên làm gì?",
+    options: [
+      { id: "a", text: "Đọc tên và vị trí file; đúng như kế hoạch thì chọn Yes", feedback: "Đúng." },
+      { id: "b", text: "Luôn từ chối mọi yêu cầu", feedback: "Claude sẽ không làm được việc bạn giao." },
+      { id: "c", text: "Đồng ý mà không đọc", feedback: "Bạn chịu trách nhiệm xem xét trước khi duyệt." },
+    ],
+    answer: "a",
+    explanation: "Terminal guide: nếu Claude xin phép tạo hoặc sửa file, nhấn Enter để chọn Yes khi bạn đồng ý.",
+  },
+  {
+    questionId: "ch05-l08-q04", lessonId: L, conceptId: "verify-run", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Khi Claude báo “đã xong”, bạn vẫn nên tự mở ứng dụng và thử theo từng tiêu chí hoàn thành.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "“Trông như xong” chưa phải là xong; tiêu chí kiểm tra được giúp bạn xác nhận trong vài phút.",
+  },
+  {
+    questionId: "ch05-l08-q05", lessonId: L, conceptId: "workflow", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "ordering",
+    prompt: "Sắp xếp các giai đoạn làm ứng dụng cùng Claude Code.",
+    items: [
+      { id: "a", text: "Chuẩn bị thư mục và git" },
+      { id: "b", text: "Lập kế hoạch ở chế độ Plan" },
+      { id: "c", text: "Cho Claude thực hiện" },
+      { id: "d", text: "Chạy thử theo tiêu chí" },
+      { id: "e", text: "Commit khi đạt" },
+    ],
+    explanation: "Lưới an toàn → kế hoạch → làm → kiểm chứng → lưu lại.",
+  },
+  {
+    questionId: "ch05-l08-q06", lessonId: L, conceptId: "acceptance", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Tiêu chí hoàn thành nào tốt nhất cho trang “Theo dõi lỗi QA”?",
+    options: [
+      { id: "a", text: "Nhập 3 lỗi thì bảng có 3 dòng và tổng đúng; tải lại trang dữ liệu vẫn còn", feedback: "Đúng — kiểm tra được, có con số." },
+      { id: "b", text: "Giao diện phải thật đẹp", feedback: "Không đo được." },
+      { id: "c", text: "Chạy tốt là được", feedback: "Không biết thế nào là tốt." },
+    ],
+    answer: "a",
+    explanation: "Tiêu chí tốt cho kết quả đạt/không đạt rõ ràng — cả bạn và Claude đều kiểm tra được.",
+  },
+  {
+    questionId: "ch05-l08-q07", lessonId: L, conceptId: "feedback", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "fix-prompt",
+    prompt: "Viết lại lời phản hồi dưới đây cho cụ thể, giúp Claude sửa đúng chỗ.",
+    source: "sai rồi, làm lại đi",
+    sampleData: { name: "Điều bạn quan sát", content: "Khi xoá một dòng lỗi, tổng theo công đoạn không giảm; phải tải lại trang tổng mới đúng." },
+    rubric: [
+      { id: "observed", label: "Hiện tượng đang thấy", weight: 1, check: { kind: "regex", pattern: "(khi|sau khi)[^\\n]*(xoa|bam|nhap)" }, pass: "Có mô tả hiện tượng và cách tái hiện.", fail: "Nêu khi làm gì thì thấy gì." },
+      { id: "expected", label: "Kết quả mong muốn", weight: 1, check: { kind: "regex", pattern: "(mong muon|can|phai)[^\\n]*(giam|cap nhat|ngay)" }, pass: "Có kết quả mong muốn.", fail: "Nói rõ mong muốn: tổng phải cập nhật ngay." },
+      { id: "verify", label: "Yêu cầu kiểm chứng", weight: 1, check: { kind: "anyKeyword", keywords: ["thử lại", "kiểm tra", "cho tôi xem", "chạy lại"] }, pass: "Có yêu cầu kiểm chứng.", fail: "Yêu cầu thử lại trường hợp này và báo kết quả." },
+    ],
+    passScore: 0.67,
+    referenceAnswer:
+      "Khi bấm xoá một dòng lỗi, tổng theo công đoạn không giảm; phải tải lại trang mới đúng. Mong muốn: tổng phải cập nhật ngay sau khi xoá. Chỉ sửa phần tính tổng. Sửa xong hãy thử lại: thêm 3 dòng, xoá 1 dòng, cho tôi xem tổng trước và sau khi xoá.",
+    explanation: "Phản hồi tốt = cách tái hiện + hiện tượng + mong muốn + cách kiểm chứng.",
+  },
+  {
+    questionId: "ch05-l08-q08", lessonId: L, conceptId: "evidence", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Claude trả lời “Tất cả test đã qua.” Phản hồi nào hữu ích nhất?",
+    options: [
+      { id: "a", text: "Yêu cầu xem lệnh đã chạy và kết quả in ra", feedback: "Đúng — bằng chứng cụ thể đáng tin hơn một câu khẳng định." },
+      { id: "b", text: "Tin luôn và commit", feedback: "Câu khẳng định không có bằng chứng cho bạn biết rất ít." },
+      { id: "c", text: "Xoá thư mục tests cho gọn", feedback: "Sẽ mất cách kiểm chứng." },
+    ],
+    answer: "a",
+    explanation: "Best practices: hãy đòi bằng chứng — lệnh đã chạy và kết quả, hoặc ảnh chụp.",
+  },
+  {
+    questionId: "ch05-l08-q09", lessonId: L, conceptId: "interview", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn chưa rõ ứng dụng cần những gì. Cách bắt đầu hợp lý?",
+    options: [
+      { id: "a", text: "Nhờ Claude phỏng vấn bạn cho đến khi đủ thông tin, rồi viết đặc tả vào file SPEC.md", feedback: "Đúng." },
+      { id: "b", text: "Bảo Claude cứ làm đại rồi tính", feedback: "Dễ phải làm lại nhiều lần." },
+      { id: "c", text: "Hoãn lại cho đến khi học xong lập trình", feedback: "Không cần — Claude giúp bạn làm rõ yêu cầu." },
+    ],
+    answer: "a",
+    explanation: "Best practices gợi ý: “Interview me until you could write the spec, then write it to SPEC.md.”",
+  },
+  {
+    questionId: "ch05-l08-q10", lessonId: L, conceptId: "rewind", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Claude vừa đổi toàn bộ giao diện theo hướng bạn không muốn. Bạn muốn quay về trước yêu cầu đó. Cách nhanh nhất?",
+    options: [
+      { id: "a", text: "Gõ /rewind (hoặc Esc hai lần khi ô nhập trống) và chọn điểm trước yêu cầu", feedback: "Đúng." },
+      { id: "b", text: "Xoá thư mục và làm lại từ đầu", feedback: "Mất cả phần đã làm tốt." },
+      { id: "c", text: "Không có cách nào", feedback: "Checkpoint cho phép tua lại thay đổi file." },
+    ],
+    answer: "a",
+    explanation: "Menu rewind cho phép đưa code, hội thoại hoặc cả hai về một yêu cầu trước đó.",
+  },
+  {
+    questionId: "ch05-l08-q11", lessonId: L, conceptId: "clear-restart", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn đã nhắc Claude sửa cùng một lỗi hai lần mà vẫn sai. Bước tiếp theo khôn ngoan nhất?",
+    options: [
+      { id: "a", text: "/clear rồi viết một yêu cầu mới, gom những gì đã biết về lỗi", feedback: "Đúng — hội thoại chứa hai lần thử sai làm nhiễu lần thứ ba." },
+      { id: "b", text: "Nhắc lần thứ ba y như cũ", feedback: "Thường chỉ lặp lại kết quả sai." },
+      { id: "c", text: "Bỏ ứng dụng", feedback: "Chưa cần — bắt đầu lại sạch thường hiệu quả." },
+    ],
+    answer: "a",
+    explanation: "Best practices: sau hai lần sửa không được, /clear và một prompt tốt hơn gần như luôn hiệu quả hơn lần sửa thứ ba.",
+  },
+  {
+    questionId: "ch05-l08-q12", lessonId: L, conceptId: "commit", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Bạn có thể nhờ Claude Code commit thay đổi bằng câu tự nhiên như “commit các thay đổi với thông điệp mô tả rõ ràng”.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Quickstart: Claude Code biến thao tác Git thành hội thoại — xem file đã đổi, commit, tạo nhánh…",
+  },
+  {
+    questionId: "ch05-l08-q13", lessonId: L, conceptId: "spec", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các câu YẾU trong đặc tả dưới đây (không kiểm tra được hoặc không giúp Claude làm đúng).",
+    segments: [
+      { id: "s1", text: "Ứng dụng cho tổ trưởng QA ghi lỗi theo ca.", isError: false },
+      { id: "s2", text: "Giao diện phải thật đẹp.", isError: true, why: "Không đo được — mô tả cụ thể: cỡ chữ, màu cảnh báo, bố cục." },
+      { id: "s3", text: "Một file index.html, không dùng thư viện ngoài.", isError: false },
+      { id: "s4", text: "Làm sao cho chạy tốt là được.", isError: true, why: "Không có tiêu chí hoàn thành — viết điều kiện kiểm tra được." },
+    ],
+    explanation: "Mỗi câu trong đặc tả nên giúp Claude quyết định hoặc giúp bạn kiểm tra.",
+  },
+  {
+    questionId: "ch05-l08-q14", lessonId: L, conceptId: "plan-mode", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Trường hợp nào lập kế hoạch ở chế độ Plan mang lại lợi ích rõ nhất?",
+    options: [
+      { id: "a", text: "Thêm tính năng xuất báo cáo, chạm tới nhiều file và bạn chưa rõ nên làm theo hướng nào", feedback: "Đúng — duyệt hướng làm trước giúp tránh làm lại." },
+      { id: "b", text: "Sửa một lỗi chính tả trong tiêu đề trang", feedback: "Việc rất nhỏ, có thể làm trực tiếp." },
+      { id: "c", text: "Hỏi ứng dụng đang dùng phông chữ gì", feedback: "Đây chỉ là câu hỏi, không có thay đổi." },
+    ],
+    answer: "a",
+    explanation: "Kế hoạch đáng công nhất khi thay đổi lớn hoặc hướng làm chưa rõ; việc nhỏ, rõ ràng có thể làm ngay.",
+  },
+  {
+    questionId: "ch05-l08-q15", lessonId: L, conceptId: "evidence", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết yêu cầu kiểm chứng gửi Claude cho “Bảng chấm điểm 5S”: Claude phải tự thử những trường hợp nào và gửi bằng chứng gì trước khi báo xong.",
+    source: "Ứng dụng: 5 hạng mục, mỗi mục 1–5 điểm; hiện tổng và phần trăm; mục dưới 3 điểm tô đỏ; lưu lịch sử bằng localStorage.",
+    rubric: [
+      { id: "cases", label: "Có trường hợp thử với con số", weight: 1, check: { kind: "minMatches", pattern: "\\d+\\s*(diem|%)", value: 2 }, pass: "Có trường hợp thử cụ thể.", fail: "Nêu trường hợp có số: “5 mục 5 điểm → 25 điểm, 100%”." },
+      { id: "edge", label: "Có trường hợp biên/lỗi", weight: 1, check: { kind: "regex", pattern: "(de trong|bo trong|nhap sai|ngoai khoang|0 diem|6 diem|tai lai)" }, pass: "Có trường hợp biên.", fail: "Thêm trường hợp biên: để trống, nhập 6 điểm, tải lại trang." },
+      { id: "evidence", label: "Yêu cầu bằng chứng", weight: 1, check: { kind: "anyKeyword", keywords: ["bằng chứng", "ảnh chụp", "kết quả", "lệnh đã chạy"] }, pass: "Có yêu cầu bằng chứng.", fail: "Yêu cầu gửi kết quả hoặc ảnh chụp từng trường hợp." },
+      { id: "loop", label: "Làm đến khi đạt", weight: 1, check: { kind: "anyKeyword", keywords: ["đến khi", "cho tới khi", "cho đến khi"] }, pass: "Có điều kiện dừng.", fail: "Thêm: “sửa và thử lại cho đến khi mọi trường hợp đạt”." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Trước khi báo xong, hãy tự thử các trường hợp sau và gửi bằng chứng (kết quả từng trường hợp hoặc ảnh chụp):\n1. 5 mục đều 5 điểm → tổng 25 điểm, 100%.\n2. Một mục 2 điểm → mục đó tô đỏ, tổng 22 điểm, 88%.\n3. Bỏ trống một mục → báo “Chưa chấm đủ 5 mục”, không lưu.\n4. Tải lại trang → lịch sử vẫn còn.\nNếu trường hợp nào không đạt, sửa và thử lại cho đến khi tất cả đạt.",
+    explanation: "Cho Claude một phép kiểm tra rõ ràng và đòi bằng chứng giúp nó tự khép vòng sửa–kiểm tra.",
+  },
+];

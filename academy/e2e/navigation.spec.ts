@@ -27,8 +27,14 @@ test("search dialog with keyboard navigation", async ({ page, isMobile }) => {
   await page.keyboard.press("Control+k");
   const input = page.getByLabel("Từ khoá tìm kiếm");
   await input.fill("terminal");
-  await expect(page.getByRole("listbox")).toContainText("Terminal Simulator");
-  await input.press("ArrowDown");
+  const list = page.getByRole("listbox");
+  await expect(list).toContainText("Terminal Simulator");
+  // Move the keyboard selection down to the lab, whatever its rank.
+  const options = list.getByRole("option");
+  const target = (await options.allTextContents()).findIndex((t) => t.includes("Terminal Simulator"));
+  // Nothing is selected until the first ArrowDown.
+  for (let i = 0; i <= target; i++) await input.press("ArrowDown");
+  await expect(options.nth(target)).toHaveAttribute("aria-selected", "true");
   await input.press("Enter");
   await expect(page).toHaveURL(/thuc-hanh\/terminal/);
 });

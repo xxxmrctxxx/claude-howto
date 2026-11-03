@@ -91,6 +91,15 @@ describe("published lessons are complete (no placeholders)", () => {
         expect(scoreRubric(b.rubric, b.placeholder, b.passScore).passed, `${lesson.id} placeholder`).toBe(false);
       }
     });
+    it(`${lesson.id} terminal-task questions are solvable with their reference commands`, () => {
+      for (const q of QUESTION_BANKS[lesson.id]) {
+        if (q.questionType !== "terminal-task") continue;
+        let s = createShell(q.preset);
+        for (const c of q.referenceCommands) s = runCommand(s, c).state;
+        for (const check of q.checks) expect(evaluateCheck(s, check), `${q.questionId}: ${check.label}`).toBe(true);
+        expect(q.checks.every((check) => evaluateCheck(createShell(q.preset), check)), `${q.questionId} not already solved`).toBe(false);
+      }
+    });
     it(`${lesson.id} every objective and concept is exercised by at least one question`, () => {
       const qs = QUESTION_BANKS[lesson.id];
       for (const o of lesson.objectives) expect(qs.some((q) => q.learningObjective === o.id), o.id).toBe(true);

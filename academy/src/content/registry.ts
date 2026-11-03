@@ -15,6 +15,15 @@ import { lessonChainOfThought } from "./lessons/ch03-l05-chain-of-thought";
 import { lessonPromptCoCauTruc } from "./lessons/ch03-l06-prompt-co-cau-truc";
 import { lessonGiamHieuNham } from "./lessons/ch03-l07-giam-hieu-nham";
 import { lessonToiUuPrompt } from "./lessons/ch03-l08-thuc-hanh-toi-uu";
+import { lessonClaudeCodeLaGi } from "./lessons/ch05-l01-claude-code-la-gi";
+import { lessonTerminalLaGi } from "./lessons/ch05-l02-terminal-la-gi";
+import { lessonCaiDatMoiTruong } from "./lessons/ch05-l03-cai-dat-moi-truong";
+import { lessonCaiDatClaudeCode } from "./lessons/ch05-l04-cai-dat-claude-code";
+import { lessonDangNhapXacThuc } from "./lessons/ch05-l05-dang-nhap-xac-thuc";
+import { lessonMoDuAn } from "./lessons/ch05-l06-mo-du-an";
+import { lessonFileVaThuMuc } from "./lessons/ch05-l07-file-va-thu-muc";
+import { lessonUngDungDauTien } from "./lessons/ch05-l08-ung-dung-dau-tien";
+import { lessonLenhCoBan } from "./lessons/ch05-l09-lenh-co-ban";
 import { questionsCh01L01 } from "./questions/ch01-l01";
 import { questionsCh01L02 } from "./questions/ch01-l02";
 import { questionsCh01L03 } from "./questions/ch01-l03";
@@ -29,6 +38,15 @@ import { questionsCh03L05 } from "./questions/ch03-l05";
 import { questionsCh03L06 } from "./questions/ch03-l06";
 import { questionsCh03L07 } from "./questions/ch03-l07";
 import { questionsCh03L08 } from "./questions/ch03-l08";
+import { questionsCh05L01 } from "./questions/ch05-l01";
+import { questionsCh05L02 } from "./questions/ch05-l02";
+import { questionsCh05L03 } from "./questions/ch05-l03";
+import { questionsCh05L04 } from "./questions/ch05-l04";
+import { questionsCh05L05 } from "./questions/ch05-l05";
+import { questionsCh05L06 } from "./questions/ch05-l06";
+import { questionsCh05L07 } from "./questions/ch05-l07";
+import { questionsCh05L08 } from "./questions/ch05-l08";
+import { questionsCh05L09 } from "./questions/ch05-l09";
 
 /**
  * Single place where content is registered. To publish a lesson:
@@ -38,7 +56,7 @@ import { questionsCh03L08 } from "./questions/ch03-l08";
  * The UI, search index and tests pick it up automatically.
  */
 export const LESSONS: Record<string, Lesson> = Object.fromEntries(
-  [lessonAiHoatDong, lessonClaudeKhacChatbot, lessonCacPhienBan, lessonClaudeLamDuocGi, lessonGioiHan, lessonLoiThuongGap, lessonPromptLaGi, lessonCauTrucPrompt, lessonRctco, lessonFewShot, lessonChainOfThought, lessonPromptCoCauTruc, lessonGiamHieuNham, lessonToiUuPrompt].map((l) => [l.id, l]),
+  [lessonAiHoatDong, lessonClaudeKhacChatbot, lessonCacPhienBan, lessonClaudeLamDuocGi, lessonGioiHan, lessonLoiThuongGap, lessonPromptLaGi, lessonCauTrucPrompt, lessonRctco, lessonFewShot, lessonChainOfThought, lessonPromptCoCauTruc, lessonGiamHieuNham, lessonToiUuPrompt, lessonClaudeCodeLaGi, lessonTerminalLaGi, lessonCaiDatMoiTruong, lessonCaiDatClaudeCode, lessonDangNhapXacThuc, lessonMoDuAn, lessonFileVaThuMuc, lessonUngDungDauTien, lessonLenhCoBan].map((l) => [l.id, l]),
 );
 
 export const QUESTION_BANKS: Record<string, Question[]> = {
@@ -56,6 +74,15 @@ export const QUESTION_BANKS: Record<string, Question[]> = {
   "ch03-l06": questionsCh03L06,
   "ch03-l07": questionsCh03L07,
   "ch03-l08": questionsCh03L08,
+  "ch05-l01": questionsCh05L01,
+  "ch05-l02": questionsCh05L02,
+  "ch05-l03": questionsCh05L03,
+  "ch05-l04": questionsCh05L04,
+  "ch05-l05": questionsCh05L05,
+  "ch05-l06": questionsCh05L06,
+  "ch05-l07": questionsCh05L07,
+  "ch05-l08": questionsCh05L08,
+  "ch05-l09": questionsCh05L09,
 };
 
 const indexedCache = new Map<string, IndexedQuestion[]>();

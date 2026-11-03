@@ -1,0 +1,182 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch05-l01";
+
+/** 15 questions for "Claude Code là gì?" — 5 beginner, 5 intermediate, 5 advanced. */
+export const questionsCh05L01: Question[] = [
+  {
+    questionId: "ch05-l01-q01", lessonId: L, conceptId: "agentic", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Mô tả nào đúng nhất về Claude Code?",
+    options: [
+      { id: "a", text: "Trợ lý AI dạng agent: đọc dự án, sửa file, chạy lệnh và tự kiểm tra kết quả", feedback: "Đúng." },
+      { id: "b", text: "Một trình soạn thảo văn bản giống Notepad", feedback: "Không — Claude Code là trợ lý AI có công cụ, không phải trình soạn thảo." },
+      { id: "c", text: "Một trang web chỉ trả lời câu hỏi bằng chữ, không thao tác được file", feedback: "Đó là chat thông thường; Claude Code thao tác được file và lệnh." },
+    ],
+    answer: "a",
+    explanation: "Điểm khác biệt của Claude Code là công cụ: nó hành động trong dự án của bạn chứ không chỉ trả lời.",
+  },
+  {
+    questionId: "ch05-l01-q02", lessonId: L, conceptId: "access", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Bạn gõ `claude` trong thư mục dự án. Claude Code truy cập được những gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "File trong thư mục đó và các thư mục con", feedback: "Đúng." },
+      { id: "b", text: "Trạng thái git: nhánh hiện tại, thay đổi chưa commit", feedback: "Đúng." },
+      { id: "c", text: "File CLAUDE.md chứa quy ước của dự án", feedback: "Đúng." },
+      { id: "d", text: "Mọi file trên máy mà không cần hỏi bạn", feedback: "Sai — file ở ngoài thư mục dự án cần bạn cho phép." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Theo tài liệu, Claude Code thấy dự án, terminal, trạng thái git và CLAUDE.md; file ở nơi khác cần bạn cho phép.",
+  },
+  {
+    questionId: "ch05-l01-q03", lessonId: L, conceptId: "agentic-loop", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "ordering",
+    prompt: "Sắp xếp các bước của vòng lặp agent khi Claude Code nhận một việc.",
+    items: [
+      { id: "a", text: "Bạn mô tả việc cần làm" },
+      { id: "b", text: "Thu thập ngữ cảnh: đọc và tìm file liên quan" },
+      { id: "c", text: "Hành động: sửa file, chạy lệnh" },
+      { id: "d", text: "Kiểm chứng: chạy test, xem kết quả" },
+      { id: "e", text: "Báo kết quả cho bạn" },
+    ],
+    explanation: "Ba giai đoạn chính là thu thập ngữ cảnh → hành động → kiểm chứng, lặp lại nếu chưa đạt.",
+  },
+  {
+    questionId: "ch05-l01-q04", lessonId: L, conceptId: "vs-chat", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Với Claude Code, bạn phải tự sao chép từng file vào khung chat thì Claude mới đọc được.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Claude Code tự đọc file trong dự án khi cần. Tài liệu ghi: bạn không phải tự thêm ngữ cảnh bằng tay.",
+  },
+  {
+    questionId: "ch05-l01-q05", lessonId: L, conceptId: "interfaces", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Ngoài terminal, bạn có thể dùng Claude Code ở đâu? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Ứng dụng desktop", feedback: "Đúng." },
+      { id: "b", text: "Tiện ích trong VS Code và JetBrains", feedback: "Đúng." },
+      { id: "c", text: "Trên web tại claude.ai/code", feedback: "Đúng." },
+      { id: "d", text: "Chỉ qua tin nhắn SMS", feedback: "Sai — không có giao diện SMS." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Vòng lặp agent giống nhau ở mọi giao diện; chỉ khác nơi bạn tương tác và nơi code chạy.",
+  },
+  {
+    questionId: "ch05-l01-q06", lessonId: L, conceptId: "tools", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép nhóm công cụ với việc Claude Code làm được.",
+    pairs: [
+      { id: "p1", left: "Thao tác file", right: "Đọc, sửa, tạo file mới" },
+      { id: "p2", left: "Tìm kiếm", right: "Tìm file theo mẫu tên, tìm nội dung" },
+      { id: "p3", left: "Thực thi", right: "Chạy test, chạy lệnh git" },
+      { id: "p4", left: "Web", right: "Tra tài liệu, tìm thông báo lỗi" },
+    ],
+    explanation: "Mỗi lần dùng công cụ trả về thông tin mới cho vòng lặp.",
+  },
+  {
+    questionId: "ch05-l01-q07", lessonId: L, conceptId: "agentic-loop", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn yêu cầu: “sửa các test đang hỏng”. Bước đầu tiên hợp lý nhất của Claude Code là gì?",
+    options: [
+      { id: "a", text: "Chạy bộ test để xem test nào hỏng và đọc thông báo lỗi", feedback: "Đúng — thu thập ngữ cảnh trước." },
+      { id: "b", text: "Xoá các test đang hỏng cho bộ test xanh", feedback: "Sai — đó là che giấu lỗi, không phải sửa." },
+      { id: "c", text: "Viết lại toàn bộ dự án", feedback: "Quá tay và không dựa trên thông tin nào." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu mô tả đúng chuỗi này: chạy test → đọc lỗi → tìm file → sửa → chạy lại test.",
+  },
+  {
+    questionId: "ch05-l01-q08", lessonId: L, conceptId: "permissions", learningObjective: "o4", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "fill-blank",
+    prompt: "Điền tổ hợp phím.",
+    template: "Trong phiên Claude Code, nhấn [[b1]] để chuyển qua lại giữa các chế độ quyền.",
+    blanks: [{ id: "b1", accepted: ["Shift+Tab", "Shift + Tab", "Shift Tab"], width: 10 }],
+    explanation: "Shift+Tab chuyển vòng qua các chế độ quyền như Manual, Accept edits, Plan và Auto (khi có).",
+  },
+  {
+    questionId: "ch05-l01-q09", lessonId: L, conceptId: "checkpoints", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Claude vừa sửa một file không như ý. Cách nào giúp quay lại trạng thái trước?",
+    options: [
+      { id: "a", text: "Nhấn Esc hai lần khi ô nhập trống để mở menu tua lại, hoặc nhờ Claude hoàn tác", feedback: "Đúng — checkpoint lưu nội dung trước khi sửa." },
+      { id: "b", text: "Không có cách nào, phải tự gõ lại", feedback: "Sai — Claude Code chụp file trước khi sửa." },
+      { id: "c", text: "Tắt máy rồi bật lại", feedback: "Không hoàn tác được thay đổi đã ghi xuống file." },
+    ],
+    answer: "a",
+    explanation: "Trước khi sửa file, Claude Code chụp lại nội dung; Esc Esc mở menu rewind để khôi phục.",
+  },
+  {
+    questionId: "ch05-l01-q10", lessonId: L, conceptId: "checkpoints", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "true-false",
+    statement: "Checkpoint của Claude Code có thể hoàn tác cả thao tác lên hệ thống bên ngoài như ghi vào database hay deploy lên server.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Checkpoint chỉ bao gồm thay đổi trên file. Thao tác lên hệ thống từ xa không tua lại được — hãy kiểm soát bằng chế độ quyền.",
+  },
+  {
+    questionId: "ch05-l01-q11", lessonId: L, conceptId: "vs-chat", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Việc nào nên dùng Claude Code thay vì chat thông thường?",
+    options: [
+      { id: "a", text: "Sửa lỗi hiển thị trong trang web nội bộ gồm 30 file và chạy test để kiểm tra", feedback: "Đúng — cần đọc nhiều file, sửa và chạy lệnh." },
+      { id: "b", text: "Hỏi nghĩa của từ “tolerance” trong tiêu chuẩn", feedback: "Chat thông thường là đủ." },
+      { id: "c", text: "Viết lời chúc mừng sinh nhật đồng nghiệp", feedback: "Chat thông thường là đủ." },
+    ],
+    answer: "a",
+    explanation: "Claude Code phát huy khi việc cần làm trên file và lệnh của một dự án; câu hỏi đơn lẻ thì chat là đủ.",
+  },
+  {
+    questionId: "ch05-l01-q12", lessonId: L, conceptId: "delegate", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "fix-prompt",
+    prompt: "Viết lại yêu cầu dưới đây thành một yêu cầu giao việc rõ ràng cho Claude Code.",
+    source: "làm lại cái xuất excel",
+    rubric: [
+      { id: "symptom", label: "Nêu vấn đề hoặc mục tiêu cụ thể", weight: 1, check: { kind: "regex", pattern: "(loi|sai|thieu|khong (mo|xuat|hien)|bi )" }, pass: "Có vấn đề cụ thể.", fail: "Nêu rõ xuất Excel đang sai ở đâu." },
+      { id: "where", label: "Nơi bắt đầu tìm", weight: 1, check: { kind: "regex", pattern: "([a-z0-9_-]+\\.(js|ts|py|html)|src/|thu muc)" }, pass: "Có file hoặc thư mục.", fail: "Gợi ý file hoặc thư mục liên quan." },
+      { id: "verify", label: "Cách kiểm chứng", weight: 1, check: { kind: "anyKeyword", keywords: ["chạy test", "chạy lại", "kiểm tra", "mở file", "thử xuất"] }, pass: "Có cách kiểm chứng.", fail: "Nói cách chứng minh đã sửa xong." },
+    ],
+    passScore: 0.67,
+    referenceAnswer:
+      "Nút “Xuất Excel” trên trang báo cáo đang bị thiếu cột Ngày và sai dấu tiếng Việt. Code xuất file nằm trong src/export.js. Hãy tìm nguyên nhân và sửa, chỉ sửa phần xuất file. Xong thì thử xuất với data/loi-mau.csv, mở file kết quả kiểm tra đủ cột và đúng dấu.",
+    explanation: "Yêu cầu tốt có vấn đề cụ thể, nơi bắt đầu tìm và cách kiểm chứng — giống giao việc cho đồng nghiệp giỏi nhưng mới vào.",
+  },
+  {
+    questionId: "ch05-l01-q13", lessonId: L, conceptId: "permissions", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Ở chế độ Manual, Claude Code xin chạy một lệnh bạn không hiểu. Bạn nên làm gì?",
+    options: [
+      { id: "a", text: "Từ chối hoặc hỏi Claude giải thích lệnh làm gì và ảnh hưởng tới đâu, rồi mới quyết định", feedback: "Đúng — bạn chịu trách nhiệm xem xét lệnh trước khi duyệt." },
+      { id: "b", text: "Luôn đồng ý vì Claude không bao giờ sai", feedback: "Sai — tài liệu nhấn mạnh người dùng phải xem xét trước khi duyệt." },
+      { id: "c", text: "Tắt Claude Code và không bao giờ dùng nữa", feedback: "Không cần cực đoan; hỏi lại là đủ." },
+    ],
+    answer: "a",
+    explanation: "Theo trang Security: bạn chịu trách nhiệm xem xét code và lệnh được đề xuất trước khi chấp thuận.",
+  },
+  {
+    questionId: "ch05-l01-q14", lessonId: L, conceptId: "access", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Đoạn mô tả sau có những câu sai. Hãy chọn các câu sai.",
+    segments: [
+      { id: "s1", text: "Claude Code chạy được trong terminal.", isError: false },
+      { id: "s2", text: "Nó chỉ nhìn thấy đúng một file bạn đang mở.", isError: true, why: "Claude Code thấy cả dự án: thư mục hiện tại và thư mục con." },
+      { id: "s3", text: "Mỗi phiên mới tự nhớ toàn bộ hội thoại của các phiên trước.", isError: true, why: "Mỗi phiên bắt đầu với context mới; dùng CLAUDE.md để lưu quy ước lâu dài." },
+      { id: "s4", text: "File CLAUDE.md giúp Claude biết quy ước của dự án ở mọi phiên.", isError: false },
+    ],
+    explanation: "Claude Code làm việc trên toàn dự án, nhưng các phiên độc lập; điều cần nhớ lâu dài nên ghi vào CLAUDE.md.",
+  },
+  {
+    questionId: "ch05-l01-q15", lessonId: L, conceptId: "agentic-loop", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Bạn chỉ hỏi câu dưới đây. Điều gì nhiều khả năng xảy ra?",
+    context: { label: "Tin nhắn gửi Claude Code", content: "Dự án này làm gì? Điểm bắt đầu chạy ở file nào?", lang: "text" },
+    options: [
+      { id: "a", text: "Claude đọc README và các file chính rồi trả lời, không sửa file nào", feedback: "Đúng — câu hỏi chỉ cần giai đoạn thu thập ngữ cảnh." },
+      { id: "b", text: "Claude viết lại README cho đẹp hơn", feedback: "Bạn không yêu cầu sửa gì." },
+      { id: "c", text: "Claude xoá các file không dùng", feedback: "Không có lý do để hành động khi bạn chỉ hỏi." },
+    ],
+    answer: "a",
+    explanation: "Vòng lặp thích nghi theo yêu cầu: câu hỏi về dự án có thể chỉ cần thu thập ngữ cảnh.",
+  },
+];

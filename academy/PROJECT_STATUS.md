@@ -11,7 +11,7 @@ Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để 
 | 3 | Lesson Engine + bài mẫu đầy đủ | Hoàn thành (bài “Prompt là gì?”) |
 | 4 | Question Engine, chống trùng, kiểm tra | Hoàn thành |
 | 5 | 5 Practice Labs | Hoàn thành |
-| 6 | Nội dung các chương còn lại | Đang làm — Chương 1 (6/6) và Chương 3 (8/8) hoàn thành; các chương khác xem bảng |
+| 6 | Nội dung các chương còn lại | Đang làm — Chương 1 (6/6), Chương 3 (8/8), Chương 5 (9/9) hoàn thành; các chương khác xem bảng |
 | 7 | Gamification, cá nhân hoá, tìm kiếm, UX | Hoàn thành phần nền tảng |
 | 8 | Kiểm thử tổng thể, chuẩn bị production | Có CI + bộ test; xem giới hạn |
 
@@ -21,10 +21,13 @@ Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để 
 | --- | --- | --- |
 | 1. Claude AI là gì? | Đủ 6/6 bài: AI hoạt động như thế nào? · Claude khác chatbot ra sao? · Các phiên bản và khả năng · Claude làm được gì? · Giới hạn của AI · Lỗi thường gặp | 6 × 15 = 90 |
 | 3. Prompt Engineering | Đủ 8/8 bài: Prompt là gì? · Cấu trúc prompt tốt · RCTCO · Few-shot · Chain-of-thought · Prompt có cấu trúc · Giảm hiểu nhầm · Thực hành tối ưu | 8 × 15 = 120 |
+| 5. Claude Code cơ bản | Đủ 9/9 bài: Claude Code là gì? · Terminal là gì? · Cài đặt môi trường · Cài đặt Claude Code · Đăng nhập và xác thực · Mở dự án · Giải thích file và thư mục · Tạo ứng dụng đầu tiên · Các lệnh cơ bản | 9 × 15 = 135 |
 | Các chương khác | Đề cương hiển thị “Sắp ra mắt”, không có trang rỗng | — |
-| **Tổng** | **14 bài đầy đủ 12 phần (2 chương trọn vẹn)** | **210 câu, 0 cảnh báo trùng chưa duyệt** |
+| **Tổng** | **23 bài đầy đủ 12 phần (3 chương trọn vẹn)** | **345 câu, 0 cảnh báo trùng chưa duyệt** |
 
 Chương 3 dùng hạ tầng **bài học thuần dữ liệu**: infographic (`flow`, `compare`, `cards`, `table`, `annotated`) và mô phỏng (`classify`, `choose`, `sequence`, `highlight`, `verify`, `terminal`, `prompt-lab`) được khai báo ngay trong file bài học, không cần viết component mới. Nội dung đối chiếu trang Prompting best practices và Prompt engineering overview của Anthropic (03/11/2026).
+
+Chương 5 đối chiếu tài liệu Claude Code chính thức ngày 03/11/2026 (Quickstart, Advanced setup, Terminal guide, Authentication, How Claude Code works, Security, Memory, Interactive mode, Best practices). Hai bài dùng terminal mô phỏng (preset mới `claude-project`: dự án mẫu đã commit, lệnh `claude` chỉ in giải thích có nhãn MÔ PHỎNG); câu hỏi `terminal-task` đầu tiên được chấm trên shell mô phỏng. Yêu cầu hệ thống, lệnh cài và thứ tự ưu tiên xác thực dễ thay đổi — cần đối chiếu lại định kỳ.
 
 Mỗi bài Chương 1 có infographic riêng và một mô phỏng tương tác thật: đoán từ tiếp theo (lấy mẫu theo xác suất minh hoạ), chatbot từ khoá chạy thật, chọn model theo hướng dẫn chính thức, phân loại 8 công việc, xếp tài liệu vào context window, kiểm chứng khẳng định với phiếu thông số.
 
@@ -40,8 +43,9 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 - **Nội dung**: mọi bài phát hành đủ 12 phần, có hình và mô phỏng đăng ký, mỗi mục tiêu học tập có câu hỏi; mọi đáp án tham khảo đạt rubric của chính nó.
 - **Bài tập**: đáp án tham khảo đạt rubric của chính nó, còn khung gợi ý (placeholder) thì không — chống rubric quá dễ.
 - **Mô phỏng dữ liệu**: mỗi mô phỏng giải được đúng như khai báo (nhãn tồn tại, nhiệm vụ terminal hoàn thành bằng lệnh gợi ý, prompt-lab: đáp án ≥ 80%, khung ban đầu < 80%).
-- **Số lượng**: 123 unit test (Vitest) và 147 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
-- **E2E** (Playwright, desktop + mobile): 6 mô phỏng Chương 1, mốc hoàn thành chương (6 bài × 50 XP + 100 XP), điều hướng, 404, tìm kiếm bằng bàn phím, quiz thích ứng đủ 15 câu không lặp + reload giữa chừng, mô phỏng lắp ráp prompt, bài tập, ghi chú/bookmark/hoàn thành sau reload, 5 lab, dark mode, responsive (không tràn ngang), ngân sách hiệu năng trang chủ, axe WCAG 2.1 AA ở chế độ sáng và tối.
+- **Câu hỏi terminal-task**: lệnh tham khảo đạt mọi điều kiện, và trạng thái ban đầu chưa đạt sẵn.
+- **Số lượng**: 184 unit test (Vitest) và 179 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
+- **E2E** (Playwright, desktop + mobile): 6 mô phỏng Chương 1, mốc hoàn thành chương (6 bài × 50 XP + 100 XP), điều hướng, 404, tìm kiếm bằng bàn phím, quiz thích ứng đủ 15 câu không lặp + reload giữa chừng, mô phỏng lắp ráp prompt, bài tập, ghi chú/bookmark/hoàn thành sau reload, 5 lab, dark mode, responsive (không tràn ngang), ngân sách hiệu năng trang chủ, axe WCAG 2.1 AA ở chế độ sáng và tối; Chương 5: 9 bài đủ 12 phần + sơ đồ, 2 terminal mô phỏng, đối chiếu nguồn (verify), chọn tình huống, phân loại, sắp thứ tự, và một câu terminal-task chấm trong quiz.
 
 ## Giới hạn hiện tại (trung thực)
 
@@ -54,14 +58,13 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 
 ## Bước tiếp theo đề xuất
 
-Thứ tự còn lại (69 bài), mỗi chương một PR, kiểm thử trước khi sang chương sau:
+Thứ tự còn lại (60 bài), mỗi chương một PR, kiểm thử trước khi sang chương sau:
 
-1. Chương 5 — Claude Code cơ bản (9 bài): nguồn là các module `01-`…`10-` của repo và code.claude.com; dùng mô phỏng `terminal` và câu hỏi `terminal-task`.
-2. Chương 8 — Tối ưu token và chi phí (8 bài): nguồn Context windows, Models overview, Token counting.
-3. Chương 6 — Claude Code nâng cao (9 bài), Chương 7 — Skills, MCP (8 bài): nguồn module `03-skills`, `05-mcp`… của repo.
-4. Chương 2 — Bắt đầu sử dụng Claude (7 bài) và Chương 4 — Artifacts (7 bài): cần đối chiếu Help Center hiện hành; không dùng ảnh chụp giả.
-5. Chương 9–12: dự án thực hành, xây trên Project Builder và Debug Challenge.
-6. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
+1. Chương 8 — Tối ưu token và chi phí (8 bài): nguồn Context windows, Models overview, Token counting.
+2. Chương 6 — Claude Code nâng cao (9 bài), Chương 7 — Skills, MCP (8 bài): nguồn module `03-skills`, `05-mcp`… của repo.
+3. Chương 2 — Bắt đầu sử dụng Claude (7 bài) và Chương 4 — Artifacts (7 bài): cần đối chiếu Help Center hiện hành; không dùng ảnh chụp giả.
+4. Chương 9–12: dự án thực hành, xây trên Project Builder và Debug Challenge.
+5. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
 
 ## Triển khai
 

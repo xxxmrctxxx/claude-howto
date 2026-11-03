@@ -554,8 +554,15 @@ export function runCommand(state: ShellState, line: string): RunResult {
       lines.push(...git(s, args));
       break;
     case "claude":
+      if (args[0] === "--version" || args[0] === "-v") {
+        lines.push(
+          hint("Trên máy thật, lệnh này in số phiên bản kèm chữ (Claude Code), ví dụ: 2.1.211 (Claude Code)."),
+          hint("Đây là môi trường MÔ PHỎNG nên không có số phiên bản thật."),
+        );
+        break;
+      }
       lines.push(
-        hint("Trên máy thật, lệnh `claude` mở Claude Code trong thư mục hiện tại."),
+        hint(`Trên máy thật, lệnh \`claude\` mở Claude Code trong thư mục hiện tại (${displayPath(s.cwd, s.home)}).`),
         hint("Đây là môi trường MÔ PHỎNG nên không chạy Claude. Hãy luyện các lệnh cơ bản ở đây trước."),
       );
       break;
@@ -600,6 +607,22 @@ export function createShell(preset: string): ShellState {
       "README.md": file("# Web QA\n"),
     });
     base.cwd = `${home}/web-qa`;
+  } else if (preset === "claude-project") {
+    h.children["du-an"] = dir({
+      "web-loi-qa": dir({
+        "README.md": file("# Web loi QA\nTrang theo doi loi QA cua xuong lap rap.\nChay thu: mo src/index.html bang trinh duyet.\n"),
+        "package.json": file('{\n  "name": "web-loi-qa",\n  "version": "0.1.0",\n  "scripts": { "test": "node test.js" }\n}\n'),
+        ".gitignore": file("node_modules/\n.env\n"),
+        src: dir({
+          "index.html": file("<h1>Theo doi loi QA</h1>\n<script src=\"app.js\"></script>\n"),
+          "app.js": file("// Doc du lieu loi va ve bang\n"),
+        }),
+        data: dir({ "loi-mau.csv": file("Ngay,Cong_doan,So_loi\n2026-11-02,Quan day,2\n2026-11-02,Lap rap vo,5\n") }),
+      }),
+    });
+    let s = { ...base, cwd: `${home}/du-an/web-loi-qa` };
+    for (const cmd of ["git init", "git add .", 'git commit -m "Khoi tao du an"']) s = runCommand(s, cmd).state;
+    return { ...s, cwd: home, history: [] };
   } else if (preset === "git-committed") {
     let s = createShell("git-project");
     for (const cmd of ["git init", "git add .", 'git commit -m "Khoi tao du an"']) s = runCommand(s, cmd).state;

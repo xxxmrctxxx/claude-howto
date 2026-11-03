@@ -37,6 +37,8 @@ Bài mới nên khai báo trực tiếp trong file bài học thay vì viết co
 | `illustration` | `infographic` | `flow` (các bước), `compare` (cột tốt/xấu), `cards`, `table`, `annotated` (prompt có chú thích từng dòng) |
 | `simulation` | `sim` | `classify` (xếp vào nhóm), `choose` (chọn phương án cho từng tình huống), `sequence` (sắp thứ tự), `highlight` (đánh dấu đoạn văn), `verify` (đối chiếu với nguồn), `terminal` (nhiệm vụ dòng lệnh mô phỏng), `prompt-lab` (sửa prompt 5 khối) |
 
+Mô phỏng `terminal` và câu hỏi `terminal-task` chọn một preset của shell mô phỏng (`src/lib/engine/terminal/shell.ts`): `home-basic` (thư mục nhà có tài liệu và dữ liệu QA), `git-project` (dự án web chưa có git), `git-committed` (đã có một commit), `claude-project` (dự án `~/du-an/web-loi-qa` đã commit, bắt đầu ở thư mục nhà). Lệnh `claude` trong mô phỏng chỉ in giải thích có nhãn MÔ PHỎNG.
+
 Test nội dung kiểm tra mỗi mô phỏng giải được đúng như khai báo. Chỉ viết component riêng (`visual`, `widget`) khi các loại trên không thể hiện được ý tưởng.
 
 ## Cách thêm một bài học mới
