@@ -54,6 +54,13 @@ import { lessonTaiFileHinhAnh } from "./lessons/ch02-l04-tai-file-hinh-anh";
 import { lessonSuDungProjects } from "./lessons/ch02-l05-su-dung-projects";
 import { lessonSuDungArtifacts } from "./lessons/ch02-l06-su-dung-artifacts";
 import { lessonQuanLyNguCanh } from "./lessons/ch02-l07-quan-ly-ngu-canh";
+import { lessonArtifactsLaGi } from "./lessons/ch04-l01-artifacts-la-gi";
+import { lessonTaoWebsite } from "./lessons/ch04-l02-tao-website";
+import { lessonTaoUngDungTuongTac } from "./lessons/ch04-l03-tao-ung-dung-tuong-tac";
+import { lessonTaoBieuDo } from "./lessons/ch04-l04-tao-bieu-do";
+import { lessonTaoDashboard } from "./lessons/ch04-l05-tao-dashboard";
+import { lessonChinhSuaKiemTra } from "./lessons/ch04-l06-chinh-sua-kiem-tra";
+import { lessonXuatChiaSe } from "./lessons/ch04-l07-xuat-chia-se";
 
 /**
  * Lesson content only (no question banks), so the lazily loaded search index
@@ -61,5 +68,5 @@ import { lessonQuanLyNguCanh } from "./lessons/ch02-l07-quan-ly-ngu-canh";
  * question banks in registry.ts.
  */
 export const LESSONS: Record<string, Lesson> = Object.fromEntries(
-  [lessonAiHoatDong, lessonClaudeKhacChatbot, lessonCacPhienBan, lessonClaudeLamDuocGi, lessonGioiHan, lessonLoiThuongGap, lessonPromptLaGi, lessonCauTrucPrompt, lessonRctco, lessonFewShot, lessonChainOfThought, lessonPromptCoCauTruc, lessonGiamHieuNham, lessonToiUuPrompt, lessonClaudeCodeLaGi, lessonTerminalLaGi, lessonCaiDatMoiTruong, lessonCaiDatClaudeCode, lessonDangNhapXacThuc, lessonMoDuAn, lessonFileVaThuMuc, lessonUngDungDauTien, lessonLenhCoBan, lessonTokenLaGi, lessonContextWindowCh8, lessonViSaoTonToken, lessonChiaCongViec, lessonTaiLieuDuAn, lessonTranhDocFileThua, lessonSoSanhPhuongPhap, lessonTheoDoiChiPhi, lessonQuanLyContext, lessonLapKeHoach, lessonNhieuFile, lessonDebug, lessonGitGithub, lessonKiemThuTuDong, lessonRefactoring, lessonCodeReview, lessonPhanChiaTacVu, lessonSkillLaGi, lessonMcpLaGi, lessonKhiNaoDung, lessonCaiDatMoRong, lessonCauHinhMoRong, lessonKiemTraKetNoi, lessonLoiPhoBienMoRong, lessonViDuThucTeMoRong, lessonTaoTaiKhoan, lessonTimHieuGiaoDien, lessonTaoHoiThoai, lessonTaiFileHinhAnh, lessonSuDungProjects, lessonSuDungArtifacts, lessonQuanLyNguCanh].map((l) => [l.id, l]),
+  [lessonAiHoatDong, lessonClaudeKhacChatbot, lessonCacPhienBan, lessonClaudeLamDuocGi, lessonGioiHan, lessonLoiThuongGap, lessonPromptLaGi, lessonCauTrucPrompt, lessonRctco, lessonFewShot, lessonChainOfThought, lessonPromptCoCauTruc, lessonGiamHieuNham, lessonToiUuPrompt, lessonClaudeCodeLaGi, lessonTerminalLaGi, lessonCaiDatMoiTruong, lessonCaiDatClaudeCode, lessonDangNhapXacThuc, lessonMoDuAn, lessonFileVaThuMuc, lessonUngDungDauTien, lessonLenhCoBan, lessonTokenLaGi, lessonContextWindowCh8, lessonViSaoTonToken, lessonChiaCongViec, lessonTaiLieuDuAn, lessonTranhDocFileThua, lessonSoSanhPhuongPhap, lessonTheoDoiChiPhi, lessonQuanLyContext, lessonLapKeHoach, lessonNhieuFile, lessonDebug, lessonGitGithub, lessonKiemThuTuDong, lessonRefactoring, lessonCodeReview, lessonPhanChiaTacVu, lessonSkillLaGi, lessonMcpLaGi, lessonKhiNaoDung, lessonCaiDatMoRong, lessonCauHinhMoRong, lessonKiemTraKetNoi, lessonLoiPhoBienMoRong, lessonViDuThucTeMoRong, lessonTaoTaiKhoan, lessonTimHieuGiaoDien, lessonTaoHoiThoai, lessonTaiFileHinhAnh, lessonSuDungProjects, lessonSuDungArtifacts, lessonQuanLyNguCanh, lessonArtifactsLaGi, lessonTaoWebsite, lessonTaoUngDungTuongTac, lessonTaoBieuDo, lessonTaoDashboard, lessonChinhSuaKiemTra, lessonXuatChiaSe].map((l) => [l.id, l]),
 );

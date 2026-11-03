@@ -1,0 +1,172 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch04-l01";
+
+/** 15 questions for "Artifacts là gì?" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh04L01: Question[] = [
+  {
+    questionId: "ch04-l01-q01", lessonId: L, conceptId: "output-forms", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Claude có thể đưa kết quả ở những dạng nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Chữ trong cuộc trò chuyện", feedback: "Đúng." },
+      { id: "b", text: "Hình trực quan dựng ngay trong chat", feedback: "Đúng (custom visuals, beta)." },
+      { id: "c", text: "Artifact mở ở cửa sổ riêng", feedback: "Đúng." },
+      { id: "d", text: "File Excel, PowerPoint, Word, PDF để tải về", feedback: "Đúng." },
+    ],
+    answer: ["a", "b", "c", "d"],
+    explanation: "Chọn dạng theo người nhận và cách họ dùng kết quả.",
+  },
+  {
+    questionId: "ch04-l01-q02", lessonId: L, conceptId: "templates", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Ba mẫu artifact nào có trên mọi gói, kể cả Free?",
+    options: [
+      { id: "a", text: "Docs, Slides, Design", feedback: "Đúng." },
+      { id: "b", text: "Dashboards, Motion, Docs", feedback: "Dashboards và Motion là beta theo gói." },
+      { id: "c", text: "Chỉ Motion", feedback: "Motion dành cho Team và Enterprise." },
+    ],
+    answer: "a",
+    explanation: "Dashboards (beta) từ gói Pro; Motion (beta) cho Team và Enterprise.",
+  },
+  {
+    questionId: "ch04-l01-q03", lessonId: L, conceptId: "file-creation", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Claude có thể tạo file Excel, PowerPoint, Word và PDF để bạn tải xuống hoặc lưu vào Google Drive.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Mỗi file tối đa 30 MB; cần khả năng Code execution and file creation đang bật.",
+  },
+  {
+    questionId: "ch04-l01-q04", lessonId: L, conceptId: "docs-template", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền lệnh tắt.",
+    template: "Muốn tạo nhanh một Claude Doc, có thể gõ [[b1]] trong ô chat rồi mô tả tài liệu.",
+    blanks: [{ id: "b1", accepted: ["/docs"], width: 6 }],
+    explanation: "Cũng có thể hỏi trong chat hoặc chọn mẫu ở tab Artifacts.",
+  },
+  {
+    questionId: "ch04-l01-q05", lessonId: L, conceptId: "custom-visuals", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Đang trao đổi, bạn tải file CSV và chỉ muốn nhìn nhanh xu hướng ngay lúc đó. Dạng nào hợp nhất?",
+    options: [
+      { id: "a", text: "Hình trực quan trong chat (custom visuals)", feedback: "Đúng." },
+      { id: "b", text: "File PowerPoint tải về", feedback: "Quá nặng cho việc nhìn nhanh." },
+      { id: "c", text: "Không làm được, phải tự vẽ", feedback: "Claude dựng được biểu đồ trong chat." },
+    ],
+    answer: "a",
+    explanation: "Custom visuals đang beta, có trên web và ứng dụng máy tính.",
+  },
+  {
+    questionId: "ch04-l01-q06", lessonId: L, conceptId: "ai-in-artifact", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn chia sẻ cho cả phòng một artifact có dùng Claude bên trong để tóm tắt văn bản. Lượt dùng được tính thế nào?",
+    options: [
+      { id: "a", text: "Mỗi người dùng artifact tốn lượt của chính họ; không cần API key", feedback: "Đúng." },
+      { id: "b", text: "Mọi lượt đều trừ vào tài khoản của người tạo", feedback: "Tính vào giới hạn của từng người dùng." },
+      { id: "c", text: "Phải nhập API key vào artifact", feedback: "Không cần API key." },
+    ],
+    answer: "a",
+    explanation: "Help Center: artifacts that call Claude require no API key; usage counts against each user's own plan.",
+  },
+  {
+    questionId: "ch04-l01-q07", lessonId: L, conceptId: "connected-apps", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Artifact lấy dữ liệu từ ứng dụng kết nối dùng chung kết nối của người tạo, nên người xem không cần duyệt gì.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Ứng dụng kết nối cần người dùng duyệt, và mỗi người kết nối ứng dụng của chính mình.",
+  },
+  {
+    questionId: "ch04-l01-q08", lessonId: L, conceptId: "artifact-storage", learningObjective: "o3", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "fill-blank",
+    prompt: "Điền số.",
+    template: "Dữ liệu một artifact lưu được tối đa [[b1]] MB và chỉ ở dạng văn bản.",
+    blanks: [{ id: "b1", accepted: ["20", "hai mươi"], width: 4 }],
+    explanation: "Theo phần giới hạn trong bài What are artifacts.",
+  },
+  {
+    questionId: "ch04-l01-q09", lessonId: L, conceptId: "choose-form", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép nhu cầu với dạng đầu ra phù hợp.",
+    pairs: [
+      { id: "p1", left: "Phòng kế toán cần nộp đúng một file có công thức", right: "File Excel tải về" },
+      { id: "p2", left: "Quy trình 4 tổ trưởng cùng góp ý trong tuần", right: "Claude Docs" },
+      { id: "p3", left: "Buổi họp giao ban cần 8 trang trình bày", right: "Slides" },
+      { id: "p4", left: "Hỏi nhanh nghĩa của một hàm Excel", right: "Chữ trong chat" },
+    ],
+    explanation: "Nghĩ tới người nhận và cách họ dùng kết quả.",
+  },
+  {
+    questionId: "ch04-l01-q10", lessonId: L, conceptId: "legacy-artifacts", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Artifact kiểu cũ (tạo trước 16/09/2026) hiện ra sao theo Help Center?",
+    options: [
+      { id: "a", text: "Vẫn hoạt động nhưng không tạo mới được loại này nữa", feedback: "Đúng." },
+      { id: "b", text: "Đã bị xoá hết", feedback: "Vẫn hoạt động." },
+      { id: "c", text: "Tự chuyển thành file PDF", feedback: "Không có cơ chế này." },
+    ],
+    answer: "a",
+    explanation: "Artifact kiểu cũ có các nút xem code, sao chép, tải về ở đầu khung.",
+  },
+  {
+    questionId: "ch04-l01-q11", lessonId: L, conceptId: "dashboards-beta", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Mẫu Dashboards (beta) dùng được trên gói Free.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Dashboards (beta) có trên Pro, Max, Ultra, Team, Enterprise.",
+  },
+  {
+    questionId: "ch04-l01-q12", lessonId: L, conceptId: "choose-form", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Báo cáo lỗi tuần: nhóm QA cần cùng sửa trong 2 ngày, sau đó quản lý (không dùng Claude) cần nhận một file để lưu hồ sơ. Cách làm hợp lý nhất?",
+    options: [
+      { id: "a", text: "Làm trên Claude Docs để nhóm cùng sửa, rồi xuất PDF hoặc Word gửi quản lý", feedback: "Đúng." },
+      { id: "b", text: "Chỉ trả lời bằng chữ trong chat rồi mỗi người tự chép", feedback: "Khó cùng sửa, dễ lệch bản." },
+      { id: "c", text: "Gửi quản lý liên kết artifact dù họ không có tài khoản Claude", feedback: "Người xem thường cần tài khoản Claude." },
+    ],
+    answer: "a",
+    explanation: "Docs xuất được Word, PDF, Markdown, Google Docs.",
+  },
+  {
+    questionId: "ch04-l01-q13", lessonId: L, conceptId: "output-forms", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các nhận định SAI về các dạng đầu ra.",
+    segments: [
+      { id: "s1", text: "Hình trực quan trong chat thay thế hoàn toàn việc xuất file cho người nhận.", isError: true, why: "Người nhận cần file thì phải tạo file tải về." },
+      { id: "s2", text: "Artifact được lưu trong tab Artifacts để sửa tiếp.", isError: false },
+      { id: "s3", text: "Claude Docs xuất được sang Word và PDF.", isError: false },
+      { id: "s4", text: "Muốn có file Excel thì chỉ cần bảo Claude “in bảng ra chat”.", isError: true, why: "Cần yêu cầu tạo file .xlsx (file creation)." },
+    ],
+    explanation: "Mỗi dạng có công dụng riêng.",
+  },
+  {
+    questionId: "ch04-l01-q14", lessonId: L, conceptId: "ai-in-artifact", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn định làm công cụ “tóm tắt biên bản” dùng Claude bên trong cho 30 công nhân, nhiều người đang dùng gói Free với lượt dùng ít. Cân nhắc nào đúng nhất?",
+    options: [
+      { id: "a", text: "Mỗi người tốn lượt của chính họ — nhắc mọi người, giữ biên bản ngắn, hoặc cân nhắc gói phù hợp cho người dùng nhiều", feedback: "Đúng." },
+      { id: "b", text: "Không cần lo vì mọi lượt tính vào tài khoản người tạo", feedback: "Sai cách tính lượt dùng." },
+      { id: "c", text: "Gắn API key cá nhân của bạn vào artifact cho mọi người dùng chung", feedback: "Không cần và không nên chia sẻ khoá." },
+    ],
+    answer: "a",
+    explanation: "Artifact gọi Claude tính vào giới hạn của từng người dùng.",
+  },
+  {
+    questionId: "ch04-l01-q15", lessonId: L, conceptId: "choose-form", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Với tình huống dưới đây, viết 3–4 dòng: dạng đầu ra cho từng người nhận và yêu cầu bạn sẽ gửi Claude.",
+    source: "Bạn làm kế hoạch đào tạo quý 4: (a) trưởng phòng muốn cùng chỉnh nội dung trong tuần; (b) phòng nhân sự cần một file Excel lịch học để nhập hệ thống; (c) buổi họp thứ Sáu cần 6 trang trình bày.",
+    rubric: [
+      { id: "docs", label: "Docs cho cùng chỉnh", weight: 1, check: { kind: "regex", pattern: "(a\\)|\\(a|trưởng phòng|truong phong)[^\\n]*docs" }, pass: "Có Docs.", fail: "(a) cùng chỉnh nội dung → Claude Docs." },
+      { id: "excel", label: "File Excel cho nhân sự", weight: 1, check: { kind: "regex", pattern: "(excel|xlsx)" }, pass: "Có file Excel.", fail: "(b) cần file → tạo file Excel (.xlsx) tải về." },
+      { id: "slides", label: "Slides cho buổi họp", weight: 1, check: { kind: "anyKeyword", keywords: ["slides", "trình chiếu", "powerpoint"] }, pass: "Có Slides.", fail: "(c) họp → Slides." },
+      { id: "request", label: "Có yêu cầu cụ thể", weight: 1, check: { kind: "regex", pattern: "(yeu cau|tao|soan)[^\\n]*\\d" }, pass: "Có yêu cầu cụ thể.", fail: "Viết ít nhất một yêu cầu có số liệu cụ thể." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "(a) Trưởng phòng cùng chỉnh → Claude Docs “Kế hoạch đào tạo Q4”.\n(b) Phòng nhân sự → file Excel (.xlsx) tải về, cột Ngày | Lớp | Giảng viên | Phòng.\n(c) Buổi họp thứ Sáu → Slides 6 trang, xuất PowerPoint nếu cần.\nYêu cầu: “Tạo Claude Doc kế hoạch đào tạo Q4 gồm 4 khoá, mỗi khoá 3 buổi; sau đó tạo file Excel lịch học và 6 trang Slides tóm tắt.”",
+    explanation: "Một nội dung, nhiều người nhận — mỗi người một dạng phù hợp.",
+  },
+];

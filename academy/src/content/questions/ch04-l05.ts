@@ -1,0 +1,181 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch04-l05";
+
+/** 15 questions for "Tạo dashboard" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh04L05: Question[] = [
+  {
+    questionId: "ch04-l05-q01", lessonId: L, conceptId: "dashboards-def", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Theo Help Center, Claude Dashboards làm gì?",
+    options: [
+      { id: "a", text: "Biến câu hỏi về dữ liệu công ty thành dashboard", feedback: "Đúng." },
+      { id: "b", text: "Thiết kế logo công ty", feedback: "Không phải." },
+      { id: "c", text: "Gửi email báo cáo tự động mỗi sáng", feedback: "Bài viết không mô tả tính năng này." },
+    ],
+    answer: "a",
+    explanation: "Mỗi dashboard là một artifact tạo từ mẫu Dashboards.",
+  },
+  {
+    questionId: "ch04-l05-q02", lessonId: L, conceptId: "data-sources", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Claude Dashboards lấy dữ liệu từ những nguồn nào theo Help Center? Chọn tất cả.",
+    options: [
+      { id: "a", text: "BigQuery", feedback: "Đúng." },
+      { id: "b", text: "Snowflake", feedback: "Đúng." },
+      { id: "c", text: "Ứng dụng đã kết nối như Salesforce", feedback: "Đúng." },
+      { id: "d", text: "Ảnh chụp bảng trắng trong phòng họp", feedback: "Không nằm trong danh sách nguồn." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Danh sách kho dữ liệu còn có Amazon Redshift, ClickHouse, Databricks.",
+  },
+  {
+    questionId: "ch04-l05-q03", lessonId: L, conceptId: "dash-plans", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Claude Dashboards đang ở giai đoạn beta và có trên gói Pro, Max, Ultra, Team, Enterprise.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Với Enterprise, tính năng tắt mặc định cho tới khi chủ sở hữu bật.",
+  },
+  {
+    questionId: "ch04-l05-q04", lessonId: L, conceptId: "chart-sql", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Mỗi biểu đồ trong Claude Dashboards hiện câu truy vấn đã dùng và thời điểm dữ liệu được làm mới.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Claude viết một câu SQL cho mỗi biểu đồ.",
+  },
+  {
+    questionId: "ch04-l05-q05", lessonId: L, conceptId: "question-first", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Mẹo của Help Center khi yêu cầu dashboard là gì?",
+    options: [
+      { id: "a", text: "Mô tả câu hỏi bạn muốn trả lời, không chỉ mô tả biểu đồ; nêu bảng hoặc ứng dụng chứa dữ liệu", feedback: "Đúng." },
+      { id: "b", text: "Yêu cầu càng nhiều biểu đồ càng tốt", feedback: "Nhiều biểu đồ không giúp trả lời câu hỏi." },
+      { id: "c", text: "Chỉ nói “làm dashboard đẹp”", feedback: "Mơ hồ." },
+    ],
+    answer: "a",
+    explanation: "Ví dụ: “số đăng ký mới mỗi tuần trong 6 tháng, chia theo gói”.",
+  },
+  {
+    questionId: "ch04-l05-q06", lessonId: L, conceptId: "create-paths", learningObjective: "o2", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Có những cách nào để bắt đầu một Claude Dashboard? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Hỏi trong chat bằng ngôn ngữ thường", feedback: "Đúng." },
+      { id: "b", text: "Chọn Output trong ô nhập → Dashboards", feedback: "Đúng." },
+      { id: "c", text: "Chọn mẫu Dashboards ở tab Artifacts", feedback: "Đúng." },
+      { id: "d", text: "Gửi email tới Anthropic", feedback: "Không phải cách tạo dashboard." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Theo bài Get started with Claude Dashboards.",
+  },
+  {
+    questionId: "ch04-l05-q07", lessonId: L, conceptId: "chart-sql", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Biểu đồ doanh thu trên dashboard cao hơn báo cáo kế toán khoảng 6%. Bước kiểm tra đầu tiên hợp lý nhất?",
+    options: [
+      { id: "a", text: "Mở câu SQL của biểu đồ: xem có tính cả đơn huỷ, đơn thử hay khoảng thời gian khác không", feedback: "Đúng." },
+      { id: "b", text: "Tin dashboard vì máy tính đúng hơn người", feedback: "Câu truy vấn có thể đếm khác ý bạn." },
+      { id: "c", text: "Xoá dashboard", feedback: "Chưa biết nguyên nhân." },
+    ],
+    answer: "a",
+    explanation: "Mở query để xem Claude đếm gì; sai thì nói rõ cần đổi.",
+  },
+  {
+    questionId: "ch04-l05-q08", lessonId: L, conceptId: "last-refreshed", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Sáng thứ Hai bạn chiếu dashboard trong họp, nhưng ai đó hỏi “số này của lúc nào?”. Bạn xem ở đâu?",
+    options: [
+      { id: "a", text: "Thời điểm làm mới hiện trên từng biểu đồ", feedback: "Đúng." },
+      { id: "b", text: "Tên dashboard", feedback: "Tên không cho biết thời điểm dữ liệu." },
+      { id: "c", text: "Không thể biết", feedback: "Mỗi biểu đồ hiện thời điểm làm mới." },
+    ],
+    answer: "a",
+    explanation: "Luôn ghi rõ thời điểm dữ liệu khi trình bày số.",
+  },
+  {
+    questionId: "ch04-l05-q09", lessonId: L, conceptId: "name-source", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Đánh dấu những phần còn thiếu hoặc mơ hồ trong yêu cầu dashboard dưới đây.",
+    segments: [
+      { id: "s1", text: "Làm dashboard trả lời: số đơn mỗi tuần trong 12 tuần qua", isError: false },
+      { id: "s2", text: "lấy từ chỗ nào đó có dữ liệu đơn hàng,", isError: true, why: "Nêu bảng/ứng dụng cụ thể, ví dụ bảng orders trong BigQuery." },
+      { id: "s3", text: "bỏ mấy đơn linh tinh,", isError: true, why: "“Linh tinh” là đơn gì? Ví dụ trạng thái “test”." },
+      { id: "s4", text: "thêm bộ lọc theo chi nhánh.", isError: false },
+    ],
+    explanation: "Nguồn và điều kiện loại trừ phải cụ thể để kiểm tra được trong SQL.",
+  },
+  {
+    questionId: "ch04-l05-q10", lessonId: L, conceptId: "edit-dashboard", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn muốn đổi biểu đồ đơn hàng từ theo ngày sang theo tuần và thêm bộ lọc chi nhánh. Làm thế nào?",
+    options: [
+      { id: "a", text: "Yêu cầu trong chat: “đổi sang theo tuần và thêm bộ lọc chi nhánh”", feedback: "Đúng." },
+      { id: "b", text: "Tạo một tài khoản Claude mới", feedback: "Không cần." },
+      { id: "c", text: "Không sửa được, phải làm dashboard khác", feedback: "Sửa được bằng yêu cầu trong chat." },
+    ],
+    answer: "a",
+    explanation: "Help Center: ask for changes in chat, such as adding a filter or switching to a weekly view.",
+  },
+  {
+    questionId: "ch04-l05-q11", lessonId: L, conceptId: "dash-limits", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Claude Dashboards được thiết kế cho câu hỏi khám phá nhanh; với phân tích sâu, Help Center gợi ý chuyển sang công cụ khác.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Dashboard cũng tính vào lượt dùng của gói.",
+  },
+  {
+    questionId: "ch04-l05-q12", lessonId: L, conceptId: "focused-design", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Trưởng phòng yêu cầu “cho hết mọi chỉ số vào dashboard” — 25 biểu đồ. Cách tiếp cận tốt nhất?",
+    options: [
+      { id: "a", text: "Hỏi lại 3–5 câu hỏi quan trọng nhất họ cần trả lời mỗi tuần, làm dashboard gọn theo đó", feedback: "Đúng." },
+      { id: "b", text: "Làm đủ 25 biểu đồ cho vừa lòng", feedback: "Khó đọc, khó kiểm tra, tốn lượt dùng." },
+      { id: "c", text: "Từ chối làm", feedback: "Có thể làm tốt hơn bằng cách thu hẹp câu hỏi." },
+    ],
+    answer: "a",
+    explanation: "Mỗi biểu đồ nên trả lời một câu hỏi người xem thật sự cần.",
+  },
+  {
+    questionId: "ch04-l05-q13", lessonId: L, conceptId: "no-warehouse", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Công ty nhỏ của bạn dùng gói Free, dữ liệu nằm trong file Excel xuất hằng tuần. Muốn có dashboard đơn giản, cách hợp lý?",
+    options: [
+      { id: "a", text: "Tải file CSV lên, nhờ Claude dựng artifact dashboard; nhớ dữ liệu là bản tĩnh, mỗi tuần tải file mới", feedback: "Đúng." },
+      { id: "b", text: "Dùng Claude Dashboards kết nối thẳng file Excel trên máy", feedback: "Dashboards cần gói trả phí và nguồn được hỗ trợ." },
+      { id: "c", text: "Không làm được gì", feedback: "Artifact dashboard từ CSV vẫn làm được." },
+    ],
+    answer: "a",
+    explanation: "Ghi rõ ngày dữ liệu trên dashboard để người xem không nhầm.",
+  },
+  {
+    questionId: "ch04-l05-q14", lessonId: L, conceptId: "dash-plans", learningObjective: "o1", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn ở công ty dùng gói Enterprise nhưng không thấy Dashboards. Giải thích và hướng xử lý hợp lý nhất?",
+    options: [
+      { id: "a", text: "Trên Enterprise, Dashboards tắt mặc định — liên hệ chủ sở hữu tổ chức bật trong Organization settings > Artifacts", feedback: "Đúng." },
+      { id: "b", text: "Enterprise không bao giờ có Dashboards", feedback: "Có, nhưng cần bật." },
+      { id: "c", text: "Cài lại trình duyệt", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Chủ sở hữu còn có thể giới hạn cho một số nhóm bằng vai trò tuỳ chỉnh.",
+  },
+  {
+    questionId: "ch04-l05-q15", lessonId: L, conceptId: "question-first", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết yêu cầu tạo dashboard (3–5 dòng) cho tình huống dưới đây và 1 điều bạn sẽ kiểm tra trong câu SQL.",
+    source: "Dữ liệu chăm sóc khách hàng ở bảng tickets trong BigQuery (cột created_at, kenh, trang_thai, thoi_gian_xu_ly_phut). Giám đốc muốn biết: kênh nào nhiều yêu cầu nhất tháng này, và thời gian xử lý trung bình theo tuần trong 8 tuần qua. Bỏ các ticket trạng thái 'spam'.",
+    rubric: [
+      { id: "source", label: "Nêu bảng nguồn", weight: 1, check: { kind: "anyKeyword", keywords: ["tickets", "bigquery"] }, pass: "Có nguồn.", fail: "Nêu bảng tickets trong BigQuery." },
+      { id: "questions", label: "Hai câu hỏi", weight: 1, check: { kind: "allGroups", groups: [["kênh"], ["thời gian xử lý", "trung bình"]] }, pass: "Có câu hỏi.", fail: "Nêu hai câu hỏi: kênh nhiều nhất, thời gian xử lý trung bình theo tuần." },
+      { id: "exclude", label: "Loại spam", weight: 1, check: { kind: "anyKeyword", keywords: ["spam"] }, pass: "Có loại trừ.", fail: "Nêu: bỏ trạng thái 'spam'." },
+      { id: "sql", label: "Điểm kiểm tra SQL", weight: 1, check: { kind: "regex", pattern: "(kiem tra|sql|truy van)[^\\n]*(spam|trung binh|tuan|thang)" }, pass: "Có kiểm tra SQL.", fail: "Nêu một điều sẽ kiểm tra trong SQL." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Từ bảng tickets trong BigQuery, làm dashboard trả lời: (1) kênh nào có nhiều yêu cầu nhất tháng này (biểu đồ cột theo kenh); (2) thời gian xử lý trung bình (phút) theo tuần trong 8 tuần qua (biểu đồ đường). Bỏ các ticket trang_thai = 'spam'. Thêm bộ lọc kênh.\nKiểm tra trong SQL: điều kiện loại 'spam' có ở cả hai biểu đồ, và trung bình tính theo tuần của created_at.",
+    explanation: "Câu hỏi rõ, nguồn rõ, điều kiện rõ → kiểm tra SQL nhanh.",
+  },
+];
