@@ -4,7 +4,7 @@ import { BookOpen, FlaskConical, Hash, Layers, Search, Clock } from "lucide-reac
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { search, type SearchDoc } from "@/lib/search";
+import type { SearchDoc, SearchHit } from "@/lib/search";
 import { cn } from "@/lib/utils";
 
 const KIND_ICON: Record<SearchDoc["kind"], typeof BookOpen> = {
@@ -14,6 +14,30 @@ const KIND_ICON: Record<SearchDoc["kind"], typeof BookOpen> = {
   term: Hash,
   chapter: Layers,
 };
+
+type SearchModule = typeof import("@/lib/search");
+let loadedSearch: SearchModule | null = null;
+
+/**
+ * The search index contains every lesson's text, so it is loaded on the first
+ * query instead of being bundled into every page. Returns null while loading.
+ */
+function useSearchHits(query: string): SearchHit[] | null {
+  const [mod, setMod] = useState<SearchModule | null>(loadedSearch);
+  const wanted = query.trim().length > 0;
+  useEffect(() => {
+    if (mod || !wanted) return;
+    let alive = true;
+    void import("@/lib/search").then((m) => {
+      loadedSearch = m;
+      if (alive) setMod(m);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [mod, wanted]);
+  return useMemo(() => (mod ? mod.search(query) : null), [mod, query]);
+}
 
 export function SearchResults({
   query,
@@ -25,8 +49,14 @@ export function SearchResults({
   activeIndex?: number;
 }) {
   const router = useRouter();
-  const hits = useMemo(() => search(query), [query]);
+  const hits = useSearchHits(query);
   if (!query.trim()) return <p className="px-1 py-6 text-center text-sm text-muted-foreground">Gõ từ khoá, ví dụ “prompt”, “git”, “token”.</p>;
+  if (!hits)
+    return (
+      <p className="px-1 py-6 text-center text-sm text-muted-foreground" role="status">
+        Đang tải chỉ mục tìm kiếm…
+      </p>
+    );
   if (!hits.length)
     return (
       <p className="px-1 py-6 text-center text-sm text-muted-foreground" role="status">
@@ -77,7 +107,7 @@ export function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChan
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(-1);
   const router = useRouter();
-  const hits = useMemo(() => search(query), [query]);
+  const hits = useSearchHits(query) ?? [];
 
   return (
     <Dialog

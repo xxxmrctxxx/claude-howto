@@ -1,29 +1,10 @@
 import { indexQuestion } from "@/lib/engine/question/fingerprint";
-import type { Chapter, IndexedQuestion, Lesson, Question } from "@/lib/types/content";
+import type { IndexedQuestion, Lesson, Question } from "@/lib/types/content";
+import { getChapterById, getChapterBySlug, lessonHref, publishedLessonIds, totalPlannedLessons } from "./catalog";
 import { course } from "./course";
-import { lessonAiHoatDong } from "./lessons/ch01-l01-ai-hoat-dong";
-import { lessonClaudeKhacChatbot } from "./lessons/ch01-l02-claude-khac-chatbot";
-import { lessonCacPhienBan } from "./lessons/ch01-l03-cac-phien-ban-claude";
-import { lessonClaudeLamDuocGi } from "./lessons/ch01-l04-claude-lam-duoc-gi";
-import { lessonGioiHan } from "./lessons/ch01-l05-gioi-han-cua-ai";
-import { lessonLoiThuongGap } from "./lessons/ch01-l06-loi-thuong-gap";
-import { lessonPromptLaGi } from "./lessons/ch03-l01-prompt-la-gi";
-import { lessonCauTrucPrompt } from "./lessons/ch03-l02-cau-truc-prompt-tot";
-import { lessonRctco } from "./lessons/ch03-l03-rctco";
-import { lessonFewShot } from "./lessons/ch03-l04-few-shot";
-import { lessonChainOfThought } from "./lessons/ch03-l05-chain-of-thought";
-import { lessonPromptCoCauTruc } from "./lessons/ch03-l06-prompt-co-cau-truc";
-import { lessonGiamHieuNham } from "./lessons/ch03-l07-giam-hieu-nham";
-import { lessonToiUuPrompt } from "./lessons/ch03-l08-thuc-hanh-toi-uu";
-import { lessonClaudeCodeLaGi } from "./lessons/ch05-l01-claude-code-la-gi";
-import { lessonTerminalLaGi } from "./lessons/ch05-l02-terminal-la-gi";
-import { lessonCaiDatMoiTruong } from "./lessons/ch05-l03-cai-dat-moi-truong";
-import { lessonCaiDatClaudeCode } from "./lessons/ch05-l04-cai-dat-claude-code";
-import { lessonDangNhapXacThuc } from "./lessons/ch05-l05-dang-nhap-xac-thuc";
-import { lessonMoDuAn } from "./lessons/ch05-l06-mo-du-an";
-import { lessonFileVaThuMuc } from "./lessons/ch05-l07-file-va-thu-muc";
-import { lessonUngDungDauTien } from "./lessons/ch05-l08-ung-dung-dau-tien";
-import { lessonLenhCoBan } from "./lessons/ch05-l09-lenh-co-ban";
+import { LESSONS } from "./lesson-registry";
+
+export { getChapterById, getChapterBySlug, lessonHref, LESSONS, publishedLessonIds, totalPlannedLessons };
 import { questionsCh01L01 } from "./questions/ch01-l01";
 import { questionsCh01L02 } from "./questions/ch01-l02";
 import { questionsCh01L03 } from "./questions/ch01-l03";
@@ -47,17 +28,22 @@ import { questionsCh05L06 } from "./questions/ch05-l06";
 import { questionsCh05L07 } from "./questions/ch05-l07";
 import { questionsCh05L08 } from "./questions/ch05-l08";
 import { questionsCh05L09 } from "./questions/ch05-l09";
+import { questionsCh08L01 } from "./questions/ch08-l01";
+import { questionsCh08L02 } from "./questions/ch08-l02";
+import { questionsCh08L03 } from "./questions/ch08-l03";
+import { questionsCh08L04 } from "./questions/ch08-l04";
+import { questionsCh08L05 } from "./questions/ch08-l05";
+import { questionsCh08L06 } from "./questions/ch08-l06";
+import { questionsCh08L07 } from "./questions/ch08-l07";
+import { questionsCh08L08 } from "./questions/ch08-l08";
 
 /**
  * Single place where content is registered. To publish a lesson:
  *   1. add src/content/lessons/<id>.ts and src/content/questions/<id>.ts
- *   2. add both to the maps below
+ *   2. add the lesson to LESSONS in lesson-registry.ts and the bank to QUESTION_BANKS below
  *   3. set `lessonId` on the matching outline entry in course.ts
  * The UI, search index and tests pick it up automatically.
  */
-export const LESSONS: Record<string, Lesson> = Object.fromEntries(
-  [lessonAiHoatDong, lessonClaudeKhacChatbot, lessonCacPhienBan, lessonClaudeLamDuocGi, lessonGioiHan, lessonLoiThuongGap, lessonPromptLaGi, lessonCauTrucPrompt, lessonRctco, lessonFewShot, lessonChainOfThought, lessonPromptCoCauTruc, lessonGiamHieuNham, lessonToiUuPrompt, lessonClaudeCodeLaGi, lessonTerminalLaGi, lessonCaiDatMoiTruong, lessonCaiDatClaudeCode, lessonDangNhapXacThuc, lessonMoDuAn, lessonFileVaThuMuc, lessonUngDungDauTien, lessonLenhCoBan].map((l) => [l.id, l]),
-);
 
 export const QUESTION_BANKS: Record<string, Question[]> = {
   "ch01-l01": questionsCh01L01,
@@ -83,6 +69,14 @@ export const QUESTION_BANKS: Record<string, Question[]> = {
   "ch05-l07": questionsCh05L07,
   "ch05-l08": questionsCh05L08,
   "ch05-l09": questionsCh05L09,
+  "ch08-l01": questionsCh08L01,
+  "ch08-l02": questionsCh08L02,
+  "ch08-l03": questionsCh08L03,
+  "ch08-l04": questionsCh08L04,
+  "ch08-l05": questionsCh08L05,
+  "ch08-l06": questionsCh08L06,
+  "ch08-l07": questionsCh08L07,
+  "ch08-l08": questionsCh08L08,
 };
 
 const indexedCache = new Map<string, IndexedQuestion[]>();
@@ -100,36 +94,15 @@ export function allQuestions(): Question[] {
   return Object.values(QUESTION_BANKS).flat();
 }
 
-export function getChapterBySlug(slug: string): Chapter | undefined {
-  return course.chapters.find((c) => c.slug === slug);
-}
-
-export function getChapterById(id: string): Chapter | undefined {
-  return course.chapters.find((c) => c.id === id);
-}
-
 export function getLessonBySlugs(chapterSlug: string, lessonSlug: string): Lesson | undefined {
   const chapter = getChapterBySlug(chapterSlug);
   const entry = chapter?.outline.find((o) => o.slug === lessonSlug);
   return entry?.lessonId ? LESSONS[entry.lessonId] : undefined;
 }
 
-export function lessonHref(lesson: Pick<Lesson, "chapterId" | "slug">): string {
-  const chapter = getChapterById(lesson.chapterId);
-  return `/hoc/${chapter?.slug}/${lesson.slug}/`;
-}
-
-export function publishedLessonIds(chapter: Chapter): string[] {
-  return chapter.outline.flatMap((o) => (o.lessonId && LESSONS[o.lessonId] ? [o.lessonId] : []));
-}
-
 /** Published lessons in curriculum order. */
 export function publishedLessons(): Lesson[] {
   return course.chapters.flatMap((c) => publishedLessonIds(c).map((id) => LESSONS[id]));
-}
-
-export function totalPlannedLessons(): number {
-  return course.chapters.reduce((s, c) => s + c.outline.length, 0);
 }
 
 export function neighbours(lessonId: string): { prev?: Lesson; next?: Lesson } {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { getChapterById, LESSONS, lessonHref, publishedLessons } from "@/content/registry";
+import { getChapterById, LESSON_REFS, publishedLessonRefs, SECTION_LABELS } from "@/content/catalog";
 import { BADGES, computeStreak, levelInfo, totalXp } from "@/lib/progress/gamification";
 import { useProgress, useProgressReady } from "@/lib/progress/store";
 import { todayKey } from "@/lib/utils";
@@ -13,15 +13,17 @@ import { todayKey } from "@/lib/utils";
 export function useResumeLesson() {
   const state = useProgress();
   const inProgress = Object.entries(state.lessons)
-    .filter(([id, l]) => l.status === "in-progress" && LESSONS[id])
+    .filter(([id, l]) => l.status === "in-progress" && LESSON_REFS[id])
     .sort((a, b) => b[1].lastVisitedAt.localeCompare(a[1].lastVisitedAt))[0];
   if (inProgress) {
-    const lesson = LESSONS[inProgress[0]];
-    const section = lesson.blocks.find((b) => b.id === inProgress[1].lastSectionId);
-    return { lesson, section, href: `${lessonHref(lesson)}${section ? `#${section.id}` : ""}`, fresh: false };
+    const lesson = LESSON_REFS[inProgress[0]];
+    const sectionId = inProgress[1].lastSectionId;
+    const section = sectionId && SECTION_LABELS[sectionId] ? { id: sectionId, title: SECTION_LABELS[sectionId] } : undefined;
+    return { lesson, section, href: `${lesson.href}${section ? `#${section.id}` : ""}`, fresh: false };
   }
-  const next = publishedLessons().find((l) => state.lessons[l.id]?.status !== "completed") ?? publishedLessons()[0];
-  return { lesson: next, section: undefined, href: lessonHref(next), fresh: !state.lessons[next.id] };
+  const published = publishedLessonRefs();
+  const next = published.find((l) => state.lessons[l.id]?.status !== "completed") ?? published[0];
+  return { lesson: next, section: undefined, href: next.href, fresh: !state.lessons[next.id] };
 }
 
 export function StartButton() {
@@ -29,7 +31,7 @@ export function StartButton() {
   const resume = useResumeLesson();
   return (
     <Button asChild size="lg" data-testid="start-learning">
-      <Link href={ready ? resume.href : lessonHref(publishedLessons()[0])}>
+      <Link href={ready ? resume.href : publishedLessonRefs()[0].href}>
         {ready && !resume.fresh ? "Học tiếp" : "Bắt đầu học"} <ArrowRight />
       </Link>
     </Button>
@@ -44,7 +46,7 @@ export function HomeDashboard() {
   const xp = totalXp(state);
   const lvl = levelInfo(xp);
   const streak = computeStreak(state.activityDays, todayKey());
-  const published = publishedLessons();
+  const published = publishedLessonRefs();
   const done = published.filter((l) => state.lessons[l.id]?.status === "completed").length;
   const correct = state.attempts.filter((a) => a.correct && a.firstTime).length;
   const chapter = getChapterById(resume.lesson.chapterId);

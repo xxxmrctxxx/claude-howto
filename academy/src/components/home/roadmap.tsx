@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChapterIcon } from "@/components/icon";
 import { Progress } from "@/components/ui/progress";
 import { course } from "@/content/course";
-import { LESSONS, publishedLessonIds } from "@/content/registry";
+import { LESSON_REFS, publishedLessonIds } from "@/content/catalog";
 import { useProgress } from "@/lib/progress/store";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +17,7 @@ export function Roadmap({ compact = false }: { compact?: boolean }) {
       {course.chapters.map((ch) => {
         const published = publishedLessonIds(ch);
         const done = published.filter((id) => state.lessons[id]?.status === "completed").length;
-        const firstLesson = published[0] ? LESSONS[published[0]] : undefined;
+        const firstLesson = published[0] ? LESSON_REFS[published[0]] : undefined;
         const href = firstLesson ? `/hoc/${ch.slug}/${firstLesson.slug}/` : `/hoc/#${ch.slug}`;
         const available = published.length > 0;
         return (

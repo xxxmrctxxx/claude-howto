@@ -45,12 +45,12 @@ Test nội dung kiểm tra mỗi mô phỏng giải được đúng như khai b�
 
 1. Tạo `src/content/lessons/<id>-<slug>.ts` xuất một `Lesson`.
 2. Tạo `src/content/questions/<id>.ts` xuất mảng `Question[]` theo `QUESTION_BANK_RULES.md`.
-3. Đăng ký cả hai trong `src/content/registry.ts`.
+3. Đăng ký bài trong `src/content/lesson-registry.ts` và ngân hàng câu hỏi trong `src/content/registry.ts`.
 4. Thêm `lessonId` vào mục tương ứng trong `src/content/course.ts`.
 5. Nếu cần hình hoặc mô phỏng mới: thêm component và đăng ký trong registry tương ứng.
 6. Chạy `npm test` rồi `npm run build`.
 
-Không cần sửa trang bài học, sidebar, tìm kiếm hay trang tiến độ — chúng đọc dữ liệu từ registry.
+Không cần sửa trang bài học, sidebar, tìm kiếm hay trang tiến độ — chúng đọc dữ liệu từ registry (server) hoặc catalog (client). Tiêu đề bài phải trùng tiêu đề trong đề cương và bài dùng đúng 12 mã phần chuẩn — có test kiểm tra.
 
 ## Định dạng chữ trong bài
 

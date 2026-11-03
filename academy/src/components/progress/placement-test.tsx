@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { getChapterById, LESSONS, publishedLessonIds } from "@/content/registry";
+import { getChapterById, LESSON_REFS, publishedLessonIds } from "@/content/catalog";
 import { AREA_LABEL, PLACEMENT_QUESTIONS, recommend } from "@/content/placement";
 import { LEVEL_LABEL } from "@/lib/engine/question/adaptive";
 import { setPlacement } from "@/lib/progress/actions";
@@ -55,7 +55,7 @@ export function PlacementTest() {
           <div className="mt-4 flex flex-wrap gap-2">
             {first ? (
               <Button asChild>
-                <Link href={`/hoc/${ch!.slug}/${LESSONS[first].slug}/`}>
+                <Link href={`/hoc/${ch!.slug}/${LESSON_REFS[first].slug}/`}>
                   Học ngay <ArrowRight />
                 </Link>
               </Button>

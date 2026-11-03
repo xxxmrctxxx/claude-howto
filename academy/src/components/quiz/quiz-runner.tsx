@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { bankFor, LESSONS } from "@/content/registry";
+import { useLessonData } from "@/components/lesson/lesson-data";
 import {
   applyAnswer,
   bankStatus,
@@ -117,9 +117,8 @@ function PracticeSuggestions() {
 export function QuizRunner({ lessonId, questionsPerSession }: { lessonId: string; questionsPerSession: number }) {
   const state = useProgress();
   const ready = useProgressReady();
-  const bank = bankFor(lessonId);
-  const lesson = LESSONS[lessonId];
-  const conceptLabel = (id: string) => lesson.concepts.find((c) => c.id === id)?.label ?? id;
+  const { bank, concepts } = useLessonData();
+  const conceptLabel = (id: string) => concepts.find((c) => c.id === id)?.label ?? id;
   const history = useMemo(() => state.attempts.filter((a) => a.lessonId === lessonId), [state.attempts, lessonId]);
   const session: QuizSession | undefined = state.sessions[lessonId];
   const [feedback, setFeedback] = useState<Feedback | null>(null);

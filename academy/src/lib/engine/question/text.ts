@@ -59,17 +59,44 @@ function trigrams(text: string): Map<string, number> {
   return grams;
 }
 
-function cosine(a: Map<string, number>, b: Map<string, number>): number {
+/** Pre-computed features of one text, so a bank-wide pairwise check does not redo them per pair. */
+export interface SimilarityProfile {
+  words: Set<string>;
+  grams: Map<string, number>;
+  norm: number;
+}
+
+export function similarityProfile(text: string): SimilarityProfile | null {
+  const c = canonicalStem(text);
+  if (!c) return null;
+  const grams = trigrams(c);
+  let sq = 0;
+  for (const v of grams.values()) sq += v * v;
+  return { words: new Set(c.split(" ")), grams, norm: Math.sqrt(sq) };
+}
+
+/**
+ * Similarity of two profiles (see lexicalSimilarity). When `floor` is given and
+ * the word overlap alone already proves the score is below it, the cheaper
+ * upper bound is returned instead of the exact value — still below `floor`.
+ */
+export function profileSimilarity(a: SimilarityProfile | null, b: SimilarityProfile | null, floor = 0): number {
+  if (!a || !b) return 0;
+  const [small, large] = a.words.size <= b.words.size ? [a.words, b.words] : [b.words, a.words];
+  let inter = 0;
+  for (const w of small) if (large.has(w)) inter++;
+  const dice = (2 * inter) / (a.words.size + b.words.size);
+  // Trigram cosine is at most 1, so the mean is at most (1 + dice) / 2.
+  const bound = (1 + dice) / 2;
+  if (bound < floor) return bound;
+  const [ga, gb] = a.grams.size <= b.grams.size ? [a.grams, b.grams] : [b.grams, a.grams];
   let dot = 0;
-  let na = 0;
-  let nb = 0;
-  for (const [k, v] of a) {
-    na += v * v;
-    const w = b.get(k);
+  for (const [k, v] of ga) {
+    const w = gb.get(k);
     if (w) dot += v * w;
   }
-  for (const v of b.values()) nb += v * v;
-  return na === 0 || nb === 0 ? 0 : dot / Math.sqrt(na * nb);
+  const tri = a.norm === 0 || b.norm === 0 ? 0 : dot / (a.norm * b.norm);
+  return (tri + dice) / 2;
 }
 
 /**
@@ -80,16 +107,7 @@ function cosine(a: Map<string, number>, b: Map<string, number>): number {
  * unique concept + objective + thinking-skill key (layer 4).
  */
 export function lexicalSimilarity(a: string, b: string): number {
-  const ca = canonicalStem(a);
-  const cb = canonicalStem(b);
-  if (!ca || !cb) return 0;
-  const tri = cosine(trigrams(ca), trigrams(cb));
-  const wa = new Set(ca.split(" "));
-  const wb = new Set(cb.split(" "));
-  let inter = 0;
-  for (const w of wa) if (wb.has(w)) inter++;
-  const dice = (2 * inter) / (wa.size + wb.size);
-  return (tri + dice) / 2;
+  return profileSimilarity(similarityProfile(a), similarityProfile(b));
 }
 
 /** Seeded PRNG (mulberry32) so question selection is reproducible in tests. */

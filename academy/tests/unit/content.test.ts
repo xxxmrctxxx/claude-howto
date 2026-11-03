@@ -1,8 +1,11 @@
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { LESSON_REFS, SECTION_LABELS } from "@/content/catalog";
 import { describe, expect, it } from "vitest";
 import { WIDGETS } from "@/components/lesson/widgets";
 import { VISUALS } from "@/components/visuals/registry";
 import { course } from "@/content/course";
-import { LESSONS, QUESTION_BANKS } from "@/content/registry";
+import { LESSONS, lessonHref, QUESTION_BANKS } from "@/content/registry";
 import { search } from "@/lib/search";
 import { evaluatePrompt, RECOMMENDED_ORDER } from "@/lib/engine/prompt/evaluate";
 import { scoreRubric } from "@/lib/engine/question/rubric";
@@ -117,5 +120,30 @@ describe("search", () => {
   it("planned lessons are findable but have no link", () => {
     const planned = search("deploy").find((h) => h.doc.kind === "planned");
     expect(planned?.doc.href).toBeNull();
+  });
+});
+
+describe("client-safe catalog matches the registry", () => {
+  it("outline titles equal lesson titles and every lesson uses the standard section ids", () => {
+    const sectionIds = Object.keys(SECTION_LABELS);
+    for (const lesson of Object.values(LESSONS)) {
+      const ref = LESSON_REFS[lesson.id];
+      expect(ref, lesson.id).toBeDefined();
+      expect(ref.title, lesson.id).toBe(lesson.title);
+      expect(ref.href, lesson.id).toBe(lessonHref(lesson));
+      expect(lesson.blocks.map((b) => b.id), lesson.id).toEqual(sectionIds);
+    }
+  });
+
+  it("no client component statically imports the content registry or the search index", () => {
+    const files = readdirSync("src", { recursive: true, withFileTypes: true })
+      .filter((d) => d.isFile() && /\.tsx?$/.test(d.name))
+      .map((d) => join(d.parentPath, d.name));
+    const offenders = files.filter((f) => {
+      const src = readFileSync(f, "utf8");
+      const heavy = /from ["']@\/content\/(registry|lesson-registry)["']/.test(src) || /^import (?!type )[^;]*from ["']@\/lib\/search["']/m.test(src);
+      return /^["']use client["']/m.test(src) && heavy;
+    });
+    expect(offenders).toEqual([]);
   });
 });

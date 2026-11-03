@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch08-l02";
+
+/** 15 questions for "Context window" (chapter 8) — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh08L02: Question[] = [
+  {
+    questionId: "ch08-l02-q01", lessonId: L, conceptId: "working-memory", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Theo Anthropic, context window là gì?",
+    options: [
+      { id: "a", text: "Toàn bộ văn bản model tham chiếu khi trả lời, kể cả câu trả lời — “bộ nhớ làm việc”", feedback: "Đúng." },
+      { id: "b", text: "Toàn bộ dữ liệu model được huấn luyện", feedback: "Đó là dữ liệu huấn luyện, khác context window." },
+      { id: "c", text: "Cửa sổ trình duyệt đang mở claude.ai", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Context window là bộ nhớ làm việc của lượt hiện tại, không phải kho kiến thức đã học.",
+  },
+  {
+    questionId: "ch08-l02-q02", lessonId: L, conceptId: "what-counts", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Những gì chiếm chỗ trong context window? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Hướng dẫn hệ thống", feedback: "Đúng." },
+      { id: "b", text: "Định nghĩa công cụ", feedback: "Đúng." },
+      { id: "c", text: "Câu trả lời và thinking của Claude", feedback: "Đúng." },
+      { id: "d", text: "Dữ liệu huấn luyện của model", feedback: "Không — đó không phải nội dung yêu cầu." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Mọi thứ trong yêu cầu và phần model sinh ra đều tính vào context window.",
+  },
+  {
+    questionId: "ch08-l02-q03", lessonId: L, conceptId: "window-size", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Context window của Claude Opus 5.5, Sonnet 5.5 và Haiku 5.5 (đối chiếu 03/11/2026) là bao nhiêu?",
+    options: [
+      { id: "a", text: "1 triệu token", feedback: "Đúng." },
+      { id: "b", text: "4.000 token", feedback: "Quá nhỏ so với model hiện tại." },
+      { id: "c", text: "Không giới hạn", feedback: "Luôn có giới hạn." },
+    ],
+    answer: "a",
+    explanation: "Các model này có context window 1 triệu token; các model cũ hơn như Sonnet 4.5 là 200 nghìn.",
+  },
+  {
+    questionId: "ch08-l02-q04", lessonId: L, conceptId: "context-rot", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Đưa càng nhiều tài liệu vào context thì Claude trả lời càng chính xác.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Context rot: khi số token tăng, độ chính xác và khả năng nhớ lại giảm. Chọn lọc quan trọng không kém dung lượng.",
+  },
+  {
+    questionId: "ch08-l02-q05", lessonId: L, conceptId: "monitor", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền lệnh.",
+    template: "Trong Claude Code, gõ [[b1]] để xem những gì đang chiếm context.",
+    blanks: [{ id: "b1", accepted: ["/context"], width: 9 }],
+    explanation: "/context còn cho thấy file CLAUDE.md nào đã được nạp.",
+  },
+  {
+    questionId: "ch08-l02-q06", lessonId: L, conceptId: "accumulation", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Mỗi lượt, câu hỏi khoảng 500 token và câu trả lời khoảng 1.500 token. Ở lượt thứ 4, phần đầu vào khoảng bao nhiêu token (bỏ qua hướng dẫn hệ thống)?",
+    context: { label: "Hội thoại", content: "Lượt 1, 2, 3 đã xong (mỗi lượt 500 hỏi + 1.500 trả lời).\nLượt 4: gửi câu hỏi mới 500 token.", lang: "text" },
+    options: [
+      { id: "a", text: "Khoảng 6.500 token", feedback: "Đúng — 3 × 2.000 lịch sử + 500 mới." },
+      { id: "b", text: "Khoảng 500 token", feedback: "Quên lịch sử được gửi lại." },
+      { id: "c", text: "Khoảng 2.000 token", feedback: "Chỉ tính một lượt." },
+    ],
+    answer: "a",
+    explanation: "Mỗi lượt mang theo toàn bộ lịch sử trước đó cộng tin nhắn mới.",
+  },
+  {
+    questionId: "ch08-l02-q07", lessonId: L, conceptId: "overflow", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép nơi dùng Claude với cách xử lý khi context gần đầy hoặc vượt.",
+    pairs: [
+      { id: "p1", left: "claude.ai", right: "Có thể bỏ phần cũ theo kiểu vào trước ra trước" },
+      { id: "p2", left: "Claude Code", right: "Tự compact: tóm tắt lịch sử" },
+      { id: "p3", left: "Gọi API với đầu vào vượt giới hạn", right: "Lỗi 400 “prompt is too long”" },
+    ],
+    explanation: "Theo tài liệu Context windows và How Claude Code works.",
+  },
+  {
+    questionId: "ch08-l02-q08", lessonId: L, conceptId: "caching-vs-window", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Phần prompt đã được cache không còn chiếm chỗ trong context window.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Prompt caching thay đổi số tiền trả cho các token đó, không thay đổi việc chúng chiếm chỗ.",
+  },
+  {
+    questionId: "ch08-l02-q09", lessonId: L, conceptId: "persistent-rules", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Đầu phiên bạn dặn “luôn ghi đơn vị kVA”. Sau vài giờ và một lần compact, Claude bắt đầu quên. Cách khắc phục bền vững?",
+    options: [
+      { id: "a", text: "Ghi quy tắc vào CLAUDE.md để được nạp mỗi phiên", feedback: "Đúng." },
+      { id: "b", text: "Nhắc lại mỗi 10 phút", feedback: "Tốn công và vẫn có thể mất sau compact." },
+      { id: "c", text: "Tắt compact để không bao giờ mất", feedback: "Context vẫn có giới hạn." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: chỉ dẫn từ đầu hội thoại có thể mất khi compact; quy tắc lâu dài nên ở CLAUDE.md.",
+  },
+  {
+    questionId: "ch08-l02-q10", lessonId: L, conceptId: "manage", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn muốn mọi lần compact trong dự án đều giữ lại kết quả test và thay đổi code. Cách nào phù hợp?",
+    options: [
+      { id: "a", text: "Thêm mục “Compact instructions” vào CLAUDE.md nêu điều cần giữ", feedback: "Đúng." },
+      { id: "b", text: "Không thể điều khiển compact", feedback: "Có thể — bằng hướng dẫn trong CLAUDE.md hoặc /compact kèm trọng tâm." },
+      { id: "c", text: "Đổi tên file test", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Trang Manage costs có ví dụ mục “Compact instructions” trong CLAUDE.md.",
+  },
+  {
+    questionId: "ch08-l02-q11", lessonId: L, conceptId: "context-rot", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn cần trả lời 3 câu hỏi về điều khoản thử nghiệm trong một tiêu chuẩn 400 trang. Cách nào cân bằng tốt nhất giữa chất lượng và token?",
+    options: [
+      { id: "a", text: "Đưa chương liên quan, yêu cầu trích nguyên văn điều khoản trước rồi mới trả lời", feedback: "Đúng — context gọn, câu trả lời bám tài liệu." },
+      { id: "b", text: "Đưa cả 10 tiêu chuẩn liên quan cho chắc", feedback: "Context rot và tốn token cho mọi câu hỏi sau." },
+      { id: "c", text: "Không đưa tài liệu, hỏi theo trí nhớ của Claude", feedback: "Dễ sai vì thiếu nguồn." },
+    ],
+    answer: "a",
+    explanation: "Chọn lọc nội dung giảm token và giảm context rot; trích dẫn trước giúp giảm bịa.",
+  },
+  {
+    questionId: "ch08-l02-q12", lessonId: L, conceptId: "accumulation", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Phiên Claude Code mở từ sáng. Chiều bạn hỏi một câu một dòng nhưng mức dùng vẫn tăng đáng kể. Vì sao?",
+    options: [
+      { id: "a", text: "Mỗi yêu cầu gửi kèm toàn bộ hội thoại; dù đọc lại với giá cache, lịch sử cả ngày vẫn tính vào mức dùng", feedback: "Đúng." },
+      { id: "b", text: "Câu hỏi ngắn bị tính phí gấp đôi", feedback: "Không có quy tắc như vậy." },
+      { id: "c", text: "Claude Code đọc lại toàn bộ ổ cứng", feedback: "Không — vấn đề là lịch sử hội thoại." },
+    ],
+    answer: "a",
+    explanation: "Trang Manage costs: phiên dài làm mức dùng tăng vì toàn bộ hội thoại đi kèm mỗi yêu cầu; /clear giữa các việc.",
+  },
+  {
+    questionId: "ch08-l02-q13", lessonId: L, conceptId: "what-counts", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các câu SAI về context window.",
+    segments: [
+      { id: "s1", text: "Định nghĩa công cụ không tính vào context.", isError: true, why: "Tool definitions cũng tính vào context window." },
+      { id: "s2", text: "Kết quả lệnh mà Claude chạy được đưa vào context.", isError: false },
+      { id: "s3", text: "Hình ảnh đính kèm không tốn token.", isError: true, why: "Hình ảnh và tài liệu cũng tính token." },
+      { id: "s4", text: "Câu trả lời của Claude cũng chiếm chỗ trong context.", isError: false },
+    ],
+    explanation: "Cứ thứ gì nằm trong yêu cầu hoặc do model sinh ra là chiếm chỗ.",
+  },
+  {
+    questionId: "ch08-l02-q14", lessonId: L, conceptId: "window-size", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Với các model có context 1 triệu token (03/11/2026), một yêu cầu sinh tối đa bao nhiêu token đầu ra?",
+    options: [
+      { id: "a", text: "128 nghìn token", feedback: "Đúng." },
+      { id: "b", text: "1 triệu token", feedback: "1 triệu là tổng context, không phải giới hạn đầu ra." },
+      { id: "c", text: "1.000 token", feedback: "Quá nhỏ." },
+    ],
+    answer: "a",
+    explanation: "Context window chứa cả đầu vào và đầu ra; riêng đầu ra mỗi yêu cầu tối đa 128K token.",
+  },
+  {
+    questionId: "ch08-l02-q15", lessonId: L, conceptId: "manage", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết mục “Compact instructions” (3–5 gạch đầu dòng) cho CLAUDE.md của dự án dưới đây.",
+    source: "Dự án tool tổng hợp lỗi QA; phiên làm việc thường dài, xoay quanh sửa hàm tính tổng và chạy test. Nhóm hay mất các quyết định về định dạng báo cáo sau khi compact.",
+    rubric: [
+      { id: "heading", label: "Có tiêu đề mục compact", weight: 1, check: { kind: "regex", pattern: "compact" }, pass: "Có tiêu đề.", fail: "Thêm tiêu đề “Compact instructions”." },
+      { id: "bullets", label: "Ít nhất 3 gạch đầu dòng", weight: 1, check: { kind: "minMatches", pattern: "^\\s*(-|\\*|\\d+[.)])\\s+\\S", value: 3 }, pass: "Đủ gạch đầu dòng.", fail: "Viết ít nhất 3 gạch đầu dòng." },
+      { id: "keep", label: "Nêu điều cần giữ", weight: 1, check: { kind: "regex", pattern: "(giu|uu tien)[^\\n]*(test|quyet dinh|thay doi|file)" }, pass: "Có điều cần giữ.", fail: "Nêu rõ cần giữ: kết quả test, quyết định định dạng, file đã sửa." },
+      { id: "decisions", label: "Giữ quyết định định dạng báo cáo", weight: 1, check: { kind: "regex", pattern: "dinh dang" }, pass: "Có quyết định định dạng.", fail: "Nhắc giữ quyết định về định dạng báo cáo." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "## Compact instructions\n- Giữ kết quả test gần nhất (test nào đạt, test nào trượt và lý do).\n- Giữ các quyết định về định dạng báo cáo đã thống nhất.\n- Giữ danh sách file đã sửa và mục đích của từng thay đổi.\n- Có thể lược bỏ log dài và các lần thử đã bỏ.",
+    explanation: "Hướng dẫn compact cụ thể giúp phần tóm tắt giữ đúng thứ nhóm cần.",
+  },
+];

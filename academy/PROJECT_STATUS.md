@@ -11,7 +11,7 @@ Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để 
 | 3 | Lesson Engine + bài mẫu đầy đủ | Hoàn thành (bài “Prompt là gì?”) |
 | 4 | Question Engine, chống trùng, kiểm tra | Hoàn thành |
 | 5 | 5 Practice Labs | Hoàn thành |
-| 6 | Nội dung các chương còn lại | Đang làm — Chương 1 (6/6), Chương 3 (8/8), Chương 5 (9/9) hoàn thành; các chương khác xem bảng |
+| 6 | Nội dung các chương còn lại | Đang làm — Chương 1 (6/6), Chương 3 (8/8), Chương 5 (9/9), Chương 8 (8/8) hoàn thành; các chương khác xem bảng |
 | 7 | Gamification, cá nhân hoá, tìm kiếm, UX | Hoàn thành phần nền tảng |
 | 8 | Kiểm thử tổng thể, chuẩn bị production | Có CI + bộ test; xem giới hạn |
 
@@ -22,12 +22,17 @@ Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để 
 | 1. Claude AI là gì? | Đủ 6/6 bài: AI hoạt động như thế nào? · Claude khác chatbot ra sao? · Các phiên bản và khả năng · Claude làm được gì? · Giới hạn của AI · Lỗi thường gặp | 6 × 15 = 90 |
 | 3. Prompt Engineering | Đủ 8/8 bài: Prompt là gì? · Cấu trúc prompt tốt · RCTCO · Few-shot · Chain-of-thought · Prompt có cấu trúc · Giảm hiểu nhầm · Thực hành tối ưu | 8 × 15 = 120 |
 | 5. Claude Code cơ bản | Đủ 9/9 bài: Claude Code là gì? · Terminal là gì? · Cài đặt môi trường · Cài đặt Claude Code · Đăng nhập và xác thực · Mở dự án · Giải thích file và thư mục · Tạo ứng dụng đầu tiên · Các lệnh cơ bản | 9 × 15 = 135 |
+| 8. Tối ưu token và chi phí | Đủ 8/8 bài: Token là gì? · Context window · Vì sao tiêu hao token? · Cách chia công việc · Sử dụng tài liệu dự án · Tránh đọc file không cần thiết · So sánh phương pháp làm việc · Theo dõi chi phí khi có dữ liệu | 8 × 15 = 120 |
 | Các chương khác | Đề cương hiển thị “Sắp ra mắt”, không có trang rỗng | — |
-| **Tổng** | **23 bài đầy đủ 12 phần (3 chương trọn vẹn)** | **345 câu, 0 cảnh báo trùng chưa duyệt** |
+| **Tổng** | **31 bài đầy đủ 12 phần (4 chương trọn vẹn)** | **465 câu, 0 cảnh báo trùng chưa duyệt** |
 
 Chương 3 dùng hạ tầng **bài học thuần dữ liệu**: infographic (`flow`, `compare`, `cards`, `table`, `annotated`) và mô phỏng (`classify`, `choose`, `sequence`, `highlight`, `verify`, `terminal`, `prompt-lab`) được khai báo ngay trong file bài học, không cần viết component mới. Nội dung đối chiếu trang Prompting best practices và Prompt engineering overview của Anthropic (03/11/2026).
 
 Chương 5 đối chiếu tài liệu Claude Code chính thức ngày 03/11/2026 (Quickstart, Advanced setup, Terminal guide, Authentication, How Claude Code works, Security, Memory, Interactive mode, Best practices). Hai bài dùng terminal mô phỏng (preset mới `claude-project`: dự án mẫu đã commit, lệnh `claude` chỉ in giải thích có nhãn MÔ PHỎNG); câu hỏi `terminal-task` đầu tiên được chấm trên shell mô phỏng. Yêu cầu hệ thống, lệnh cài và thứ tự ưu tiên xác thực dễ thay đổi — cần đối chiếu lại định kỳ.
+
+Chương 8 đối chiếu ngày 03/11/2026: trang Manage costs, Memory, Permissions, Best practices của Claude Code và Pricing, Context windows, Token counting của Anthropic. Giá theo MTok (Opus 5.5 $4/$20, Sonnet 5.5 $2/$10, Haiku 5.5 $0,10/$0,50, Fable 5.1 $10/$50; cache, Batch −50%) và số liệu tham khảo ($13/ngày/lập trình viên) **dễ thay đổi** — mọi chỗ dùng đều ghi ngày và ghi rõ là ước tính.
+
+**Hiệu năng:** khi thêm Chương 8, JS trang chủ vượt ngân sách 1,5 MB vì nội dung mọi bài bị đóng gói vào mọi trang. Đã tách: client chỉ dùng `content/catalog.ts` (từ đề cương), ngân hàng câu hỏi truyền từ trang server, tìm kiếm tải chỉ mục khi gõ. Đo lại: trang chủ 691 KB (trước 1.291 KB với ít bài hơn), không còn tăng theo số bài. Bộ chống trùng câu hỏi cũng được tối ưu (tính trước đặc trưng mỗi câu, bỏ qua cặp chắc chắn dưới ngưỡng) — từ hơn 5 giây xuống dưới 1 giây cho 465 câu.
 
 Mỗi bài Chương 1 có infographic riêng và một mô phỏng tương tác thật: đoán từ tiếp theo (lấy mẫu theo xác suất minh hoạ), chatbot từ khoá chạy thật, chọn model theo hướng dẫn chính thức, phân loại 8 công việc, xếp tài liệu vào context window, kiểm chứng khẳng định với phiếu thông số.
 
@@ -44,8 +49,9 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 - **Bài tập**: đáp án tham khảo đạt rubric của chính nó, còn khung gợi ý (placeholder) thì không — chống rubric quá dễ.
 - **Mô phỏng dữ liệu**: mỗi mô phỏng giải được đúng như khai báo (nhãn tồn tại, nhiệm vụ terminal hoàn thành bằng lệnh gợi ý, prompt-lab: đáp án ≥ 80%, khung ban đầu < 80%).
 - **Câu hỏi terminal-task**: lệnh tham khảo đạt mọi điều kiện, và trạng thái ban đầu chưa đạt sẵn.
-- **Số lượng**: 184 unit test (Vitest) và 179 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
-- **E2E** (Playwright, desktop + mobile): 6 mô phỏng Chương 1, mốc hoàn thành chương (6 bài × 50 XP + 100 XP), điều hướng, 404, tìm kiếm bằng bàn phím, quiz thích ứng đủ 15 câu không lặp + reload giữa chừng, mô phỏng lắp ráp prompt, bài tập, ghi chú/bookmark/hoàn thành sau reload, 5 lab, dark mode, responsive (không tràn ngang), ngân sách hiệu năng trang chủ, axe WCAG 2.1 AA ở chế độ sáng và tối; Chương 5: 9 bài đủ 12 phần + sơ đồ, 2 terminal mô phỏng, đối chiếu nguồn (verify), chọn tình huống, phân loại, sắp thứ tự, và một câu terminal-task chấm trong quiz.
+- **Số lượng**: 227 unit test (Vitest) và 201 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
+- **E2E** (Playwright, desktop + mobile): 6 mô phỏng Chương 1, mốc hoàn thành chương (6 bài × 50 XP + 100 XP), điều hướng, 404, tìm kiếm bằng bàn phím, quiz thích ứng đủ 15 câu không lặp + reload giữa chừng, mô phỏng lắp ráp prompt, bài tập, ghi chú/bookmark/hoàn thành sau reload, 5 lab, dark mode, responsive (không tràn ngang), ngân sách hiệu năng trang chủ, axe WCAG 2.1 AA ở chế độ sáng và tối; Chương 5: 9 bài đủ 12 phần + sơ đồ, 2 terminal mô phỏng, đối chiếu nguồn (verify), chọn tình huống, phân loại, sắp thứ tự, và một câu terminal-task chấm trong quiz; Chương 8: 8 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (phân loại, đối chiếu nguồn, đánh dấu, chọn tình huống) và XP mô phỏng tính đúng một lần.
+- **Chặn bundle phình to**: test tĩnh từ chối mọi file `"use client"` import registry hoặc chỉ mục tìm kiếm; test kiểm tra catalog khớp registry (tiêu đề, link, 12 mã phần).
 
 ## Giới hạn hiện tại (trung thực)
 
@@ -58,13 +64,12 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 
 ## Bước tiếp theo đề xuất
 
-Thứ tự còn lại (60 bài), mỗi chương một PR, kiểm thử trước khi sang chương sau:
+Thứ tự còn lại (52 bài), kiểm thử trước khi sang chương sau:
 
-1. Chương 8 — Tối ưu token và chi phí (8 bài): nguồn Context windows, Models overview, Token counting.
-2. Chương 6 — Claude Code nâng cao (9 bài), Chương 7 — Skills, MCP (8 bài): nguồn module `03-skills`, `05-mcp`… của repo.
-3. Chương 2 — Bắt đầu sử dụng Claude (7 bài) và Chương 4 — Artifacts (7 bài): cần đối chiếu Help Center hiện hành; không dùng ảnh chụp giả.
-4. Chương 9–12: dự án thực hành, xây trên Project Builder và Debug Challenge.
-5. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
+1. Chương 6 — Claude Code nâng cao (9 bài), Chương 7 — Skills, MCP (8 bài): nguồn module `03-skills`, `05-mcp`… của repo.
+2. Chương 2 — Bắt đầu sử dụng Claude (7 bài) và Chương 4 — Artifacts (7 bài): cần đối chiếu Help Center hiện hành; không dùng ảnh chụp giả.
+3. Chương 9–12: dự án thực hành, xây trên Project Builder và Debug Challenge.
+4. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
 
 ## Triển khai
 

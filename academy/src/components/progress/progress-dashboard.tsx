@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { LABS } from "@/content/labs/index";
-import { bankFor, LESSONS, lessonHref, publishedLessons } from "@/content/registry";
 import { BADGES, computeStreak, levelInfo, totalXp } from "@/lib/progress/gamification";
 import { emptyState, parseState } from "@/lib/progress/schema";
 import { getLoadIssue, replaceProgress, useProgress, useProgressReady } from "@/lib/progress/store";
@@ -15,7 +14,17 @@ import { todayKey } from "@/lib/utils";
 
 const fmtDate = (iso: string) => new Date(iso).toLocaleString("vi-VN", { dateStyle: "short", timeStyle: "short" });
 
-export function ProgressDashboard() {
+/** Compact per-lesson data computed on the server, so this page does not bundle every lesson. */
+export interface LessonOverview {
+  id: string;
+  title: string;
+  href: string;
+  sections: number;
+  questionCount: number;
+  concepts: { id: string; label: string }[];
+}
+
+export function ProgressDashboard({ lessons, prompts }: { lessons: LessonOverview[]; prompts: Record<string, string> }) {
   const state = useProgress();
   const ready = useProgressReady();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -25,7 +34,8 @@ export function ProgressDashboard() {
   const xp = totalXp(state);
   const lvl = levelInfo(xp);
   const streak = computeStreak(state.activityDays, todayKey());
-  const published = publishedLessons();
+  const published = lessons;
+  const byId = Object.fromEntries(lessons.map((l) => [l.id, l]));
   const done = published.filter((l) => state.lessons[l.id]?.status === "completed").length;
 
   // Weak skills: concepts with accuracy < 70% across first-time and review attempts.
@@ -39,7 +49,7 @@ export function ProgressDashboard() {
   }
   const weak = [...byConcept.entries()]
     .map(([k, v]) => ({ conceptId: k.split("|")[1], ...v, rate: v.correct / v.tries }))
-    .filter((w) => w.rate < 0.7 && LESSONS[w.lessonId])
+    .filter((w) => w.rate < 0.7 && byId[w.lessonId])
     .sort((a, b) => a.rate - b.rate);
 
   const exportData = () => {
@@ -91,7 +101,7 @@ export function ProgressDashboard() {
             {weak.length ? (
               <ul className="flex flex-col gap-2 text-sm" data-testid="weak-skills">
                 {weak.map((w) => {
-                  const lesson = LESSONS[w.lessonId];
+                  const lesson = byId[w.lessonId];
                   const label = lesson.concepts.find((c) => c.id === w.conceptId)?.label ?? w.conceptId;
                   return (
                     <li key={`${w.lessonId}-${w.conceptId}`} className="flex items-center gap-3 rounded-xl bg-muted/50 p-3">
@@ -101,7 +111,7 @@ export function ProgressDashboard() {
                           {lesson.title} · đúng {w.correct}/{w.tries}
                         </span>
                       </span>
-                      <Link href={`${lessonHref(lesson)}#giai-thich`} className="text-xs font-semibold text-primary hover:underline">
+                      <Link href={`${lesson.href}#giai-thich`} className="text-xs font-semibold text-primary hover:underline">
                         Ôn lại bài
                       </Link>
                     </li>
@@ -142,19 +152,18 @@ export function ProgressDashboard() {
           <CardContent className="flex flex-col gap-3">
             {published.map((l) => {
               const lp = state.lessons[l.id];
-              const bank = bankFor(l.id);
               const answered = new Set(state.attempts.filter((a) => a.lessonId === l.id).map((a) => a.questionId)).size;
               return (
                 <div key={l.id} className="text-sm">
                   <div className="flex justify-between gap-2">
-                    <Link href={lessonHref(l)} className="font-semibold hover:text-primary">
+                    <Link href={l.href} className="font-semibold hover:text-primary">
                       {l.title}
                     </Link>
                     <span className="text-xs text-muted-foreground">{lp?.status === "completed" ? "Hoàn thành" : lp ? "Đang học" : "Chưa bắt đầu"}</span>
                   </div>
-                  <Progress className="mt-1 h-1.5" value={((lp?.sectionsSeen.length ?? 0) / l.blocks.length) * 100} label={`Phần đã xem của ${l.title}`} />
+                  <Progress className="mt-1 h-1.5" value={((lp?.sectionsSeen.length ?? 0) / l.sections) * 100} label={`Phần đã xem của ${l.title}`} />
                   <p className="mt-0.5 text-xs text-muted-foreground">
-                    Đã xem {lp?.sectionsSeen.length ?? 0}/{l.blocks.length} phần · đã làm {answered}/{bank.length} câu hỏi
+                    Đã xem {lp?.sectionsSeen.length ?? 0}/{l.sections} phần · đã làm {answered}/{l.questionCount} câu hỏi
                   </p>
                 </div>
               );
@@ -171,19 +180,19 @@ export function ProgressDashboard() {
           <CardContent className="flex flex-col gap-3 text-sm">
             {state.bookmarks.length === 0 && Object.keys(state.notes).length === 0 && <p className="text-muted-foreground">Chưa có bài lưu hay ghi chú.</p>}
             <ul className="flex flex-col gap-1" data-testid="bookmarks">
-              {state.bookmarks.filter((id) => LESSONS[id]).map((id) => (
+              {state.bookmarks.filter((id) => byId[id]).map((id) => (
                 <li key={id}>
-                  <Link href={lessonHref(LESSONS[id])} className="flex items-center gap-2 font-semibold hover:text-primary">
-                    <Bookmark className="size-3.5" aria-hidden="true" /> {LESSONS[id].title}
+                  <Link href={byId[id].href} className="flex items-center gap-2 font-semibold hover:text-primary">
+                    <Bookmark className="size-3.5" aria-hidden="true" /> {byId[id].title}
                   </Link>
                 </li>
               ))}
             </ul>
             <ul className="flex flex-col gap-2">
-              {Object.entries(state.notes).filter(([id]) => LESSONS[id]).map(([id, n]) => (
+              {Object.entries(state.notes).filter(([id]) => byId[id]).map(([id, n]) => (
                 <li key={id} className="rounded-xl bg-muted/50 p-3">
                   <p className="flex items-center gap-2 font-semibold">
-                    <NotebookPen className="size-3.5" aria-hidden="true" /> {LESSONS[id].title}
+                    <NotebookPen className="size-3.5" aria-hidden="true" /> {byId[id].title}
                   </p>
                   <p className="mt-1 whitespace-pre-wrap">{n.text}</p>
                   <p className="mt-1 text-xs text-muted-foreground">{fmtDate(n.updatedAt)}</p>
@@ -227,10 +236,9 @@ export function ProgressDashboard() {
             {state.attempts.length ? (
               <ul className="flex max-h-72 flex-col gap-1.5 overflow-y-auto text-sm" data-testid="attempt-history">
                 {[...state.attempts].reverse().slice(0, 30).map((a, i) => {
-                  const q = bankFor(a.lessonId).find((x) => x.questionId === a.questionId);
                   return (
                     <li key={i} className="flex justify-between gap-2 border-b border-border pb-1.5">
-                      <span className="line-clamp-1">{q?.prompt ?? a.questionId}</span>
+                      <span className="line-clamp-1">{prompts[a.questionId] ?? a.questionId}</span>
                       <span className={a.correct ? "text-success" : "text-danger"}>{a.correct ? "Đúng" : "Sai"}{a.firstTime ? "" : " (ôn)"}</span>
                     </li>
                   );
