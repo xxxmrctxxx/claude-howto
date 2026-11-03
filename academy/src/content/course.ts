@@ -198,12 +198,12 @@ export const course: Course = {
       audience: "Kỹ sư, QA/QC, nhân viên văn phòng",
       estimatedMinutes: 300,
       outline: [
-        { title: "Ứng dụng quản lý công việc", slug: "quan-ly-cong-viec" },
-        { title: "Dashboard QA", slug: "dashboard-qa" },
-        { title: "Công cụ phân tích Excel", slug: "phan-tich-excel" },
-        { title: "Công cụ xử lý PDF", slug: "xu-ly-pdf" },
-        { title: "Ứng dụng kiểm tra lỗi hình ảnh", slug: "kiem-tra-loi-hinh-anh" },
-        { title: "Ứng dụng quản lý dự án kỹ thuật", slug: "quan-ly-du-an-ky-thuat" },
+        { title: "Ứng dụng quản lý công việc", slug: "quan-ly-cong-viec", lessonId: "ch10-l01" },
+        { title: "Dashboard QA", slug: "dashboard-qa", lessonId: "ch10-l02" },
+        { title: "Công cụ phân tích Excel", slug: "phan-tich-excel", lessonId: "ch10-l03" },
+        { title: "Công cụ xử lý PDF", slug: "xu-ly-pdf", lessonId: "ch10-l04" },
+        { title: "Ứng dụng kiểm tra lỗi hình ảnh", slug: "kiem-tra-loi-hinh-anh", lessonId: "ch10-l05" },
+        { title: "Ứng dụng quản lý dự án kỹ thuật", slug: "quan-ly-du-an-ky-thuat", lessonId: "ch10-l06" },
       ],
     },
     {
