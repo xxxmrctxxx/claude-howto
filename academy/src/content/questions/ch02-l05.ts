@@ -1,0 +1,176 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch02-l05";
+
+/** 15 questions for "Sử dụng Projects" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh02L05: Question[] = [
+  {
+    questionId: "ch02-l05-q01", lessonId: L, conceptId: "project-def", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Một project trong Claude gồm những phần nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Kiến thức (knowledge) — tài liệu tải lên", feedback: "Đúng." },
+      { id: "b", text: "Hướng dẫn (instructions) cho mọi chat", feedback: "Đúng." },
+      { id: "c", text: "Lịch sử chat riêng", feedback: "Đúng." },
+      { id: "d", text: "Một model Claude riêng huấn luyện từ tài liệu của bạn", feedback: "Project không huấn luyện model." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Project còn có bộ nhớ riêng.",
+  },
+  {
+    questionId: "ch02-l05-q02", lessonId: L, conceptId: "name-not-seen", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Claude đọc tên và mô tả của project để biết cách trả lời.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Help Center: Claude can't see these details — tên và mô tả là nhãn cho bạn; quy tắc đặt trong instructions.",
+  },
+  {
+    questionId: "ch02-l05-q03", lessonId: L, conceptId: "free-five", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền số.",
+    template: "Tài khoản gói Free tạo được tối đa [[b1]] project.",
+    blanks: [{ id: "b1", accepted: ["5", "năm"], width: 3 }],
+    explanation: "Project có trên mọi gói, kể cả Free.",
+  },
+  {
+    questionId: "ch02-l05-q04", lessonId: L, conceptId: "create-project", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Bắt đầu tạo project mới từ đâu?",
+    options: [
+      { id: "a", text: "Projects ở thanh bên (hoặc claude.ai/projects) → + New Project", feedback: "Đúng." },
+      { id: "b", text: "Nút + trong ô chat → Add files or photos", feedback: "Đó là đính kèm file vào chat." },
+      { id: "c", text: "Biểu tượng con ma", feedback: "Đó là chat ẩn danh." },
+    ],
+    answer: "a",
+    explanation: "Sau đó nhập tên, mô tả, thêm knowledge và instructions.",
+  },
+  {
+    questionId: "ch02-l05-q05", lessonId: L, conceptId: "project-instructions", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Hướng dẫn đặt bằng “Set project instructions” áp dụng cho mọi chat trong project đó.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Ví dụ: giọng văn trang trọng, trả lời theo vai trò một ngành nghề.",
+  },
+  {
+    questionId: "ch02-l05-q06", lessonId: L, conceptId: "chats-not-shared", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Trong project “Báo cáo QA”, hôm qua bạn dán bảng số liệu tháng 10 vào chat A. Hôm nay ở chat B (cùng project), Claude không biết số liệu đó. Làm sao để mọi chat dùng được?",
+    options: [
+      { id: "a", text: "Thêm bảng số liệu vào knowledge của project", feedback: "Đúng." },
+      { id: "b", text: "Ghi số liệu vào tên project", feedback: "Claude không thấy tên project." },
+      { id: "c", text: "Gộp mọi việc vào một chat duy nhất", feedback: "Chat sẽ quá dài và tốn lượt dùng." },
+    ],
+    answer: "a",
+    explanation: "Ngữ cảnh không chia sẻ giữa các chat trừ khi nằm trong knowledge.",
+  },
+  {
+    questionId: "ch02-l05-q07", lessonId: L, conceptId: "move-chat", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn có một chat cũ nằm ngoài project nhưng thuộc đúng chủ đề “Báo cáo QA”. Muốn đưa nó vào project. Làm gì?",
+    options: [
+      { id: "a", text: "Bấm mũi tên cạnh tên chat → Add to project → chọn project", feedback: "Đúng." },
+      { id: "b", text: "Copy toàn bộ nội dung chat vào instructions", feedback: "Instructions dành cho quy tắc." },
+      { id: "c", text: "Không làm được, phải tạo chat mới", feedback: "Có thể chuyển chat vào project." },
+    ],
+    answer: "a",
+    explanation: "Cùng menu đó dùng để chuyển chat sang project khác hoặc bỏ khỏi project.",
+  },
+  {
+    questionId: "ch02-l05-q08", lessonId: L, conceptId: "rag-mode", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Trên gói trả phí, khi knowledge của project gần chạm giới hạn context, điều gì xảy ra?",
+    options: [
+      { id: "a", text: "Claude tự bật chế độ RAG: tìm và lấy phần liên quan, chứa được tới khoảng 10 lần nội dung", feedback: "Đúng." },
+      { id: "b", text: "Project bị khoá, phải xoá bớt file", feedback: "Không — RAG tự bật." },
+      { id: "c", text: "Claude bỏ qua toàn bộ knowledge", feedback: "Claude vẫn dùng knowledge qua tìm kiếm." },
+    ],
+    answer: "a",
+    explanation: "Không cần thiết lập; có thể thêm hoặc bớt nội dung bất cứ lúc nào.",
+  },
+  {
+    questionId: "ch02-l05-q09", lessonId: L, conceptId: "descriptive-filenames", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Project có hơn 50 tài liệu tên “scan001.pdf”, “scan002.pdf”… Claude hay lấy nhầm tài liệu. Cải thiện thế nào?",
+    options: [
+      { id: "a", text: "Đổi tên file rõ nghĩa (vd quy-trinh-bao-tri-may-ep.pdf) và nhắc tên tài liệu trong câu hỏi", feedback: "Đúng." },
+      { id: "b", text: "Viết hoa toàn bộ câu hỏi", feedback: "Không giúp tìm đúng tài liệu." },
+      { id: "c", text: "Tải lại cùng các file một lần nữa", feedback: "Tên vẫn không rõ nghĩa." },
+    ],
+    answer: "a",
+    explanation: "Mẹo trong bài RAG for projects: tên file mô tả rõ, nhắc tài liệu cụ thể trong câu hỏi.",
+  },
+  {
+    questionId: "ch02-l05-q10", lessonId: L, conceptId: "archive-delete", learningObjective: "o4", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Muốn xoá một project đang được lưu trữ (archived), bạn phải bỏ lưu trữ trước.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Lưu trữ giữ nguyên thành viên, quyền và knowledge; vẫn mở được các chat cũ.",
+  },
+  {
+    questionId: "ch02-l05-q11", lessonId: L, conceptId: "project-sharing", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép quyền chia sẻ project (Team/Enterprise) với việc người được chia sẻ làm được.",
+    pairs: [
+      { id: "p1", left: "Can view", right: "Xem nội dung và chat, không sửa" },
+      { id: "p2", left: "Can edit", right: "Sửa instructions, knowledge, quản lý thành viên" },
+      { id: "p3", left: "Chia sẻ toàn tổ chức", right: "Mọi người trong tổ chức thấy project" },
+    ],
+    explanation: "Chủ sở hữu tổ chức có thể tắt việc chia sẻ project.",
+  },
+  {
+    questionId: "ch02-l05-q12", lessonId: L, conceptId: "project-knowledge", learningObjective: "o1", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn đang dùng gói Free và muốn đưa toàn bộ kho tài liệu 2.000 trang của phòng vào một project. Cách tiếp cận hợp lý nhất?",
+    options: [
+      { id: "a", text: "Chỉ chọn tài liệu thật sự cần cho mục đích của project, đặt tên rõ; cân nhắc tách thành nhiều project theo chủ đề", feedback: "Đúng — knowledge phải vừa context; RAG chỉ có ở gói trả phí." },
+      { id: "b", text: "Tải hết, Claude sẽ tự lo", feedback: "Trên gói Free, knowledge phải vừa context window." },
+      { id: "c", text: "Dán toàn bộ vào instructions", feedback: "Instructions dành cho quy tắc ngắn." },
+    ],
+    answer: "a",
+    explanation: "Ít mà đúng trọng tâm giúp câu trả lời chính xác hơn.",
+  },
+  {
+    questionId: "ch02-l05-q13", lessonId: L, conceptId: "project-instructions", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn thiết lập project như dưới đây. Chọn các thiết lập SAI.",
+    segments: [
+      { id: "s1", text: "Ghi “Luôn trả lời dạng bảng” vào mô tả project.", isError: true, why: "Claude không thấy mô tả; đặt trong instructions." },
+      { id: "s2", text: "Tải sổ tay quy trình vào knowledge với tên so-tay-quy-trinh.pdf.", isError: false },
+      { id: "s3", text: "Tin rằng chat B tự biết số liệu đã dán trong chat A cùng project.", isError: true, why: "Chat không chia sẻ ngữ cảnh ngoài knowledge." },
+      { id: "s4", text: "Đặt quy tắc ghi nguồn trong Set project instructions.", isError: false },
+    ],
+    explanation: "Tên/mô tả cho bạn; instructions và knowledge cho Claude.",
+  },
+  {
+    questionId: "ch02-l05-q14", lessonId: L, conceptId: "create-project", learningObjective: "o2", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "ordering",
+    prompt: "Sắp xếp các bước thiết lập một project.",
+    items: [
+      { id: "a", text: "Projects → + New Project, đặt tên ngắn rõ" },
+      { id: "b", text: "Đổi tên tài liệu cho rõ nghĩa rồi thêm vào knowledge" },
+      { id: "c", text: "Set project instructions → Save instructions" },
+      { id: "d", text: "Mở chat mới trong project, hỏi có nhắc tên tài liệu" },
+      { id: "e", text: "Lưu trữ project khi xong việc" },
+    ],
+    explanation: "Tạo → kiến thức → quy tắc → dùng → dọn dẹp.",
+  },
+  {
+    questionId: "ch02-l05-q15", lessonId: L, conceptId: "project-instructions", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết project instructions (3–5 dòng) cho tình huống dưới đây.",
+    source: "Project “Đào tạo an toàn xưởng” dùng để soạn tài liệu đào tạo cho công nhân mới. Knowledge có: noi-quy-an-toan.pdf, quy-trinh-khoa-may.pdf. Muốn: ngôn ngữ đơn giản cho người không chuyên, câu ngắn, mỗi tài liệu có phần “Điều cần nhớ”; luôn ghi tài liệu nguồn; không thêm quy định không có trong tài liệu.",
+    rubric: [
+      { id: "audience", label: "Người đọc/ngôn ngữ đơn giản", weight: 1, check: { kind: "anyKeyword", keywords: ["đơn giản", "dễ hiểu", "người không chuyên", "công nhân mới", "câu ngắn"] }, pass: "Có người đọc.", fail: "Nêu người đọc và yêu cầu ngôn ngữ đơn giản." },
+      { id: "format", label: "Có phần “Điều cần nhớ”", weight: 1, check: { kind: "anyKeyword", keywords: ["điều cần nhớ"] }, pass: "Có định dạng.", fail: "Yêu cầu mỗi tài liệu có phần “Điều cần nhớ”." },
+      { id: "source", label: "Ghi nguồn", weight: 1, check: { kind: "anyKeyword", keywords: ["nguồn", "ghi tên tài liệu"] }, pass: "Có ghi nguồn.", fail: "Yêu cầu ghi tài liệu nguồn." },
+      { id: "no-invent", label: "Không thêm quy định ngoài tài liệu", weight: 1, check: { kind: "anyKeyword", keywords: ["không thêm", "không bịa", "chỉ dùng", "không có trong tài liệu"] }, pass: "Có ràng buộc.", fail: "Thêm: không đưa quy định không có trong tài liệu." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Bạn soạn tài liệu đào tạo an toàn cho công nhân mới.\nDùng ngôn ngữ đơn giản, câu ngắn, dễ hiểu với người không chuyên.\nMỗi tài liệu kết thúc bằng phần “Điều cần nhớ” (3–5 gạch đầu dòng).\nLuôn ghi tên tài liệu nguồn trong knowledge.\nChỉ dùng quy định có trong tài liệu; không thêm quy định không có trong tài liệu — thiếu thì ghi rõ cần hỏi phụ trách an toàn.",
+    explanation: "Instructions tốt: người đọc, định dạng, nguồn, giới hạn.",
+  },
+];

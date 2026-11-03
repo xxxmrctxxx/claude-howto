@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch02-l03";
+
+/** 15 questions for "Tạo cuộc hội thoại" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh02L03: Question[] = [
+  {
+    questionId: "ch02-l03-q01", lessonId: L, conceptId: "be-specific", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Theo mẹo trong Help Center, tin nhắn mở đầu như thế nào thường cho kết quả tốt hơn?",
+    options: [
+      { id: "a", text: "Cụ thể: nói rõ việc, bối cảnh và kết quả mong muốn", feedback: "Đúng." },
+      { id: "b", text: "Càng ngắn càng tốt, chỉ 1–2 từ", feedback: "Quá ngắn thường mơ hồ." },
+      { id: "c", text: "Viết toàn bộ bằng chữ in hoa", feedback: "Không giúp Claude hiểu hơn." },
+    ],
+    answer: "a",
+    explanation: "Help Center: chi tiết giúp cải thiện kết quả.",
+  },
+  {
+    questionId: "ch02-l03-q02", lessonId: L, conceptId: "natural-tone", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Help Center khuyên viết yêu cầu cho Claude một cách tự nhiên, như khi nói chuyện với đồng nghiệp hay bạn bè.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Không cần “câu lệnh bí mật”; cần rõ ràng và cụ thể.",
+  },
+  {
+    questionId: "ch02-l03-q03", lessonId: L, conceptId: "follow-up", learningObjective: "o2", thinkingSkill: "apply", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Claude viết email gần đúng ý nhưng hơi dài. Bước tiếp theo hợp lý nhất?",
+    options: [
+      { id: "a", text: "Hỏi tiếp trong cùng chat: “Rút gọn còn khoảng 80 từ, giữ nguyên các con số.”", feedback: "Đúng." },
+      { id: "b", text: "Xoá chat và viết lại từ đầu", feedback: "Bỏ phí phần đã tốt." },
+      { id: "c", text: "Chấp nhận và gửi luôn", feedback: "Chưa đúng yêu cầu." },
+    ],
+    answer: "a",
+    explanation: "Hội thoại hai chiều: tinh chỉnh từng điểm.",
+  },
+  {
+    questionId: "ch02-l03-q04", lessonId: L, conceptId: "incognito-chat", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Chat ẩn danh không xuất hiện trong lịch sử chat và không được lưu vào bộ nhớ của Claude.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Theo mặc định chat ẩn danh vẫn được giữ 30 ngày phía hệ thống, nhưng không vào lịch sử và bộ nhớ.",
+  },
+  {
+    questionId: "ch02-l03-q05", lessonId: L, conceptId: "new-chat", learningObjective: "o3", thinkingSkill: "apply", difficulty: "beginner",
+    questionType: "scenario",
+    prompt: "Bạn vừa xong việc viết email, giờ cần lập kế hoạch đào tạo — chủ đề khác hẳn. Nên làm gì?",
+    options: [
+      { id: "a", text: "Mở một chat mới cho kế hoạch đào tạo", feedback: "Đúng — mỗi việc một chat." },
+      { id: "b", text: "Tiếp tục trong chat email cho tiện", feedback: "Ngữ cảnh lẫn lộn, chat dài tốn lượt dùng." },
+      { id: "c", text: "Xoá chat email trước", feedback: "Không cần thiết." },
+    ],
+    answer: "a",
+    explanation: "Chat riêng giúp ngữ cảnh gọn và dễ tìm lại.",
+  },
+  {
+    questionId: "ch02-l03-q06", lessonId: L, conceptId: "edit-branch", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn sửa một tin nhắn bạn đã gửi trước đó trong hội thoại. Điều gì xảy ra?",
+    options: [
+      { id: "a", text: "Claude tạo một phiên bản riêng của hội thoại từ điểm đó; phiên bản cũ vẫn còn", feedback: "Đúng." },
+      { id: "b", text: "Toàn bộ hội thoại bị xoá", feedback: "Không — phần cũ không mất." },
+      { id: "c", text: "Claude ghi đè và không thể quay lại", feedback: "Phiên bản cũ vẫn còn." },
+    ],
+    answer: "a",
+    explanation: "Help Center: edit an earlier message to create a separate version of the chat without losing prior work.",
+  },
+  {
+    questionId: "ch02-l03-q07", lessonId: L, conceptId: "memory-off-chat", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Tắt Memory cho riêng một chat (trong nút + trước tin nhắn đầu) khác chat ẩn danh ở điểm nào?",
+    options: [
+      { id: "a", text: "Chat tắt Memory vẫn nằm trong lịch sử và tìm lại được; chat ẩn danh thì không vào lịch sử", feedback: "Đúng." },
+      { id: "b", text: "Hai cách giống hệt nhau", feedback: "Khác ở chỗ có vào lịch sử hay không." },
+      { id: "c", text: "Chat tắt Memory bị xoá ngay khi đóng", feedback: "Vẫn được lưu trong lịch sử." },
+    ],
+    answer: "a",
+    explanation: "Theo bài Chat search and memory của Help Center.",
+  },
+  {
+    questionId: "ch02-l03-q08", lessonId: L, conceptId: "long-chat-cost", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Một hội thoại càng dài thì mỗi lượt trả lời càng tốn nhiều lượt dùng; Help Center gợi ý mở chat mới khi sắp chạm giới hạn trong một chat dài.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Xem thêm Chương 8 về token và context.",
+  },
+  {
+    questionId: "ch02-l03-q09", lessonId: L, conceptId: "chat-separate", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Hôm qua bạn đưa Claude số liệu sản lượng trong chat A. Hôm nay mở chat B và hỏi “so với số liệu hôm qua thì sao?”, Claude không nắm được số liệu đó. Giải thích hợp lý nhất?",
+    options: [
+      { id: "a", text: "Mỗi chat có ngữ cảnh riêng; nếu không có bộ nhớ/tìm kiếm chat phù hợp, hãy dán lại số liệu hoặc quay về chat A", feedback: "Đúng." },
+      { id: "b", text: "Claude đã xoá số liệu của bạn", feedback: "Chat A vẫn còn." },
+      { id: "c", text: "Tài khoản bị lỗi", feedback: "Đây là hành vi bình thường." },
+    ],
+    answer: "a",
+    explanation: "Tìm kiếm chat cũ chỉ có ở gói trả phí và phải được bật.",
+  },
+  {
+    questionId: "ch02-l03-q10", lessonId: L, conceptId: "first-message", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Đánh dấu những phần còn thiếu hoặc gây mơ hồ trong tin nhắn mở đầu dưới đây.",
+    segments: [
+      { id: "s1", text: "Viết giúp cái thông báo", isError: true, why: "Thông báo về việc gì?" },
+      { id: "s2", text: "cho công nhân ca đêm", isError: false },
+      { id: "s3", text: "cho hay vào", isError: true, why: "Chủ quan; nêu giọng văn hoặc tiêu chí cụ thể." },
+      { id: "s4", text: "tối đa 6 dòng, dán ở bảng tin.", isError: false },
+    ],
+    explanation: "Thiếu nội dung chính và có yêu cầu chủ quan.",
+  },
+  {
+    questionId: "ch02-l03-q11", lessonId: L, conceptId: "verify-answer", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp một vòng hội thoại hiệu quả.",
+    items: [
+      { id: "a", text: "Chọn kiểu chat (thường, ẩn danh, tắt Memory)" },
+      { id: "b", text: "Gửi tin nhắn mở đầu cụ thể" },
+      { id: "c", text: "Đọc và kiểm tra số liệu trong câu trả lời" },
+      { id: "d", text: "Hỏi tiếp để tinh chỉnh" },
+      { id: "e", text: "Đặt tên hội thoại cho dễ tìm" },
+    ],
+    explanation: "Chọn kiểu chat phải làm trước tin nhắn đầu tiên.",
+  },
+  {
+    questionId: "ch02-l03-q12", lessonId: L, conceptId: "edit-branch", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn đã có một phương án kế hoạch tốt sau 6 lượt trao đổi, giờ muốn thử cách tiếp cận khác từ câu hỏi số 2 nhưng không muốn mất phương án hiện tại. Cách nào tốt nhất?",
+    options: [
+      { id: "a", text: "Sửa tin nhắn số 2 để tạo phiên bản riêng của hội thoại", feedback: "Đúng." },
+      { id: "b", text: "Gõ tiếp “bỏ hết những gì trên, làm lại theo cách khác”", feedback: "Ngữ cảnh cũ vẫn ảnh hưởng và dễ lẫn." },
+      { id: "c", text: "Xoá hội thoại rồi bắt đầu lại", feedback: "Mất phương án hiện tại." },
+    ],
+    answer: "a",
+    explanation: "Phiên bản cũ vẫn còn để so sánh.",
+  },
+  {
+    questionId: "ch02-l03-q13", lessonId: L, conceptId: "verify-answer", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Claude tóm tắt biên bản họp rất trôi chảy, nhưng một hạn chót trong bản tóm tắt khác với biên bản gốc. Bạn nên làm gì?",
+    options: [
+      { id: "a", text: "Chỉ ra chỗ sai và yêu cầu Claude đối chiếu lại toàn bộ hạn chót với biên bản gốc", feedback: "Đúng." },
+      { id: "b", text: "Tin bản tóm tắt vì viết rất mạch lạc", feedback: "Trôi chảy không có nghĩa là đúng." },
+      { id: "c", text: "Bỏ dùng Claude cho việc tóm tắt", feedback: "Kiểm tra và yêu cầu sửa là đủ." },
+    ],
+    answer: "a",
+    explanation: "Luôn kiểm tra số liệu, tên, ngày trong câu trả lời — xem Chương 1 bài Giới hạn của AI.",
+  },
+  {
+    questionId: "ch02-l03-q14", lessonId: L, conceptId: "incognito-chat", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "matching",
+    prompt: "Ghép nhu cầu với kiểu chat phù hợp.",
+    pairs: [
+      { id: "p1", left: "Việc thường ngày, muốn tìm lại sau", right: "Chat thường" },
+      { id: "p2", left: "Câu hỏi cá nhân, không muốn lưu lịch sử", right: "Chat ẩn danh" },
+      { id: "p3", left: "Muốn giữ trong lịch sử nhưng không ảnh hưởng bộ nhớ", right: "Tắt Memory cho chat đó" },
+      { id: "p4", left: "Thử hướng khác mà không mất phần cũ", right: "Sửa tin nhắn trước (phiên bản riêng)" },
+    ],
+    explanation: "Mỗi kiểu có công dụng riêng.",
+  },
+  {
+    questionId: "ch02-l03-q15", lessonId: L, conceptId: "first-message", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết tin nhắn mở đầu cụ thể cho tình huống dưới đây, kèm một tin nhắn hỏi tiếp.",
+    source: "Bạn là trưởng nhóm QA. Cần Claude soạn lịch đào tạo an toàn cho 12 công nhân mới trong 3 ngày (thứ Hai–thứ Tư), mỗi ngày 2 buổi 90 phút, buổi chiều thực hành tại xưởng. Kết quả dán vào email gửi phòng nhân sự.",
+    rubric: [
+      { id: "task", label: "Có việc cần làm", weight: 1, check: { kind: "anyKeyword", keywords: ["lịch đào tạo", "soạn lịch", "lập lịch"] }, pass: "Có việc.", fail: "Nêu việc: soạn lịch đào tạo an toàn." },
+      { id: "facts", label: "Có thông tin cụ thể", weight: 1, check: { kind: "allGroups", groups: [["12"], ["90 phút", "90"], ["thứ hai", "3 ngày"]] }, pass: "Có số liệu cụ thể.", fail: "Đưa đủ: 12 người, 3 ngày, buổi 90 phút." },
+      { id: "output", label: "Có định dạng kết quả", weight: 1, check: { kind: "anyKeyword", keywords: ["bảng", "email", "cột", "định dạng"] }, pass: "Có định dạng.", fail: "Nêu định dạng: bảng để dán vào email." },
+      { id: "followup", label: "Có hỏi tiếp", weight: 1, check: { kind: "regex", pattern: "hoi tiep\\s*:\\s*\\S+" }, pass: "Có tinh chỉnh.", fail: "Thêm dòng “Hỏi tiếp: …”." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Mở đầu: Mình là trưởng nhóm QA, cần soạn lịch đào tạo an toàn cho 12 công nhân mới trong 3 ngày (thứ Hai đến thứ Tư), mỗi ngày 2 buổi 90 phút: sáng lý thuyết, chiều thực hành tại xưởng. Trình bày dạng bảng (cột: Ngày, Buổi, Nội dung, Địa điểm) để dán vào email gửi phòng nhân sự.\nHỏi tiếp: Thêm cột “Người phụ trách” và một dòng ghi chú về trang bị bảo hộ cần mang theo.",
+    explanation: "Mở đầu tốt có việc, bối cảnh, số liệu và định dạng; hỏi tiếp để tinh chỉnh.",
+  },
+];

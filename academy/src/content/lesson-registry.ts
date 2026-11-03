@@ -47,6 +47,13 @@ import { lessonCauHinhMoRong } from "./lessons/ch07-l05-cau-hinh";
 import { lessonKiemTraKetNoi } from "./lessons/ch07-l06-kiem-tra-ket-noi";
 import { lessonLoiPhoBienMoRong } from "./lessons/ch07-l07-loi-pho-bien";
 import { lessonViDuThucTeMoRong } from "./lessons/ch07-l08-vi-du-thuc-te";
+import { lessonTaoTaiKhoan } from "./lessons/ch02-l01-tao-tai-khoan";
+import { lessonTimHieuGiaoDien } from "./lessons/ch02-l02-tim-hieu-giao-dien";
+import { lessonTaoHoiThoai } from "./lessons/ch02-l03-tao-hoi-thoai";
+import { lessonTaiFileHinhAnh } from "./lessons/ch02-l04-tai-file-hinh-anh";
+import { lessonSuDungProjects } from "./lessons/ch02-l05-su-dung-projects";
+import { lessonSuDungArtifacts } from "./lessons/ch02-l06-su-dung-artifacts";
+import { lessonQuanLyNguCanh } from "./lessons/ch02-l07-quan-ly-ngu-canh";
 
 /**
  * Lesson content only (no question banks), so the lazily loaded search index
@@ -54,5 +61,5 @@ import { lessonViDuThucTeMoRong } from "./lessons/ch07-l08-vi-du-thuc-te";
  * question banks in registry.ts.
  */
 export const LESSONS: Record<string, Lesson> = Object.fromEntries(
-  [lessonAiHoatDong, lessonClaudeKhacChatbot, lessonCacPhienBan, lessonClaudeLamDuocGi, lessonGioiHan, lessonLoiThuongGap, lessonPromptLaGi, lessonCauTrucPrompt, lessonRctco, lessonFewShot, lessonChainOfThought, lessonPromptCoCauTruc, lessonGiamHieuNham, lessonToiUuPrompt, lessonClaudeCodeLaGi, lessonTerminalLaGi, lessonCaiDatMoiTruong, lessonCaiDatClaudeCode, lessonDangNhapXacThuc, lessonMoDuAn, lessonFileVaThuMuc, lessonUngDungDauTien, lessonLenhCoBan, lessonTokenLaGi, lessonContextWindowCh8, lessonViSaoTonToken, lessonChiaCongViec, lessonTaiLieuDuAn, lessonTranhDocFileThua, lessonSoSanhPhuongPhap, lessonTheoDoiChiPhi, lessonQuanLyContext, lessonLapKeHoach, lessonNhieuFile, lessonDebug, lessonGitGithub, lessonKiemThuTuDong, lessonRefactoring, lessonCodeReview, lessonPhanChiaTacVu, lessonSkillLaGi, lessonMcpLaGi, lessonKhiNaoDung, lessonCaiDatMoRong, lessonCauHinhMoRong, lessonKiemTraKetNoi, lessonLoiPhoBienMoRong, lessonViDuThucTeMoRong].map((l) => [l.id, l]),
+  [lessonAiHoatDong, lessonClaudeKhacChatbot, lessonCacPhienBan, lessonClaudeLamDuocGi, lessonGioiHan, lessonLoiThuongGap, lessonPromptLaGi, lessonCauTrucPrompt, lessonRctco, lessonFewShot, lessonChainOfThought, lessonPromptCoCauTruc, lessonGiamHieuNham, lessonToiUuPrompt, lessonClaudeCodeLaGi, lessonTerminalLaGi, lessonCaiDatMoiTruong, lessonCaiDatClaudeCode, lessonDangNhapXacThuc, lessonMoDuAn, lessonFileVaThuMuc, lessonUngDungDauTien, lessonLenhCoBan, lessonTokenLaGi, lessonContextWindowCh8, lessonViSaoTonToken, lessonChiaCongViec, lessonTaiLieuDuAn, lessonTranhDocFileThua, lessonSoSanhPhuongPhap, lessonTheoDoiChiPhi, lessonQuanLyContext, lessonLapKeHoach, lessonNhieuFile, lessonDebug, lessonGitGithub, lessonKiemThuTuDong, lessonRefactoring, lessonCodeReview, lessonPhanChiaTacVu, lessonSkillLaGi, lessonMcpLaGi, lessonKhiNaoDung, lessonCaiDatMoRong, lessonCauHinhMoRong, lessonKiemTraKetNoi, lessonLoiPhoBienMoRong, lessonViDuThucTeMoRong, lessonTaoTaiKhoan, lessonTimHieuGiaoDien, lessonTaoHoiThoai, lessonTaiFileHinhAnh, lessonSuDungProjects, lessonSuDungArtifacts, lessonQuanLyNguCanh].map((l) => [l.id, l]),
 );
