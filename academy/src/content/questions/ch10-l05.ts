@@ -1,0 +1,177 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch10-l05";
+
+/** 15 questions for "Ứng dụng kiểm tra lỗi hình ảnh" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Anthropic Vision docs). */
+export const questionsCh10L05: Question[] = [
+  {
+    questionId: "ch10-l05-q01", lessonId: L, conceptId: "image-formats", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Theo tài liệu Vision, Claude hỗ trợ những định dạng ảnh nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "JPEG", feedback: "Đúng." },
+      { id: "b", text: "PNG", feedback: "Đúng." },
+      { id: "c", text: "WebP", feedback: "Đúng." },
+      { id: "d", text: "File RAW của máy ảnh", feedback: "Không nằm trong danh sách." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Thêm GIF — ảnh động chỉ lấy khung đầu.",
+  },
+  {
+    questionId: "ch10-l05-q02", lessonId: L, conceptId: "human-review", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Theo tài liệu Vision, không nên dùng Claude cho việc cần độ chính xác tuyệt đối hoặc phân tích ảnh nhạy cảm mà không có con người giám sát.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Claude sàng lọc, người kiểm tra quyết định.",
+  },
+  {
+    questionId: "ch10-l05-q03", lessonId: L, conceptId: "image-limits", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền số.",
+    template: "Trên claude.ai, mỗi tin nhắn gửi được tối đa [[b1]] ảnh; mỗi ảnh tối đa 8000 × 8000 px.",
+    blanks: [{ id: "b1", accepted: ["20", "hai mươi"], width: 4 }],
+    explanation: "Mỗi ảnh tối đa 10 MB trên claude.ai.",
+  },
+  {
+    questionId: "ch10-l05-q04", lessonId: L, conceptId: "reference-sample", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Vì sao nên kèm ảnh mẫu chuẩn (sản phẩm đạt) khi nhờ kiểm tra ảnh sản phẩm?",
+    options: [
+      { id: "a", text: "Để Claude so sánh với hình mẫu cụ thể thay vì tự đoán thế nào là “đạt”", feedback: "Đúng." },
+      { id: "b", text: "Để tin nhắn có nhiều ảnh hơn", feedback: "Không phải lý do." },
+      { id: "c", text: "Vì Claude không xem được một ảnh đơn lẻ", feedback: "Không đúng." },
+    ],
+    answer: "a",
+    explanation: "Mẫu chuẩn nên chụp cùng góc, cùng ánh sáng.",
+  },
+  {
+    questionId: "ch10-l05-q05", lessonId: L, conceptId: "photo-quality", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Ảnh mờ, xoay nghiêng hoặc rất nhỏ (dưới 200 px) có thể khiến Claude nhận định sai.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Theo phần Limitations của tài liệu Vision.",
+  },
+  {
+    questionId: "ch10-l05-q06", lessonId: L, conceptId: "downscale", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Ảnh chụp toàn bộ băng chuyền độ phân giải rất cao, nhưng lỗi chỉ là vết xước nhỏ trên một sản phẩm. Cách gửi tốt hơn?",
+    options: [
+      { id: "a", text: "Cắt đúng vùng sản phẩm cần xem — ảnh quá lớn sẽ bị thu nhỏ, chi tiết nhỏ có thể mất", feedback: "Đúng." },
+      { id: "b", text: "Gửi nguyên ảnh lớn nhất có thể", feedback: "Ảnh lớn bị thu nhỏ trước khi xử lý." },
+      { id: "c", text: "Nén thật mạnh cho nhẹ", feedback: "Nén mạnh làm mờ chi tiết." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu Vision khuyên cân nhắc cắt hoặc thu nhỏ trước khi gửi.",
+  },
+  {
+    questionId: "ch10-l05-q07", lessonId: L, conceptId: "counting-limit", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn định dùng ảnh để Claude đếm chính xác 480 con ốc trong khay trước khi đóng gói. Đánh giá?",
+    options: [
+      { id: "a", text: "Không phù hợp — đếm nhiều vật nhỏ có thể không chính xác; dùng cân hoặc máy đếm", feedback: "Đúng." },
+      { id: "b", text: "Phù hợp, Claude đếm chính xác tuyệt đối", feedback: "Trái với tài liệu Vision." },
+      { id: "c", text: "Phù hợp nếu ảnh có màu", feedback: "Màu không giải quyết giới hạn đếm." },
+    ],
+    answer: "a",
+    explanation: "Claude cho số đếm gần đúng, nhất là với nhiều vật nhỏ.",
+  },
+  {
+    questionId: "ch10-l05-q08", lessonId: L, conceptId: "spatial-limit", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Vị trí lỗi Claude chỉ ra trên ảnh (ví dụ toạ độ) là chính xác tới từng điểm ảnh.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Toạ độ và vị trí chỉ gần đúng; kiểm tra lại trước khi dựa vào.",
+  },
+  {
+    questionId: "ch10-l05-q09", lessonId: L, conceptId: "defect-criteria", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Đánh dấu những phần mơ hồ trong yêu cầu kiểm tra ảnh dưới đây.",
+    segments: [
+      { id: "s1", text: "So ảnh 2 với ảnh mẫu 1;", isError: false },
+      { id: "s2", text: "xem có lỗi gì đáng kể không;", isError: true, why: "“Đáng kể” là gì? Liệt kê loại lỗi và ngưỡng." },
+      { id: "s3", text: "báo vị trí và mức chắc chắn của từng điểm;", isError: false },
+      { id: "s4", text: "rồi kết luận luôn Đạt hay Không đạt để xuất hàng.", isError: true, why: "Claude sàng lọc; người kiểm tra quyết định." },
+    ],
+    explanation: "Tiêu chí cụ thể và vai trò rõ ràng.",
+  },
+  {
+    questionId: "ch10-l05-q10", lessonId: L, conceptId: "location-confidence", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Vì sao nên yêu cầu Claude nêu mức chắc chắn cho từng điểm nghi lỗi?",
+    options: [
+      { id: "a", text: "Để người kiểm tra ưu tiên xem kỹ các điểm chắc chắn thấp hoặc “không xác định được”", feedback: "Đúng." },
+      { id: "b", text: "Để có thể bỏ qua hoàn toàn kiểm tra của người", feedback: "Người vẫn quyết định." },
+      { id: "c", text: "Vì bắt buộc theo luật", feedback: "Không phải lý do." },
+    ],
+    answer: "a",
+    explanation: "Kết quả sàng lọc là danh sách để xem lại.",
+  },
+  {
+    questionId: "ch10-l05-q11", lessonId: L, conceptId: "photo-quality", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép vấn đề ảnh với cách khắc phục.",
+    pairs: [
+      { id: "p1", left: "Ảnh rung, mờ", right: "Đặt điện thoại trên giá cố định" },
+      { id: "p2", left: "Loá đèn trên bề mặt bóng", right: "Đổi góc đèn, dùng ánh sáng khuếch tán" },
+      { id: "p3", left: "Chụp nghiêng", right: "Chụp thẳng góc với bề mặt" },
+      { id: "p4", left: "Chữ trên nhãn quá nhỏ", right: "Cắt/chụp gần vùng nhãn" },
+    ],
+    explanation: "Ảnh tốt là nửa thành công của việc kiểm tra bằng ảnh.",
+  },
+  {
+    questionId: "ch10-l05-q12", lessonId: L, conceptId: "cannot-determine", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Claude trả về: “Ảnh 7 — vùng góc dưới phải quá tối, không xác định được có vết xước hay không.” Bạn làm gì?",
+    options: [
+      { id: "a", text: "Người kiểm tra xem trực tiếp sản phẩm 7, đồng thời cải thiện ánh sáng ở điểm chụp", feedback: "Đúng." },
+      { id: "b", text: "Coi là đạt vì Claude không thấy lỗi", feedback: "“Không xác định được” không có nghĩa là đạt." },
+      { id: "c", text: "Bảo Claude đoán thử", feedback: "Đoán làm mất giá trị sàng lọc." },
+    ],
+    answer: "a",
+    explanation: "Đây là lý do yêu cầu ghi “không xác định được” thay vì đoán.",
+  },
+  {
+    questionId: "ch10-l05-q13", lessonId: L, conceptId: "accuracy-limit", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các nhận định SAI về giới hạn khả năng nhìn ảnh của Claude.",
+    segments: [
+      { id: "s1", text: "Claude có thể xác định chắc chắn ảnh có phải do AI tạo hay không.", isError: true, why: "Tài liệu: không xác định được và có thể sai." },
+      { id: "s2", text: "Kết quả đếm nhiều vật nhỏ chỉ nên xem là gần đúng.", isError: false },
+      { id: "s3", text: "Có thể dùng Claude để nhận diện tên người trong ảnh camera xưởng.", isError: true, why: "Claude không được dùng để nêu tên người trong ảnh." },
+      { id: "s4", text: "Ảnh chất lượng thấp làm tăng khả năng nhận định sai.", isError: false },
+    ],
+    explanation: "Theo phần Limitations của tài liệu Vision.",
+  },
+  {
+    questionId: "ch10-l05-q14", lessonId: L, conceptId: "human-review", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "ordering",
+    prompt: "Sắp xếp quy trình sàng lọc lỗi ngoại quan bằng ảnh.",
+    items: [
+      { id: "a", text: "Chụp ảnh mẫu chuẩn và ảnh sản phẩm đúng chuẩn" },
+      { id: "b", text: "Gửi yêu cầu có tiêu chí, vị trí, mức chắc chắn" },
+      { id: "c", text: "Claude liệt kê điểm nghi lỗi và “không xác định được”" },
+      { id: "d", text: "Người kiểm tra xem trực tiếp các điểm bị đánh dấu" },
+      { id: "e", text: "Người kiểm tra kết luận và lưu hồ sơ" },
+    ],
+    explanation: "Kết luận cuối luôn ở bước con người.",
+  },
+  {
+    questionId: "ch10-l05-q15", lessonId: L, conceptId: "defect-criteria", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết yêu cầu sàng lọc ảnh cho tình huống dưới đây (3–5 dòng), kèm một dòng về người quyết định.",
+    source: "Kiểm tra mối hàn trên khung thép: mối hàn đạt phải liền, không rỗ khí nhìn thấy, không nứt, không bắn tóe dính bề mặt. Có ảnh mẫu mối hàn đạt. Mỗi khung chụp 4 mối hàn bằng điện thoại.",
+    rubric: [
+      { id: "reference", label: "Dùng ảnh mẫu", weight: 1, check: { kind: "anyKeyword", keywords: ["ảnh mẫu", "mẫu chuẩn", "ảnh 1"] }, pass: "Có mẫu.", fail: "So với ảnh mẫu mối hàn đạt." },
+      { id: "criteria", label: "Tiêu chí lỗi", weight: 1, check: { kind: "allGroups", groups: [["rỗ"], ["nứt"]] }, pass: "Có tiêu chí.", fail: "Liệt kê: rỗ khí, nứt, không liền, bắn tóe." },
+      { id: "unsure", label: "Mức chắc chắn / không xác định", weight: 1, check: { kind: "anyKeyword", keywords: ["mức chắc chắn", "không xác định được"] }, pass: "Có xử lý không chắc.", fail: "Yêu cầu mức chắc chắn và “không xác định được”." },
+      { id: "human", label: "Người quyết định", weight: 1, check: { kind: "anyKeyword", keywords: ["người kiểm tra", "qc", "kỹ thuật viên", "quyết định"] }, pass: "Có vai trò người.", fail: "Ghi rõ người kiểm tra quyết định." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Ảnh 1 là mẫu mối hàn đạt. Ảnh 2–5 là 4 mối hàn của khung K12. So từng ảnh với mẫu, kiểm tra: mối hàn không liền, rỗ khí nhìn thấy, nứt, bắn tóe dính bề mặt. Trả bảng: ảnh | lỗi nghi ngờ | vị trí | mức chắc chắn. Chỗ ảnh không đủ rõ ghi “không xác định được”. Đây là sàng lọc.\nNgười quyết định: kỹ thuật viên QC kiểm tra trực tiếp các mối hàn bị đánh dấu và kết luận đạt/không đạt.",
+    explanation: "Mẫu + tiêu chí + mức chắc chắn + vai trò người.",
+  },
+];

@@ -1,6 +1,7 @@
 import { course } from "@/content/course";
 import { LABS } from "@/content/labs/index";
-import { LESSONS, lessonHref } from "@/content/registry";
+import { lessonHref } from "@/content/catalog";
+import { LESSONS } from "@/content/lesson-registry";
 import { foldVietnamese } from "@/lib/utils";
 
 export interface SearchDoc {

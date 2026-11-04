@@ -129,6 +129,7 @@ export const lessonClaudeLamDuocGi: Lesson = {
         { id: "three", label: "Có 3 việc", weight: 1, check: { kind: "minMatches", pattern: "(^|\\n)\\s*(\\d+[.)]|-|•)", value: 3 }, pass: "Có ít nhất 3 việc.", fail: "Liệt kê 3 việc, mỗi việc một dòng (1., 2., 3.)." },
         { id: "data", label: "Nêu dữ liệu cần cung cấp", weight: 1, check: { kind: "anyKeyword", keywords: ["dữ liệu", "file", "bảng", "tài liệu", "ảnh", "báo cáo"] }, pass: "Có nêu dữ liệu.", fail: "Ghi rõ dữ liệu cần đưa cho Claude." },
         { id: "tool", label: "Xét đến công cụ/kết nối", weight: 1, check: { kind: "anyKeyword", keywords: ["công cụ", "kết nối", "connector", "mcp", "web", "claude code", "không cần"] }, pass: "Có xét đến công cụ.", fail: "Ghi việc nào cần kết nối công cụ (hoặc không cần)." },
+        { id: "detail", label: "Đủ chi tiết cho 3 việc", weight: 1, check: { kind: "minChars", value: 250 }, pass: "Đủ chi tiết.", fail: "Viết cụ thể cho cả 3 việc, không chỉ khung." },
         { id: "check", label: "Có cách kiểm tra", weight: 1, check: { kind: "anyKeyword", keywords: ["kiểm tra", "đối chiếu", "duyệt", "so sánh", "đọc lại"] }, pass: "Có cách kiểm tra.", fail: "Thêm cách kiểm tra cho mỗi việc." },
       ],
       passScore: 0.75,

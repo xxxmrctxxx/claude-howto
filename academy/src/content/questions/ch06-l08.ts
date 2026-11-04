@@ -1,0 +1,181 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch06-l08";
+
+/** 15 questions for "Code review" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh06L08: Question[] = [
+  {
+    questionId: "ch06-l08-q01", lessonId: L, conceptId: "code-review-cmd", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Lệnh nào nhờ Claude Code review các thay đổi trên nhánh hiện tại để tìm lỗi?",
+    options: [
+      { id: "a", text: "/code-review (bí danh /review)", feedback: "Đúng." },
+      { id: "b", text: "/compact", feedback: "/compact tóm tắt hội thoại." },
+      { id: "c", text: "/init", feedback: "/init tạo CLAUDE.md." },
+    ],
+    answer: "a",
+    explanation: "Không ghi mục tiêu thì review nhánh hiện tại và thay đổi chưa commit.",
+  },
+  {
+    questionId: "ch06-l08-q02", lessonId: L, conceptId: "background-subagent", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "/code-review chạy như một subagent nền với context riêng, nên không làm đầy hội thoại chính; kết quả gửi về khi review xong.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Bạn có thể tiếp tục làm việc trong lúc review chạy.",
+  },
+  {
+    questionId: "ch06-l08-q03", lessonId: L, conceptId: "review-target", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "matching",
+    prompt: "Ghép điều muốn review với lệnh tương ứng.",
+    pairs: [
+      { id: "p1", left: "Pull request số 1234", right: "/code-review 1234" },
+      { id: "p2", left: "Nhánh my-feature so với main", right: "/code-review main...my-feature" },
+      { id: "p3", left: "15 commit gần nhất", right: "/code-review HEAD~15..HEAD" },
+      { id: "p4", left: "Thư mục src/auth", right: "/code-review src/auth" },
+    ],
+    explanation: "Theo bảng Choose what to review trong tài liệu.",
+  },
+  {
+    questionId: "ch06-l08-q04", lessonId: L, conceptId: "human-review", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Đã chạy /code-review thì không cần đồng nghiệp review pull request nữa.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Review của Claude là một lớp lọc thêm; người review hiểu bối cảnh nhóm và chịu trách nhiệm cùng bạn.",
+  },
+  {
+    questionId: "ch06-l08-q05", lessonId: L, conceptId: "fix-flag", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Cờ --fix trong /code-review --fix làm gì?",
+    options: [
+      { id: "a", text: "Nhờ Claude áp dụng các phát hiện vào working tree sau khi review (vẫn qua chế độ quyền)", feedback: "Đúng." },
+      { id: "b", text: "Tự merge PR", feedback: "Không — chỉ sửa file trong working tree." },
+      { id: "c", text: "Xoá các phát hiện", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Không có --fix thì review chỉ báo cáo.",
+  },
+  {
+    questionId: "ch06-l08-q06", lessonId: L, conceptId: "effort-level", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Chạy /code-review low khác mức cao hơn thế nào?",
+    options: [
+      { id: "a", text: "low báo các phát hiện chắc chắn nhất, ít báo nhầm; mức cao hơn phủ rộng hơn", feedback: "Đúng." },
+      { id: "b", text: "low bỏ qua toàn bộ lỗi", feedback: "Vẫn báo lỗi, chỉ ưu tiên độ chắc chắn." },
+      { id: "c", text: "Không khác gì", feedback: "Mức effort đánh đổi độ phủ và độ chắc chắn." },
+    ],
+    answer: "a",
+    explanation: "Không ghi mức thì review dùng lại mức bạn gõ gần nhất.",
+  },
+  {
+    questionId: "ch06-l08-q07", lessonId: L, conceptId: "comment-flag", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn muốn các phát hiện xuất hiện thành comment inline trên pull request GitHub để cả nhóm thấy. Dùng gì?",
+    options: [
+      { id: "a", text: "/code-review --comment", feedback: "Đúng." },
+      { id: "b", text: "/code-review --fix", feedback: "--fix sửa file, không đăng comment." },
+      { id: "c", text: "/btw", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "--comment đăng phát hiện lên PR GitHub (hoặc một note trên GitLab merge request).",
+  },
+  {
+    questionId: "ch06-l08-q08", lessonId: L, conceptId: "custom-review", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "fix-prompt",
+    prompt: "Viết lại yêu cầu review dưới đây theo tiêu chí rõ ràng.",
+    source: "review code giúp tôi",
+    rubric: [
+      { id: "fresh", label: "Góc nhìn mới (subagent hoặc /code-review)", weight: 1, check: { kind: "regex", pattern: "(subagent|/code-review)" }, pass: "Có góc nhìn mới.", fail: "Dùng subagent hoặc /code-review." },
+      { id: "spec", label: "Bám đặc tả/yêu cầu", weight: 1, check: { kind: "regex", pattern: "(spec|dac ta|yeu cau)" }, pass: "Có tiêu chí đặc tả.", fail: "So với SPEC.md hoặc danh sách yêu cầu." },
+      { id: "correct", label: "Chỉ lỗi ảnh hưởng tính đúng đắn", weight: 1, check: { kind: "regex", pattern: "(skip style|bo qua (style|trinh bay)|tinh dung dan)" }, pass: "Có giới hạn phạm vi.", fail: "Thêm: chỉ báo lỗi ảnh hưởng tính đúng đắn, skip style." },
+    ],
+    passScore: 0.67,
+    referenceAnswer: "Dùng một subagent review diff của nhánh này so với SPEC.md: kiểm tra từng yêu cầu đã được làm và các trường hợp biên đã có test; chỉ báo lỗi ảnh hưởng tính đúng đắn, skip style.",
+    explanation: "Đây là dạng yêu cầu review tự viết trong Best practices.",
+  },
+  {
+    questionId: "ch06-l08-q09", lessonId: L, conceptId: "skip-style", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Vì sao tài liệu khuyên giữ cụm “skip style” trong yêu cầu review?",
+    options: [
+      { id: "a", text: "Người review được bảo tìm vấn đề luôn tìm ra thứ gì đó; sửa hết góp ý vụn vặt dễ sinh trừu tượng và test thừa", feedback: "Đúng." },
+      { id: "b", text: "Vì Claude không đọc được style", feedback: "Không phải lý do." },
+      { id: "c", text: "Để review chạy nhanh hơn gấp đôi", feedback: "Mục đích là tập trung vào lỗi quan trọng." },
+    ],
+    answer: "a",
+    explanation: "Best practices: Don't drop the skip style part of that prompt.",
+  },
+  {
+    questionId: "ch06-l08-q10", lessonId: L, conceptId: "claude-md-rules", learningObjective: "o3", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Muốn mọi lần /code-review áp dụng quy tắc riêng của dự án, có thể ghi các quy tắc đó vào CLAUDE.md.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Review làm theo CLAUDE.md; file REVIEW.md chỉ dùng cho dịch vụ Code Review được quản lý trên GitHub.",
+  },
+  {
+    questionId: "ch06-l08-q11", lessonId: L, conceptId: "fix-limits", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Một lượt /code-review --fix chạy nền đã sửa nhiều file bạn chưa từng đụng trong phiên. Bạn muốn hoàn tác. Cách đáng tin?",
+    options: [
+      { id: "a", text: "Dùng git để khôi phục — các sửa chạy nền nằm ngoài checkpoint của phiên", feedback: "Đúng." },
+      { id: "b", text: "/rewind chắc chắn khôi phục hết", feedback: "/rewind chỉ khôi phục file Claude đã sửa trong hội thoại của bạn." },
+      { id: "c", text: "/clear", feedback: "/clear không đổi file trên đĩa." },
+    ],
+    answer: "a",
+    explanation: "Theo tài liệu: background review áp dụng --fix ngoài checkpoint; commit trước khi review để có điểm quay lại.",
+  },
+  {
+    questionId: "ch06-l08-q12", lessonId: L, conceptId: "triage", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Review trả về: 1 lỗi tính sai thuế, 2 góp ý đổi tên biến, 1 cảnh báo null ở chỗ đã kiểm tra null ngay trước đó. Cách xử lý tốt nhất?",
+    options: [
+      { id: "a", text: "Sửa lỗi thuế kèm test; để sau góp ý đổi tên; bỏ cảnh báo null và ghi lý do là báo nhầm", feedback: "Đúng." },
+      { id: "b", text: "Sửa cả 4 mục cho chắc", feedback: "Sửa cả báo nhầm và góp ý vụn vặt làm phình thay đổi." },
+      { id: "c", text: "Bỏ qua cả 4 vì review hay báo nhầm", feedback: "Bỏ sót lỗi thuế thật." },
+    ],
+    answer: "a",
+    explanation: "Thẩm định từng phát hiện: lỗi thật / trình bày / báo nhầm.",
+  },
+  {
+    questionId: "ch06-l08-q13", lessonId: L, conceptId: "review-target", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn muốn review đúng một commit có mã abc1234. Gõ gì?",
+    options: [
+      { id: "a", text: "/code-review abc1234^..abc1234", feedback: "Đúng — khoảng từ commit cha đến commit đó." },
+      { id: "b", text: "/code-review", feedback: "Không ghi mục tiêu thì review cả nhánh và thay đổi chưa commit." },
+      { id: "c", text: "/code-review src/", feedback: "Đó là review theo đường dẫn." },
+    ],
+    answer: "a",
+    explanation: "Theo bảng mục tiêu trong tài liệu /code-review.",
+  },
+  {
+    questionId: "ch06-l08-q14", lessonId: L, conceptId: "triage", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các thói quen SAI khi làm việc với kết quả review.",
+    segments: [
+      { id: "s1", text: "Áp dụng mọi phát hiện mà không đọc.", isError: true, why: "Có thể sửa theo báo nhầm hoặc thêm phức tạp thừa." },
+      { id: "s2", text: "Thêm test cho lỗi thật mà review tìm ra.", isError: false },
+      { id: "s3", text: "/code-review không báo gì nên merge ngay, bỏ qua review của đồng nghiệp.", isError: true, why: "Không có phát hiện không đồng nghĩa không có lỗi; vẫn cần người review." },
+      { id: "s4", text: "Đọc từng phát hiện và ghi quyết định kèm lý do.", isError: false },
+    ],
+    explanation: "Review là thông tin để bạn quyết định, không phải lệnh phải làm theo.",
+  },
+  {
+    questionId: "ch06-l08-q15", lessonId: L, conceptId: "custom-review", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết yêu cầu review cho thay đổi rủi ro cao dưới đây.",
+    source: "Nhánh feature/thue-vat thay đổi cách tính VAT cho hoá đơn. SPEC.md liệt kê 4 nhóm hàng với 4 mức thuế, và yêu cầu làm tròn đến đồng. Hệ thống đang chạy thật cho phòng kế toán.",
+    rubric: [
+      { id: "fresh", label: "Góc nhìn mới", weight: 1, check: { kind: "regex", pattern: "(subagent|/code-review)" }, pass: "Có góc nhìn mới.", fail: "Dùng subagent hoặc /code-review." },
+      { id: "spec", label: "Đối chiếu từng yêu cầu", weight: 1, check: { kind: "regex", pattern: "(spec\\.md|dac ta)[^\\n]*(tung|moi|4)" }, pass: "Có đối chiếu đặc tả.", fail: "Đối chiếu từng mục trong SPEC.md (4 nhóm hàng, làm tròn)." },
+      { id: "edges", label: "Trường hợp biên và test", weight: 1, check: { kind: "regex", pattern: "(lam tron|so 0|so am|bien)[^\\n]*test|test[^\\n]*(lam tron|so 0|so am|bien)" }, pass: "Có trường hợp biên.", fail: "Yêu cầu kiểm tra test cho làm tròn, số 0, số âm." },
+      { id: "focus", label: "Chỉ lỗi ảnh hưởng tính đúng đắn", weight: 1, check: { kind: "regex", pattern: "(skip style|tinh dung dan|bo qua trinh bay)" }, pass: "Có giới hạn.", fail: "Thêm: chỉ báo lỗi ảnh hưởng tính đúng đắn, skip style." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Dùng một subagent review diff của nhánh feature/thue-vat so với SPEC.md: kiểm tra từng nhóm trong 4 nhóm hàng có đúng mức thuế, cách làm tròn đến đồng.\nKiểm tra các trường hợp biên đã có test: làm tròn, số 0, số âm, hoá đơn nhiều nhóm hàng.\nChỉ báo lỗi ảnh hưởng tính đúng đắn, skip style. Mỗi phát hiện ghi file, dòng và cách tái hiện.",
+    explanation: "Thay đổi rủi ro cao cần review bám đặc tả, có trường hợp biên và tập trung vào tính đúng đắn.",
+  },
+];

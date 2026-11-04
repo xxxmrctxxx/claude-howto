@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch08-l04";
+
+/** 15 questions for "Cách chia công việc" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh08L04: Question[] = [
+  {
+    questionId: "ch08-l04-q01", lessonId: L, conceptId: "decompose", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Lợi ích của việc chia một việc lớn thành phần nhỏ khi làm với Claude Code? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Mỗi phần có mục tiêu và phép kiểm tra rõ ràng", feedback: "Đúng." },
+      { id: "b", text: "Lỗi được phát hiện sớm, sửa rẻ hơn", feedback: "Đúng." },
+      { id: "c", text: "Context của mỗi phần gọn hơn", feedback: "Đúng." },
+      { id: "d", text: "Không cần kiểm tra kết quả nữa", feedback: "Ngược lại — chia nhỏ để kiểm tra được từng phần." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Làm một phần, kiểm thử, rồi làm tiếp giúp bắt lỗi sớm và tránh làm lại cả hệ thống.",
+  },
+  {
+    questionId: "ch08-l04-q02", lessonId: L, conceptId: "one-task-session", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Giữ một phiên Claude Code cho cả tuần làm mọi việc giúp Claude “nhớ hết” nên luôn tiết kiệm hơn.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Lịch sử cũ đi kèm mọi yêu cầu sau và gây context rot; quy tắc lâu dài nên nằm trong CLAUDE.md, còn việc mới thì /clear.",
+  },
+  {
+    questionId: "ch08-l04-q03", lessonId: L, conceptId: "subagent-isolation", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Khi giao việc chạy cả bộ test cho subagent, hội thoại chính nhận lại gì?",
+    options: [
+      { id: "a", text: "Bản tóm tắt kết quả; output dài nằm lại trong context của subagent", feedback: "Đúng." },
+      { id: "b", text: "Toàn bộ output của mọi test", feedback: "Như vậy thì không còn lợi ích giữ context gọn." },
+      { id: "c", text: "Không nhận gì cả", feedback: "Subagent trả về bản tóm tắt khi xong." },
+    ],
+    answer: "a",
+    explanation: "Subagent làm việc trong context riêng; chỉ phần tóm tắt quay về hội thoại chính.",
+  },
+  {
+    questionId: "ch08-l04-q04", lessonId: L, conceptId: "incremental-test", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Cách làm nào giúp bắt lỗi sớm nhất?",
+    options: [
+      { id: "a", text: "Viết một phần, kiểm thử, rồi mới làm phần tiếp theo", feedback: "Đúng — test incrementally." },
+      { id: "b", text: "Viết hết rồi mới kiểm thử một lần cuối", feedback: "Lỗi chồng lỗi, khó tìm nguyên nhân." },
+      { id: "c", text: "Không kiểm thử, chờ người dùng báo lỗi", feedback: "Đắt nhất." },
+    ],
+    answer: "a",
+    explanation: "Trang Manage costs khuyên kiểm thử từng bước để bắt lỗi sớm.",
+  },
+  {
+    questionId: "ch08-l04-q05", lessonId: L, conceptId: "plan-first", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Với việc phức tạp, chế độ Plan giúp tránh việc phải làm lại tốn kém khi hướng đi ban đầu sai.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Claude khám phá và đề xuất cách làm để bạn duyệt trước khi sửa file.",
+  },
+  {
+    questionId: "ch08-l04-q06", lessonId: L, conceptId: "clear-vs-continue", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn vừa sửa xong hàm tinhTong và muốn thêm test cho chính hàm đó. Nên làm gì?",
+    options: [
+      { id: "a", text: "Tiếp tục trong cùng phiên", feedback: "Đúng — ngữ cảnh vừa có rất hữu ích cho việc này." },
+      { id: "b", text: "/clear rồi giải thích lại từ đầu", feedback: "Mất ngữ cảnh liên quan trực tiếp." },
+      { id: "c", text: "Mở 3 phiên song song cho chắc", feedback: "Tốn thêm mà không lợi gì." },
+    ],
+    answer: "a",
+    explanation: "Việc liên quan trực tiếp nên tiếp tục; chỉ /clear khi chuyển sang việc không liên quan.",
+  },
+  {
+    questionId: "ch08-l04-q07", lessonId: L, conceptId: "rename-resume", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "fill-blank",
+    prompt: "Điền lệnh.",
+    template: "Trước khi /clear, gõ [[b1]] để đặt tên phiên; sau này dùng /resume để quay lại.",
+    blanks: [{ id: "b1", accepted: ["/rename"], width: 9 }],
+    explanation: "Trang Manage costs: dùng /rename trước khi clear để tìm lại phiên bằng /resume.",
+  },
+  {
+    questionId: "ch08-l04-q08", lessonId: L, conceptId: "subagent-model", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Subagent chỉ làm việc đơn giản (tìm và liệt kê file). Cách giảm chi phí hợp lý?",
+    options: [
+      { id: "a", text: "Chọn model nhỏ hơn (ví dụ Haiku) cho subagent đó", feedback: "Đúng." },
+      { id: "b", text: "Không cần, subagent miễn phí", feedback: "Yêu cầu của subagent vẫn tính vào mức dùng." },
+      { id: "c", text: "Luôn dùng model lớn nhất cho mọi subagent", feedback: "Tốn mà không cần thiết cho việc đơn giản." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu gợi ý chỉ định model: haiku cho subagent làm việc đơn giản.",
+  },
+  {
+    questionId: "ch08-l04-q09", lessonId: L, conceptId: "spec-file", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Claude đã phỏng vấn bạn và ghi xong SPEC.md trong một phiên dài. Bước tiếp theo theo Best practices?",
+    options: [
+      { id: "a", text: "Mở phiên mới để xây từ SPEC.md, bắt đầu với context sạch", feedback: "Đúng." },
+      { id: "b", text: "Tiếp tục trong phiên phỏng vấn dài đó", feedback: "Phiên mới sạch hơn; đặc tả đã nằm trong file." },
+      { id: "c", text: "Xoá SPEC.md vì đã nói hết với Claude", feedback: "SPEC.md là định nghĩa “xong” cho cả việc kiểm tra sau này." },
+    ],
+    answer: "a",
+    explanation: "Đặc tả trong file cho phép phiên xây dựng bắt đầu sạch mà vẫn có định nghĩa hoàn thành.",
+  },
+  {
+    questionId: "ch08-l04-q10", lessonId: L, conceptId: "subagent-isolation", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn cần lấy 3 tham số từ một tài liệu API dài 60 trang để dùng trong việc đang làm. Cách nào giữ context chính gọn nhất?",
+    options: [
+      { id: "a", text: "Nhờ một subagent đọc tài liệu và chỉ trả về 3 tham số", feedback: "Đúng." },
+      { id: "b", text: "Dán cả 60 trang vào hội thoại chính", feedback: "Context chính phình to cho mọi yêu cầu sau." },
+      { id: "c", text: "Đoán 3 tham số", feedback: "Dễ sai." },
+    ],
+    answer: "a",
+    explanation: "Đọc tài liệu dài là thao tác “ồn ào” điển hình nên giao subagent.",
+  },
+  {
+    questionId: "ch08-l04-q11", lessonId: L, conceptId: "decompose", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp các phần của công cụ báo cáo lỗi QA theo thứ tự phụ thuộc hợp lý.",
+    items: [
+      { id: "a", text: "Đọc file CSV thành dữ liệu + kiểm thử" },
+      { id: "b", text: "Tính tổng theo công đoạn + kiểm thử" },
+      { id: "c", text: "Vẽ biểu đồ từ số tổng + kiểm tra" },
+      { id: "d", text: "Xuất Excel + mở file kiểm tra" },
+    ],
+    explanation: "Phần sau dùng kết quả phần trước; làm đúng thứ tự để mỗi phép kiểm tra có dữ liệu đáng tin.",
+  },
+  {
+    questionId: "ch08-l04-q12", lessonId: L, conceptId: "decompose", learningObjective: "o1", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Cách chia nào tốt nhất cho việc “thêm tính năng xuất PDF cho báo cáo”?",
+    options: [
+      { id: "a", text: "Chia theo chức năng (lấy dữ liệu → dựng bố cục → xuất file), mỗi phần có phép kiểm tra", feedback: "Đúng." },
+      { id: "b", text: "Một yêu cầu duy nhất “thêm xuất PDF”", feedback: "Khó kiểm tra và dễ làm lại nhiều." },
+      { id: "c", text: "Cứ 10 file một phiên, không cần mục tiêu từng phần", feedback: "Chia theo số file không gắn với kết quả kiểm tra được." },
+    ],
+    answer: "a",
+    explanation: "Chia theo kết quả kiểm tra được, không theo số lượng file hay thời gian.",
+  },
+  {
+    questionId: "ch08-l04-q13", lessonId: L, conceptId: "clear-vs-continue", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Kế hoạch làm việc dưới đây có những bước chưa hợp lý. Chọn chúng.",
+    segments: [
+      { id: "s1", text: "Sửa xong lỗi thì /clear rồi viết email cho khách.", isError: false },
+      { id: "s2", text: "Đang sửa dở hàm tinhTong thì /clear cho tiết kiệm.", isError: true, why: "Mất ngữ cảnh giữa chừng; nếu hội thoại dài, dùng /compact kèm trọng tâm." },
+      { id: "s3", text: "Chạy cả bộ 400 test ngay trong hội thoại chính và đọc hết output.", isError: true, why: "Nên giao subagent và chỉ nhận test lỗi." },
+      { id: "s4", text: "Commit sau mỗi phần đạt kiểm tra.", isError: false },
+    ],
+    explanation: "/clear dùng khi đổi việc; trong một việc đang dở, giữ ngữ cảnh hoặc compact.",
+  },
+  {
+    questionId: "ch08-l04-q14", lessonId: L, conceptId: "rename-resume", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn đang tối ưu phần đăng nhập thì có việc gấp không liên quan. Xong việc gấp bạn muốn quay lại phần đăng nhập. Cách tốt nhất?",
+    options: [
+      { id: "a", text: "/rename phiên đăng nhập, /clear làm việc gấp, xong /resume phiên cũ", feedback: "Đúng — việc gấp không gánh lịch sử, phiên cũ vẫn giữ nguyên." },
+      { id: "b", text: "Làm việc gấp ngay trong phiên đăng nhập", feedback: "Hai việc trộn lẫn trong một context." },
+      { id: "c", text: "/clear và bỏ luôn phiên đăng nhập", feedback: "Mất ngữ cảnh bạn còn cần." },
+    ],
+    answer: "a",
+    explanation: "Đặt tên phiên trước khi clear cho phép quay lại đúng chỗ.",
+  },
+  {
+    questionId: "ch08-l04-q15", lessonId: L, conceptId: "decompose", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Lập kế hoạch chia việc cho Claude Code để chuyển bảng Excel theo dõi bảo trì máy thành một trang web nhỏ.",
+    source: "Bảng Excel hiện có: Mã máy, Tên máy, Ngày bảo trì gần nhất, Chu kỳ (ngày), Người phụ trách. Cần: xem danh sách, cảnh báo máy quá hạn, thêm lần bảo trì mới.",
+    rubric: [
+      { id: "parts", label: "Ít nhất 4 phần đánh số", weight: 1, check: { kind: "minMatches", pattern: "^\\s*\\d+[.)]\\s+\\S", value: 4 }, pass: "Đủ phần.", fail: "Chia ít nhất 4 phần đánh số." },
+      { id: "checks", label: "Có phép kiểm tra", weight: 1, check: { kind: "minMatches", pattern: "(kiem tra|test)", value: 3 }, pass: "Có kiểm tra.", fail: "Ghi phép kiểm tra cho các phần." },
+      { id: "overdue", label: "Kiểm tra cảnh báo quá hạn bằng ví dụ cụ thể", weight: 1, check: { kind: "regex", pattern: "qua han[^\\n]*\\d" }, pass: "Có ví dụ quá hạn.", fail: "Ví dụ: máy bảo trì 01/09, chu kỳ 30 ngày → ngày 03/11 phải báo quá hạn." },
+      { id: "prep", label: "Đặc tả/kế hoạch trước", weight: 1, check: { kind: "regex", pattern: "(spec|dac ta|ke hoach|plan)" }, pass: "Có chuẩn bị.", fail: "Bắt đầu bằng đặc tả hoặc kế hoạch." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "0. Viết SPEC.md (phỏng vấn), mở phiên mới và duyệt kế hoạch ở chế độ Plan.\n1. Đọc dữ liệu xuất từ Excel (CSV) — kiểm tra: 5 máy mẫu hiển thị đủ 5 dòng.\n2. Tính ngày đến hạn và cảnh báo quá hạn — test: máy bảo trì 01/09, chu kỳ 30 ngày, ngày 03/11 phải báo quá hạn.\n3. Form thêm lần bảo trì — kiểm tra: thêm xong ngày gần nhất cập nhật và hết cảnh báo.\n4. Lưu dữ liệu và tải lại trang — kiểm tra dữ liệu còn nguyên.\nMỗi phần đạt thì commit; chạy cả bộ test bằng subagent.",
+    explanation: "Kế hoạch tốt chia theo kết quả kiểm tra được và bắt đầu từ đặc tả.",
+  },
+];

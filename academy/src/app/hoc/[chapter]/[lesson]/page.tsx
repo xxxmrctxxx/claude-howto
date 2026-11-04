@@ -5,11 +5,12 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { LessonActions, SectionTracker } from "@/components/lesson/interactive";
 import { LessonBlocks } from "@/components/lesson/lesson-blocks";
+import { LessonDataProvider } from "@/components/lesson/lesson-data";
 import { LessonShell } from "@/components/lesson/lesson-shell";
 import { LessonSidebar } from "@/components/lesson/lesson-sidebar";
 import { RightPanel } from "@/components/lesson/right-panel";
 import { course } from "@/content/course";
-import { getChapterBySlug, getLessonBySlugs, lessonHref, neighbours } from "@/content/registry";
+import { bankFor, getChapterBySlug, getLessonBySlugs, lessonHref, neighbours } from "@/content/registry";
 import { LEVEL_LABEL } from "@/lib/engine/question/adaptive";
 
 export const dynamicParams = false;
@@ -92,5 +93,9 @@ export default async function LessonPage({ params }: PageProps<"/hoc/[chapter]/[
     </article>
   );
 
-  return <LessonShell nav={<LessonSidebar current={lesson} />} content={content} tools={<RightPanel lesson={lesson} />} />;
+  return (
+    <LessonDataProvider bank={bankFor(lesson.id)} concepts={lesson.concepts}>
+      <LessonShell nav={<LessonSidebar current={lesson} />} content={content} tools={<RightPanel lesson={lesson} />} />
+    </LessonDataProvider>
+  );
 }

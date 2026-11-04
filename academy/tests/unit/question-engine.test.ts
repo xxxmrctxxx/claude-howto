@@ -11,7 +11,7 @@ import {
   type QuizSession,
 } from "@/lib/engine/question/adaptive";
 import { computeFingerprint, indexQuestion } from "@/lib/engine/question/fingerprint";
-import { createRng, lexicalSimilarity } from "@/lib/engine/question/text";
+import { createRng, lexicalSimilarity, profileSimilarity, similarityProfile } from "@/lib/engine/question/text";
 import { checkCandidate, validateBank } from "@/lib/engine/question/validate";
 import type { IndexedQuestion, Question, SingleChoiceQuestion } from "@/lib/types/content";
 
@@ -109,6 +109,20 @@ describe("duplicate detection layers", () => {
     };
     const issues = checkCandidate(sameIdea, QUESTION_BANKS["ch03-l01"], lessons);
     expect(issues.some((i) => i.layer === "semantic-key")).toBe(true);
+  });
+
+  it("layer 5 — the pruned bank-wide comparison agrees with the exact similarity", () => {
+    const stems = allQuestions().slice(0, 120).map((q) => q.prompt);
+    const profiles = stems.map(similarityProfile);
+    for (let i = 0; i < stems.length; i += 7) {
+      for (let j = i + 1; j < stems.length; j += 5) {
+        const exact = lexicalSimilarity(stems[i], stems[j]);
+        const pruned = profileSimilarity(profiles[i], profiles[j], 0.72);
+        // Above the floor the value is exact; below it, it may be an upper bound that still stays below.
+        expect(pruned >= 0.72).toBe(exact >= 0.72);
+        if (exact >= 0.72) expect(pruned).toBeCloseTo(exact, 10);
+      }
+    }
   });
 
   it("layer 5 — lexical similarity flags a reworded stem even with different metadata", () => {

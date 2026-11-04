@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch11-l01";
+
+/** 15 questions for "Kết nối API" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh11L01: Question[] = [
+  {
+    questionId: "ch11-l01-q01", lessonId: L, conceptId: "console-account", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Để gọi Claude API từ script, bạn cần gì?",
+    options: [
+      { id: "a", text: "Tài khoản Claude Console và một API key tạo trong Console", feedback: "Đúng." },
+      { id: "b", text: "Chỉ cần đăng nhập claude.ai trên trình duyệt", feedback: "Đăng nhập giao diện không thay cho API key." },
+      { id: "c", text: "Cài Claude Code là đủ, không cần key", feedback: "Gọi API trực tiếp cần API key." },
+    ],
+    answer: "a",
+    explanation: "API overview: cần tài khoản Console và API key.",
+  },
+  {
+    questionId: "ch11-l01-q02", lessonId: L, conceptId: "env-var", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền tên biến môi trường mà SDK tự đọc.",
+    template: "SDK chính thức tự lấy API key từ biến môi trường [[b1]].",
+    blanks: [{ id: "b1", accepted: ["ANTHROPIC_API_KEY"], width: 18 }],
+    explanation: "Đặt key ở đây thay vì viết vào code.",
+  },
+  {
+    questionId: "ch11-l01-q03", lessonId: L, conceptId: "stateless", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Messages API ghi nhớ các lượt trước, nên lần gọi sau chỉ cần gửi câu hỏi mới.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "API là stateless: muốn hội thoại nhiều lượt thì gửi lại toàn bộ lịch sử.",
+  },
+  {
+    questionId: "ch11-l01-q04", lessonId: L, conceptId: "request-body", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Thân yêu cầu Messages API tối thiểu gồm những trường nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "model", feedback: "Đúng." },
+      { id: "b", text: "max_tokens", feedback: "Đúng." },
+      { id: "c", text: "messages", feedback: "Đúng." },
+      { id: "d", text: "password", feedback: "Không có trường này; xác thực nằm ở header." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Key đi trong header, không nằm trong thân yêu cầu.",
+  },
+  {
+    questionId: "ch11-l01-q05", lessonId: L, conceptId: "api-key-secret", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Vì sao không được commit API key lên Git, kể cả repo nội bộ?",
+    options: [
+      { id: "a", text: "Ai đọc được key là gọi API bằng tài khoản của bạn; lịch sử Git giữ key cả khi bạn xoá dòng đó sau này", feedback: "Đúng." },
+      { id: "b", text: "Vì Git không lưu được chuỗi dài", feedback: "Không phải lý do." },
+      { id: "c", text: "Vì key sẽ tự hết hạn khi commit", feedback: "Commit không làm key hết hạn." },
+    ],
+    answer: "a",
+    explanation: "Key đã lộ thì vô hiệu hoá trong Console và tạo key mới.",
+  },
+  {
+    questionId: "ch11-l01-q06", lessonId: L, conceptId: "response-blocks", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Phản hồi dưới đây cho biết điều gì, và script nên làm gì?",
+    context: { label: "Phản hồi (rút gọn)", content: "{\n  \"content\": [{\"type\": \"text\", \"text\": \"Tóm tắt: 1) Lỗi nứt vỏ tăng 12%; 2) Công đoạn sơn\"}],\n  \"stop_reason\": \"max_tokens\",\n  \"usage\": {\"input_tokens\": 2410, \"output_tokens\": 64}\n}", lang: "json" },
+    options: [
+      { id: "a", text: "Câu trả lời bị cắt vì chạm max_tokens — không dùng bản này; tăng max_tokens hoặc chia nhỏ việc rồi gọi lại", feedback: "Đúng." },
+      { id: "b", text: "Claude đã trả lời xong, dùng luôn", feedback: "end_turn mới là xong tự nhiên." },
+      { id: "c", text: "Claude từ chối trả lời", feedback: "Từ chối có stop_reason refusal." },
+    ],
+    answer: "a",
+    explanation: "Luôn kiểm tra stop_reason trước khi dùng kết quả.",
+  },
+  {
+    questionId: "ch11-l01-q07", lessonId: L, conceptId: "error-codes", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mã lỗi với cách xử lý hợp lý.",
+    pairs: [
+      { id: "p1", left: "401 authentication_error", right: "Kiểm tra key: sai, đã vô hiệu hoá hay hết hạn" },
+      { id: "p2", left: "429 rate_limit_error", right: "Chờ rồi thử lại, giảm tốc độ gửi; xem giới hạn trong Console" },
+      { id: "p3", left: "529 overloaded_error", right: "API đang quá tải tạm thời — thử lại có giãn cách" },
+      { id: "p4", left: "400 invalid_request_error", right: "Sửa nội dung/định dạng yêu cầu, gửi lại y nguyên sẽ vẫn lỗi" },
+    ],
+    explanation: "Lỗi tạm thời thì thử lại; lỗi do yêu cầu hoặc key thì phải sửa.",
+  },
+  {
+    questionId: "ch11-l01-q08", lessonId: L, conceptId: "official-sdk", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Theo tài liệu Errors, SDK chính thức làm gì với lỗi tạm thời như 429 hoặc 5xx?",
+    options: [
+      { id: "a", text: "Tự thử lại có giãn cách (mặc định 2 lần), tôn trọng header retry-after nếu có", feedback: "Đúng." },
+      { id: "b", text: "Không bao giờ thử lại", feedback: "SDK có cơ chế thử lại." },
+      { id: "c", text: "Thử lại liên tục đến khi thành công", feedback: "Mặc định chỉ 2 lần; có thể cấu hình max_retries." },
+    ],
+    answer: "a",
+    explanation: "Có thể chỉnh bằng tham số max_retries.",
+  },
+  {
+    questionId: "ch11-l01-q09", lessonId: L, conceptId: "key-expiration", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn vừa lỡ dán API key vào một kênh chat chung của nhóm. Làm gì trước tiên?",
+    options: [
+      { id: "a", text: "Vào Console vô hiệu hoá (Disable) hoặc xoá key đó, tạo key mới và cập nhật nơi đang dùng", feedback: "Đúng." },
+      { id: "b", text: "Xoá tin nhắn là đủ", feedback: "Có thể đã có người sao chép." },
+      { id: "c", text: "Đợi key tự hết hạn", feedback: "Key có thể đặt Never — không chờ được." },
+    ],
+    answer: "a",
+    explanation: "Disable bật lại được, Delete là vĩnh viễn.",
+  },
+  {
+    questionId: "ch11-l01-q10", lessonId: L, conceptId: "request-headers", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Khi gọi Messages API bằng HTTP thuần (không SDK), cần gửi những header nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Xác thực: Authorization: Bearer <key> (hoặc x-api-key)", feedback: "Đúng." },
+      { id: "b", text: "anthropic-version", feedback: "Đúng — bắt buộc." },
+      { id: "c", text: "content-type: application/json", feedback: "Đúng." },
+      { id: "d", text: "x-claude-password", feedback: "Không có header này." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "SDK gửi các header này tự động.",
+  },
+  {
+    questionId: "ch11-l01-q11", lessonId: L, conceptId: "request-id", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Script chạy đêm thỉnh thoảng gặp lỗi 500. Bạn muốn liên hệ hỗ trợ. Nên ghi log gì?",
+    options: [
+      { id: "a", text: "Thời điểm, mã lỗi, request-id của phản hồi, loại yêu cầu — không ghi API key", feedback: "Đúng." },
+      { id: "b", text: "Toàn bộ API key để hỗ trợ kiểm tra", feedback: "Không bao giờ ghi key vào log." },
+      { id: "c", text: "Không cần log, chỉ mô tả bằng lời", feedback: "request-id giúp tra đúng yêu cầu." },
+    ],
+    answer: "a",
+    explanation: "request-id có trong header mỗi phản hồi và trong thân lỗi.",
+  },
+  {
+    questionId: "ch11-l01-q12", lessonId: L, conceptId: "api-key-secret", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một nhóm thiết lập script gọi API như dưới đây. Chọn các việc SAI.",
+    segments: [
+      { id: "s1", text: "Dùng chung một key cá nhân của trưởng nhóm cho máy chủ chạy báo cáo.", isError: true, why: "Việc dùng chung, tự động nên dùng key của service account; key cá nhân hỏng khi người đó rời tổ chức." },
+      { id: "s2", text: "Lưu key trong trình quản lý bí mật, script đọc qua biến môi trường.", isError: false },
+      { id: "s3", text: "In toàn bộ biến môi trường ra log để dễ gỡ lỗi.", isError: true, why: "Làm lộ key vào log." },
+      { id: "s4", text: "Đặt hạn dùng cho key và lên lịch tạo key mới trước khi hết hạn.", isError: false },
+    ],
+    explanation: "Đúng chủ thể (service account), đúng nơi lưu, không lộ qua log.",
+  },
+  {
+    questionId: "ch11-l01-q13", lessonId: L, conceptId: "stateless", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Chatbot nội bộ gọi API: lượt 2 hỏi “còn công đoạn sơn thì sao?” nhưng Claude trả lời như chưa biết gì về lượt 1. Nguyên nhân và cách sửa?",
+    options: [
+      { id: "a", text: "Lượt 2 chỉ gửi câu hỏi mới — phải gửi lại lượt user 1, phản hồi assistant 1 rồi câu hỏi mới", feedback: "Đúng." },
+      { id: "b", text: "Claude bị lỗi trí nhớ, đổi sang mô hình khác", feedback: "API vốn không tự nhớ." },
+      { id: "c", text: "Tăng max_tokens", feedback: "Không liên quan đến ngữ cảnh lượt trước." },
+    ],
+    answer: "a",
+    explanation: "Messages API stateless: lịch sử do chương trình của bạn giữ và gửi lại.",
+  },
+  {
+    questionId: "ch11-l01-q14", lessonId: L, conceptId: "error-codes", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Script gặp 400 invalid_request_error. Đồng nghiệp đề xuất: “cho SDK thử lại 10 lần”. Bạn đánh giá thế nào?",
+    options: [
+      { id: "a", text: "Không ích gì: 400 là lỗi do yêu cầu, gửi lại y nguyên vẫn lỗi — đọc message lỗi, sửa yêu cầu", feedback: "Đúng." },
+      { id: "b", text: "Hợp lý, 10 lần thế nào cũng được", feedback: "Thử lại chỉ có ích với lỗi tạm thời." },
+      { id: "c", text: "Đổi API key mới", feedback: "400 không phải lỗi xác thực." },
+    ],
+    answer: "a",
+    explanation: "Ví dụ: gửi tham số đã bị bỏ ở phiên bản API mới cũng trả 400.",
+  },
+  {
+    questionId: "ch11-l01-q15", lessonId: L, conceptId: "response-blocks", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết (mã giả hoặc Python) phần xử lý phản hồi của một script tóm tắt: kiểm tra lý do dừng, lấy văn bản, ghi số token.",
+    source: "msg = client.messages.create(model=..., max_tokens=1024, messages=[...])",
+    rubric: [
+      { id: "stop", label: "Kiểm tra stop_reason", weight: 1, check: { kind: "anyKeyword", keywords: ["stop_reason"] }, pass: "Có kiểm tra.", fail: "Kiểm tra msg.stop_reason (end_turn mới dùng)." },
+      { id: "text", label: "Lấy khối text", weight: 1, check: { kind: "anyKeyword", keywords: ["type", "text"] }, pass: "Có lấy văn bản.", fail: "Lấy các khối có type text trong content." },
+      { id: "usage", label: "Ghi usage", weight: 1, check: { kind: "anyKeyword", keywords: ["usage", "input_tokens", "output_tokens"] }, pass: "Có ghi token.", fail: "Ghi msg.usage để theo dõi chi phí." },
+    ],
+    passScore: 0.67,
+    referenceAnswer:
+      "if msg.stop_reason != \"end_turn\":\n    log(\"dừng vì\", msg.stop_reason, msg._request_id)\n    raise SystemExit(1)\nvan_ban = \"\".join(b.text for b in msg.content if b.type == \"text\")\nlog_tokens(msg.usage.input_tokens, msg.usage.output_tokens)\nprint(van_ban)",
+    explanation: "Ba việc: kiểm tra, trích, đo.",
+  },
+];

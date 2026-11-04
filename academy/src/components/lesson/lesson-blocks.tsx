@@ -1,6 +1,7 @@
 import { CheckCircle2, Lightbulb, ThumbsDown, ThumbsUp, Target } from "lucide-react";
 import { QuizRunner } from "@/components/quiz/quiz-runner";
 import { MermaidDiagram } from "@/components/visuals/mermaid-diagram";
+import { InfographicView } from "@/components/visuals/infographic";
 import { VISUALS } from "@/components/visuals/registry";
 import { BLOCK_TO_PART, type Lesson, type LessonBlock, type LessonPart } from "@/lib/types/content";
 import { CodeBlock } from "./copy-button";
@@ -64,10 +65,10 @@ function BlockBody({ block, lesson }: { block: LessonBlock; lesson: Lesson }) {
         </div>
       );
     case "illustration": {
-      const Visual = VISUALS[block.visual];
+      const Visual = block.visual ? VISUALS[block.visual] : undefined;
       return (
         <figure>
-          {Visual ? <Visual /> : <p className="text-danger">Thiếu hình “{block.visual}”.</p>}
+          {block.infographic ? <InfographicView data={block.infographic} /> : Visual ? <Visual /> : <p className="text-danger">Thiếu hình minh hoạ.</p>}
           <figcaption className="mt-3 text-center text-sm text-muted-foreground">{block.caption}</figcaption>
         </figure>
       );
@@ -116,7 +117,7 @@ function BlockBody({ block, lesson }: { block: LessonBlock; lesson: Lesson }) {
       return (
         <div className="flex flex-col gap-3">
           <p className="text-sm text-muted-foreground">{block.intro}</p>
-          <SimulationView lessonId={lesson.id} widget={block.widget} />
+          <SimulationView lessonId={lesson.id} widget={block.widget} sim={block.sim} />
         </div>
       );
     case "steps":

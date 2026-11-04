@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch06-l09";
+
+/** 15 questions for "Phân chia tác vụ" — 5 beginner, 7 intermediate, 3 advanced. Facts checked 2026-11-03. */
+export const questionsCh06L09: Question[] = [
+  {
+    questionId: "ch06-l09-q01", lessonId: L, conceptId: "subagent-def", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Subagent trong Claude Code là gì?",
+    options: [
+      { id: "a", text: "Trợ lý chuyên biệt chạy trong context riêng, có công cụ và quyền riêng, trả kết quả về hội thoại chính", feedback: "Đúng." },
+      { id: "b", text: "Một tài khoản Claude thứ hai", feedback: "Không — subagent chạy trong phiên của bạn." },
+      { id: "c", text: "Một nhánh git", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Theo tài liệu Subagents.",
+  },
+  {
+    questionId: "ch06-l09-q02", lessonId: L, conceptId: "builtin-agents", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "matching",
+    prompt: "Ghép subagent có sẵn với vai trò.",
+    pairs: [
+      { id: "p1", left: "Explore", right: "Tìm kiếm, phân tích codebase, chỉ đọc, nhanh" },
+      { id: "p2", left: "Plan", right: "Khảo sát lấy ngữ cảnh khi ở chế độ Plan" },
+      { id: "p3", left: "general-purpose", right: "Việc nhiều bước cần cả khám phá lẫn hành động" },
+    ],
+    explanation: "Explore và Plan chỉ đọc; general-purpose có mọi công cụ dành cho subagent.",
+  },
+  {
+    questionId: "ch06-l09-q03", lessonId: L, conceptId: "when-main", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Việc cần trao đổi qua lại nhiều lần để tinh chỉnh nên giữ ở hội thoại chính thay vì giao subagent.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Subagent (không phải fork) bắt đầu trắng; hội thoại chính giữ được mạch trao đổi.",
+  },
+  {
+    questionId: "ch06-l09-q04", lessonId: L, conceptId: "frontmatter", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Trong file subagent, những trường nào BẮT BUỘC? Chọn tất cả.",
+    options: [
+      { id: "a", text: "name", feedback: "Đúng." },
+      { id: "b", text: "description", feedback: "Đúng." },
+      { id: "c", text: "tools", feedback: "Tuỳ chọn — bỏ trống thì kế thừa công cụ dành cho subagent." },
+      { id: "d", text: "model", feedback: "Tuỳ chọn." },
+    ],
+    answer: ["a", "b"],
+    explanation: "Chỉ name và description là bắt buộc.",
+  },
+  {
+    questionId: "ch06-l09-q05", lessonId: L, conceptId: "agent-scope", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Đặt file subagent ở .claude/agents/ khác gì ~/.claude/agents/?",
+    options: [
+      { id: "a", text: ".claude/agents/ cho dự án hiện tại; ~/.claude/agents/ cho mọi dự án của bạn", feedback: "Đúng." },
+      { id: "b", text: "Không khác gì", feedback: "Phạm vi áp dụng khác nhau." },
+      { id: "c", text: "~/.claude/agents/ chỉ dùng trên máy chủ", feedback: "Đó là thư mục người dùng trên máy bạn." },
+    ],
+    answer: "a",
+    explanation: "Subagent của dự án có thể commit để cả nhóm dùng.",
+  },
+  {
+    questionId: "ch06-l09-q06", lessonId: L, conceptId: "when-subagent", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn cần biết mọi chỗ gọi một API cũ trong 200 file, chỉ cần danh sách cuối cùng. Cách nào phù hợp?",
+    options: [
+      { id: "a", text: "Giao một subagent (ví dụ Explore) khảo sát và trả danh sách", feedback: "Đúng." },
+      { id: "b", text: "Đọc cả 200 file trong hội thoại chính", feedback: "Context chính đầy output không cần giữ." },
+      { id: "c", text: "Đoán", feedback: "Dễ bỏ sót." },
+    ],
+    answer: "a",
+    explanation: "Việc nhiều output, tự hoàn thành, chỉ cần tóm tắt — đúng chỗ của subagent.",
+  },
+  {
+    questionId: "ch06-l09-q07", lessonId: L, conceptId: "agent-model", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Subagent chỉ liệt kê file và đếm dòng. Khai báo model nào hợp lý trong frontmatter?",
+    options: [
+      { id: "a", text: "model: haiku", feedback: "Đúng — việc đơn giản, model nhỏ, rẻ." },
+      { id: "b", text: "model: fable", feedback: "Đắt nhất, không cần cho việc này." },
+      { id: "c", text: "model: gpt", feedback: "Không phải giá trị hợp lệ." },
+    ],
+    answer: "a",
+    explanation: "Giá trị hợp lệ: sonnet, opus, haiku, fable, mã model đầy đủ, hoặc inherit.",
+  },
+  {
+    questionId: "ch06-l09-q08", lessonId: L, conceptId: "invoke-agent", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Những cách nào gọi được subagent tên test-runner? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Nói: “Dùng subagent test-runner để sửa các test đang lỗi”", feedback: "Đúng." },
+      { id: "b", text: "Gõ @ rồi chọn test-runner (hoặc gõ @agent-test-runner)", feedback: "Đúng." },
+      { id: "c", text: "Chạy cả phiên dưới dạng subagent đó: claude --agent test-runner", feedback: "Đúng." },
+      { id: "d", text: "Gõ git agent test-runner", feedback: "Không phải lệnh của Claude Code." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Theo mục Invoking subagents.",
+  },
+  {
+    questionId: "ch06-l09-q09", lessonId: L, conceptId: "tools-limit", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Vì sao một subagent review chỉ nên có tools: Read, Grep, Glob?",
+    options: [
+      { id: "a", text: "Để nó chỉ đọc và báo cáo, không thể sửa file — ràng buộc đúng với vai trò", feedback: "Đúng." },
+      { id: "b", text: "Để nó chạy nhanh gấp mười", feedback: "Mục đích chính là ràng buộc vai trò." },
+      { id: "c", text: "Vì subagent không được phép có công cụ khác", feedback: "Có thể, nhưng nên giới hạn theo vai trò." },
+    ],
+    answer: "a",
+    explanation: "Giới hạn công cụ là một lợi ích được tài liệu nêu: enforce constraints.",
+  },
+  {
+    questionId: "ch06-l09-q10", lessonId: L, conceptId: "foreground-background", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Subagent mà Claude tạo từ hội thoại chính mặc định chạy nền; khi nó cần quyền, Claude Code hỏi bạn trong phiên chính.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Theo mục Foreground vs. background trong tài liệu Subagents.",
+  },
+  {
+    questionId: "ch06-l09-q11", lessonId: L, conceptId: "worktree-parallel", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Trong một thư mục vừa git init, bạn chạy claude --worktree tinh-nang-a và nhận lỗi “Failed to resolve base branch \"HEAD\"”. Nguyên nhân và cách xử lý?",
+    options: [
+      { id: "a", text: "Kho chưa có commit nào; tạo commit đầu tiên rồi chạy lại", feedback: "Đúng — worktree được tạo từ một commit có sẵn." },
+      { id: "b", text: "Claude Code chưa được cài", feedback: "Lệnh đã chạy, lỗi là do git." },
+      { id: "c", text: "Tên worktree không được có dấu gạch ngang", feedback: "Tên này hợp lệ." },
+    ],
+    answer: "a",
+    explanation: "Common workflows: mỗi worktree là bản checkout riêng tạo từ commit có sẵn, nên kho cần ít nhất một commit.",
+  },
+  {
+    questionId: "ch06-l09-q12", lessonId: L, conceptId: "headless-batch", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Lệnh dưới đây làm gì?",
+    context: { label: "Terminal", content: "$ git log --oneline -20 | claude -p \"summarize these recent commits\"", lang: "bash" },
+    options: [
+      { id: "a", text: "Đưa 20 commit gần nhất cho Claude, in bản tóm tắt rồi thoát", feedback: "Đúng — chế độ không tương tác, dùng được trong script." },
+      { id: "b", text: "Mở phiên tương tác và chờ bạn hỏi", feedback: "-p chạy một lần rồi thoát." },
+      { id: "c", text: "Xoá 20 commit gần nhất", feedback: "Không — chỉ đọc log." },
+    ],
+    answer: "a",
+    explanation: "Common workflows: Pipe Claude into scripts.",
+  },
+  {
+    questionId: "ch06-l09-q13", lessonId: L, conceptId: "when-subagent", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Việc nào KHÔNG nên giao subagent?",
+    options: [
+      { id: "a", text: "Thiết kế lại form nhập với nhiều vòng góp ý trực tiếp từ bạn", feedback: "Đúng — cần trao đổi liên tục, giữ ở hội thoại chính." },
+      { id: "b", text: "Chạy toàn bộ test và tóm tắt lỗi", feedback: "Việc này rất hợp với subagent." },
+      { id: "c", text: "Đọc tài liệu API dài để lấy vài tham số", feedback: "Việc này rất hợp với subagent." },
+    ],
+    answer: "a",
+    explanation: "Tiêu chí: nhiều output và tự hoàn thành → subagent; lặp lại nhiều vòng với bạn → hội thoại chính.",
+  },
+  {
+    questionId: "ch06-l09-q14", lessonId: L, conceptId: "custom-agent", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "File subagent dưới đây có những dòng sai. Chọn chúng.",
+    segments: [
+      { id: "s1", text: "name: code-reviewer", isError: false },
+      { id: "s2", text: "description:   (để trống)", isError: true, why: "description bắt buộc — Claude dựa vào đó để biết khi nào giao việc." },
+      { id: "s3", text: "tools: Read, Grep, Glob", isError: false },
+      { id: "s4", text: "model: gpt-4", isError: true, why: "Giá trị hợp lệ: sonnet, opus, haiku, fable, mã model Claude đầy đủ, hoặc inherit." },
+    ],
+    explanation: "Kiểm tra trường bắt buộc và giá trị hợp lệ trước khi dùng subagent.",
+  },
+  {
+    questionId: "ch06-l09-q15", lessonId: L, conceptId: "when-subagent", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Lập kế hoạch chia việc cho một ngày dưới đây: việc nào ở hội thoại chính, việc nào giao subagent, việc nào chạy phiên song song.",
+    source: "Việc trong ngày: (1) chuyển 40 chỗ gọi API cũ sang API mới — trước tiên phải khảo sát; (2) thiết kế lại trang tổng quan với trưởng nhóm qua nhiều vòng góp ý; (3) chạy và tóm tắt bộ test 600 test sau mỗi đợt sửa; (4) sửa một lỗi xuất Excel độc lập do bộ phận khác báo.",
+    rubric: [
+      { id: "explore", label: "Khảo sát bằng subagent", weight: 1, check: { kind: "regex", pattern: "(subagent|explore)[^\\n]*(khao sat|tim|api)|(khao sat|api)[^\\n]*(subagent|explore)" }, pass: "Có subagent khảo sát.", fail: "Giao khảo sát 40 chỗ gọi API cho subagent/Explore." },
+      { id: "main", label: "Thiết kế ở hội thoại chính", weight: 1, check: { kind: "regex", pattern: "(hoi thoai chinh|phien chinh)[^\\n]*(thiet ke|tong quan|gop y)|(thiet ke|tong quan|gop y)[^\\n]*(hoi thoai chinh|phien chinh)" }, pass: "Đúng chỗ.", fail: "Việc nhiều vòng góp ý giữ ở hội thoại chính." },
+      { id: "tests", label: "Chạy test bằng subagent", weight: 1, check: { kind: "regex", pattern: "test[^\\n]*subagent|subagent[^\\n]*test" }, pass: "Có subagent chạy test.", fail: "Giao chạy và tóm tắt test cho subagent." },
+      { id: "worktree", label: "Lỗi độc lập ở worktree", weight: 1, check: { kind: "regex", pattern: "worktree" }, pass: "Có worktree.", fail: "Sửa lỗi xuất Excel ở claude --worktree riêng." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "(1) Khảo sát 40 chỗ gọi API cũ: giao subagent Explore, nhận danh sách; sau đó sửa từng đợt ở hội thoại chính.\n(2) Thiết kế lại trang tổng quan: giữ ở hội thoại chính vì nhiều vòng góp ý.\n(3) Chạy và tóm tắt 600 test: giao subagent test-runner (model haiku), chỉ báo test lỗi.\n(4) Lỗi xuất Excel độc lập: mở phiên song song bằng claude --worktree sua-loi-excel.",
+    explanation: "Chia theo tính chất việc: trao đổi nhiều → chính; ồn ào, tự hoàn thành → subagent; độc lập → worktree.",
+  },
+];

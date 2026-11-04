@@ -11,13 +11,12 @@ test("home shows the main sections and links to the course", async ({ page }) =>
   await expect(page.getByRole("option").first()).toBeVisible();
 });
 
-test("course page: published lessons link, planned lessons are labelled and not links", async ({ page }) => {
+test("course page: every outline lesson is published and links to its page", async ({ page }) => {
   await page.goto("/hoc/");
   await expect(page.getByRole("link", { name: /Prompt là gì\?/ }).first()).toBeVisible();
-  const planned = page.getByText("Few-shot prompting").first();
-  await expect(planned).toBeVisible();
-  expect(await planned.evaluate((el) => el.closest("a"))).toBeNull();
-  await expect(page.getByText("Sắp ra mắt").first()).toBeVisible();
+  const last = page.locator("section", { hasText: "Chương 12: Dự án tốt nghiệp" }).locator("li", { hasText: "Đánh giá kết quả" });
+  await expect(last.locator("a")).toHaveAttribute("href", /\/hoc\/du-an-tot-nghiep\/danh-gia-ket-qua\/?$/);
+  await expect(page.getByText("Sắp ra mắt")).toHaveCount(0);
 });
 
 test("search dialog with keyboard navigation", async ({ page, isMobile }) => {
@@ -26,8 +25,14 @@ test("search dialog with keyboard navigation", async ({ page, isMobile }) => {
   await page.keyboard.press("Control+k");
   const input = page.getByLabel("Từ khoá tìm kiếm");
   await input.fill("terminal");
-  await expect(page.getByRole("listbox")).toContainText("Terminal Simulator");
-  await input.press("ArrowDown");
+  const list = page.getByRole("listbox");
+  await expect(list).toContainText("Terminal Simulator");
+  // Move the keyboard selection down to the lab, whatever its rank.
+  const options = list.getByRole("option");
+  const target = (await options.allTextContents()).findIndex((t) => t.includes("Terminal Simulator"));
+  // Nothing is selected until the first ArrowDown.
+  for (let i = 0; i <= target; i++) await input.press("ArrowDown");
+  await expect(options.nth(target)).toHaveAttribute("aria-selected", "true");
   await input.press("Enter");
   await expect(page).toHaveURL(/thuc-hanh\/terminal/);
 });

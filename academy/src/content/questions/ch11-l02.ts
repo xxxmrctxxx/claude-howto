@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch11-l02";
+
+/** 15 questions for "Xử lý dữ liệu" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh11L02: Question[] = [
+  {
+    questionId: "ch11-l02-q01", lessonId: L, conceptId: "structured-outputs", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Với structured outputs, JSON schema được đặt ở tham số nào của Messages API?",
+    options: [
+      { id: "a", text: "output_config.format (type: json_schema)", feedback: "Đúng." },
+      { id: "b", text: "Trong tên mô hình", feedback: "Không có cách đó." },
+      { id: "c", text: "Header anthropic-version", feedback: "Header đó là phiên bản API." },
+    ],
+    answer: "a",
+    explanation: "Tham số cũ output_format đã chuyển sang output_config.format.",
+  },
+  {
+    questionId: "ch11-l02-q02", lessonId: L, conceptId: "no-extra-fields", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền giá trị bắt buộc cho object trong schema structured outputs.",
+    template: "Với mỗi object, \"additionalProperties\" phải đặt là [[b1]].",
+    blanks: [{ id: "b1", accepted: ["false"], width: 6 }],
+    explanation: "Tài liệu: additionalProperties phải là false với object.",
+  },
+  {
+    questionId: "ch11-l02-q03", lessonId: L, conceptId: "source-check", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "JSON khớp schema nghĩa là nội dung chắc chắn đúng với ghi chú gốc.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Schema đảm bảo khuôn, không đảm bảo sự thật — vẫn đối chiếu mẫu với nguồn.",
+  },
+  {
+    questionId: "ch11-l02-q04", lessonId: L, conceptId: "enum-field", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Trường “mức độ” chỉ có ba giá trị nhe / trung-binh / nang. Nên khai báo thế nào trong schema?",
+    options: [
+      { id: "a", text: "type string kèm enum gồm ba giá trị đó", feedback: "Đúng." },
+      { id: "b", text: "type string, mô tả bằng lời trong prompt", feedback: "Dễ ra giá trị lạ." },
+      { id: "c", text: "type integer từ 1 đến 3", feedback: "Mất nghĩa và khó đọc." },
+    ],
+    answer: "a",
+    explanation: "Enum giới hạn giá trị hợp lệ.",
+  },
+  {
+    questionId: "ch11-l02-q05", lessonId: L, conceptId: "required-fields", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Từ khoá nào trong JSON schema liệt kê các trường bắt buộc phải có?",
+    options: [
+      { id: "a", text: "required", feedback: "Đúng." },
+      { id: "b", text: "mandatory", feedback: "Không phải từ khoá JSON schema." },
+      { id: "c", text: "enum", feedback: "enum liệt kê giá trị cho phép." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu nêu required trong danh sách tính năng được hỗ trợ.",
+  },
+  {
+    questionId: "ch11-l02-q06", lessonId: L, conceptId: "schema-limits", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn muốn so_luong không âm và thêm \"minimum\": 0 vào schema, nhận lỗi 400. Cách làm đúng?",
+    options: [
+      { id: "a", text: "Bỏ minimum khỏi schema; sau khi nhận JSON, code tự kiểm tra so_luong ≥ 0", feedback: "Đúng." },
+      { id: "b", text: "Gửi lại nhiều lần cho đến khi hết lỗi", feedback: "Schema không hỗ trợ minimum — gửi lại vẫn 400." },
+      { id: "c", text: "Đổi so_luong sang kiểu string", feedback: "Mất kiểu số, càng khó kiểm tra." },
+    ],
+    answer: "a",
+    explanation: "Ràng buộc số và độ dài chuỗi không được hỗ trợ — kiểm tra cục bộ.",
+  },
+  {
+    questionId: "ch11-l02-q07", lessonId: L, conceptId: "stop-check", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Đoạn code dưới đây gặp phản hồi có stop_reason là max_tokens. Chuyện gì có thể xảy ra?",
+    context: { label: "Code", content: "ban_ghi = json.loads(msg.content[0].text)\nnap_vao_bang(ban_ghi)", lang: "python" },
+    options: [
+      { id: "a", text: "JSON có thể bị cắt dở: json.loads báo lỗi, hoặc tệ hơn là bản ghi thiếu trường vẫn được nạp", feedback: "Đúng." },
+      { id: "b", text: "Không sao, structured outputs luôn trả JSON đầy đủ", feedback: "Tài liệu nêu max_tokens có thể làm output không khớp schema." },
+      { id: "c", text: "API tự tăng max_tokens và gọi lại", feedback: "API không tự làm việc đó." },
+    ],
+    answer: "a",
+    explanation: "Kiểm tra stop_reason trước khi parse.",
+  },
+  {
+    questionId: "ch11-l02-q08", lessonId: L, conceptId: "enum-casing", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bảng tổng hợp hiện hai nhóm “Lắp ráp vỏ” và “Lắp Ráp Vỏ”. Nguyên nhân khả dĩ và cách xử lý?",
+    options: [
+      { id: "a", text: "Giá trị enum có thể lệch chữ hoa; chuẩn hoá (so khớp không phân biệt hoa thường) trước khi nạp", feedback: "Đúng." },
+      { id: "b", text: "Hai công đoạn khác nhau thật", feedback: "Danh mục chỉ có một công đoạn này." },
+      { id: "c", text: "Lỗi của phần mềm bảng tính", feedback: "Dữ liệu đầu vào đã khác nhau." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu khuyên so sánh enum không phân biệt hoa thường.",
+  },
+  {
+    questionId: "ch11-l02-q09", lessonId: L, conceptId: "unknown-value", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Ghi chú “vỏ móp, chưa đếm” cho ra so_luong = 1. Schema của bạn bắt buộc so_luong là integer. Sửa thế nào?",
+    options: [
+      { id: "a", text: "Cho so_luong nhận integer hoặc null, dặn “không có thì để null”; bản ghi null vào hàng chờ", feedback: "Đúng." },
+      { id: "b", text: "Giữ nguyên, số 1 cũng gần đúng", feedback: "Số bị đoán làm sai thống kê." },
+      { id: "c", text: "Xoá trường so_luong", feedback: "Mất dữ liệu cần thiết." },
+    ],
+    answer: "a",
+    explanation: "Đừng ép mô hình đoán khi nguồn không có thông tin.",
+  },
+  {
+    questionId: "ch11-l02-q10", lessonId: L, conceptId: "strict-tools", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép tính năng với việc nó đảm bảo.",
+    pairs: [
+      { id: "p1", left: "output_config.format (JSON outputs)", right: "Câu trả lời của Claude theo đúng khuôn JSON" },
+      { id: "p2", left: "strict: true trên công cụ", right: "Tham số Claude truyền khi gọi công cụ khớp schema" },
+      { id: "p3", left: "Kiểm tra cục bộ trong code", right: "Điều kiện schema không diễn đạt được (số âm, khoảng ngày)" },
+    ],
+    explanation: "Hai tính năng API dùng được cùng nhau; phần còn lại do code của bạn.",
+  },
+  {
+    questionId: "ch11-l02-q11", lessonId: L, conceptId: "local-validation", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp các cổng kiểm tra cho một bản ghi trích từ ghi chú.",
+    items: [
+      { id: "a", text: "Kiểm tra stop_reason là end_turn" },
+      { id: "b", text: "Parse JSON" },
+      { id: "c", text: "Kiểm tra cục bộ: số âm, enum, ngày" },
+      { id: "d", text: "Bản ghi có null thì vào hàng chờ" },
+      { id: "e", text: "Nạp vào bảng" },
+    ],
+    explanation: "Chặn sớm nhất có thể; không gì vào bảng mà chưa qua cổng.",
+  },
+  {
+    questionId: "ch11-l02-q12", lessonId: L, conceptId: "json-schema", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn viết schema cho phiếu kiểm tra như dưới đây. Chọn các dòng gây lỗi hoặc rủi ro.",
+    segments: [
+      { id: "s1", text: "\"ngay\": {\"type\": \"string\", \"format\": \"date\"}", isError: false },
+      { id: "s2", text: "\"nhiet_do\": {\"type\": \"number\", \"maximum\": 300}", isError: true, why: "maximum không được hỗ trợ — lỗi 400; kiểm tra cục bộ." },
+      { id: "s3", text: "\"ket_qua\": {\"type\": \"string\", \"enum\": [\"dat\", \"khong-dat\"]}", isError: false },
+      { id: "s4", text: "\"additionalProperties\": true", isError: true, why: "Với object phải là false." },
+      { id: "s5", text: "\"required\": [\"ngay\", \"ket_qua\"]", isError: false },
+    ],
+    explanation: "Định dạng date và enum được hỗ trợ; maximum và additionalProperties true thì không.",
+  },
+  {
+    questionId: "ch11-l02-q13", lessonId: L, conceptId: "source-check", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Pipeline trích 2.000 ghi chú/tuần, 100% JSON hợp lệ. Trưởng phòng muốn bỏ bước đối chiếu thủ công. Bạn khuyên gì?",
+    options: [
+      { id: "a", text: "Giữ đối chiếu ngẫu nhiên một mẫu nhỏ mỗi tuần và theo dõi tỷ lệ sai; JSON hợp lệ không chứng minh nội dung đúng", feedback: "Đúng." },
+      { id: "b", text: "Bỏ hẳn, vì JSON đã hợp lệ", feedback: "Hợp lệ về khuôn ≠ đúng nội dung." },
+      { id: "c", text: "Đối chiếu toàn bộ 2.000 ghi chú", feedback: "Tốn công không cần thiết; lấy mẫu là đủ để phát hiện xu hướng." },
+    ],
+    answer: "a",
+    explanation: "Lấy mẫu có hệ thống cân bằng chi phí và độ tin cậy.",
+  },
+  {
+    questionId: "ch11-l02-q14", lessonId: L, conceptId: "structured-outputs", learningObjective: "o1", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Code cũ ép định dạng bằng cách viết sẵn “{” ở cuối lượt assistant (prefill). Trên mô hình mới, yêu cầu bị lỗi 400. Hướng sửa?",
+    options: [
+      { id: "a", text: "Bỏ prefill, dùng structured outputs (output_config.format) để có JSON đúng khuôn", feedback: "Đúng." },
+      { id: "b", text: "Prefill hai ký tự thay vì một", feedback: "Prefill không được hỗ trợ trên các mô hình mới." },
+      { id: "c", text: "Hạ phiên bản SDK", feedback: "Lỗi đến từ mô hình, không phải SDK." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu Messages API khuyên dùng structured outputs thay prefill.",
+  },
+  {
+    questionId: "ch11-l02-q15", lessonId: L, conceptId: "json-schema", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết JSON schema cho bản ghi “kết quả đo kích thước”: ma_chi_tiet (chuỗi), kich_thuoc_mm (số), ket_luan (dat/khong-dat), ghi_chu (chuỗi hoặc null).",
+    source: "Mẫu ghi chú: “CT-118 đo 24.98 mm, đạt” · “CT-121 đo 25.40 mm, không đạt, ba via”",
+    rubric: [
+      { id: "required", label: "required", weight: 1, check: { kind: "anyKeyword", keywords: ["required"] }, pass: "Có trường bắt buộc.", fail: "Thêm required." },
+      { id: "enum", label: "enum kết luận", weight: 1, check: { kind: "allGroups", groups: [["enum"], ["khong-dat", "khong dat"]] }, pass: "Có enum.", fail: "ket_luan cần enum dat/khong-dat." },
+      { id: "strict", label: "Chặn trường lạ", weight: 1, check: { kind: "anyKeyword", keywords: ["additionalproperties"] }, pass: "Có additionalProperties.", fail: "Thêm additionalProperties false." },
+      { id: "null", label: "ghi_chu cho phép null", weight: 1, check: { kind: "anyKeyword", keywords: ["null"] }, pass: "Có null.", fail: "ghi_chu cần cho phép null." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "{\"type\": \"object\", \"properties\": {\"ma_chi_tiet\": {\"type\": \"string\"}, \"kich_thuoc_mm\": {\"type\": \"number\"}, \"ket_luan\": {\"type\": \"string\", \"enum\": [\"dat\", \"khong-dat\"]}, \"ghi_chu\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}]}}, \"required\": [\"ma_chi_tiet\", \"kich_thuoc_mm\", \"ket_luan\", \"ghi_chu\"], \"additionalProperties\": false}\nDung sai kích thước kiểm tra trong code, không đặt minimum/maximum trong schema.",
+    explanation: "Đủ khuôn, có enum, chặn trường lạ, cho phép thiếu ghi chú.",
+  },
+];

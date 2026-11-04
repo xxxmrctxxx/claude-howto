@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch05-l03";
+
+/** 15 questions for "Cài đặt môi trường" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh05L03: Question[] = [
+  {
+    questionId: "ch05-l03-q01", lessonId: L, conceptId: "sys-req", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Hệ điều hành nào đáp ứng yêu cầu tối thiểu của Claude Code? Chọn tất cả.",
+    options: [
+      { id: "a", text: "macOS 14 Sonoma", feedback: "Đúng — yêu cầu macOS 13.0 trở lên." },
+      { id: "b", text: "Windows 11", feedback: "Đúng — yêu cầu Windows 10 bản 1809 trở lên." },
+      { id: "c", text: "Ubuntu 22.04", feedback: "Đúng — yêu cầu Ubuntu 20.04 trở lên." },
+      { id: "d", text: "Windows 7", feedback: "Sai — quá cũ." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Theo Advanced setup: macOS 13.0+, Windows 10 1809+ hoặc Server 2019+, Ubuntu 20.04+, Debian 10+, Alpine 3.19+.",
+  },
+  {
+    questionId: "ch05-l03-q02", lessonId: L, conceptId: "hardware", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Claude Code cần tối thiểu bao nhiêu RAM?",
+    options: [
+      { id: "a", text: "4 GB trở lên", feedback: "Đúng." },
+      { id: "b", text: "512 MB", feedback: "Quá ít so với yêu cầu." },
+      { id: "c", text: "64 GB", feedback: "Không cần nhiều như vậy." },
+    ],
+    answer: "a",
+    explanation: "Yêu cầu phần cứng: 4 GB RAM trở lên, bộ xử lý x64 hoặc ARM64.",
+  },
+  {
+    questionId: "ch05-l03-q03", lessonId: L, conceptId: "network-region", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Claude Code có thể chạy hoàn toàn không cần internet vì model nằm sẵn trên máy bạn.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Claude Code yêu cầu kết nối internet; model chạy trên hạ tầng của Anthropic hoặc nhà cung cấp đám mây.",
+  },
+  {
+    questionId: "ch05-l03-q04", lessonId: L, conceptId: "git-for-windows", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Trên Windows (native), nếu KHÔNG cài Git for Windows thì Claude Code chạy lệnh shell bằng gì?",
+    options: [
+      { id: "a", text: "Công cụ PowerShell", feedback: "Đúng." },
+      { id: "b", text: "Không chạy được lệnh nào", feedback: "Sai — vẫn có PowerShell." },
+      { id: "c", text: "Bắt buộc phải cài WSL", feedback: "WSL là lựa chọn khác, không bắt buộc." },
+    ],
+    answer: "a",
+    explanation: "Có Git for Windows → dùng Git Bash cho công cụ Bash; không có → dùng công cụ PowerShell.",
+  },
+  {
+    questionId: "ch05-l03-q05", lessonId: L, conceptId: "desktop-alt", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Người chưa quen terminal có thể dùng Claude Code qua ứng dụng desktop.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Tài liệu chính thức giới thiệu ứng dụng desktop cho người muốn dùng Claude Code mà không cần terminal.",
+  },
+  {
+    questionId: "ch05-l03-q06", lessonId: L, conceptId: "windows-options", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Trên Windows, bạn cần chạy lệnh trong sandbox (cách ly file và mạng). Nên chọn cách nào?",
+    options: [
+      { id: "a", text: "WSL 2", feedback: "Đúng — sandbox chỉ hỗ trợ ở WSL 2." },
+      { id: "b", text: "Native Windows", feedback: "Native Windows không hỗ trợ sandbox." },
+      { id: "c", text: "WSL 1", feedback: "WSL 1 không hỗ trợ sandbox." },
+    ],
+    answer: "a",
+    explanation: "Bảng “Set up on Windows”: chỉ WSL 2 hỗ trợ sandboxing.",
+  },
+  {
+    questionId: "ch05-l03-q07", lessonId: L, conceptId: "wsl", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "fill-blank",
+    prompt: "Điền từ còn thiếu.",
+    template: "Khi dùng WSL, bạn cài và chạy `claude` bên trong terminal [[b1]], không phải trong PowerShell hay CMD.",
+    blanks: [{ id: "b1", accepted: ["WSL", "Linux", "của WSL"], width: 8 }],
+    explanation: "Với WSL, chạy trình cài Linux và lệnh claude trong bản phân phối WSL.",
+  },
+  {
+    questionId: "ch05-l03-q08", lessonId: L, conceptId: "os-version", learningObjective: "o1", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Sau khi cài trên MacBook, bạn gặp lỗi `dyld: cannot load` kèm dòng `built for Mac OS X 13.0`. Nên làm gì trước tiên?",
+    options: [
+      { id: "a", text: "Kiểm tra phiên bản macOS (About This Mac); nếu thấp hơn 13.0 thì cập nhật macOS", feedback: "Đúng — đây là dấu hiệu macOS quá cũ." },
+      { id: "b", text: "Mua máy mới ngay", feedback: "Có thể chỉ cần cập nhật macOS." },
+      { id: "c", text: "Cài lại nhiều lần cho tới khi chạy", feedback: "Cài lại không sửa được việc hệ điều hành quá cũ." },
+    ],
+    answer: "a",
+    explanation: "Terminal guide chính thức: lỗi dyld hoặc built for Mac OS X 13.0 thường do macOS cũ hơn mức hỗ trợ.",
+  },
+  {
+    questionId: "ch05-l03-q09", lessonId: L, conceptId: "git", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Git là tuỳ chọn khi cài Claude Code. Vì sao vẫn nên có Git?",
+    options: [
+      { id: "a", text: "Để xem Claude đã thay đổi gì và quay lại phiên bản trước khi cần", feedback: "Đúng." },
+      { id: "b", text: "Vì không có Git thì Claude Code không mở được", feedback: "Sai — Git là tuỳ chọn." },
+      { id: "c", text: "Để tăng tốc độ internet", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Claude Code đọc trạng thái git và có thể dùng git; với bạn, git là lưới an toàn để xem và hoàn tác thay đổi.",
+  },
+  {
+    questionId: "ch05-l03-q10", lessonId: L, conceptId: "account-req", learningObjective: "o3", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Loại tài khoản nào dùng được Claude Code? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Gói Pro hoặc Max", feedback: "Đúng." },
+      { id: "b", text: "Gói Team hoặc Enterprise", feedback: "Đúng." },
+      { id: "c", text: "Tài khoản Claude Console", feedback: "Đúng." },
+      { id: "d", text: "Gói claude.ai miễn phí", feedback: "Sai — gói miễn phí không gồm Claude Code." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Theo Advanced setup: cần Pro, Max, Ultra, Team, Enterprise hoặc Console; hoặc nhà cung cấp đám mây như Amazon Bedrock.",
+  },
+  {
+    questionId: "ch05-l03-q11", lessonId: L, conceptId: "editor", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn muốn xem trực quan những file Claude Code vừa sửa trong dự án. Chuẩn bị gì là hợp lý?",
+    options: [
+      { id: "a", text: "Một trình soạn thảo code như VS Code (có tiện ích Claude Code)", feedback: "Đúng — giúp mở file và xem thay đổi dễ dàng." },
+      { id: "b", text: "Phần mềm vẽ Paint", feedback: "Không dùng để xem code." },
+      { id: "c", text: "Không cần xem lại, cứ tin Claude", feedback: "Bạn chịu trách nhiệm xem xét thay đổi." },
+    ],
+    answer: "a",
+    explanation: "Trình soạn thảo không bắt buộc, nhưng giúp bạn đọc và kiểm tra thay đổi trước khi chấp nhận.",
+  },
+  {
+    questionId: "ch05-l03-q12", lessonId: L, conceptId: "sys-req", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Bảng kiểm tra máy dưới đây có những dòng KHÔNG đạt yêu cầu. Hãy chọn chúng.",
+    segments: [
+      { id: "s1", text: "Windows 10 bản 1709", isError: true, why: "Cần bản 1809 trở lên." },
+      { id: "s2", text: "8 GB RAM", isError: false },
+      { id: "s3", text: "Kết nối internet ổn định", isError: false },
+      { id: "s4", text: "Windows 32-bit", isError: true, why: "Cần bộ xử lý x64 hoặc ARM64; Claude Code không hỗ trợ Windows 32-bit." },
+    ],
+    explanation: "Đối chiếu từng dòng với yêu cầu: hệ điều hành, RAM, kiến trúc bộ xử lý, mạng.",
+  },
+  {
+    questionId: "ch05-l03-q13", lessonId: L, conceptId: "windows-options", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép cách chạy trên Windows với tình huống phù hợp.",
+    pairs: [
+      { id: "p1", left: "Native Windows", right: "Dự án dùng công cụ Windows" },
+      { id: "p2", left: "WSL 2", right: "Cần công cụ Linux hoặc sandbox" },
+      { id: "p3", left: "WSL 1", right: "Khi không dùng được WSL 2" },
+    ],
+    explanation: "Theo bảng lựa chọn trong trang Advanced setup.",
+  },
+  {
+    questionId: "ch05-l03-q14", lessonId: L, conceptId: "desktop-alt", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Phòng hành chính gồm 5 người chưa từng dùng terminal muốn thử Claude Code cho việc sắp xếp hồ sơ. Đề xuất nào hợp lý nhất?",
+    options: [
+      { id: "a", text: "Bắt đầu bằng ứng dụng desktop; ai muốn đi sâu thì học terminal sau", feedback: "Đúng — giảm rào cản ban đầu mà vẫn dùng được Claude Code." },
+      { id: "b", text: "Bắt buộc mọi người học Linux trước khi thử", feedback: "Rào cản quá cao cho mục tiêu thử nghiệm." },
+      { id: "c", text: "Dùng gói miễn phí cho đỡ tốn", feedback: "Gói miễn phí không gồm Claude Code." },
+    ],
+    answer: "a",
+    explanation: "Chọn giao diện theo người dùng: desktop cho người không quen terminal; vòng lặp agent vẫn như nhau.",
+  },
+  {
+    questionId: "ch05-l03-q15", lessonId: L, conceptId: "os-version", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết kế hoạch chuẩn bị môi trường cho anh Minh để dùng Claude Code bằng terminal.",
+    source: "Máy anh Minh: MacBook Air M1 (ARM64), macOS 12 Monterey, 8 GB RAM, chưa kiểm tra Git. Anh có gói Max.",
+    rubric: [
+      { id: "upgrade", label: "Phát hiện cần cập nhật macOS", weight: 1, check: { kind: "regex", pattern: "(macos\\s*13|13\\.0|cap nhat|nang cap)" }, pass: "Có bước cập nhật macOS.", fail: "macOS 12 chưa đạt — cần 13.0 trở lên." },
+      { id: "hw", label: "Xác nhận phần cứng đạt", weight: 1, check: { kind: "regex", pattern: "(arm64|8\\s*gb|4\\s*gb)" }, pass: "Có xét phần cứng.", fail: "Xác nhận RAM và bộ xử lý đạt yêu cầu." },
+      { id: "git", label: "Kiểm tra Git", weight: 1, check: { kind: "regex", pattern: "git --version" }, pass: "Có kiểm tra Git.", fail: "Chạy git --version." },
+      { id: "account", label: "Tài khoản", weight: 1, check: { kind: "anyKeyword", keywords: ["max", "tài khoản", "gói"] }, pass: "Đã xét tài khoản.", fail: "Xác nhận gói tài khoản đủ điều kiện." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "1. Phần cứng đạt: ARM64 (M1), 8 GB RAM (yêu cầu 4 GB).\n2. macOS 12 chưa đạt: cập nhật lên macOS 13.0 trở lên qua Software Update, rồi kiểm tra lại bằng sw_vers.\n3. Mở Terminal, chạy git --version để xem đã có Git chưa.\n4. Gói Max đủ điều kiện dùng Claude Code.",
+    explanation: "Kế hoạch tốt đối chiếu từng yêu cầu, chỉ ra điểm chưa đạt và cách kiểm tra lại.",
+  },
+];

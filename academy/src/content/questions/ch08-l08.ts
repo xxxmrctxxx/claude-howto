@@ -1,0 +1,181 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch08-l08";
+
+/** 15 questions for "Theo dõi chi phí khi có dữ liệu" — 5 beginner, 7 intermediate, 3 advanced. Facts checked 2026-11-03. */
+export const questionsCh08L08: Question[] = [
+  {
+    questionId: "ch08-l08-q01", lessonId: L, conceptId: "usage-cmd", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Trong Claude Code, lệnh nào hiển thị mức dùng, hạn mức gói và chi phí ước tính?",
+    options: [
+      { id: "a", text: "/usage", feedback: "Đúng — /cost là bí danh mở thẻ chi phí." },
+      { id: "b", text: "/init", feedback: "/init tạo CLAUDE.md." },
+      { id: "c", text: "/clear", feedback: "/clear xoá hội thoại." },
+    ],
+    answer: "a",
+    explanation: "/usage là bảng mức dùng chính của Claude Code.",
+  },
+  {
+    questionId: "ch08-l08-q02", lessonId: L, conceptId: "sub-vs-api", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Với người dùng gói Pro hoặc Max, con số chi phí phiên trong /usage có ý nghĩa thế nào?",
+    options: [
+      { id: "a", text: "Không dùng để tính tiền — mức dùng đã nằm trong gói; nên xem thanh hạn mức và phần phân bổ", feedback: "Đúng." },
+      { id: "b", text: "Là số tiền sẽ bị trừ thêm vào thẻ", feedback: "Không — tài liệu nói con số này dành cho người dùng API." },
+      { id: "c", text: "Là hạn mức còn lại", feedback: "Hạn mức hiển thị bằng thanh riêng." },
+    ],
+    answer: "a",
+    explanation: "Theo Manage costs: khối Session dành cho người dùng API; người dùng gói xem thanh hạn mức và phân bổ.",
+  },
+  {
+    questionId: "ch08-l08-q03", lessonId: L, conceptId: "estimate-vs-bill", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Số tiền Claude Code hiển thị trong /usage là hoá đơn chính thức.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Claude Code tính trên máy theo giá niêm yết (hoặc bảng giá tổ chức cấu hình) — là ước tính.",
+  },
+  {
+    questionId: "ch08-l08-q04", lessonId: L, conceptId: "usage-fields", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Khi dùng prompt caching, phần token đầu vào trong trường usage được tách thành những trường nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "input_tokens", feedback: "Đúng." },
+      { id: "b", text: "cache_read_input_tokens", feedback: "Đúng." },
+      { id: "c", text: "cache_creation_input_tokens", feedback: "Đúng." },
+      { id: "d", text: "monthly_invoice_total", feedback: "Không có trường này." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Cả ba trường đều tính vào context window và có mức giá khác nhau.",
+  },
+  {
+    questionId: "ch08-l08-q05", lessonId: L, conceptId: "baseline", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Tài liệu khuyên ước tính chi phí Claude Code cho một nhóm bằng cách nào?",
+    options: [
+      { id: "a", text: "Bắt đầu với một nhóm thí điểm nhỏ, dùng công cụ theo dõi để đo mức nền rồi mới mở rộng", feedback: "Đúng." },
+      { id: "b", text: "Nhân mức trung bình trên mạng với số người, không cần đo", feedback: "Chi phí khác nhau nhiều theo model, dự án và thói quen." },
+      { id: "c", text: "Chờ hoá đơn cuối năm", feedback: "Quá muộn để điều chỉnh." },
+    ],
+    answer: "a",
+    explanation: "Chi phí mỗi người dao động lớn theo model, kích thước codebase và cách dùng.",
+  },
+  {
+    questionId: "ch08-l08-q06", lessonId: L, conceptId: "console", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn là quản trị viên Claude Console, muốn đặt trần chi tiêu cho toàn bộ Claude Code của tổ chức. Làm ở đâu?",
+    options: [
+      { id: "a", text: "Đặt giới hạn chi tiêu cho workspace “Claude Code” trong Console", feedback: "Đúng." },
+      { id: "b", text: "Ghi “đừng tiêu quá $200” vào CLAUDE.md", feedback: "CLAUDE.md không giới hạn chi tiêu." },
+      { id: "c", text: "Gõ /clear thường xuyên", feedback: "Giúp tiết kiệm nhưng không phải giới hạn." },
+    ],
+    answer: "a",
+    explanation: "Workspace “Claude Code” được tạo tự động khi đăng nhập Console lần đầu; có thể đặt giới hạn chi tiêu cho nó.",
+  },
+  {
+    questionId: "ch08-l08-q07", lessonId: L, conceptId: "usage-fields", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Một yêu cầu tới Opus 5.5 ($4 vào, $20 ra mỗi MTok, không dùng cache) có usage như dưới. Chi phí ước tính?",
+    context: { label: "usage", content: "{ \"input_tokens\": 10000, \"output_tokens\": 2000 }", lang: "json" },
+    options: [
+      { id: "a", text: "$0,08 ($0,04 vào + $0,04 ra)", feedback: "Đúng." },
+      { id: "b", text: "$0,048", feedback: "Đã tính đầu ra theo giá đầu vào." },
+      { id: "c", text: "$80", feedback: "Quên chia cho 1.000.000." },
+    ],
+    answer: "a",
+    explanation: "0,01 × $4 = $0,04; 0,002 × $20 = $0,04.",
+  },
+  {
+    questionId: "ch08-l08-q08", lessonId: L, conceptId: "enterprise-avg", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Theo trang Manage costs (03/11/2026), mức chi phí trung bình của Claude Code trong các doanh nghiệp là bao nhiêu?",
+    options: [
+      { id: "a", text: "Khoảng $13 mỗi lập trình viên mỗi ngày làm việc, $150–250 mỗi tháng", feedback: "Đúng — và 90% người dùng dưới $30 mỗi ngày." },
+      { id: "b", text: "Khoảng $1 mỗi tháng cho mọi người", feedback: "Không khớp với số liệu tài liệu nêu." },
+      { id: "c", text: "Cố định $1.000 mỗi người mỗi ngày", feedback: "Không có mức cố định như vậy." },
+    ],
+    answer: "a",
+    explanation: "Đây là mức tham khảo; tài liệu vẫn khuyên đo mức nền của nhóm mình bằng thí điểm.",
+  },
+  {
+    questionId: "ch08-l08-q09", lessonId: L, conceptId: "team-seat", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Trên gói Team và Enterprise, hạn mức Claude Code của mỗi thành viên lấy từ hạn mức theo ghế, đặt lại theo cửa sổ 5 giờ và theo tuần, dùng chung với Claude chat.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Quản trị viên có thể bật usage credits và đặt giới hạn chi tiêu khi cần vượt hạn mức ghế.",
+  },
+  {
+    questionId: "ch08-l08-q10", lessonId: L, conceptId: "clear-reset", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Từ Claude Code v2.1.211, tổng chi phí trong khối Session của /usage đặt lại về $0 khi /clear bắt đầu phiên mới.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Trước v2.1.211 tổng cộng dồn qua /clear trong suốt tiến trình; hãy ghi số liệu trước khi /clear nếu cần.",
+  },
+  {
+    questionId: "ch08-l08-q11", lessonId: L, conceptId: "cloud", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Công ty dùng Claude Code qua Amazon Bedrock và muốn biết chi phí theo từng lập trình viên. Cách phù hợp?",
+    options: [
+      { id: "a", text: "Xuất số liệu bằng OpenTelemetry (hoặc dùng gateway có thống kê theo người)", feedback: "Đúng." },
+      { id: "b", text: "Xem dashboard analytics của claude.ai", feedback: "Không bao gồm mức dùng trên nhà cung cấp đám mây." },
+      { id: "c", text: "Không có cách nào", feedback: "Có — OpenTelemetry hoặc gateway." },
+    ],
+    answer: "a",
+    explanation: "Claude Code không gửi số liệu từ đám mây của bạn về Anthropic; theo dõi theo người bằng OpenTelemetry hoặc gateway.",
+  },
+  {
+    questionId: "ch08-l08-q12", lessonId: L, conceptId: "no-fabricate", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Trưởng phòng hỏi: “Tháng sau nhóm 8 người dùng Claude Code hết bao nhiêu?” Bạn chưa có số liệu nào. Trả lời tốt nhất?",
+    options: [
+      { id: "a", text: "Đưa khoảng ước tính kèm giả định rõ ràng, đề xuất thí điểm 2 tuần để đo rồi báo lại số thật", feedback: "Đúng." },
+      { id: "b", text: "Đưa một con số chính xác cho trưởng phòng yên tâm", feedback: "Con số không có căn cứ dễ gây quyết định sai." },
+      { id: "c", text: "Từ chối trả lời", feedback: "Có thể đưa khoảng ước tính kèm giả định." },
+    ],
+    answer: "a",
+    explanation: "Trung thực về mức độ chắc chắn và đề xuất cách đo là cách làm đúng khi thiếu dữ liệu.",
+  },
+  {
+    questionId: "ch08-l08-q13", lessonId: L, conceptId: "usage-fields", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Bảng tính chi phí từ trường usage dưới đây có những dòng sai. Chọn chúng.",
+    segments: [
+      { id: "s1", text: "cache_read_input_tokens tính theo giá đầu vào thường.", isError: true, why: "Đọc cache có giá riêng, thấp hơn nhiều." },
+      { id: "s2", text: "output_tokens nhân với giá đầu ra.", isError: false },
+      { id: "s3", text: "Bỏ qua cache_creation_input_tokens vì ghi cache miễn phí.", isError: true, why: "Ghi cache có tính phí (cao hơn đầu vào thường một chút)." },
+      { id: "s4", text: "Ghi rõ là ước tính theo giá niêm yết và ngày tra giá.", isError: false },
+    ],
+    explanation: "Mỗi loại token có giá riêng: đầu vào, ghi cache, đọc cache, đầu ra.",
+  },
+  {
+    questionId: "ch08-l08-q14", lessonId: L, conceptId: "spend-limits", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn có gói Pro, đã bật usage credits để làm tiếp khi hết hạn mức, nhưng muốn chắc không vượt một khoản mỗi tháng. Làm gì?",
+    options: [
+      { id: "a", text: "Đặt giới hạn chi tiêu hằng tháng cho usage credits (mở bằng /usage-credits, mục Settings > Usage)", feedback: "Đúng." },
+      { id: "b", text: "Gõ /clear sau mỗi câu hỏi", feedback: "Giúp tiết kiệm nhưng không phải giới hạn." },
+      { id: "c", text: "Không có cách giới hạn", feedback: "Có thể đặt giới hạn chi tiêu hằng tháng." },
+    ],
+    answer: "a",
+    explanation: "Với Pro, Max, Ultra, /usage-credits mở trang Settings > Usage để bật/tắt usage credits và đặt giới hạn tháng.",
+  },
+  {
+    questionId: "ch08-l08-q15", lessonId: L, conceptId: "report", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết báo cáo chi phí tháng (5–7 dòng) cho trưởng phòng từ dữ liệu dưới đây.",
+    source: "Nguồn: trang Cost của Console, 01–31/10/2026. Nhóm 4 người. Chi phí Claude Code: $186. Ngân sách: $250. Phiên tốn nhất: dán log thô 10.000 dòng (đã khắc phục bằng lọc log). Giới hạn workspace hiện tại: chưa đặt.",
+    rubric: [
+      { id: "source", label: "Có nguồn và thời gian", weight: 1, check: { kind: "regex", pattern: "(console|trang cost)[^\\n]*(10/2026|thang 10)|(10/2026|thang 10)[^\\n]*(console|cost)" }, pass: "Có nguồn và thời gian.", fail: "Ghi nguồn (Console) và khoảng thời gian." },
+      { id: "budget", label: "So với ngân sách", weight: 1, check: { kind: "regex", pattern: "186[^\\n]*250|250[^\\n]*186|ngan sach" }, pass: "Có so với ngân sách.", fail: "So $186 với ngân sách $250." },
+      { id: "action", label: "Có hành động tiếp theo", weight: 1, check: { kind: "regex", pattern: "(dat gioi han|gioi han workspace|de xuat|thang 11)" }, pass: "Có hành động.", fail: "Đề xuất đặt giới hạn workspace, theo dõi tháng 11." },
+      { id: "nature", label: "Ghi rõ tính chất số liệu", weight: 1, check: { kind: "anyKeyword", keywords: ["hoá đơn", "hóa đơn", "ước tính", "theo console"] }, pass: "Có ghi chú.", fail: "Ghi rõ số liệu lấy từ Console (hoá đơn) hay ước tính." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Báo cáo chi phí Claude Code tháng 10/2026 (nguồn: trang Cost của Console, 01–31/10/2026, số liệu theo Console).\n- Nhóm 4 người dùng hết $186, trong ngân sách $250.\n- Phiên tốn nhất do dán log thô 10.000 dòng; đã chuyển sang lọc log trước.\n- Đề xuất: đặt giới hạn workspace $250 cho tháng 11 và xem lại /usage mỗi thứ Sáu.",
+    explanation: "Báo cáo tốt có nguồn, thời gian, so sánh, nguyên nhân và hành động.",
+  },
+];

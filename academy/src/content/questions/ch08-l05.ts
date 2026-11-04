@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch08-l05";
+
+/** 15 questions for "Sử dụng tài liệu dự án" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh08L05: Question[] = [
+  {
+    questionId: "ch08-l05-q01", lessonId: L, conceptId: "claude-md-load", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Nội dung CLAUDE.md được nạp vào context ở đầu mỗi phiên, kể cả khi bạn làm việc không liên quan đến phần lớn nội dung đó.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Vì vậy mỗi dòng trong CLAUDE.md có “giá” ở mọi phiên — hãy giữ những dòng thật cần.",
+  },
+  {
+    questionId: "ch08-l05-q02", lessonId: L, conceptId: "claude-md-size", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Vì sao tài liệu khuyên giữ CLAUDE.md dưới khoảng 200 dòng?",
+    options: [
+      { id: "a", text: "File dài tốn context hơn và làm giảm mức Claude tuân theo hướng dẫn", feedback: "Đúng." },
+      { id: "b", text: "Vì Claude Code không đọc được file quá 200 dòng", feedback: "Vẫn đọc được; chỉ là kém hiệu quả." },
+      { id: "c", text: "Vì GitHub giới hạn 200 dòng", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Theo trang Memory: longer files consume more context and reduce adherence.",
+  },
+  {
+    questionId: "ch08-l05-q03", lessonId: L, conceptId: "skills-on-demand", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Nội dung đầy đủ của một skill được nạp vào context khi nào?",
+    options: [
+      { id: "a", text: "Khi skill được dùng", feedback: "Đúng — đầu phiên Claude chỉ thấy mô tả ngắn." },
+      { id: "b", text: "Luôn luôn ở đầu mỗi phiên", feedback: "Đó là cách CLAUDE.md hoạt động." },
+      { id: "c", text: "Không bao giờ", feedback: "Skill được nạp khi cần dùng." },
+    ],
+    answer: "a",
+    explanation: "Chuyển quy trình chuyên biệt từ CLAUDE.md sang skill giúp context nền nhỏ hơn.",
+  },
+  {
+    questionId: "ch08-l05-q04", lessonId: L, conceptId: "enforce", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Ghi “không bao giờ xoá thư mục data” vào CLAUDE.md đảm bảo tuyệt đối Claude sẽ không xoá thư mục đó.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "CLAUDE.md là ngữ cảnh, không phải cấu hình bắt buộc; điều tuyệt đối cần hook hoặc quy tắc quyền.",
+  },
+  {
+    questionId: "ch08-l05-q05", lessonId: L, conceptId: "test-command", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Theo Best practices, nếu dự án có phép kiểm tra (test, build, lint), dòng hữu ích nhất trong CLAUDE.md là gì?",
+    options: [
+      { id: "a", text: "Lệnh chạy phép kiểm tra đó", feedback: "Đúng." },
+      { id: "b", text: "Lời chào thân thiện với Claude", feedback: "Không giúp Claude kiểm chứng công việc." },
+      { id: "c", text: "Danh sách người từng làm dự án", feedback: "Không cần cho việc hằng ngày." },
+    ],
+    answer: "a",
+    explanation: "Có lệnh kiểm tra, Claude tự khép vòng sửa–kiểm tra mà không phải hỏi bạn.",
+  },
+  {
+    questionId: "ch08-l05-q06", lessonId: L, conceptId: "path-rules", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn có quy tắc chỉ áp dụng cho file trong src/api/. Đặt ở đâu để không tốn context khi làm phần khác?",
+    options: [
+      { id: "a", text: "Một file trong .claude/rules/ có khai báo paths cho src/api/", feedback: "Đúng — chỉ nạp khi làm việc với file khớp." },
+      { id: "b", text: "Đầu CLAUDE.md gốc", feedback: "Sẽ nạp ở mọi phiên dù không cần." },
+      { id: "c", text: "Dán vào mỗi tin nhắn", feedback: "Tốn và dễ quên." },
+    ],
+    answer: "a",
+    explanation: "Quy tắc theo đường dẫn giảm context cho phần codebase không liên quan.",
+  },
+  {
+    questionId: "ch08-l05-q07", lessonId: L, conceptId: "imports", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Tách một CLAUDE.md dài thành nhiều file rồi dùng @import sẽ làm giảm số token nạp vào mỗi phiên.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "File được import nạp cùng CLAUDE.md; import giúp sắp xếp, không giảm context.",
+  },
+  {
+    questionId: "ch08-l05-q08", lessonId: L, conceptId: "classify-content", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép nội dung với nơi đặt phù hợp.",
+    pairs: [
+      { id: "p1", left: "Lệnh chạy test", right: "CLAUDE.md" },
+      { id: "p2", left: "Quy trình migrate database dùng 2 lần mỗi năm", right: "Skill" },
+      { id: "p3", left: "Quy ước riêng cho file trong src/api/", right: ".claude/rules/ theo đường dẫn" },
+      { id: "p4", left: "Mật khẩu database", right: "Không đưa vào; dùng biến môi trường hoặc secret" },
+    ],
+    explanation: "Nơi đặt quyết định khi nào nội dung được nạp và có bị lộ hay không.",
+  },
+  {
+    questionId: "ch08-l05-q09", lessonId: L, conceptId: "overview-skill", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Phiên nào Claude cũng đọc hàng chục file chỉ để hiểu kiến trúc dự án. Cách giảm hợp lý?",
+    options: [
+      { id: "a", text: "Viết tài liệu tổng quan ngắn (mục trong CLAUDE.md hoặc một skill tổng quan codebase): kiến trúc, thư mục chính, quy ước", feedback: "Đúng." },
+      { id: "b", text: "Cấm Claude đọc file", feedback: "Claude vẫn cần đọc file liên quan để làm việc." },
+      { id: "c", text: "Dán toàn bộ mã nguồn vào CLAUDE.md", feedback: "Nạp khổng lồ ở mọi phiên." },
+    ],
+    answer: "a",
+    explanation: "Trang Manage costs gợi ý skill “codebase-overview” để Claude có ngay ngữ cảnh thay vì đọc nhiều file.",
+  },
+  {
+    questionId: "ch08-l05-q10", lessonId: L, conceptId: "specific", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "fix-prompt",
+    prompt: "Viết lại các dòng CLAUDE.md dưới đây cho cụ thể, kiểm tra được.",
+    source: "Viết code tốt.\nTest cẩn thận.\nĐặt tên hợp lý.",
+    rubric: [
+      { id: "cmd", label: "Có lệnh kiểm tra cụ thể", weight: 1, check: { kind: "regex", pattern: "(npm test|pytest|npm run|make test)" }, pass: "Có lệnh kiểm tra.", fail: "Thay “test cẩn thận” bằng lệnh cụ thể, ví dụ npm test." },
+      { id: "naming", label: "Quy ước đặt tên cụ thể", weight: 1, check: { kind: "regex", pattern: "(camelcase|snake_case|kebab-case|pascalcase)" }, pass: "Có quy ước cụ thể.", fail: "Nêu quy ước: camelCase, snake_case…" },
+      { id: "when", label: "Có thời điểm/điều kiện áp dụng", weight: 1, check: { kind: "regex", pattern: "(truoc (moi|khi) commit|sau moi thay doi|truoc khi bao xong)" }, pass: "Có thời điểm áp dụng.", fail: "Nêu khi nào phải chạy: trước mỗi commit…" },
+    ],
+    passScore: 0.67,
+    referenceAnswer: "- Chạy npm test trước mỗi commit; mọi test phải đạt.\n- Tên biến và hàm dùng camelCase; tên file dùng kebab-case.\n- Hàm mới phải có ít nhất một test trong tests/.",
+    explanation: "Hướng dẫn cụ thể, kiểm tra được thì Claude làm theo đều hơn — và bạn cũng kiểm tra được.",
+  },
+  {
+    questionId: "ch08-l05-q11", lessonId: L, conceptId: "claude-md-size", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Dự án có CLAUDE.md 900 dòng. Claude hay bỏ sót các quy tắc nằm giữa file. Nguyên nhân nhiều khả năng nhất và cách xử lý?",
+    options: [
+      { id: "a", text: "File quá dài làm giảm mức tuân thủ; rút gọn, chuyển phần chuyên biệt sang skill hoặc rules", feedback: "Đúng." },
+      { id: "b", text: "Claude Code bị lỗi, cần cài lại", feedback: "Đây là vấn đề độ dài và cấu trúc hướng dẫn." },
+      { id: "c", text: "Viết thêm 200 dòng nhắc lại quy tắc", feedback: "Càng dài càng tệ." },
+    ],
+    answer: "a",
+    explanation: "Claude Code cũng cảnh báo khi khởi động và trong /status nếu file vượt độ dài khuyến nghị.",
+  },
+  {
+    questionId: "ch08-l05-q12", lessonId: L, conceptId: "classify-content", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các dòng NÊN BỎ khỏi CLAUDE.md.",
+    segments: [
+      { id: "s1", text: "Hãy viết code sạch.", isError: true, why: "Chung chung, không giúp hành động cụ thể." },
+      { id: "s2", text: "Chạy npm test trước mỗi commit.", isError: false },
+      { id: "s3", text: "Lịch sử thay đổi từ 2019 đến nay (300 dòng).", isError: true, why: "Đã có trong git; nạp mỗi phiên là lãng phí." },
+      { id: "s4", text: "Đơn vị công suất ghi kVA.", isError: false },
+    ],
+    explanation: "Giữ điều cụ thể, cần ở mọi phiên; bỏ điều chung chung hoặc đã có ở nơi khác.",
+  },
+  {
+    questionId: "ch08-l05-q13", lessonId: L, conceptId: "enforce", learningObjective: "o4", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Claude tuyệt đối không được đọc file .env của dự án. Cách nào đáng tin hơn chỉ ghi trong CLAUDE.md?",
+    options: [
+      { id: "a", text: "Thêm quy tắc deny Read(./.env) vào permissions trong .claude/settings.json", feedback: "Đúng — công cụ đọc file của Claude sẽ bị chặn." },
+      { id: "b", text: "Đổi tên .env thành env.txt", feedback: "Không chặn được gì." },
+      { id: "c", text: "Ghi lời nhắc in hoa trong CLAUDE.md", feedback: "Vẫn chỉ là ngữ cảnh." },
+    ],
+    answer: "a",
+    explanation: "Theo trang Permissions: Read deny rules chặn công cụ đọc file (áp dụng nỗ lực tối đa cho cả Grep, Glob, @file); muốn chặn ở mức hệ điều hành thì bật sandbox.",
+  },
+  {
+    questionId: "ch08-l05-q14", lessonId: L, conceptId: "memory-check", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép lệnh với công dụng khi làm việc với CLAUDE.md.",
+    pairs: [
+      { id: "p1", left: "/context", right: "Xem file CLAUDE.md nào đã nạp (mục Memory files)" },
+      { id: "p2", left: "/memory", right: "Mở các file CLAUDE.md để sửa" },
+      { id: "p3", left: "/init", right: "Tạo hoặc đề xuất cải tiến CLAUDE.md khởi đầu" },
+    ],
+    explanation: "Theo trang “How Claude remembers your project”.",
+  },
+  {
+    questionId: "ch08-l05-q15", lessonId: L, conceptId: "classify-content", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết CLAUDE.md ngắn (khoảng 6–10 dòng) cho dự án mô tả dưới đây, và ghi chú phần nào bạn để ngoài CLAUDE.md.",
+    source: "Dự án Python tổng hợp số liệu máy biến áp; kiểm thử bằng pytest -q; dữ liệu mẫu trong data/ chỉ đọc; tên biến snake_case; có quy trình xuất báo cáo tháng dài 50 bước; có file .env chứa chuỗi kết nối.",
+    rubric: [
+      { id: "test", label: "Lệnh kiểm tra", weight: 1, check: { kind: "regex", pattern: "pytest" }, pass: "Có pytest.", fail: "Ghi lệnh pytest -q." },
+      { id: "conv", label: "Quy ước cụ thể", weight: 1, check: { kind: "regex", pattern: "(snake_case|chi doc)" }, pass: "Có quy ước.", fail: "Ghi snake_case và data/ chỉ đọc." },
+      { id: "out", label: "Quy trình dài để ngoài (skill)", weight: 1, check: { kind: "anyKeyword", keywords: ["skill"] }, pass: "Có tách quy trình.", fail: "Quy trình 50 bước nên là skill." },
+      { id: "secret", label: "Bí mật không nằm trong CLAUDE.md", weight: 1, check: { kind: "noKeyword", keywords: ["postgres://", "password=", "mật khẩu:"] }, pass: "Không có bí mật.", fail: "Không ghi chuỗi kết nối hay mật khẩu vào CLAUDE.md." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "# Tổng hợp số liệu MBA\n- Kiểm thử: pytest -q (trước mỗi commit)\n- Tên biến: snake_case\n- data/: dữ liệu mẫu, chỉ đọc\n- Xuất báo cáo tháng: dùng skill bao-cao-thang\nĐể ngoài CLAUDE.md: quy trình 50 bước (skill); .env bị chặn đọc bằng quy tắc deny Read(./.env).",
+    explanation: "CLAUDE.md tốt: ngắn, cụ thể, có lệnh kiểm tra, không chứa bí mật.",
+  },
+];

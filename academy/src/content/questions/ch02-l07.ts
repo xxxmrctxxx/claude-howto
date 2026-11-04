@@ -1,0 +1,181 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch02-l07";
+
+/** 15 questions for "Quản lý hội thoại và ngữ cảnh" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh02L07: Question[] = [
+  {
+    questionId: "ch02-l07-q01", lessonId: L, conceptId: "share-snapshot", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Sau khi bạn chia sẻ một chat, các tin nhắn bạn gửi tiếp theo trong chat đó vẫn riêng tư theo mặc định.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Người có liên kết chỉ thấy ảnh chụp các tin nhắn tới lúc chia sẻ.",
+  },
+  {
+    questionId: "ch02-l07-q02", lessonId: L, conceptId: "rename-delete", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Hội thoại đã xoá được xử lý thế nào theo Help Center?",
+    options: [
+      { id: "a", text: "Biến khỏi lịch sử ngay và được xoá khỏi hệ thống phía sau trong vòng 30 ngày", feedback: "Đúng." },
+      { id: "b", text: "Chuyển vào thùng rác 1 năm, khôi phục được bất cứ lúc nào", feedback: "Help Center không mô tả cách khôi phục." },
+      { id: "c", text: "Vẫn hiện trong lịch sử nhưng mờ đi", feedback: "Bị gỡ khỏi lịch sử ngay." },
+    ],
+    answer: "a",
+    explanation: "Cân nhắc trước khi xoá.",
+  },
+  {
+    questionId: "ch02-l07-q03", lessonId: L, conceptId: "memory", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Bật hoặc tắt việc Claude tạo bộ nhớ từ các cuộc chat ở đâu?",
+    options: [
+      { id: "a", text: "Settings > Your Claude → Generate memory from chats", feedback: "Đúng." },
+      { id: "b", text: "Nút Share", feedback: "Đó là chia sẻ chat." },
+      { id: "c", text: "Tab Artifacts", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Khi tắt: Pause memory (giữ) hoặc Reset memory (xoá vĩnh viễn).",
+  },
+  {
+    questionId: "ch02-l07-q04", lessonId: L, conceptId: "usage-limit", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Buổi sáng bạn dùng Claude Code, buổi chiều dùng claude.ai trên cùng tài khoản. Lượt dùng được tính thế nào?",
+    options: [
+      { id: "a", text: "Cùng tính vào một giới hạn sử dụng chung", feedback: "Đúng." },
+      { id: "b", text: "Mỗi sản phẩm có giới hạn riêng hoàn toàn", feedback: "Help Center: dùng chung một giới hạn." },
+      { id: "c", text: "Claude Code không tính lượt dùng", feedback: "Có tính." },
+    ],
+    answer: "a",
+    explanation: "Usage across claude.ai, Claude Code, and Claude Desktop counts towards the same usage limit.",
+  },
+  {
+    questionId: "ch02-l07-q05", lessonId: L, conceptId: "chat-search", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Tính năng tìm kiếm chat cũ có trên mọi gói, kể cả Free.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Chat search chỉ có ở gói trả phí (Pro, Max, Ultra, Team, Enterprise).",
+  },
+  {
+    questionId: "ch02-l07-q06", lessonId: L, conceptId: "share-privacy", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn đã chia sẻ một chat cho đối tác; dự án nay đã kết thúc. Làm sao để liên kết không còn xem được?",
+    options: [
+      { id: "a", text: "Mở menu Share, đổi từ Public sang Private", feedback: "Đúng." },
+      { id: "b", text: "Đổi tên chat", feedback: "Liên kết vẫn mở được." },
+      { id: "c", text: "Đăng xuất khỏi Claude", feedback: "Không thu hồi liên kết." },
+    ],
+    answer: "a",
+    explanation: "Gói Free/Pro/Max/Ultra còn quản lý các chat đã chia sẻ ở Settings > Privacy.",
+  },
+  {
+    questionId: "ch02-l07-q07", lessonId: L, conceptId: "share-snapshot", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Người nhận liên kết chia sẻ chat thấy được những gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Các tin nhắn gửi trước thời điểm chia sẻ", feedback: "Đúng." },
+      { id: "b", text: "Các artifact trong những tin nhắn đó", feedback: "Đúng." },
+      { id: "c", text: "File PDF bạn đã đính kèm", feedback: "File không nằm trong ảnh chụp chia sẻ." },
+      { id: "d", text: "Dữ liệu thô từ các lần gọi công cụ MCP", feedback: "Dữ liệu thô MCP được ẩn." },
+    ],
+    answer: ["a", "b"],
+    explanation: "Chữ trong chat và artifact hiển thị với ai có liên kết — kiểm tra trước khi chia sẻ.",
+  },
+  {
+    questionId: "ch02-l07-q08", lessonId: L, conceptId: "manage-memory", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Claude cứ nhắc tới dự án “Dây chuyền B” đã kết thúc trong các chat mới. Cách xử lý nhanh nhất?",
+    options: [
+      { id: "a", text: "Bảo Claude quên thông tin đó, hoặc xoá chủ đề trong Settings > Your Claude → Manage → Topics", feedback: "Đúng." },
+      { id: "b", text: "Xoá toàn bộ tài khoản", feedback: "Quá mức cần thiết." },
+      { id: "c", text: "Chỉ dùng chat ẩn danh từ nay", feedback: "Bất tiện và không sửa bộ nhớ đã có." },
+    ],
+    answer: "a",
+    explanation: "Bộ nhớ xem, sửa, xoá được; cũng có thể yêu cầu ngay trong chat.",
+  },
+  {
+    questionId: "ch02-l07-q09", lessonId: L, conceptId: "length-limit", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi khái niệm với mô tả đúng.",
+    pairs: [
+      { id: "p1", left: "Giới hạn sử dụng", right: "Lượng dùng theo thời gian: theo phiên 5 giờ, theo tuần" },
+      { id: "p2", left: "Giới hạn độ dài", right: "Một chat chứa được bao nhiêu nội dung (context window)" },
+      { id: "p3", left: "Quản lý context tự động", right: "Tóm tắt phần cũ khi chat gần đầy (khi bật code execution)" },
+      { id: "p4", left: "Project", right: "Chỉ nạp phần nội dung liên quan, giúp vượt giới hạn độ dài" },
+    ],
+    explanation: "Theo bài How do usage and length limits work?.",
+  },
+  {
+    questionId: "ch02-l07-q10", lessonId: L, conceptId: "project-memory", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Trong một project, Claude dùng bộ nhớ nào?",
+    options: [
+      { id: "a", text: "Bộ nhớ của chính project đó và bộ nhớ tài khoản (ngoài project), không dùng bộ nhớ của project khác", feedback: "Đúng." },
+      { id: "b", text: "Bộ nhớ của mọi project gộp lại", feedback: "Không dùng bộ nhớ project khác." },
+      { id: "c", text: "Không có bộ nhớ nào", feedback: "Project có bộ nhớ riêng." },
+    ],
+    answer: "a",
+    explanation: "Muốn tách hẳn, tắt “Use account memory” trên trang project.",
+  },
+  {
+    questionId: "ch02-l07-q11", lessonId: L, conceptId: "auto-context", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Khi quản lý context tự động tóm tắt phần cũ của một chat dài, lịch sử chat đầy đủ của bạn vẫn được giữ.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Bạn có thể thấy Claude “organizing its thoughts”; chat dài vẫn tốn nhiều lượt dùng hơn.",
+  },
+  {
+    questionId: "ch02-l07-q12", lessonId: L, conceptId: "save-usage", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn đưa ra các mẹo tiết kiệm lượt dùng. Chọn các mẹo SAI.",
+    segments: [
+      { id: "s1", text: "Mở chat mới khi chuyển sang việc khác.", isError: false },
+      { id: "s2", text: "Luôn bật extended thinking và mọi connector cho chắc.", isError: true, why: "Help Center khuyên tắt khi không cần vì tốn context và lượt dùng." },
+      { id: "s3", text: "Dồn mọi việc của cả tháng vào một chat để Claude nhớ hết.", isError: true, why: "Chat dài tốn nhiều lượt dùng hơn." },
+      { id: "s4", text: "Bỏ file không dùng khỏi project, rút gọn project instructions.", isError: false },
+    ],
+    explanation: "Theo phần lời khuyên trong bài về giới hạn của Help Center.",
+  },
+  {
+    questionId: "ch02-l07-q13", lessonId: L, conceptId: "share-privacy", learningObjective: "o1", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Chat bạn muốn chia sẻ cho cả nhóm có một đoạn bạn đã dán thông tin lương của từng người. Cách làm an toàn nhất?",
+    options: [
+      { id: "a", text: "Mở chat mới chỉ với phần cần chia sẻ (không dữ liệu cá nhân), chia sẻ chat mới đó", feedback: "Đúng." },
+      { id: "b", text: "Chia sẻ nguyên chat, dặn mọi người đừng đọc đoạn lương", feedback: "Chữ đã dán hiện trong ảnh chụp chia sẻ." },
+      { id: "c", text: "Chia sẻ rồi xoá đoạn lương sau", feedback: "Ảnh chụp đã chứa đoạn đó." },
+    ],
+    answer: "a",
+    explanation: "Ai có liên kết cũng xem được ảnh chụp — chỉ chia sẻ những gì cần.",
+  },
+  {
+    questionId: "ch02-l07-q14", lessonId: L, conceptId: "bulk-delete", learningObjective: "o1", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "ordering",
+    prompt: "Sắp xếp các bước xoá nhiều hội thoại cùng lúc trên web.",
+    items: [
+      { id: "a", text: "Mở Chats and tasks" },
+      { id: "b", text: "Bấm ⋮ trên một hội thoại → Select" },
+      { id: "c", text: "Đánh dấu các hội thoại cần xoá" },
+      { id: "d", text: "Bấm Delete" },
+      { id: "e", text: "Xác nhận xoá" },
+    ],
+    explanation: "Theo bài Delete or rename a conversation.",
+  },
+  {
+    questionId: "ch02-l07-q15", lessonId: L, conceptId: "save-usage", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết tin nhắn nhờ Claude tóm tắt một chat dài để chuyển sang chat mới, và 2 việc bạn làm ngay sau đó.",
+    source: "Chat “Kế hoạch đào tạo quý 4” đã kéo dài 2 tuần: có các quyết định về lịch, ngân sách 45 triệu, 3 việc còn dở. Câu trả lời đã chậm và bạn sắp chạm giới hạn sử dụng.",
+    rubric: [
+      { id: "summary", label: "Yêu cầu tóm tắt có cấu trúc", weight: 1, check: { kind: "anyKeyword", keywords: ["tóm tắt"] }, pass: "Có yêu cầu tóm tắt.", fail: "Nhờ Claude tóm tắt." },
+      { id: "content", label: "Nêu nội dung cần giữ", weight: 1, check: { kind: "allGroups", groups: [["quyết định"], ["ngân sách", "45 triệu", "số liệu"], ["việc còn", "còn dở", "việc tiếp"]] }, pass: "Có đủ nội dung.", fail: "Giữ: quyết định, ngân sách/số liệu, việc còn dở." },
+      { id: "new-chat", label: "Mở chat mới với bản tóm tắt", weight: 1, check: { kind: "anyKeyword", keywords: ["chat mới", "hội thoại mới"] }, pass: "Có chat mới.", fail: "Mở chat mới và dán bản tóm tắt." },
+      { id: "check", label: "Kiểm tra bản tóm tắt", weight: 1, check: { kind: "anyKeyword", keywords: ["kiểm tra", "đối chiếu", "soát"] }, pass: "Có kiểm tra.", fail: "Kiểm tra bản tóm tắt trước khi chuyển." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Tin nhắn: “Tóm tắt chat này thành tối đa 10 gạch đầu dòng chia 3 phần: các quyết định đã chốt (lịch), số liệu (ngân sách 45 triệu), và 3 việc còn dở kèm người phụ trách — để mình mở chat mới tiếp tục.”\nSau đó: (1) kiểm tra bản tóm tắt, đối chiếu ngân sách và lịch với nội dung chat; (2) mở chat mới (tốt nhất trong project Đào tạo) và dán bản tóm tắt làm tin nhắn đầu.",
+    explanation: "Tóm tắt có cấu trúc + kiểm tra + chat mới giúp tiếp tục mà không tốn lượt dùng cho chat quá dài.",
+  },
+];

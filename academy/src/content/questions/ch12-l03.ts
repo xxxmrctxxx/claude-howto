@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch12-l03";
+
+/** 15 questions for "Tạo kế hoạch" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh12L03: Question[] = [
+  {
+    questionId: "ch12-l03-q01", lessonId: L, conceptId: "plan-mode", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Khi bạn yêu cầu PLAN.md cho dự án tốt nghiệp ở plan mode, Claude có thể sửa luôn các file mã nguồn trong lúc đề xuất.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Bạn duyệt kế hoạch rồi mới cho triển khai.",
+  },
+  {
+    questionId: "ch12-l03-q02", lessonId: L, conceptId: "riskiest-first", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Nên làm phần rủi ro lớn nhất (ví dụ độ chính xác trích xuất) trước khi làm giao diện.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Nếu giả định sai, đổi hướng khi mới tốn ít công.",
+  },
+  {
+    questionId: "ch12-l03-q03", lessonId: L, conceptId: "milestone-check", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Phép kiểm tra tốt cho mốc “trích xuất đầy đủ” là gì?",
+    options: [
+      { id: "a", text: "Test chạy được: ghi chú thiếu số lượng → so_luong trống và vào hàng chờ", feedback: "Đúng." },
+      { id: "b", text: "“Trông có vẻ ổn”", feedback: "Không kiểm chứng được." },
+      { id: "c", text: "Code đã dài hơn 500 dòng", feedback: "Độ dài không nói lên đúng sai." },
+    ],
+    answer: "a",
+    explanation: "Lấy từ tiêu chí chấp nhận trong SPEC.",
+  },
+  {
+    questionId: "ch12-l03-q04", lessonId: L, conceptId: "walking-skeleton", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "“Khung xuyên suốt” là gì?",
+    options: [
+      { id: "a", text: "Phiên bản mỏng nhất chạy được từ đầu đến cuối hệ thống", feedback: "Đúng." },
+      { id: "b", text: "Bản thiết kế giao diện đầy đủ", feedback: "Chưa chạy được đầu-cuối." },
+      { id: "c", text: "Tài liệu hướng dẫn sử dụng", feedback: "Không phải." },
+    ],
+    answer: "a",
+    explanation: "Giúp lộ vấn đề tích hợp sớm.",
+  },
+  {
+    questionId: "ch12-l03-q05", lessonId: L, conceptId: "plan-file", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Vì sao nên lưu kế hoạch thành file PLAN.md trong dự án?",
+    options: [
+      { id: "a", text: "Theo dõi được qua nhiều phiên; Claude và người khác đọc được; đánh dấu mốc đã xong", feedback: "Đúng." },
+      { id: "b", text: "Vì Claude không nhớ được gì", feedback: "Lý do chính là theo dõi và chia sẻ." },
+      { id: "c", text: "Để dự án nặng hơn", feedback: "Không phải." },
+    ],
+    answer: "a",
+    explanation: "Phiên mới chỉ cần @PLAN.md để biết đang ở đâu.",
+  },
+  {
+    questionId: "ch12-l03-q06", lessonId: L, conceptId: "task-size", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Mốc “làm toàn bộ backend” mất 3 phiên vẫn chưa xong, ngữ cảnh rối. Chỉnh kế hoạch thế nào?",
+    options: [
+      { id: "a", text: "Chia nhỏ thành các mốc vừa một phiên, mỗi mốc có phép kiểm tra riêng", feedback: "Đúng." },
+      { id: "b", text: "Làm tiếp trong một phiên thật dài", feedback: "Ngữ cảnh càng rối." },
+      { id: "c", text: "Bỏ phép kiểm tra cho nhanh", feedback: "Mất bằng chứng đã xong." },
+    ],
+    answer: "a",
+    explanation: "Việc nhỏ dễ kiểm và giữ ngữ cảnh gọn (Chương 8).",
+  },
+  {
+    questionId: "ch12-l03-q07", lessonId: L, conceptId: "dependencies", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp các mốc theo phụ thuộc hợp lý.",
+    items: [
+      { id: "a", text: "Thử trích 50 ghi chú mẫu, đo tỷ lệ khớp" },
+      { id: "b", text: "Khung xuyên suốt 1 ghi chú → bảng" },
+      { id: "c", text: "Bảng tuần đầy đủ" },
+      { id: "d", text: "Test trong CI" },
+      { id: "e", text: "Dùng thử với trưởng xưởng" },
+    ],
+    explanation: "Giả định → đầu-cuối → làm đầy → tự động kiểm → người dùng.",
+  },
+  {
+    questionId: "ch12-l03-q08", lessonId: L, conceptId: "estimate", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Ước lượng cho mỗi mốc nên gồm gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Thời gian dự kiến", feedback: "Đúng." },
+      { id: "b", text: "Chi phí token/API ước tính", feedback: "Đúng." },
+      { id: "c", text: "Thời gian và chi phí thực tế ghi lại khi xong", feedback: "Đúng — để so và điều chỉnh." },
+      { id: "d", text: "Số dòng code chính xác", feedback: "Khó ước lượng và ít ý nghĩa." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "So dự kiến với thực tế giúp ước lượng lần sau tốt hơn.",
+  },
+  {
+    questionId: "ch12-l03-q09", lessonId: L, conceptId: "plan-risks", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Theo điểm rủi ro (khả năng × ảnh hưởng), rủi ro nào cần có biện pháp ngay trong mốc 1?",
+    context: { label: "Danh sách rủi ro", content: "R1: Claude trích sai mức độ — khả năng 4, ảnh hưởng 4\nR2: Trưởng xưởng bận, dùng thử trễ — khả năng 3, ảnh hưởng 2\nR3: Chi phí API vượt ngân sách — khả năng 2, ảnh hưởng 3", lang: "text" },
+    options: [
+      { id: "a", text: "R1 (16) — kiểm ngay trong mốc thử trích 50 ghi chú", feedback: "Đúng." },
+      { id: "b", text: "R2 (6)", feedback: "Điểm thấp hơn R1." },
+      { id: "c", text: "R3 (6)", feedback: "Điểm thấp hơn R1." },
+    ],
+    answer: "a",
+    explanation: "Rủi ro điểm cao nhất xử lý trước.",
+  },
+  {
+    questionId: "ch12-l03-q10", lessonId: L, conceptId: "plan-review", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Claude đề xuất kế hoạch 8 mốc trong plan mode. Bước tiếp theo hợp lý?",
+    options: [
+      { id: "a", text: "Phản biện: hỏi mốc nào quá lớn, rủi ro nào bị sót; sửa thứ tự cho rủi ro lớn nhất lên đầu; rồi mới duyệt", feedback: "Đúng." },
+      { id: "b", text: "Duyệt ngay không đọc", feedback: "Mất cơ hội sửa khi còn rẻ." },
+      { id: "c", text: "Bỏ kế hoạch, làm theo cảm hứng", feedback: "Mất định hướng." },
+    ],
+    answer: "a",
+    explanation: "Kế hoạch là bản nháp để bạn sửa.",
+  },
+  {
+    questionId: "ch12-l03-q11", lessonId: L, conceptId: "replan", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Cuối tuần 2, dự án chậm một mốc. Cách xử lý đúng tinh thần bài học?",
+    options: [
+      { id: "a", text: "Cập nhật PLAN.md, báo người dùng, cân nhắc thu hẹp phạm vi phần chưa thiết yếu", feedback: "Đúng." },
+      { id: "b", text: "Giấu chậm trễ, làm thêm giờ", feedback: "Người dùng mất khả năng điều chỉnh." },
+      { id: "c", text: "Bỏ test để kịp", feedback: "Đổi chậm lấy lỗi." },
+    ],
+    answer: "a",
+    explanation: "Kế hoạch là công cụ, không phải lời hứa bất biến.",
+  },
+  {
+    questionId: "ch12-l03-q12", lessonId: L, conceptId: "milestones", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một PLAN.md như dưới đây. Chọn các điểm cần sửa.",
+    segments: [
+      { id: "s1", text: "M1: Thiết kế giao diện đầy đủ 6 trang.", isError: true, why: "Chưa kiểm rủi ro lớn nhất; giao diện không phải giả định nguy hiểm." },
+      { id: "s2", text: "M2: Khung xuyên suốt 1 ghi chú → bảng, kiểm bằng một lệnh chạy.", isError: false },
+      { id: "s3", text: "M3: Làm xong mọi thứ còn lại.", isError: true, why: "Quá lớn, không có phép kiểm tra." },
+      { id: "s4", text: "Rủi ro: trích sai mức độ (4×4) — kiểm trên 50 ghi chú mẫu.", isError: false },
+    ],
+    explanation: "Thứ tự theo rủi ro và mốc có kiểm tra.",
+  },
+  {
+    questionId: "ch12-l03-q13", lessonId: L, conceptId: "riskiest-first", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Mốc 1 (thử trích 50 ghi chú) chỉ đạt 70%, mục tiêu 90%. Quyết định nào hợp lý nhất?",
+    options: [
+      { id: "a", text: "Phân tích loại sai, thử cải thiện (ví dụ, schema, viết tắt của xưởng); nếu vẫn thấp thì đổi phạm vi (ví dụ chỉ trích công đoạn + loại lỗi) và báo người dùng", feedback: "Đúng." },
+      { id: "b", text: "Bỏ qua, làm giao diện trước rồi tính", feedback: "Xây trên giả định đã thấy là sai." },
+      { id: "c", text: "Hạ chỉ số xuống 70% mà không nói với ai", feedback: "Người dùng cần biết và đồng ý." },
+    ],
+    answer: "a",
+    explanation: "Mốc rủi ro sớm cho thông tin để quyết định có căn cứ.",
+  },
+  {
+    questionId: "ch12-l03-q14", lessonId: L, conceptId: "estimate", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Ước lượng chi phí API cho dùng thử: 500 ghi chú/tuần. Cách ước lượng có căn cứ nhất?",
+    options: [
+      { id: "a", text: "Đo usage thật trên 50 ghi chú mẫu ở mốc 1, nhân tỷ lệ lên 500, áp giá hiện hành, cộng dự phòng", feedback: "Đúng." },
+      { id: "b", text: "Đoán theo cảm giác", feedback: "Không có căn cứ." },
+      { id: "c", text: "Bỏ qua chi phí vì nhỏ", feedback: "Chưa đo thì chưa biết nhỏ." },
+    ],
+    answer: "a",
+    explanation: "Đo trên mẫu thật rồi ngoại suy (Chương 8).",
+  },
+  {
+    questionId: "ch12-l03-q15", lessonId: L, conceptId: "plan-mode", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "fix-prompt",
+    prompt: "Viết lại yêu cầu dưới đây thành yêu cầu lập kế hoạch trong plan mode.",
+    source: "làm hết dự án theo SPEC giúp tôi",
+    rubric: [
+      { id: "plan", label: "Lập kế hoạch, chưa code", weight: 1, check: { kind: "anyKeyword", keywords: ["/plan", "kế hoạch", "chưa viết code", "chưa sửa"] }, pass: "Có lập kế hoạch.", fail: "Yêu cầu kế hoạch trước, chưa sửa file." },
+      { id: "risk", label: "Rủi ro lớn nhất trước", weight: 1, check: { kind: "anyKeyword", keywords: ["rủi ro lớn nhất", "rủi ro"] }, pass: "Có rủi ro.", fail: "Yêu cầu mốc 1 kiểm rủi ro lớn nhất." },
+      { id: "check", label: "Phép kiểm tra mỗi mốc", weight: 1, check: { kind: "anyKeyword", keywords: ["phép kiểm tra", "kiểm tra", "tiêu chí"] }, pass: "Có kiểm tra.", fail: "Mỗi mốc cần phép kiểm tra." },
+    ],
+    passScore: 0.67,
+    referenceAnswer:
+      "/plan Đọc @SPEC.md. Đề xuất kế hoạch theo mốc, chưa sửa file. Mốc 1 kiểm tra rủi ro lớn nhất, mốc 2 là khung xuyên suốt. Mỗi mốc có phép kiểm tra chạy được lấy từ tiêu chí trong SPEC, phụ thuộc và ước lượng. Liệt kê 5 rủi ro chính.",
+    explanation: "Kế hoạch trước, mốc có kiểm tra, rủi ro lên đầu.",
+  },
+];

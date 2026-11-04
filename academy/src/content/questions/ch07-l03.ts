@@ -1,0 +1,186 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch07-l03";
+
+/** 15 questions for "Khi nào cần dùng?" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh07L03: Question[] = [
+  {
+    questionId: "ch07-l03-q01", lessonId: L, conceptId: "trigger-claude-md", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Claude làm sai một quy ước hoặc một lệnh của dự án lần thứ hai. Tài liệu gợi ý ghi điều đó vào đâu?",
+    options: [
+      { id: "a", text: "CLAUDE.md", feedback: "Đúng." },
+      { id: "b", text: "Một MCP server", feedback: "MCP dành cho dịch vụ bên ngoài." },
+      { id: "c", text: "Một plugin", feedback: "Plugin dùng để đóng gói và chia sẻ." },
+    ],
+    answer: "a",
+    explanation: "Lỗi lặp lại là một lần sửa CLAUDE.md, không phải một lần nhắc trong chat.",
+  },
+  {
+    questionId: "ch07-l03-q02", lessonId: L, conceptId: "build-over-time", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Theo tài liệu, nên cấu hình đầy đủ skill, MCP, hook và plugin ngay từ ngày đầu dùng Claude Code.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Tài liệu: bạn không cần cấu hình mọi thứ từ đầu; thêm khi gặp dấu hiệu tương ứng.",
+  },
+  {
+    questionId: "ch07-l03-q03", lessonId: L, conceptId: "trigger-hook", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Bạn muốn một việc xảy ra mọi lần mà không phải nhắc Claude. Nên dùng gì?",
+    options: [
+      { id: "a", text: "Hook", feedback: "Đúng." },
+      { id: "b", text: "Subagent", feedback: "Subagent dùng để tách context." },
+      { id: "c", text: "Gõ lại yêu cầu mỗi lần", feedback: "Đó chính là việc bạn muốn tránh." },
+    ],
+    answer: "a",
+    explanation: "Hook do Claude Code tự chạy khi tới sự kiện, ví dụ sau mỗi lần sửa file.",
+  },
+  {
+    questionId: "ch07-l03-q04", lessonId: L, conceptId: "trigger-plugin", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Repo thứ hai của nhóm cần đúng bộ skill, hook và MCP như repo đầu. Tài liệu gợi ý gì?",
+    options: [
+      { id: "a", text: "Đóng gói thành plugin", feedback: "Đúng." },
+      { id: "b", text: "Copy tay từng file mỗi khi có thay đổi", feedback: "Dễ lệch phiên bản giữa các repo." },
+      { id: "c", text: "Gộp tất cả vào CLAUDE.md", feedback: "Hook và MCP không khai báo trong CLAUDE.md." },
+    ],
+    answer: "a",
+    explanation: "Plugin là lớp đóng gói để dùng lại ở nhiều repo hoặc chia sẻ qua marketplace.",
+  },
+  {
+    questionId: "ch07-l03-q05", lessonId: L, conceptId: "context-cost", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Hook không chiếm context của Claude, trừ khi hook trả về output được đưa vào hội thoại.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Hook chạy bên ngoài hội thoại; ví dụ output của linter do hook PostToolUse trả về sẽ được Claude đọc.",
+  },
+  {
+    questionId: "ch07-l03-q06", lessonId: L, conceptId: "context-cost", learningObjective: "o2", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi tính năng với những gì nó nạp vào context.",
+    pairs: [
+      { id: "p1", left: "CLAUDE.md", right: "Toàn bộ nội dung từ đầu phiên, có mặt ở mọi request" },
+      { id: "p2", left: "Skill", right: "Mô tả lúc đầu phiên, nội dung đầy đủ khi được dùng" },
+      { id: "p3", left: "MCP server", right: "Tên công cụ lúc đầu phiên, schema khi cần" },
+      { id: "p4", left: "Subagent", right: "Context riêng, tách khỏi hội thoại chính" },
+    ],
+    explanation: "Theo bảng Context cost by feature.",
+  },
+  {
+    questionId: "ch07-l03-q07", lessonId: L, conceptId: "trigger-subagent", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Để trả lời một câu hỏi, Claude phải đọc 30 file log và hội thoại ngập output bạn sẽ không xem lại. Lần sau nên làm gì?",
+    options: [
+      { id: "a", text: "Giao việc đó cho một subagent, chỉ nhận bản tóm tắt", feedback: "Đúng." },
+      { id: "b", text: "Ghi 30 file log vào CLAUDE.md", feedback: "Làm đầy context ở mọi phiên." },
+      { id: "c", text: "Viết hook đọc log sau mỗi lần sửa file", feedback: "Không khớp nhu cầu." },
+    ],
+    answer: "a",
+    explanation: "Dấu hiệu: việc phụ làm ngập hội thoại → subagent.",
+  },
+  {
+    questionId: "ch07-l03-q08", lessonId: L, conceptId: "guardrail-hook", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Quy tắc “không bao giờ sửa file .env” phải đúng trong mọi trường hợp. Cách nào bảo đảm nhất?",
+    options: [
+      { id: "a", text: "Một hook PreToolUse chặn mọi lần sửa .env", feedback: "Đúng — đó là thực thi." },
+      { id: "b", text: "Viết hoa và thêm ba dấu chấm than trong CLAUDE.md", feedback: "Vẫn chỉ là yêu cầu." },
+      { id: "c", text: "Đặt quy tắc vào một skill", feedback: "Skill cũng là hướng dẫn Claude diễn giải." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: hướng dẫn trong CLAUDE.md hay skill là yêu cầu, không phải bảo đảm; hook chặn là thực thi.",
+  },
+  {
+    questionId: "ch07-l03-q09", lessonId: L, conceptId: "hook-vs-skill", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Khác biệt cốt lõi giữa hook và skill là gì?",
+    options: [
+      { id: "a", text: "Hook chạy theo sự kiện mà không cần Claude quyết định; skill là hướng dẫn Claude diễn giải, kết quả có thể khác nhau", feedback: "Đúng." },
+      { id: "b", text: "Hook chỉ chạy trên Windows, skill chạy trên macOS", feedback: "Không liên quan đến hệ điều hành." },
+      { id: "c", text: "Không khác gì, chỉ khác tên", feedback: "Khác về tính xác định và cách kích hoạt." },
+    ],
+    answer: "a",
+    explanation: "Hook: format khi lưu, chặn lệnh nguy hiểm. Skill: checklist phát hành, quy trình debug.",
+  },
+  {
+    questionId: "ch07-l03-q10", lessonId: L, conceptId: "build-over-time", learningObjective: "o4", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Theo bảng “Build your setup over time”, phần lớn các nhóm bổ sung tính năng theo thứ tự gần đúng nào?",
+    items: [
+      { id: "a", text: "CLAUDE.md" },
+      { id: "b", text: "Skill" },
+      { id: "c", text: "MCP server" },
+      { id: "d", text: "Subagent" },
+      { id: "e", text: "Hook" },
+      { id: "f", text: "Plugin" },
+    ],
+    explanation: "Đây là thứ tự gần đúng trong tài liệu; hãy thêm theo dấu hiệu thực tế của bạn.",
+  },
+  {
+    questionId: "ch07-l03-q11", lessonId: L, conceptId: "claude-md-size", learningObjective: "o2", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "fill-blank",
+    prompt: "Điền số dòng.",
+    template: "Tài liệu khuyên giữ CLAUDE.md dưới [[b1]] dòng; phần tham khảo dài nên chuyển sang skill.",
+    blanks: [{ id: "b1", accepted: ["200"], width: 5 }],
+    explanation: "CLAUDE.md có mặt ở mọi request; skill chỉ nạp khi dùng.",
+  },
+  {
+    questionId: "ch07-l03-q12", lessonId: L, conceptId: "combine-features", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Nhóm cần: (1) quy ước API áp dụng mọi lúc, (2) bộ hướng dẫn style API dài 30 trang, (3) truy vấn cơ sở dữ liệu, (4) chạy lint sau mỗi lần sửa. Thiết kế nào hợp lý nhất?",
+    options: [
+      { id: "a", text: "CLAUDE.md nêu ngắn “theo quy ước API”; skill chứa style guide đầy đủ; MCP nối cơ sở dữ liệu; hook chạy lint", feedback: "Đúng." },
+      { id: "b", text: "Dồn cả 4 vào CLAUDE.md", feedback: "30 trang ở mọi request, và lint không được bảo đảm." },
+      { id: "c", text: "Biến cả 4 thành hook", feedback: "Hook không thay được kiến thức và kết nối." },
+    ],
+    answer: "a",
+    explanation: "Mỗi tính năng làm phần việc nó giỏi nhất — đúng ví dụ Combine features trong tài liệu.",
+  },
+  {
+    questionId: "ch07-l03-q13", lessonId: L, conceptId: "trigger-skill", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Chọn các ghép “dấu hiệu → tính năng” SAI.",
+    segments: [
+      { id: "s1", text: "Cứ gõ lại cùng một prompt để bắt đầu một việc → lưu thành skill gọi bằng /tên.", isError: false },
+      { id: "s2", text: "Dán cùng một quy trình nhiều bước lần thứ ba → skill.", isError: false },
+      { id: "s3", text: "Cần dữ liệu trên hệ thống bên ngoài mà Claude không thấy → viết skill mô tả dữ liệu là đủ.", isError: true, why: "Skill không tạo kết nối; cần MCP server." },
+      { id: "s4", text: "Muốn format chắc chắn sau mỗi lần sửa → ghi vào skill.", isError: true, why: "Việc phải xảy ra mọi lần → hook." },
+    ],
+    explanation: "Skill cho kiến thức và quy trình; MCP cho kết nối; hook cho việc bắt buộc theo sự kiện.",
+  },
+  {
+    questionId: "ch07-l03-q14", lessonId: L, conceptId: "feature-layering", learningObjective: "o2", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Có hai hook PostToolUse cùng khớp Edit: một trong ~/.claude/settings.json, một trong .claude/settings.json của dự án. Claude sửa một file. Điều gì xảy ra?",
+    context: {
+      label: "Hai nơi khai báo hook",
+      content: "~/.claude/settings.json   → PostToolUse, matcher \"Edit\": ghi log\n.claude/settings.json     → PostToolUse, matcher \"Edit\": chạy lint",
+      lang: "text",
+    },
+    options: [
+      { id: "a", text: "Cả hai hook đều chạy", feedback: "Đúng — hook được gộp từ mọi nguồn." },
+      { id: "b", text: "Chỉ hook của dự án chạy vì ghi đè hook cá nhân", feedback: "Hook không ghi đè theo tên như skill." },
+      { id: "c", text: "Không hook nào chạy vì bị trùng", feedback: "Trùng sự kiện không làm hook bị tắt." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: hooks merge — mọi hook đã đăng ký đều chạy cho sự kiện khớp, bất kể nguồn. Skill và MCP server thì ghi đè theo tên.",
+  },
+  {
+    questionId: "ch07-l03-q15", lessonId: L, conceptId: "build-over-time", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết lộ trình 4 bước bổ sung tính năng Claude Code cho dự án dưới đây. Mỗi bước nêu dấu hiệu sẽ khiến bạn thêm và tính năng được thêm.",
+    source: "Nhóm 3 người bắt đầu một website bán hàng nhỏ. Chưa có cấu hình Claude Code nào. Đơn hàng nằm trong một cơ sở dữ liệu có MCP server chính thức; nhóm muốn code luôn được format.",
+    rubric: [
+      { id: "start", label: "Bắt đầu với CLAUDE.md", weight: 1, check: { kind: "regex", pattern: "claude\\.md" }, pass: "Có CLAUDE.md.", fail: "Bước đầu: tạo CLAUDE.md (/init)." },
+      { id: "trigger", label: "Có dấu hiệu kích hoạt", weight: 1, check: { kind: "minMatches", pattern: "(khi|neu|lan thu|lap lai)", value: 3 }, pass: "Có dấu hiệu.", fail: "Mỗi bước nêu “khi …” — dấu hiệu sẽ khiến bạn thêm." },
+      { id: "features", label: "Có skill và MCP hoặc hook", weight: 1, check: { kind: "allGroups", groups: [["skill"], ["mcp", "hook"]] }, pass: "Có tính năng phù hợp.", fail: "Thêm skill và MCP/hook vào lộ trình." },
+      { id: "gradual", label: "Bổ sung dần", weight: 1, check: { kind: "anyKeyword", keywords: ["dần", "khi cần", "chưa cần", "từng bước", "sau đó"] }, pass: "Có tinh thần bổ sung dần.", fail: "Nói rõ: chỉ thêm khi dấu hiệu xuất hiện." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "1. Ngày đầu: tạo CLAUDE.md bằng /init, ghi lệnh build/test; sau đó khi Claude sai một quy ước lần thứ hai thì bổ sung vào CLAUDE.md.\n2. Khi nhóm muốn format chắc chắn sau mỗi lần sửa: thêm hook PostToolUse chạy Prettier.\n3. Khi phải copy dữ liệu đơn hàng vào chat lặp lại: kết nối MCP server chính thức của cơ sở dữ liệu (quyền chỉ đọc).\n4. Khi dán cùng quy trình phát hành lần thứ ba: tạo skill /phat-hanh. Chưa cần plugin cho đến khi có repo thứ hai.",
+    explanation: "Lộ trình tốt bổ sung dần theo dấu hiệu, không cấu hình mọi thứ từ đầu.",
+  },
+];

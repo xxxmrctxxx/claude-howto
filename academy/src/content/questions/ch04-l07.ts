@@ -1,0 +1,176 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch04-l07";
+
+/** 15 questions for "Xuất và chia sẻ kết quả" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh04L07: Question[] = [
+  {
+    questionId: "ch04-l07-q01", lessonId: L, conceptId: "export-docs", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Claude Docs xuất được sang những định dạng nào? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Word (.docx)", feedback: "Đúng." },
+      { id: "b", text: "PDF", feedback: "Đúng." },
+      { id: "c", text: "Markdown", feedback: "Đúng." },
+      { id: "d", text: "File âm thanh MP3", feedback: "Không nằm trong danh sách." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Docs còn đưa được sang Google Docs.",
+  },
+  {
+    questionId: "ch04-l07-q02", lessonId: L, conceptId: "share-scopes", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Phạm vi chia sẻ mặc định của một artifact là gì?",
+    options: [
+      { id: "a", text: "Only you — chỉ mình bạn", feedback: "Đúng." },
+      { id: "b", text: "Anyone with the link", feedback: "Phải tự chọn." },
+      { id: "c", text: "Cả tổ chức", feedback: "Phải tự chọn." },
+    ],
+    answer: "a",
+    explanation: "Bấm Share để mở rộng phạm vi.",
+  },
+  {
+    questionId: "ch04-l07-q03", lessonId: L, conceptId: "export-files", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Đối tác bên ngoài không dùng Claude cần báo cáo để lưu hồ sơ thì nên gửi file xuất (PDF, Word…) thay vì liên kết artifact.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Người xem liên kết thường cần đăng nhập Claude.",
+  },
+  {
+    questionId: "ch04-l07-q04", lessonId: L, conceptId: "invite-people", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền số ngày.",
+    template: "Lời mời xem artifact gửi qua email sẽ hết hạn sau [[b1]] ngày nếu người được mời chưa nhận.",
+    blanks: [{ id: "b1", accepted: ["30", "ba mươi"], width: 4 }],
+    explanation: "Người được mời phải đăng nhập bằng đúng email đã được mời.",
+  },
+  {
+    questionId: "ch04-l07-q05", lessonId: L, conceptId: "share-safety", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Help Center khuyên chỉ mở artifact được chia sẻ từ người bạn tin, coi như file từ người gửi lạ.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Artifact có thể chứa code và lưu trữ chung.",
+  },
+  {
+    questionId: "ch04-l07-q06", lessonId: L, conceptId: "access-levels", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép mỗi người nhận artifact báo cáo với thiết lập chia sẻ phù hợp nhất.",
+    pairs: [
+      { id: "p1", left: "Kế toán chỉ cần đọc số liệu", right: "Mời — Can view" },
+      { id: "p2", left: "Quản đốc góp ý từng đoạn, không tự sửa", right: "Mời — Commenter" },
+      { id: "p3", left: "Đồng nghiệp cùng soạn báo cáo", right: "Mời — Can edit" },
+      { id: "p4", left: "Chính bạn, khi bản nháp chưa nghiệm thu", right: "Giữ Only you" },
+    ],
+    explanation: "Quyền nhỏ nhất đủ dùng; mỗi mức bao gồm quyền của mức trước.",
+  },
+  {
+    questionId: "ch04-l07-q07", lessonId: L, conceptId: "link-signed-in", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Với phạm vi “Anyone with the link” (artifact hiện tại), ai mở được artifact?",
+    options: [
+      { id: "a", text: "Ai đã đăng nhập Claude và có liên kết", feedback: "Đúng." },
+      { id: "b", text: "Bất kỳ ai, không cần tài khoản", feedback: "Chỉ artifact kiểu cũ đã publish mới xem được không cần tài khoản." },
+      { id: "c", text: "Chỉ người trong danh bạ của bạn", feedback: "Không đúng." },
+    ],
+    answer: "a",
+    explanation: "Theo bài Share artifacts.",
+  },
+  {
+    questionId: "ch04-l07-q08", lessonId: L, conceptId: "revoke", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Dự án kết thúc, bạn (gói Pro) muốn không ai ngoài mình mở được artifact nữa nhưng vẫn giữ artifact. Làm gì?",
+    options: [
+      { id: "a", text: "Mở Share, đặt phạm vi về Only you", feedback: "Đúng." },
+      { id: "b", text: "Đổi tên artifact", feedback: "Không thu hồi quyền." },
+      { id: "c", text: "Xoá artifact", feedback: "Thu hồi được nhưng mất luôn artifact." },
+    ],
+    answer: "a",
+    explanation: "Trên Team/Enterprise là Only people invited; gỡ từng người bằng Remove.",
+  },
+  {
+    questionId: "ch04-l07-q09", lessonId: L, conceptId: "unpublish-legacy", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bấm Unpublish một artifact kiểu cũ đã publish có hệ quả gì?",
+    options: [
+      { id: "a", text: "Thu hồi quyền truy cập, không publish lại được, và xoá vĩnh viễn dữ liệu lưu trữ của artifact", feedback: "Đúng." },
+      { id: "b", text: "Chỉ ẩn tạm, bấm lại là xong", feedback: "Không publish lại được." },
+      { id: "c", text: "Không ảnh hưởng gì", feedback: "Có hệ quả lớn — cân nhắc trước." },
+    ],
+    answer: "a",
+    explanation: "Muốn chia sẻ lại phải tạo artifact mới.",
+  },
+  {
+    questionId: "ch04-l07-q10", lessonId: L, conceptId: "viewer-usage", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Khi người xem dùng tính năng gọi Claude trong artifact bạn chia sẻ, lượt dùng trừ vào gói của bạn.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Trừ vào giới hạn của chính người xem; ứng dụng kết nối cũng dùng kết nối của người xem.",
+  },
+  {
+    questionId: "ch04-l07-q11", lessonId: L, conceptId: "team-sharing", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Công ty bạn dùng gói Team. Bạn muốn mời một nhà thầu bên ngoài xem artifact nhưng không thấy lựa chọn chia sẻ ra ngoài. Giải thích hợp lý nhất?",
+    options: [
+      { id: "a", text: "Trên Team/Enterprise, artifact mặc định chỉ trong tổ chức; chủ sở hữu quyết định có cho chia sẻ ra ngoài không", feedback: "Đúng." },
+      { id: "b", text: "Gói Team không có tính năng chia sẻ", feedback: "Có, trong tổ chức." },
+      { id: "c", text: "Nhà thầu phải dùng cùng mật khẩu", feedback: "Claude không dùng mật khẩu." },
+    ],
+    answer: "a",
+    explanation: "Nếu được phép, mỗi artifact mời tối đa 50 người ngoài; hoặc xuất file gửi nhà thầu.",
+  },
+  {
+    questionId: "ch04-l07-q12", lessonId: L, conceptId: "share-safety", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Chat gốc tạo artifact báo cáo có đính kèm file bảng lương. Bạn sắp chia sẻ artifact cho cả phòng. Quyết định an toàn nhất?",
+    options: [
+      { id: "a", text: "Rà tệp đính kèm trước; tạo lại artifact trong chat mới không có file nhạy cảm rồi mới chia sẻ", feedback: "Đúng." },
+      { id: "b", text: "Chia sẻ luôn vì artifact không hiện bảng lương", feedback: "Người xem có thể truy cập tệp của chat." },
+      { id: "c", text: "Chia sẻ rồi nhờ mọi người đừng mở tệp", feedback: "Lời dặn không bảo vệ dữ liệu." },
+    ],
+    answer: "a",
+    explanation: "Help Center: review attachments in a chat before sharing that artifact.",
+  },
+  {
+    questionId: "ch04-l07-q13", lessonId: L, conceptId: "access-levels", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn lập kế hoạch chia sẻ như dưới đây. Chọn các ý SAI.",
+    segments: [
+      { id: "s1", text: "Cho 40 công nhân quyền Can edit để ai cũng tiện sửa.", isError: true, why: "Công nhân chỉ cần xem; quyền nhỏ nhất đủ dùng." },
+      { id: "s2", text: "Quản đốc góp ý nhưng không sửa: Commenter.", isError: false },
+      { id: "s3", text: "Gửi liên kết cho đối tác không có tài khoản Claude.", isError: true, why: "Đối tác không mở được; gửi file xuất." },
+      { id: "s4", text: "Xong dự án thì đặt lại Only you.", isError: false },
+    ],
+    explanation: "Đúng người, đúng quyền, đúng kênh.",
+  },
+  {
+    questionId: "ch04-l07-q14", lessonId: L, conceptId: "export-slides-design", learningObjective: "o1", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bản trình chiếu làm bằng Claude sẽ được trình bày trên máy của phòng họp tập đoàn (chỉ có PowerPoint, không đăng nhập Claude). Cách chuẩn bị hợp lý?",
+    options: [
+      { id: "a", text: "Xuất bản trình chiếu ra PowerPoint (và một bản PDF dự phòng)", feedback: "Đúng." },
+      { id: "b", text: "Mang liên kết artifact tới mở trên máy phòng họp", feedback: "Máy không đăng nhập Claude." },
+      { id: "c", text: "Chụp màn hình từng slide", feedback: "Mất chất lượng, khó sửa." },
+    ],
+    answer: "a",
+    explanation: "Bản trình chiếu xuất được PowerPoint, PDF hoặc đưa sang Google Slides.",
+  },
+  {
+    questionId: "ch04-l07-q15", lessonId: L, conceptId: "share-scopes", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Lập kế hoạch chia sẻ (4–5 dòng) cho artifact công cụ dưới đây: phạm vi/quyền cho từng nhóm, kênh cho người ngoài, việc rà trước khi chia sẻ, và lúc thu hồi.",
+    source: "Công cụ “Tính giờ tăng ca” (artifact, gói Pro). Người nhận: 2 tổ trưởng cùng hoàn thiện; 30 công nhân dùng hằng tuần (có tài khoản Claude); kế toán bên dịch vụ ngoài chỉ cần bảng tổng cuối tháng. Công cụ đang lưu chung tên và số giờ của từng người.",
+    rubric: [
+      { id: "edit", label: "Tổ trưởng sửa được", weight: 1, check: { kind: "regex", pattern: "to truong[^\\n]*(can edit|sua)" }, pass: "Có quyền sửa cho tổ trưởng.", fail: "Tổ trưởng: Can edit." },
+      { id: "workers", label: "Công nhân quyền phù hợp", weight: 1, check: { kind: "regex", pattern: "cong nhan[^\\n]*(can view|xem|lien ket)" }, pass: "Có quyền cho công nhân.", fail: "Công nhân: chỉ xem/dùng (liên kết hoặc Can view)." },
+      { id: "export", label: "Người ngoài nhận file", weight: 1, check: { kind: "regex", pattern: "ke toan[^\\n]*(xuat|file|pdf|excel)" }, pass: "Có xuất file.", fail: "Kế toán ngoài: xuất file bảng tổng (Excel/PDF)." },
+      { id: "safety", label: "Rà dữ liệu và thu hồi", weight: 1, check: { kind: "allGroups", groups: [["lưu trữ chung", "dữ liệu", "rà"], ["thu hồi", "only you", "remove"]] }, pass: "Có rà và thu hồi.", fail: "Rà dữ liệu lưu chung và nêu lúc thu hồi quyền." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Tổ trưởng: mời qua email với quyền Can edit để cùng hoàn thiện.\nCông nhân: chia sẻ liên kết (Anyone with the link, cần đăng nhập) hoặc mời Can view để dùng hằng tuần; nhắc mỗi người tốn lượt dùng của mình nếu công cụ gọi Claude.\nKế toán dịch vụ ngoài: xuất file Excel bảng tổng cuối tháng gửi qua email, không gửi liên kết.\nRà trước: dữ liệu lưu trữ chung chỉ có tên và số giờ, không có số điện thoại hay lương.\nThu hồi: khi đổi công cụ mới hoặc tổ trưởng chuyển công tác — Remove người đó hoặc đặt lại Only you.",
+    explanation: "Kế hoạch chia sẻ tốt: đúng quyền, đúng kênh, rà dữ liệu và có điểm thu hồi.",
+  },
+];

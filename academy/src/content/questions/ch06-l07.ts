@@ -1,0 +1,186 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch06-l07";
+
+/** 15 questions for "Refactoring" — 5 beginner, 6 intermediate, 4 advanced. */
+export const questionsCh06L07: Question[] = [
+  {
+    questionId: "ch06-l07-q01", lessonId: L, conceptId: "refactor-def", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Refactoring nghĩa là gì?",
+    options: [
+      { id: "a", text: "Cải thiện cấu trúc code mà giữ nguyên hành vi", feedback: "Đúng." },
+      { id: "b", text: "Thêm tính năng mới", feedback: "Đó là thay đổi hành vi." },
+      { id: "c", text: "Xoá test cho gọn", feedback: "Ngược lại — test là lưới an toàn." },
+    ],
+    answer: "a",
+    explanation: "Cùng đầu vào, cùng kết quả — chỉ code dễ đọc, dễ sửa hơn.",
+  },
+  {
+    questionId: "ch06-l07-q02", lessonId: L, conceptId: "safety-net", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Nên có test bao phủ phần code sắp refactor trước khi bắt đầu.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Test cho biết hành vi có bị đổi hay không sau mỗi bước.",
+  },
+  {
+    questionId: "ch06-l07-q03", lessonId: L, conceptId: "find-legacy", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Yêu cầu nào giúp tìm chỗ cần hiện đại hoá trong codebase?",
+    options: [
+      { id: "a", text: "“Tìm các chỗ dùng API đã lỗi thời trong codebase”", feedback: "Đúng — giống ví dụ trong Common workflows." },
+      { id: "b", text: "“Viết lại hết cho mới”", feedback: "Không có phạm vi, rủi ro lớn." },
+      { id: "c", text: "“Xoá code cũ”", feedback: "Có thể làm hỏng chức năng." },
+    ],
+    answer: "a",
+    explanation: "Bước đầu của quy trình refactor: xác định code cần cải thiện.",
+  },
+  {
+    questionId: "ch06-l07-q04", lessonId: L, conceptId: "no-mix", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Gộp refactor và thêm tính năng mới vào cùng một commit giúp người review dễ kiểm tra hơn.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Người review không phân biệt được thay đổi nào đổi hành vi; tách riêng từng commit.",
+  },
+  {
+    questionId: "ch06-l07-q05", lessonId: L, conceptId: "small-steps", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Tài liệu Claude Code khuyên refactor theo cách nào?",
+    options: [
+      { id: "a", text: "Từng bước nhỏ, kiểm thử được", feedback: "Đúng." },
+      { id: "b", text: "Một lần thật lớn cho xong", feedback: "Khó tìm nguyên nhân khi có lỗi." },
+      { id: "c", text: "Không cần kiểm thử", feedback: "Mất cách biết hành vi có đổi không." },
+    ],
+    answer: "a",
+    explanation: "Tip trong mục Refactor code: do refactoring in small, testable increments.",
+  },
+  {
+    questionId: "ch06-l07-q06", lessonId: L, conceptId: "same-behavior", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "fix-prompt",
+    prompt: "Viết lại yêu cầu dưới đây cho an toàn.",
+    source: "refactor utils.js cho hiện đại",
+    rubric: [
+      { id: "same", label: "Giữ nguyên hành vi", weight: 1, check: { kind: "regex", pattern: "(giu nguyen hanh vi|khong doi (hanh vi|ket qua)|same behavior)" }, pass: "Có giữ hành vi.", fail: "Nêu rõ giữ nguyên hành vi." },
+      { id: "test", label: "Chạy test", weight: 1, check: { kind: "regex", pattern: "(chay test|npm test|test)" }, pass: "Có test.", fail: "Chạy test sau khi refactor." },
+      { id: "why", label: "Giải thích lợi ích / đề xuất trước", weight: 1, check: { kind: "regex", pattern: "(loi ich|de xuat)" }, pass: "Có đề xuất kèm lợi ích.", fail: "Yêu cầu đề xuất và giải thích lợi ích trước." },
+    ],
+    passScore: 0.67,
+    referenceAnswer: "Đề xuất cách refactor @src/utils.js dùng cú pháp JavaScript hiện đại và giải thích lợi ích; chờ tôi duyệt. Khi làm: giữ nguyên hành vi, từng bước, sau mỗi bước chạy npm test.",
+    explanation: "Đề xuất + lợi ích + giữ hành vi + test: đúng bốn bước trong Common workflows.",
+  },
+  {
+    questionId: "ch06-l07-q07", lessonId: L, conceptId: "benefits", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Vì sao nên nhờ Claude giải thích lợi ích của từng đề xuất refactor?",
+    options: [
+      { id: "a", text: "Để bạn quyết định thay đổi nào đáng làm và loại bỏ thay đổi chỉ cho “đẹp”", feedback: "Đúng." },
+      { id: "b", text: "Để Claude viết dài hơn", feedback: "Không phải mục đích." },
+      { id: "c", text: "Vì Claude không làm được nếu không giải thích", feedback: "Claude vẫn làm được; giải thích giúp bạn quyết định." },
+    ],
+    answer: "a",
+    explanation: "Common workflows: ask Claude to explain the benefits of the modern approach.",
+  },
+  {
+    questionId: "ch06-l07-q08", lessonId: L, conceptId: "backward-compat", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Hàm tinhTong được module của nhóm khác gọi. Bạn muốn refactor bên trong hàm. Ràng buộc quan trọng nhất cần nêu?",
+    options: [
+      { id: "a", text: "Giữ nguyên tên và tham số (chữ ký) của hàm để không làm hỏng nơi gọi", feedback: "Đúng — tương thích ngược." },
+      { id: "b", text: "Đổi tên cho rõ nghĩa hơn", feedback: "Sẽ làm hỏng module của nhóm khác." },
+      { id: "c", text: "Không cần ràng buộc gì", feedback: "Có nơi phụ thuộc thì cần tương thích ngược." },
+    ],
+    answer: "a",
+    explanation: "Tip trong Common workflows: request backward compatibility when needed.",
+  },
+  {
+    questionId: "ch06-l07-q09", lessonId: L, conceptId: "simplify", learningObjective: "o4", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Lệnh /simplify trong Claude Code dùng để làm gì?",
+    options: [
+      { id: "a", text: "Xem xét riêng phần dọn dẹp (tái sử dụng, đơn giản hoá, hiệu năng) và áp dụng sửa", feedback: "Đúng." },
+      { id: "b", text: "Tìm lỗi correctness như /code-review", feedback: "Tìm lỗi là việc của /code-review." },
+      { id: "c", text: "Xoá các file không dùng", feedback: "Không phải chức năng của lệnh này." },
+    ],
+    answer: "a",
+    explanation: "Theo trang /code-review: /simplify reviews for cleanup only and applies its fixes.",
+  },
+  {
+    questionId: "ch06-l07-q10", lessonId: L, conceptId: "over-engineering", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Một lượt review đề xuất 12 góp ý, gồm thêm 3 lớp trừu tượng và test cho trường hợp không thể xảy ra. Cách xử lý hợp lý?",
+    options: [
+      { id: "a", text: "Chỉ làm các góp ý ảnh hưởng tính đúng đắn; bỏ phần gây phức tạp thừa", feedback: "Đúng — tránh quá đà." },
+      { id: "b", text: "Làm hết cả 12 góp ý cho chắc", feedback: "Dễ sinh lớp trừu tượng và test thừa." },
+      { id: "c", text: "Bỏ qua toàn bộ review", feedback: "Có thể bỏ sót lỗi thật." },
+    ],
+    answer: "a",
+    explanation: "Best practices: người review được bảo tìm vấn đề luôn tìm ra thứ gì đó; sửa hết mọi góp ý dẫn tới quá đà.",
+  },
+  {
+    questionId: "ch06-l07-q11", lessonId: L, conceptId: "safety-net", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Hàm cũ cần refactor nhưng chưa có test nào. Bước đầu tiên?",
+    options: [
+      { id: "a", text: "Nhờ Claude viết test ghi lại hành vi hiện tại, chạy và commit, rồi mới refactor", feedback: "Đúng." },
+      { id: "b", text: "Refactor luôn, test sau", feedback: "Không biết hành vi có bị đổi không." },
+      { id: "c", text: "Bỏ qua, vì code cũ không cần test", feedback: "Code cũ là nơi dễ vỡ nhất." },
+    ],
+    answer: "a",
+    explanation: "Test ghi lại hành vi hiện tại (characterization test) là lưới an toàn cho code cũ.",
+  },
+  {
+    questionId: "ch06-l07-q12", lessonId: L, conceptId: "judge-proposal", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Claude đề xuất viết lại toàn bộ module xuất báo cáo sang một framework mới. Module đang ổn định, không có lỗi hay yêu cầu mới. Quyết định hợp lý?",
+    options: [
+      { id: "a", text: "Từ chối viết lại; nếu có điểm khó đọc cụ thể thì refactor nhỏ, có test", feedback: "Đúng." },
+      { id: "b", text: "Đồng ý vì framework mới hiện đại hơn", feedback: "Rủi ro lớn mà không giải quyết vấn đề nào." },
+      { id: "c", text: "Đồng ý nhưng bỏ qua test cho nhanh", feedback: "Càng rủi ro." },
+    ],
+    answer: "a",
+    explanation: "Refactor phải có lý do cụ thể; “cho hiện đại” không phải lý do đủ.",
+  },
+  {
+    questionId: "ch06-l07-q13", lessonId: L, conceptId: "same-behavior", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Bản tóm tắt “refactor” dưới đây lén thay đổi hành vi ở đâu? Chọn các mục.",
+    segments: [
+      { id: "s1", text: "Tách taoBaoCao thành docDuLieu, tinhTong, dinhDang.", isError: false },
+      { id: "s2", text: "Đổi làm tròn từ 1 sang 2 chữ số thập phân cho chính xác hơn.", isError: true, why: "Kết quả hiển thị thay đổi — đây là thay đổi hành vi." },
+      { id: "s3", text: "Đổi tên biến nội bộ tmp thành tongTheoNgay.", isError: false },
+      { id: "s4", text: "Bỏ kiểm tra dữ liệu rỗng vì “có vẻ không cần”.", isError: true, why: "Dữ liệu rỗng sẽ gây lỗi — hành vi thay đổi." },
+    ],
+    explanation: "Mọi thay đổi kết quả hoặc cách xử lý dữ liệu là thay đổi hành vi, cần commit và review riêng.",
+  },
+  {
+    questionId: "ch06-l07-q14", lessonId: L, conceptId: "small-steps", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp quy trình refactor an toàn.",
+    items: [
+      { id: "a", text: "Đảm bảo có test bao phủ và commit" },
+      { id: "b", text: "Xin đề xuất kèm lợi ích, chọn bước đáng làm" },
+      { id: "c", text: "Refactor một bước nhỏ, giữ nguyên hành vi" },
+      { id: "d", text: "Chạy test, đạt thì commit bước đó" },
+      { id: "e", text: "Lặp lại đến khi xong, rồi /diff tổng thể" },
+    ],
+    explanation: "Mỗi bước là một vòng kiểm chứng nhỏ.",
+  },
+  {
+    questionId: "ch06-l07-q15", lessonId: L, conceptId: "refactor-def", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Lập kế hoạch refactor (3–5 bước) cho file dưới đây, mỗi bước có cách kiểm chứng.",
+    source: "src/export.js dài 300 dòng: một hàm xuatExcel làm mọi việc (đọc dữ liệu, tính tổng, định dạng, ghi file). Có 4 test tích hợp đang đạt. Không được đổi định dạng file Excel đầu ra.",
+    rubric: [
+      { id: "steps", label: "Ít nhất 3 bước đánh số", weight: 1, check: { kind: "minMatches", pattern: "^\\s*\\d+[.)]\\s+\\S", value: 3 }, pass: "Đủ bước.", fail: "Chia ít nhất 3 bước đánh số." },
+      { id: "verify", label: "Kiểm chứng sau mỗi bước", weight: 1, check: { kind: "minMatches", pattern: "(chay test|npm test|test dat)", value: 2 }, pass: "Có kiểm chứng.", fail: "Ghi chạy test sau mỗi bước." },
+      { id: "output", label: "Giữ định dạng đầu ra", weight: 1, check: { kind: "regex", pattern: "(khong doi|giu nguyen)[^\\n]*(dinh dang|dau ra|file excel)" }, pass: "Có ràng buộc đầu ra.", fail: "Nêu rõ không đổi định dạng file Excel." },
+      { id: "commit", label: "Commit từng bước", weight: 1, check: { kind: "regex", pattern: "commit" }, pass: "Có commit.", fail: "Commit sau mỗi bước đạt." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Ràng buộc: giữ nguyên định dạng file Excel đầu ra, không thêm tính năng.\n1. Tách phần đọc dữ liệu thành hàm docDuLieu; chạy npm test, đạt thì commit.\n2. Tách phần tính tổng thành tinhTong; chạy npm test, đạt thì commit.\n3. Tách phần định dạng thành dinhDang; chạy npm test, đạt thì commit.\n4. xuatExcel chỉ còn gọi 3 hàm trên và ghi file; chạy npm test, /diff tổng thể rồi commit.",
+    explanation: "Kế hoạch tốt có bước nhỏ, kiểm chứng sau mỗi bước và ràng buộc đầu ra rõ ràng.",
+  },
+];

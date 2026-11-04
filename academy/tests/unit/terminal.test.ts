@@ -113,3 +113,31 @@ describe("terminal missions", () => {
     }
   });
 });
+
+describe("claude-project preset", () => {
+  it("starts at home with a committed, clean project", () => {
+    const s0 = createShell("claude-project");
+    expect(s0.cwd).toBe("/home/hocvien");
+    expect(s0.history).toEqual([]);
+    const s1 = run(s0, "cd du-an/web-loi-qa").state;
+    expect(evaluateCheck(s1, { kind: "cleanTree", path: ".", label: "" })).toBe(true);
+    expect(evaluateCheck(s1, { kind: "commitCount", path: ".", min: 1, label: "" })).toBe(true);
+    expect(run(s1, "ls").out[0]).not.toContain(".gitignore");
+    expect(run(s1, "ls -a").out[0]).toContain(".gitignore");
+  });
+  it("labels claude as simulated", () => {
+    const s = run(createShell("claude-project"), "cd du-an/web-loi-qa", "claude").out.join(" ");
+    expect(s).toContain("MÔ PHỎNG");
+    expect(s).toContain("~/du-an/web-loi-qa");
+    expect(run(createShell("home-basic"), "claude --version").out.join(" ")).toContain("(Claude Code)");
+  });
+  it("labels claude mcp and claude plugin subcommands as simulated", () => {
+    const mcp = run(createShell("home-basic"), "claude mcp list").out.join(" ");
+    expect(mcp).toContain("claude mcp");
+    expect(mcp).toContain("MÔ PHỎNG");
+    expect(mcp).not.toContain("mở Claude Code");
+    const plugin = run(createShell("home-basic"), "claude plugin install x@y").out.join(" ");
+    expect(plugin).toContain("claude plugin");
+    expect(plugin).toContain("MÔ PHỎNG");
+  });
+});

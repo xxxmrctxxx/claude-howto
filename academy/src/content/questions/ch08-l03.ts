@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch08-l03";
+
+/** 15 questions for "Vì sao tiêu hao token?" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh08L03: Question[] = [
+  {
+    questionId: "ch08-l03-q01", lessonId: L, conceptId: "resend-history", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Claude Code gửi kèm toàn bộ hội thoại trong mỗi yêu cầu tới model.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Vì vậy hội thoại càng dài, mỗi yêu cầu càng lớn — dù phần lặp lại được đọc với giá cache rẻ hơn.",
+  },
+  {
+    questionId: "ch08-l03-q02", lessonId: L, conceptId: "tool-results", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Vì sao để Claude đọc nguyên một file log 10.000 dòng lại tốn kém?",
+    options: [
+      { id: "a", text: "Toàn bộ nội dung thành token đầu vào, nằm lại trong context và đi kèm các yêu cầu sau", feedback: "Đúng." },
+      { id: "b", text: "Vì Claude tính phí theo số file", feedback: "Phí tính theo token, không theo số file." },
+      { id: "c", text: "Vì file log luôn bị đọc hai lần", feedback: "Không có quy tắc như vậy." },
+    ],
+    answer: "a",
+    explanation: "Kết quả công cụ (nội dung file, output lệnh) trở thành một phần của hội thoại.",
+  },
+  {
+    questionId: "ch08-l03-q03", lessonId: L, conceptId: "vague-scan", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Yêu cầu “cải thiện codebase này” thường dẫn đến điều gì?",
+    options: [
+      { id: "a", text: "Claude quét rộng, đọc nhiều file để đoán bạn muốn gì", feedback: "Đúng — tốn token và dễ lệch ý." },
+      { id: "b", text: "Claude từ chối làm", feedback: "Claude vẫn làm, nhưng tốn và khó đạt đúng ý." },
+      { id: "c", text: "Claude chỉ đọc đúng một file", feedback: "Không có gì chỉ ra file nào." },
+    ],
+    answer: "a",
+    explanation: "Trang Manage costs: yêu cầu mơ hồ kích hoạt quét rộng; yêu cầu cụ thể giúp đọc ít file.",
+  },
+  {
+    questionId: "ch08-l03-q04", lessonId: L, conceptId: "claude-md-size", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Tài liệu khuyên giữ mỗi file CLAUDE.md ở độ dài nào?",
+    options: [
+      { id: "a", text: "Dưới khoảng 200 dòng", feedback: "Đúng." },
+      { id: "b", text: "Càng dài càng tốt", feedback: "File dài tốn context và giảm mức tuân thủ." },
+      { id: "c", text: "Đúng 1.000 dòng", feedback: "Không có con số như vậy." },
+    ],
+    answer: "a",
+    explanation: "CLAUDE.md nạp ở đầu mỗi phiên; file dài hơn tốn context và giảm mức tuân thủ.",
+  },
+  {
+    questionId: "ch08-l03-q05", lessonId: L, conceptId: "compaction-cost", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Compact một context lớn bản thân nó cũng là một yêu cầu lớn, còn /clear thì không tốn gì.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "/compact phải đọc phần hội thoại cần tóm tắt; khi không cần giữ mạch, /clear rẻ hơn.",
+  },
+  {
+    questionId: "ch08-l03-q06", lessonId: L, conceptId: "cache-miss", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn nghỉ trưa 2 tiếng rồi quay lại hỏi tiếp trong một phiên rất dài. Tin nhắn đầu tiên tốn hơn hẳn. Vì sao?",
+    options: [
+      { id: "a", text: "Cache đã quá thời gian sống, nên toàn bộ context phải xử lý lại", feedback: "Đúng." },
+      { id: "b", text: "Claude tính phí giờ nghỉ", feedback: "Không có phí như vậy." },
+      { id: "c", text: "Câu hỏi sau giờ nghỉ dài hơn", feedback: "Nguyên nhân chính là cache hết hạn." },
+    ],
+    answer: "a",
+    explanation: "Trang Manage costs liệt kê cache miss sau quãng nghỉ dài là một lý do mức dùng tăng.",
+  },
+  {
+    questionId: "ch08-l03-q07", lessonId: L, conceptId: "thinking-cost", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn chỉ nhờ đổi tên một biến ở 3 chỗ nhưng mức dùng cao vì phiên đang chạy effort tối đa. Thay đổi hợp lý?",
+    options: [
+      { id: "a", text: "Hạ mức effort (/effort) cho các việc đơn giản như vậy", feedback: "Đúng — giảm thinking không cần thiết." },
+      { id: "b", text: "Tắt hẳn thinking trên Opus 5.5", feedback: "Không tắt được thinking trên các model 5.5; hãy dùng mức effort." },
+      { id: "c", text: "Viết prompt dài hơn", feedback: "Không giảm thinking." },
+    ],
+    answer: "a",
+    explanation: "Thinking tính như token đầu ra; các model 5.5 luôn dùng thinking nên điều chỉnh bằng effort.",
+  },
+  {
+    questionId: "ch08-l03-q08", lessonId: L, conceptId: "background", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Những gì có thể tiêu hao mức dùng ngay cả khi bạn không gõ gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Tác vụ /loop chạy định kỳ trong phiên", feedback: "Đúng — mỗi lần chạy gửi cả context." },
+      { id: "b", text: "Agent teammate vẫn đang hoạt động", feedback: "Đúng — tiêu hao đến khi thoát." },
+      { id: "c", text: "Tóm tắt phiên và compact khi rảnh", feedback: "Đúng — tài liệu nêu có thể dùng token khi bạn nghỉ." },
+      { id: "d", text: "Một phiên đã thoát hẳn bằng /exit", feedback: "Phiên đã thoát không gửi yêu cầu." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Xem mục Background token usage và Why usage climbs trong trang Manage costs.",
+  },
+  {
+    questionId: "ch08-l03-q09", lessonId: L, conceptId: "subagents-cost", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Subagent làm việc trong context riêng nên hoàn toàn không tính vào mức dùng của bạn.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Subagent giữ context chính gọn gàng, nhưng yêu cầu của nó vẫn tính vào mức dùng; có thể chọn model nhỏ hơn cho subagent.",
+  },
+  {
+    questionId: "ch08-l03-q10", lessonId: L, conceptId: "diagnose", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Bạn dùng gói Max và muốn biết skill, subagent hay máy chủ MCP nào chiếm nhiều hạn mức nhất. Xem ở đâu?",
+    options: [
+      { id: "a", text: "/usage — phần phân bổ (attribution) và gợi ý", feedback: "Đúng." },
+      { id: "b", text: "/init", feedback: "/init tạo CLAUDE.md." },
+      { id: "c", text: "git log", feedback: "git log là lịch sử commit." },
+    ],
+    answer: "a",
+    explanation: "Trên gói đăng ký, /usage cho thấy phân bổ theo skill, subagent, plugin, MCP và gợi ý thay đổi.",
+  },
+  {
+    questionId: "ch08-l03-q11", lessonId: L, conceptId: "tool-results", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn cần Claude phân tích các lỗi trong file app.log 10.000 dòng. Cách nào tốt nhất?",
+    options: [
+      { id: "a", text: "Lọc trước (ví dụ grep \"ERROR\" app.log, hoặc một hook lọc) rồi chỉ đưa các dòng lỗi", feedback: "Đúng — từ hàng chục nghìn token còn vài trăm." },
+      { id: "b", text: "Dán cả file để Claude không bỏ sót", feedback: "Tốn token, context rot làm phân tích kém hơn." },
+      { id: "c", text: "Chia file làm 10 phần và dán lần lượt trong cùng phiên", feedback: "Tổng token vẫn như vậy, còn tích luỹ thêm." },
+    ],
+    answer: "a",
+    explanation: "Trang Manage costs đưa đúng ví dụ này: hook grep ERROR thay vì đọc log 10.000 dòng.",
+  },
+  {
+    questionId: "ch08-l03-q12", lessonId: L, conceptId: "long-session", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Cách A: một phiên 6 tiếng cho 5 việc khác nhau. Cách B: /clear giữa 5 việc. Cách nào tốn ít hơn và vì sao?",
+    options: [
+      { id: "a", text: "Cách B — mỗi việc chỉ gánh lịch sử của chính nó", feedback: "Đúng." },
+      { id: "b", text: "Cách A — giữ một phiên thì rẻ hơn", feedback: "Lịch sử các việc trước bị gửi lại ở mọi yêu cầu sau." },
+      { id: "c", text: "Như nhau vì cùng 5 việc", feedback: "Kích thước context khác nhau nhiều." },
+    ],
+    answer: "a",
+    explanation: "Context cũ (stale) tốn token ở mọi tin nhắn sau; /clear khi đổi việc là thói quen rẻ nhất.",
+  },
+  {
+    questionId: "ch08-l03-q13", lessonId: L, conceptId: "diagnose", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "single-choice",
+    prompt: "Trong /usage có dòng gợi ý dưới đây. Con số 25% nghĩa là gì?",
+    options: [
+      { id: "a", text: "Gợi ý này áp dụng cho khoảng 25% mức dùng gần đây — không phải mức tiết kiệm được", feedback: "Đúng." },
+      { id: "b", text: "Làm theo sẽ tiết kiệm đúng 25%", feedback: "Tài liệu nói rõ đây không phải mức tiết kiệm." },
+      { id: "c", text: "CLAUDE.md chiếm 25% dung lượng ổ cứng", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Ví dụ gợi ý: “25%  Trim ~/code/api/CLAUDE.md · 49k tokens per request”. Một yêu cầu có thể thuộc nhiều dòng nên tổng có thể vượt 100%.",
+  },
+  {
+    questionId: "ch08-l03-q14", lessonId: L, conceptId: "long-session", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép nguồn tiêu hao với cách sửa phù hợp.",
+    pairs: [
+      { id: "p1", left: "Một phiên cho nhiều việc không liên quan", right: "/clear khi chuyển việc" },
+      { id: "p2", left: "Log 10.000 dòng", right: "Lọc trước rồi mới đưa" },
+      { id: "p3", left: "CLAUDE.md chứa quy trình hiếm dùng", right: "Chuyển quy trình đó sang skill" },
+      { id: "p4", left: "Yêu cầu “cải thiện codebase”", right: "Chỉ rõ file, hàm và mục tiêu" },
+    ],
+    explanation: "Mỗi nguồn có một cách sửa trực tiếp; sửa nguồn lớn nhất trước.",
+  },
+  {
+    questionId: "ch08-l03-q15", lessonId: L, conceptId: "diagnose", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Dựa trên báo cáo /usage (mô phỏng) dưới đây, viết kế hoạch 3–4 hành động giảm mức dùng, kèm cách kiểm tra lại.",
+    source: "Gợi ý trong /usage (7 ngày):\n40%  Trim ~/du-an/web-loi-qa/CLAUDE.md · 52k tokens per request\n30%  Long sessions · consider /clear between tasks\n20%  Switch from max to high effort · /effort high",
+    rubric: [
+      { id: "claudemd", label: "Rút gọn CLAUDE.md", weight: 1, check: { kind: "regex", pattern: "claude\\.md" }, pass: "Có xử lý CLAUDE.md.", fail: "Rút gọn CLAUDE.md (dưới 200 dòng, chuyển phần hiếm dùng sang skill)." },
+      { id: "clear", label: "/clear giữa việc", weight: 1, check: { kind: "regex", pattern: "/clear" }, pass: "Có /clear.", fail: "Dùng /clear giữa các việc." },
+      { id: "effort", label: "Hạ effort", weight: 1, check: { kind: "regex", pattern: "/effort|effort" }, pass: "Có điều chỉnh effort.", fail: "Hạ mức effort cho việc đơn giản." },
+      { id: "recheck", label: "Kiểm tra lại", weight: 1, check: { kind: "regex", pattern: "/usage" }, pass: "Có kiểm tra lại.", fail: "Chạy lại /usage sau một tuần để so sánh." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "1. Rút gọn CLAUDE.md của web-loi-qa xuống dưới 200 dòng; chuyển quy trình review và deploy sang skill.\n2. /clear mỗi khi chuyển sang việc không liên quan; đặt tên phiên bằng /rename nếu cần quay lại.\n3. Chuyển từ effort max sang /effort high cho việc thường ngày.\n4. Sau 7 ngày chạy lại /usage, so sánh tỷ lệ các gợi ý.",
+    explanation: "Kế hoạch tốt bám đúng các gợi ý có tỷ lệ lớn nhất và có bước đo lại.",
+  },
+];

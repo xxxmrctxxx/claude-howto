@@ -1,6 +1,6 @@
 import type { IndexedQuestion, Lesson, Question } from "@/lib/types/content";
 import { indexQuestion, stemText } from "./fingerprint";
-import { lexicalSimilarity } from "./text";
+import { profileSimilarity, similarityProfile } from "./text";
 
 export interface BankIssue {
   layer: "id" | "content" | "fingerprint" | "semantic-key" | "similarity" | "schema";
@@ -115,12 +115,15 @@ export function validateBank(questions: Question[], lessons: Lesson[] = []): Ban
     }
   }
 
+  // Profiles are computed once per question; pairs whose word overlap already
+  // rules out a warning skip the trigram comparison.
+  const profiles = indexed.map((q) => similarityProfile(stemText(q)));
   for (let i = 0; i < indexed.length; i++) {
     for (let j = i + 1; j < indexed.length; j++) {
       const a = indexed[i];
       const b = indexed[j];
       if (a.questionId === b.questionId) continue;
-      const sim = lexicalSimilarity(stemText(a), stemText(b));
+      const sim = profileSimilarity(profiles[i], profiles[j], SIMILARITY_WARNING);
       const acknowledged =
         a.reviewedDistinctFrom?.includes(b.questionId) || b.reviewedDistinctFrom?.includes(a.questionId);
       const pct = Math.round(sim * 100);

@@ -110,9 +110,25 @@ export interface ExplainBlock extends BlockBase {
 
 export interface IllustrationBlock extends BlockBase {
   type: "illustration";
-  visual: VisualId;
+  /** A hand-built infographic component… */
+  visual?: VisualId;
+  /** …or a data-driven one (preferred for new lessons). */
+  infographic?: Infographic;
   caption: string;
 }
+
+export type InfographicIcon =
+  | "message" | "user" | "file" | "target" | "check" | "alert" | "cpu" | "layers" | "list" | "code"
+  | "terminal" | "git" | "search" | "tag" | "repeat" | "shield" | "zap" | "book" | "folder" | "plug"
+  | "globe" | "chart" | "clock" | "coins" | "wrench" | "bug" | "rocket";
+
+/** Data-driven infographics rendered by components/visuals/infographic.tsx. */
+export type Infographic =
+  | { kind: "flow"; steps: { title: string; body: string; icon?: InfographicIcon }[] }
+  | { kind: "compare"; columns: { title: string; tone: "bad" | "good" | "neutral"; items: string[] }[] }
+  | { kind: "cards"; cards: { title: string; body: string; foot?: string; icon?: InfographicIcon }[] }
+  | { kind: "table"; headers: string[]; rows: string[][] }
+  | { kind: "annotated"; label: string; lines: { text: string; note?: string; tone?: "role" | "context" | "task" | "constraints" | "output" | "neutral" }[] };
 
 export interface DiagramBlock extends BlockBase {
   type: "diagram";
@@ -131,9 +147,51 @@ export interface CompareBlock extends BlockBase {
 
 export interface SimulationBlock extends BlockBase {
   type: "simulation";
-  widget: WidgetId;
+  /** A hand-built widget… */
+  widget?: WidgetId;
+  /** …or a data-driven simulation (preferred for new lessons). */
+  sim?: GenericSim;
   intro: string;
 }
+
+/** Data-driven simulations rendered by components/lesson/generic-sims.tsx. */
+export type GenericSim =
+  | {
+      kind: "classify";
+      bins: { id: string; label: string }[];
+      items: { id: string; text: string; bin: string; why: string }[];
+    }
+  | {
+      kind: "choose";
+      options: { id: string; label: string }[];
+      scenarios: { id: string; text: string; answer: string; why: string }[];
+    }
+  | { kind: "sequence"; items: { id: string; text: string }[]; explain: string }
+  | {
+      kind: "highlight";
+      instruction: string;
+      segments: { id: string; text: string; target: boolean; why?: string }[];
+    }
+  | {
+      kind: "verify";
+      sourceTitle: string;
+      sourceLines: string[];
+      verdicts: { id: string; label: string }[];
+      claims: { id: string; text: string; verdict: string; why: string }[];
+      note?: string;
+    }
+  | {
+      kind: "terminal";
+      preset: string;
+      steps: { instruction: string; hint: string; check: TerminalCheck }[];
+    }
+  | {
+      kind: "prompt-lab";
+      brief: string;
+      starter: Record<"role" | "context" | "task" | "constraints" | "output", string>;
+      expectations: { block: "role" | "context" | "task" | "constraints" | "output"; keywords: string[]; ok: string; missing: string }[];
+      reference: Record<"role" | "context" | "task" | "constraints" | "output", string>;
+    };
 
 export interface StepsBlock extends BlockBase {
   type: "steps";

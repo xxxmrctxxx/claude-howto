@@ -1,0 +1,176 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch05-l04";
+
+/** 15 questions for "Cài đặt Claude Code" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh05L04: Question[] = [
+  {
+    questionId: "ch05-l04-q01", lessonId: L, conceptId: "native-install", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Lệnh cài native được khuyến nghị cho macOS, Linux và WSL là gì?",
+    options: [
+      { id: "a", text: "curl -fsSL https://claude.ai/install.sh | bash", feedback: "Đúng." },
+      { id: "b", text: "irm https://claude.ai/install.ps1 | iex", feedback: "Đây là lệnh cho Windows PowerShell." },
+      { id: "c", text: "apt-get install claude-free", feedback: "Không có gói nào tên như vậy." },
+    ],
+    answer: "a",
+    explanation: "Trình cài native tải từ claude.ai và tự cập nhật trong nền.",
+  },
+  {
+    questionId: "ch05-l04-q02", lessonId: L, conceptId: "windows-install", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "matching",
+    prompt: "Ghép shell với lệnh cài native tương ứng.",
+    pairs: [
+      { id: "p1", left: "macOS, Linux, WSL", right: "curl -fsSL https://claude.ai/install.sh | bash" },
+      { id: "p2", left: "Windows PowerShell", right: "irm https://claude.ai/install.ps1 | iex" },
+      { id: "p3", left: "Windows CMD", right: "curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd" },
+    ],
+    explanation: "PowerShell và CMD dùng cú pháp khác nhau, nên mỗi shell có lệnh riêng.",
+  },
+  {
+    questionId: "ch05-l04-q03", lessonId: L, conceptId: "verify-install", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền phần còn thiếu của lệnh kiểm tra.",
+    template: "Cài xong, mở terminal mới và chạy `claude [[b1]]` để xem số phiên bản.",
+    blanks: [{ id: "b1", accepted: ["--version"], width: 10 }],
+    explanation: "Thấy số phiên bản kèm chữ (Claude Code) nghĩa là cài thành công.",
+  },
+  {
+    questionId: "ch05-l04-q04", lessonId: L, conceptId: "updates", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Bản Claude Code cài bằng trình cài native tự cập nhật trong nền.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Native kiểm tra cập nhật khi khởi động và định kỳ; bản mới có hiệu lực ở lần mở sau.",
+  },
+  {
+    questionId: "ch05-l04-q05", lessonId: L, conceptId: "package-managers", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Lệnh cài Claude Code bằng Homebrew trên macOS là gì?",
+    options: [
+      { id: "a", text: "brew install --cask claude-code", feedback: "Đúng." },
+      { id: "b", text: "brew get claude", feedback: "Homebrew không có lệnh get." },
+      { id: "c", text: "winget install Anthropic.ClaudeCode", feedback: "Đây là lệnh WinGet trên Windows." },
+    ],
+    answer: "a",
+    explanation: "Cask claude-code theo kênh stable; claude-code@latest theo kênh latest.",
+  },
+  {
+    questionId: "ch05-l04-q06", lessonId: L, conceptId: "path-fix", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Cài xong, mở terminal mới, gõ `claude` thì báo `command not found: claude`. Nên làm gì?",
+    options: [
+      { id: "a", text: "Thêm thư mục cài (~/.local/bin) vào PATH theo lệnh trong mục Setup notes, rồi mở terminal mới", feedback: "Đúng." },
+      { id: "b", text: "Cài lại ngay bằng sudo", feedback: "sudo không sửa được PATH và tạo thêm rủi ro." },
+      { id: "c", text: "Kết luận máy không hỗ trợ Claude Code", feedback: "Đây chỉ là vấn đề PATH." },
+    ],
+    answer: "a",
+    explanation: "Trình cài in sẵn lệnh sửa PATH; nếu file ~/.local/bin/claude không tồn tại thì việc cài chưa hoàn tất.",
+  },
+  {
+    questionId: "ch05-l04-q07", lessonId: L, conceptId: "updates", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn cài Claude Code bằng WinGet từ vài tháng trước. Làm sao lên bản mới nhất?",
+    options: [
+      { id: "a", text: "winget upgrade Anthropic.ClaudeCode", feedback: "Đúng — bản WinGet không tự cập nhật mặc định." },
+      { id: "b", text: "Không cần làm gì, WinGet luôn tự cập nhật", feedback: "Sai — WinGet không tự cập nhật mặc định." },
+      { id: "c", text: "Xoá Windows và cài lại", feedback: "Không cần thiết." },
+    ],
+    answer: "a",
+    explanation: "Homebrew: brew upgrade claude-code; WinGet: winget upgrade Anthropic.ClaudeCode; native: tự động hoặc claude update.",
+  },
+  {
+    questionId: "ch05-l04-q08", lessonId: L, conceptId: "npm-install", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Khi cài bằng npm, nên dùng `sudo npm install -g @anthropic-ai/claude-code` để tránh lỗi quyền.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Tài liệu cảnh báo không dùng sudo: dễ gây lỗi quyền, rủi ro bảo mật và Claude Code không tự cập nhật được.",
+  },
+  {
+    questionId: "ch05-l04-q09", lessonId: L, conceptId: "doctor", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Lệnh `claude doctor` chạy trong shell làm gì?",
+    options: [
+      { id: "a", text: "In chẩn đoán cài đặt và cấu hình (chỉ đọc) mà không mở phiên làm việc", feedback: "Đúng." },
+      { id: "b", text: "Xoá và cài lại Claude Code", feedback: "doctor chỉ đọc, không cài lại." },
+      { id: "c", text: "Gửi dự án của bạn cho bộ phận hỗ trợ", feedback: "Không — nó chỉ in chẩn đoán trên máy." },
+    ],
+    answer: "a",
+    explanation: "claude doctor báo tình trạng cài đặt, lỗi file cấu hình, cảnh báo kèm cách sửa, và kết quả lần cập nhật gần nhất.",
+  },
+  {
+    questionId: "ch05-l04-q10", lessonId: L, conceptId: "release-channel", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Kênh phát hành `stable` khác `latest` thế nào?",
+    options: [
+      { id: "a", text: "Thường cũ hơn khoảng một tuần và bỏ qua bản có lỗi lớn", feedback: "Đúng." },
+      { id: "b", text: "Có tính năng mới sớm hơn latest", feedback: "Ngược lại — latest có tính năng mới ngay." },
+      { id: "c", text: "Chỉ dành cho tài khoản Enterprise", feedback: "Ai cũng chọn được kênh." },
+    ],
+    answer: "a",
+    explanation: "latest là mặc định; stable phù hợp khi bạn ưu tiên ổn định. Chỉnh qua /config hoặc thiết lập autoUpdatesChannel.",
+  },
+  {
+    questionId: "ch05-l04-q11", lessonId: L, conceptId: "install-safety", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Một blog hướng dẫn: `curl -fsSL https://claude-code-free.example/install.sh | bash` “cho bản nhanh hơn”. Bạn làm gì?",
+    options: [
+      { id: "a", text: "Không chạy; chỉ dùng lệnh từ tài liệu chính thức với tên miền claude.ai", feedback: "Đúng — lệnh dạng | bash chạy ngay mọi thứ script đó chứa." },
+      { id: "b", text: "Chạy thử, nếu lỗi thì gỡ", feedback: "Script có thể đã gây hại trước khi bạn kịp gỡ." },
+      { id: "c", text: "Chạy với sudo cho chắc", feedback: "sudo trao cho script lạ toàn quyền trên máy." },
+    ],
+    answer: "a",
+    explanation: "Lệnh curl … | bash tải và chạy script ngay. Hãy chắc chắn nguồn là chính thức (code.claude.com hướng dẫn tải từ claude.ai).",
+  },
+  {
+    questionId: "ch05-l04-q12", lessonId: L, conceptId: "verify-install", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Khi cài đặt thành công, lệnh dưới đây in ra dạng nào?",
+    context: { label: "Terminal", content: "$ claude --version", lang: "bash" },
+    options: [
+      { id: "a", text: "Một số phiên bản kèm chữ (Claude Code), ví dụ 2.1.211 (Claude Code)", feedback: "Đúng." },
+      { id: "b", text: "command not found: claude", feedback: "Đó là dấu hiệu PATH chưa đúng." },
+      { id: "c", text: "Mở trình duyệt để đăng nhập", feedback: "--version chỉ in phiên bản." },
+    ],
+    answer: "a",
+    explanation: "Số phiên bản cụ thể thay đổi liên tục; quan trọng là có số phiên bản và chữ (Claude Code).",
+  },
+  {
+    questionId: "ch05-l04-q13", lessonId: L, conceptId: "windows-install", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn dán lệnh cài dành cho CMD (có `&&`) và nhận lỗi `The token '&&' is not a valid statement separator`. Nguyên nhân và cách sửa?",
+    options: [
+      { id: "a", text: "Bạn đang ở PowerShell; dùng lệnh irm https://claude.ai/install.ps1 | iex", feedback: "Đúng." },
+      { id: "b", text: "Máy thiếu RAM", feedback: "Lỗi này về cú pháp shell, không phải phần cứng." },
+      { id: "c", text: "Cần cài WSL trước", feedback: "Không cần — chỉ cần dùng đúng lệnh cho PowerShell." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu nêu: thấy lỗi token && là bạn đang ở PowerShell, không phải CMD.",
+  },
+  {
+    questionId: "ch05-l04-q14", lessonId: L, conceptId: "native-install", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "ordering",
+    prompt: "Sắp xếp các bước cài Claude Code native trên macOS.",
+    items: [
+      { id: "a", text: "Dán lệnh curl -fsSL https://claude.ai/install.sh | bash và nhấn Enter" },
+      { id: "b", text: "Chờ trình cài chạy xong (không có thanh tiến trình)" },
+      { id: "c", text: "Mở cửa sổ terminal mới" },
+      { id: "d", text: "Chạy claude --version để kiểm tra" },
+      { id: "e", text: "cd vào thư mục dự án và chạy claude" },
+    ],
+    explanation: "Terminal mới đảm bảo shell đọc lại PATH; kiểm tra phiên bản trước khi bắt đầu làm việc.",
+  },
+  {
+    questionId: "ch05-l04-q15", lessonId: L, conceptId: "install-safety", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Bản hướng dẫn nội bộ dưới đây có những câu sai. Hãy chọn chúng.",
+    segments: [
+      { id: "s1", text: "Cài native rồi mở terminal mới, chạy claude --version.", isError: false },
+      { id: "s2", text: "Nếu dùng npm, hãy chạy sudo npm install -g để khỏi lỗi quyền.", isError: true, why: "Không dùng sudo với npm." },
+      { id: "s3", text: "Cài bằng Homebrew thì Claude Code tự cập nhật, không cần làm gì.", isError: true, why: "Homebrew cần brew upgrade claude-code (hoặc bật tuỳ chọn tự nâng cấp)." },
+      { id: "s4", text: "Lệnh cài không hiện tiến trình, cứ để cửa sổ mở và chờ.", isError: false },
+    ],
+    explanation: "Đối chiếu hướng dẫn nội bộ với trang Advanced setup trước khi phát cho cả nhóm.",
+  },
+];

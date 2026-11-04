@@ -66,7 +66,9 @@ academy/
 │   │   └── tim-kiem/           # Tìm kiếm toàn bộ bài học
 │   ├── content/                # NỘI DUNG — chỉ dữ liệu
 │   │   ├── course.ts           # 12 chương và đề cương bài học
-│   │   ├── registry.ts         # Nơi đăng ký bài học + ngân hàng câu hỏi
+│   │   ├── catalog.ts          # Đề cương nhẹ cho client (id, tiêu đề, link) — không chứa nội dung
+│   │   ├── lesson-registry.ts  # Đăng ký nội dung bài học (không có câu hỏi)
+│   │   ├── registry.ts         # Đăng ký ngân hàng câu hỏi + hàm tra cứu (dùng ở server và test)
 │   │   ├── lessons/            # Mỗi bài một file (12 phần bắt buộc)
 │   │   ├── questions/          # Mỗi bài một ngân hàng câu hỏi
 │   │   ├── labs/               # Dữ liệu cho 5 lab
@@ -106,6 +108,7 @@ Schema nằm trong `src/lib/types/content.ts` (nội dung) và `src/lib/progress
 - **Không giả vờ có AI.** Chưa kết nối AI API: chấm bài tự luận bằng rubric quy tắc và luôn ghi rõ giới hạn; panel “Gợi ý” cung cấp prompt để người học tự hỏi Claude.
 - **Mô phỏng được gắn nhãn.** Terminal ghi “MÔ PHỎNG”, số token ghi “ước tính”. Code trong Debug Challenge chạy thật trong Web Worker có giới hạn 3 giây.
 - **Tiến độ an toàn.** Dữ liệu hỏng được sao lưu sang khoá `cha:progress:v1:backup:<thời gian>` thay vì bị xoá; người học có thể xuất/nhập file JSON.
+- **Nội dung không đi vào bundle chung.** Component phía client chỉ import `content/catalog.ts` (dựng từ đề cương). Trang bài học truyền ngân hàng câu hỏi của đúng bài đó qua `LessonDataProvider`; trang tiến độ nhận bản tóm tắt từ server; chỉ mục tìm kiếm chỉ tải khi người dùng gõ từ khoá. Test `content.test.ts` chặn mọi file `"use client"` import `registry`, `lesson-registry` hoặc `lib/search`. Nhờ vậy JS trang chủ không tăng theo số bài (đo 03/11/2026: 691 KB với 31 bài, trước đó 1.291 KB với 23 bài).
 - **XP chỉ tính một lần** cho mỗi câu hỏi, bài học, lab (khoá idempotent) — không khuyến khích làm lại câu cũ để lấy điểm.
 
 ## Mở rộng sau này

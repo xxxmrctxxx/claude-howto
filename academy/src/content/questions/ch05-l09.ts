@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch05-l09";
+
+/** 15 questions for "Các lệnh cơ bản" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh05L09: Question[] = [
+  {
+    questionId: "ch05-l09-q01", lessonId: L, conceptId: "shell-vs-session", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Lệnh dùng bên trong phiên Claude Code (như clear, compact, model) bắt đầu bằng ký tự nào?",
+    options: [
+      { id: "a", text: "/", feedback: "Đúng — ví dụ /clear, /compact." },
+      { id: "b", text: "#", feedback: "Không phải ký tự bắt đầu lệnh." },
+      { id: "c", text: "$", feedback: "$ thường là dấu nhắc của shell." },
+    ],
+    answer: "a",
+    explanation: "Gõ / để mở danh sách lệnh và skill có sẵn.",
+  },
+  {
+    questionId: "ch05-l09-q02", lessonId: L, conceptId: "print-mode", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Lệnh `claude -p \"giải thích hàm tinhTong\"` làm gì?",
+    options: [
+      { id: "a", text: "Trả lời một lần rồi thoát", feedback: "Đúng — chế độ in (print), hợp để dùng trong script." },
+      { id: "b", text: "Mở phiên tương tác và chờ bạn hỏi tiếp", feedback: "Đó là claude \"…\" (không có -p)." },
+      { id: "c", text: "In ra số phiên bản", feedback: "Đó là claude --version." },
+    ],
+    answer: "a",
+    explanation: "Quickstart: claude -p \"query\" — run one-off query, then exit.",
+  },
+  {
+    questionId: "ch05-l09-q03", lessonId: L, conceptId: "clear", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền lệnh.",
+    template: "Xong một việc, chuyển sang việc khác không liên quan: gõ [[b1]] để bắt đầu hội thoại sạch.",
+    blanks: [{ id: "b1", accepted: ["/clear", "/reset", "/new"], width: 8 }],
+    explanation: "/clear (bí danh /reset, /new) xoá lịch sử hội thoại của phiên.",
+  },
+  {
+    questionId: "ch05-l09-q04", lessonId: L, conceptId: "esc-keys", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Nhấn Esc khi Claude đang làm sẽ dừng ngay thao tác đang chạy, và phần việc đã làm được giữ lại.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Esc dừng lượt đang chạy để bạn hướng lại; Claude giữ phần đã làm.",
+  },
+  {
+    questionId: "ch05-l09-q05", lessonId: L, conceptId: "exit-keys", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Những cách nào để thoát Claude Code? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Gõ /exit", feedback: "Đúng." },
+      { id: "b", text: "Nhấn Ctrl+D hai lần trên ô nhập trống", feedback: "Đúng." },
+      { id: "c", text: "Gõ exit", feedback: "Đúng — theo Terminal guide." },
+      { id: "d", text: "Nhấn Shift+Tab", feedback: "Shift+Tab đổi chế độ quyền, không thoát." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Lần sau mở lại đúng hội thoại bằng claude -c.",
+  },
+  {
+    questionId: "ch05-l09-q06", lessonId: L, conceptId: "compact", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Hội thoại về tính năng xuất báo cáo đã rất dài. Bạn vẫn làm tiếp việc này và muốn giữ lại chi tiết về thay đổi API. Gõ gì?",
+    options: [
+      { id: "a", text: "/compact tập trung vào các thay đổi API", feedback: "Đúng — tóm gọn mà giữ trọng tâm." },
+      { id: "b", text: "/clear", feedback: "/clear xoá hết, mất mạch của việc đang làm." },
+      { id: "c", text: "/exit rồi mở phiên mới", feedback: "Mất ngữ cảnh của việc đang dở." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu: chạy /compact kèm trọng tâm (ví dụ “focus on the API changes”) để kiểm soát điều được giữ lại.",
+  },
+  {
+    questionId: "ch05-l09-q07", lessonId: L, conceptId: "context-cmd", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Lệnh /context dùng để làm gì?",
+    options: [
+      { id: "a", text: "Xem những gì đang chiếm chỗ trong context (hội thoại, file, CLAUDE.md…)", feedback: "Đúng." },
+      { id: "b", text: "Xoá toàn bộ context", feedback: "Đó là /clear." },
+      { id: "c", text: "Đổi model", feedback: "Đó là /model." },
+    ],
+    answer: "a",
+    explanation: "/context còn cho biết các file CLAUDE.md nào đã được nạp (mục Memory files).",
+  },
+  {
+    questionId: "ch05-l09-q08", lessonId: L, conceptId: "continue-resume", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Chiều qua bạn làm dở trong thư mục ~/du-an/web-loi-qa. Sáng nay muốn tiếp tục đúng hội thoại gần nhất đó. Làm gì?",
+    options: [
+      { id: "a", text: "cd ~/du-an/web-loi-qa rồi chạy claude -c", feedback: "Đúng — -c tiếp tục hội thoại gần nhất trong thư mục hiện tại." },
+      { id: "b", text: "Chạy claude -p ở thư mục nhà", feedback: "-p trả lời một lần rồi thoát; thư mục cũng sai." },
+      { id: "c", text: "Gõ /clear", feedback: "/clear xoá hội thoại hiện tại." },
+    ],
+    answer: "a",
+    explanation: "Hội thoại gắn với thư mục; -c lấy hội thoại gần nhất của thư mục đó, -r cho bạn chọn.",
+  },
+  {
+    questionId: "ch05-l09-q09", lessonId: L, conceptId: "model", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "fill-blank",
+    prompt: "Điền lệnh.",
+    template: "Muốn đổi sang model khác ngay trong phiên, gõ [[b1]].",
+    blanks: [{ id: "b1", accepted: ["/model"], width: 8 }],
+    explanation: "Cũng có thể chọn model khi mở bằng claude --model <tên>.",
+  },
+  {
+    questionId: "ch05-l09-q10", lessonId: L, conceptId: "prefixes", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép tiền tố gõ ở ô nhập với tác dụng.",
+    pairs: [
+      { id: "p1", left: "/", right: "Mở danh sách lệnh" },
+      { id: "p2", left: "! (đầu dòng)", right: "Chạy lệnh shell trực tiếp, kết quả đưa vào phiên" },
+      { id: "p3", left: "@", right: "Gợi ý đường dẫn file" },
+      { id: "p4", left: "? (khi ô nhập trống)", right: "Mở bảng phím tắt" },
+    ],
+    explanation: "Theo mục Quick commands trong tài liệu Interactive mode.",
+  },
+  {
+    questionId: "ch05-l09-q11", lessonId: L, conceptId: "esc-keys", learningObjective: "o3", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "predict-output",
+    prompt: "Claude không chạy gì; ô nhập đang có một câu bạn gõ dở. Bạn nhấn Ctrl+C một lần. Điều gì xảy ra?",
+    context: { label: "Trạng thái", content: "> Viết lại phần tổng hợp theo tu|   (đang gõ dở, Claude không chạy gì)", lang: "text" },
+    options: [
+      { id: "a", text: "Ô nhập được xoá; nhấn Ctrl+C thêm lần nữa khi trống thì thoát Claude Code", feedback: "Đúng." },
+      { id: "b", text: "Thoát Claude Code ngay lập tức", feedback: "Lần đầu chỉ xoá ô nhập." },
+      { id: "c", text: "Gửi câu đang gõ cho Claude", feedback: "Enter mới gửi tin nhắn." },
+    ],
+    answer: "a",
+    explanation: "Ctrl+C: đang chạy thì dừng; không chạy gì thì lần đầu xoá ô nhập, lần hai thoát.",
+  },
+  {
+    questionId: "ch05-l09-q12", lessonId: L, conceptId: "status-usage", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép lệnh với thông tin nó hiển thị.",
+    pairs: [
+      { id: "p1", left: "/status", right: "Phiên bản, model, tài khoản đang dùng" },
+      { id: "p2", left: "/usage", right: "Mức sử dụng, giới hạn gói và chi phí" },
+      { id: "p3", left: "/context", right: "Phần context đang bị chiếm" },
+    ],
+    explanation: "/cost là bí danh mở thẳng thẻ chi phí trong /usage.",
+  },
+  {
+    questionId: "ch05-l09-q13", lessonId: L, conceptId: "shell-vs-session", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một học viên ghi lại các thao tác. Chọn những thao tác gõ SAI chỗ.",
+    segments: [
+      { id: "s1", text: "Ở terminal (chưa mở Claude), gõ /clear để xoá hội thoại.", isError: true, why: "Lệnh / chỉ có nghĩa bên trong phiên Claude Code." },
+      { id: "s2", text: "Trong phiên Claude Code, gõ /context.", isError: false },
+      { id: "s3", text: "Trong phiên Claude Code, gõ claude --version (không có !) để xem phiên bản.", isError: true, why: "Đó là lệnh shell; trong phiên nó chỉ là tin nhắn gửi Claude. Dùng !claude --version hoặc /status." },
+      { id: "s4", text: "Ở terminal, gõ claude -c để tiếp tục hội thoại.", isError: false },
+    ],
+    explanation: "Nhớ hai “nơi gõ”: shell cho lệnh claude …, phiên cho lệnh / và phím tắt.",
+  },
+  {
+    questionId: "ch05-l09-q14", lessonId: L, conceptId: "clear", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Sau khi sửa xong lỗi đăng nhập, bạn muốn nhờ Claude viết hướng dẫn sử dụng cho trang báo cáo (không liên quan). Lựa chọn nào tốt nhất?",
+    options: [
+      { id: "a", text: "/clear rồi giao việc mới", feedback: "Đúng — không tốn gì, việc mới không phải gánh lịch sử cũ." },
+      { id: "b", text: "Tiếp tục trong cùng hội thoại cho tiện", feedback: "Context lẫn lộn hai việc, dễ nhầm và tốn hơn." },
+      { id: "c", text: "/compact để giữ chi tiết lỗi đăng nhập", feedback: "Việc mới không cần chi tiết đó." },
+    ],
+    answer: "a",
+    explanation: "Best practices: /clear giữa các việc không liên quan; /compact dành cho việc dài cần giữ mạch.",
+  },
+  {
+    questionId: "ch05-l09-q15", lessonId: L, conceptId: "routine", learningObjective: "o4", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết quy trình mở đầu và kết thúc một buổi làm việc với Claude Code (5–7 bước, kèm lệnh cụ thể) cho đồng nghiệp mới.",
+    source: "Đồng nghiệp làm dự án ~/du-an/web-loi-qa mỗi ngày, thường có 2–3 việc khác nhau trong một buổi.",
+    rubric: [
+      { id: "start", label: "Mở đúng thư mục, tiếp tục hoặc mở mới", weight: 1, check: { kind: "regex", pattern: "cd\\s+\\S*web-loi-qa[\\s\\S]*claude" }, pass: "Có bước mở đúng thư mục.", fail: "Bắt đầu bằng cd vào dự án rồi claude (hoặc claude -c)." },
+      { id: "check", label: "Kiểm tra trạng thái", weight: 1, check: { kind: "regex", pattern: "(/status|/context|git status)" }, pass: "Có bước kiểm tra.", fail: "Thêm /status, /context hoặc git status." },
+      { id: "between", label: "Giữa các việc", weight: 1, check: { kind: "regex", pattern: "/clear" }, pass: "Có /clear giữa việc.", fail: "Dùng /clear khi chuyển việc không liên quan." },
+      { id: "end", label: "Kết thúc", weight: 1, check: { kind: "allGroups", groups: [["commit"], ["/exit", "ctrl+d", "ctrl d", "exit"]] }, pass: "Có commit và thoát.", fail: "Cuối buổi: commit rồi /exit." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "1. cd ~/du-an/web-loi-qa, chạy git status để chắc cây làm việc sạch.\n2. claude -c nếu muốn tiếp tục hôm qua, hoặc claude để mở phiên mới.\n3. Gõ /status và /context để xem tài khoản, model và context.\n4. Làm việc thứ nhất; xong thì commit.\n5. /clear trước khi sang việc không liên quan.\n6. Việc dài thì /compact kèm trọng tâm.\n7. Cuối buổi: commit các thay đổi còn lại rồi /exit.",
+    explanation: "Thói quen ổn định giúp phiên gọn, ít nhầm lẫn và luôn có điểm quay lại.",
+  },
+];

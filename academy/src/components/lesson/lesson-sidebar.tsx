@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ChapterIcon } from "@/components/icon";
 import { course } from "@/content/course";
-import { LESSONS } from "@/content/registry";
+import { LESSON_REFS } from "@/content/catalog";
 import { useProgress } from "@/lib/progress/store";
 import type { Lesson } from "@/lib/types/content";
 import { cn } from "@/lib/utils";
@@ -57,7 +57,7 @@ export function LessonSidebar({ current }: { current: Lesson }) {
             {isOpen && (
               <ul className="mb-2 ml-4 flex flex-col gap-0.5">
                 {ch.outline.map((o) => {
-                  const lesson = o.lessonId ? LESSONS[o.lessonId] : undefined;
+                  const lesson = o.lessonId ? LESSON_REFS[o.lessonId] : undefined;
                   if (!lesson)
                     return (
                       <li key={o.slug} className="flex items-center gap-2 px-2 py-1 text-muted-foreground" title="Sắp ra mắt">

@@ -28,16 +28,29 @@ Học bằng hình ảnh → Hiểu bằng ví dụ → Thực hành → Kiểm 
 
 Test `tests/unit/content.test.ts` thất bại nếu bài đã phát hành thiếu bất kỳ phần nào.
 
+## Hình minh hoạ và mô phỏng bằng dữ liệu
+
+Bài mới nên khai báo trực tiếp trong file bài học thay vì viết component:
+
+| Block | Trường | Các loại có sẵn |
+| --- | --- | --- |
+| `illustration` | `infographic` | `flow` (các bước), `compare` (cột tốt/xấu), `cards`, `table`, `annotated` (prompt có chú thích từng dòng) |
+| `simulation` | `sim` | `classify` (xếp vào nhóm), `choose` (chọn phương án cho từng tình huống), `sequence` (sắp thứ tự), `highlight` (đánh dấu đoạn văn), `verify` (đối chiếu với nguồn), `terminal` (nhiệm vụ dòng lệnh mô phỏng), `prompt-lab` (sửa prompt 5 khối) |
+
+Mô phỏng `terminal` và câu hỏi `terminal-task` chọn một preset của shell mô phỏng (`src/lib/engine/terminal/shell.ts`): `home-basic` (thư mục nhà có tài liệu và dữ liệu QA), `git-project` (dự án web chưa có git), `git-committed` (đã có một commit), `claude-project` (dự án `~/du-an/web-loi-qa` đã commit, bắt đầu ở thư mục nhà). Lệnh `claude` (kể cả `claude --version`, `claude mcp …`, `claude plugin …`) trong mô phỏng chỉ in giải thích có nhãn MÔ PHỎNG — không giả lập kết quả kết nối hay cài đặt. Muốn luyện cấu trúc file (skill, SKILL.md) thì tạo bằng `mkdir -p` và `echo … >>`.
+
+Test nội dung kiểm tra mỗi mô phỏng giải được đúng như khai báo. Chỉ viết component riêng (`visual`, `widget`) khi các loại trên không thể hiện được ý tưởng.
+
 ## Cách thêm một bài học mới
 
 1. Tạo `src/content/lessons/<id>-<slug>.ts` xuất một `Lesson`.
 2. Tạo `src/content/questions/<id>.ts` xuất mảng `Question[]` theo `QUESTION_BANK_RULES.md`.
-3. Đăng ký cả hai trong `src/content/registry.ts`.
+3. Đăng ký bài trong `src/content/lesson-registry.ts` và ngân hàng câu hỏi trong `src/content/registry.ts`.
 4. Thêm `lessonId` vào mục tương ứng trong `src/content/course.ts`.
 5. Nếu cần hình hoặc mô phỏng mới: thêm component và đăng ký trong registry tương ứng.
 6. Chạy `npm test` rồi `npm run build`.
 
-Không cần sửa trang bài học, sidebar, tìm kiếm hay trang tiến độ — chúng đọc dữ liệu từ registry.
+Không cần sửa trang bài học, sidebar, tìm kiếm hay trang tiến độ — chúng đọc dữ liệu từ registry (server) hoặc catalog (client). Tiêu đề bài phải trùng tiêu đề trong đề cương và bài dùng đúng 12 mã phần chuẩn — có test kiểm tra.
 
 ## Định dạng chữ trong bài
 

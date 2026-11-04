@@ -1,0 +1,185 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch10-l02";
+
+/** 15 questions for "Dashboard QA" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh10L02: Question[] = [
+  {
+    questionId: "ch10-l02-q01", lessonId: L, conceptId: "defect-rate", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Công thức tỷ lệ lỗi dùng trong bài là gì?",
+    options: [
+      { id: "a", text: "Số lỗi ÷ sản lượng × 100%", feedback: "Đúng." },
+      { id: "b", text: "Số lỗi × sản lượng", feedback: "Không có ý nghĩa." },
+      { id: "c", text: "Sản lượng ÷ số ngày", feedback: "Đó là năng suất trung bình." },
+    ],
+    answer: "a",
+    explanation: "Ghi định nghĩa trên dashboard để người xem hiểu giống nhau.",
+  },
+  {
+    questionId: "ch10-l02-q02", lessonId: L, conceptId: "count-vs-rate", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Để so sánh công đoạn có sản lượng rất khác nhau, nên dùng tỷ lệ lỗi thay vì số lỗi.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Công đoạn làm nhiều hàng đương nhiên có nhiều lỗi hơn.",
+  },
+  {
+    questionId: "ch10-l02-q03", lessonId: L, conceptId: "pareto", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Biểu đồ Pareto gồm những gì?",
+    options: [
+      { id: "a", text: "Cột các loại lỗi sắp giảm dần kèm đường % tích luỹ", feedback: "Đúng." },
+      { id: "b", text: "Biểu đồ tròn 3D", feedback: "Không phải Pareto." },
+      { id: "c", text: "Đường theo thời gian", feedback: "Đó là biểu đồ xu hướng." },
+    ],
+    answer: "a",
+    explanation: "Giúp thấy vài loại lỗi chiếm phần lớn.",
+  },
+  {
+    questionId: "ch10-l02-q04", lessonId: L, conceptId: "clean-names", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "“Lắp ráp vỏ”, “lap rap vo” và “Lắp Ráp Vỏ” nên được chuẩn hoá về một tên trước khi tính.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Nếu không, một công đoạn bị tách thành ba nhóm.",
+  },
+  {
+    questionId: "ch10-l02-q05", lessonId: L, conceptId: "trend-week", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Để xem chất lượng đang tốt lên hay xấu đi qua 12 tuần, dùng biểu đồ nào?",
+    options: [
+      { id: "a", text: "Đường tỷ lệ lỗi theo tuần", feedback: "Đúng." },
+      { id: "b", text: "Pareto", feedback: "Pareto cho thấy loại lỗi chính." },
+      { id: "c", text: "Tròn", feedback: "Không thể hiện xu hướng." },
+    ],
+    answer: "a",
+    explanation: "Xu hướng theo thời gian → đường.",
+  },
+  {
+    questionId: "ch10-l02-q06", lessonId: L, conceptId: "count-vs-rate", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Theo dữ liệu dưới đây, công đoạn nào có tỷ lệ lỗi cao hơn?",
+    context: { label: "Tuần 45", content: "Lắp ráp vỏ: 120 lỗi / 20.000 sản phẩm\nQuấn dây: 40 lỗi / 2.000 sản phẩm", lang: "text" },
+    options: [
+      { id: "a", text: "Quấn dây (2,0% so với 0,6%)", feedback: "Đúng." },
+      { id: "b", text: "Lắp ráp vỏ vì có nhiều lỗi hơn", feedback: "So bằng số lỗi dẫn đến kết luận ngược." },
+      { id: "c", text: "Bằng nhau", feedback: "Tính lại: 120/20.000 = 0,6%; 40/2.000 = 2%." },
+    ],
+    answer: "a",
+    explanation: "Định nghĩa chỉ số trước, kết luận sau.",
+  },
+  {
+    questionId: "ch10-l02-q07", lessonId: L, conceptId: "date-format", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Vì sao ngày “11/03/2026” lẫn với “2026-11-03” trong cùng file là vấn đề?",
+    options: [
+      { id: "a", text: "“11/03/2026” có thể được hiểu là 11 tháng 3 hoặc 3 tháng 11 — dễ xếp nhầm tuần", feedback: "Đúng." },
+      { id: "b", text: "Không có vấn đề gì", feedback: "Có — dễ hiểu nhầm ngày/tháng." },
+      { id: "c", text: "Vì Claude không đọc được số", feedback: "Không đúng." },
+    ],
+    answer: "a",
+    explanation: "Chuẩn hoá về yyyy-mm-dd trước khi tính theo tuần.",
+  },
+  {
+    questionId: "ch10-l02-q08", lessonId: L, conceptId: "invalid-values", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Claude báo có 6 dòng số lỗi âm và 14 dòng trống. Cách làm hợp lý nhất?",
+    options: [
+      { id: "a", text: "Hỏi người ghi/tổ trưởng để xác định; tạm loại các dòng đó và ghi số dòng đã loại trên dashboard", feedback: "Đúng." },
+      { id: "b", text: "Để Claude tự đoán giá trị đúng", feedback: "Bịa dữ liệu." },
+      { id: "c", text: "Đổi số âm thành dương cho nhanh", feedback: "Có thể sai bản chất." },
+    ],
+    answer: "a",
+    explanation: "Minh bạch về dữ liệu đã loại giúp người xem tin dashboard.",
+  },
+  {
+    questionId: "ch10-l02-q09", lessonId: L, conceptId: "duplicates", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Có hai dòng giống hệt nhau: cùng ngày, công đoạn, loại lỗi, số lỗi. Nên xử lý thế nào?",
+    options: [
+      { id: "a", text: "Kiểm tra lại với người ghi: có thể nhập hai lần, cũng có thể là hai lần phát hiện thật", feedback: "Đúng." },
+      { id: "b", text: "Luôn xoá một dòng", feedback: "Có thể xoá mất lỗi thật." },
+      { id: "c", text: "Luôn giữ cả hai", feedback: "Có thể đếm gấp đôi." },
+    ],
+    answer: "a",
+    explanation: "Đây là lý do nên liệt kê vấn đề trước, quyết định sau.",
+  },
+  {
+    questionId: "ch10-l02-q10", lessonId: L, conceptId: "data-source-choice", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép tình huống dữ liệu với cách dựng dashboard.",
+    pairs: [
+      { id: "p1", left: "File CSV xuất hằng tuần, gói Free", right: "Artifact dashboard từ file tải lên" },
+      { id: "p2", left: "Dữ liệu trong BigQuery, gói Pro", right: "Claude Dashboards (beta)" },
+      { id: "p3", left: "File Excel .xlsx", right: "Bật khả năng tạo file rồi tải lên" },
+    ],
+    explanation: "Theo các bài Upload files và Claude Dashboards của Help Center.",
+  },
+  {
+    questionId: "ch10-l02-q11", lessonId: L, conceptId: "kpi-definition", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Phần ghi chú trên dashboard QA nên có những gì? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Ngày dữ liệu", feedback: "Đúng." },
+      { id: "b", text: "Định nghĩa chỉ số", feedback: "Đúng." },
+      { id: "c", text: "Số dòng đã loại khi làm sạch", feedback: "Đúng." },
+      { id: "d", text: "Tên và số điện thoại người ghi lỗi", feedback: "Không cần, dữ liệu cá nhân." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Minh bạch giúp người xem đọc đúng.",
+  },
+  {
+    questionId: "ch10-l02-q12", lessonId: L, conceptId: "cross-check", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Dashboard ghi tỷ lệ lỗi tuần 45 là 1,8%; bạn tính bằng Excel ra 1,4%. Nghi ngờ đầu tiên hợp lý?",
+    options: [
+      { id: "a", text: "Cách tính khác: có thể dashboard lấy trung bình tỷ lệ từng ngày thay vì tổng lỗi ÷ tổng sản lượng, hoặc khác khoảng ngày của tuần", feedback: "Đúng." },
+      { id: "b", text: "Excel sai", feedback: "Chưa có cơ sở." },
+      { id: "c", text: "Bỏ qua vì chênh ít", feedback: "0,4 điểm % là lệch đáng kể." },
+    ],
+    answer: "a",
+    explanation: "Trung bình các tỷ lệ khác với tỷ lệ của tổng; định nghĩa phải nói rõ.",
+  },
+  {
+    questionId: "ch10-l02-q13", lessonId: L, conceptId: "clean-names", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn chuẩn bị dữ liệu như dưới đây. Chọn các bước SAI.",
+    segments: [
+      { id: "s1", text: "Để Claude tự sửa mọi thứ, không cần báo đã sửa gì.", isError: true, why: "Liệt kê vấn đề trước, bạn quyết định; ghi lại thay đổi." },
+      { id: "s2", text: "Chuẩn hoá tên công đoạn về danh sách chính thức.", isError: false },
+      { id: "s3", text: "Điền số lỗi cho ô trống bằng trung bình cho đẹp biểu đồ.", isError: true, why: "Bịa dữ liệu; loại và ghi số dòng." },
+      { id: "s4", text: "Chuẩn hoá ngày về yyyy-mm-dd.", isError: false },
+    ],
+    explanation: "Làm sạch phải minh bạch và không bịa dữ liệu.",
+  },
+  {
+    questionId: "ch10-l02-q14", lessonId: L, conceptId: "weekly-routine", learningObjective: "o4", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "ordering",
+    prompt: "Sắp xếp quy trình cập nhật dashboard QA mỗi tuần.",
+    items: [
+      { id: "a", text: "Xuất file dữ liệu tuần mới (bỏ thông tin cá nhân)" },
+      { id: "b", text: "Nhờ Claude liệt kê vấn đề dữ liệu" },
+      { id: "c", text: "Quyết định và làm sạch, ghi số dòng đã loại" },
+      { id: "d", text: "Cập nhật dashboard" },
+      { id: "e", text: "Đối chiếu 2–3 số với Excel, ghi ngày dữ liệu" },
+    ],
+    explanation: "Có thể ghi quy trình này thành một skill để dùng lại.",
+  },
+  {
+    questionId: "ch10-l02-q15", lessonId: L, conceptId: "kpi-definition", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết định nghĩa 2 chỉ số và yêu cầu dashboard (3–5 dòng) cho tình huống dưới đây.",
+    source: "Bộ phận kiểm tra đầu vào (IQC) muốn theo dõi chất lượng linh kiện của 5 nhà cung cấp: file nhap-kho.csv (Ngay, Nha_cung_cap, So_luong_nhan, So_luong_loi). Giao ban hỏi: nhà cung cấp nào tỷ lệ lỗi cao nhất tháng này, và xu hướng 6 tháng.",
+    rubric: [
+      { id: "rate", label: "Định nghĩa tỷ lệ lỗi", weight: 1, check: { kind: "regex", pattern: "(so_luong_loi|so luong loi)[^\\n]*(so_luong_nhan|so luong nhan)" }, pass: "Có định nghĩa.", fail: "Tỷ lệ lỗi = So_luong_loi ÷ So_luong_nhan × 100%." },
+      { id: "compare", label: "So sánh nhà cung cấp", weight: 1, check: { kind: "anyKeyword", keywords: ["nhà cung cấp"] }, pass: "Có so sánh.", fail: "Biểu đồ cột tỷ lệ lỗi theo nhà cung cấp." },
+      { id: "trend", label: "Xu hướng 6 tháng", weight: 1, check: { kind: "anyKeyword", keywords: ["6 tháng", "xu hướng", "đường"] }, pass: "Có xu hướng.", fail: "Đường tỷ lệ lỗi theo tháng, 6 tháng." },
+      { id: "clean", label: "Làm sạch/đối chiếu", weight: 1, check: { kind: "anyKeyword", keywords: ["liệt kê vấn đề", "làm sạch", "đối chiếu"] }, pass: "Có làm sạch/đối chiếu.", fail: "Thêm bước liệt kê vấn đề dữ liệu và đối chiếu." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Chỉ số 1: tỷ lệ lỗi = tổng So_luong_loi ÷ tổng So_luong_nhan × 100%, theo nhà cung cấp và theo tháng.\nChỉ số 2: số lô nhận có lỗi ÷ tổng số lô nhận, theo nhà cung cấp.\nYêu cầu: đọc nhap-kho.csv, liệt kê vấn đề dữ liệu trước (tên nhà cung cấp viết khác, ngày, ô trống), chưa sửa. Sau đó tạo artifact dashboard: cột tỷ lệ lỗi theo nhà cung cấp tháng này (trục từ 0) và đường xu hướng 6 tháng cho từng nhà cung cấp; ghi ngày dữ liệu, định nghĩa chỉ số; kèm bảng tổng hợp để đối chiếu với Excel.",
+    explanation: "Định nghĩa + làm sạch + biểu đồ đúng câu hỏi + đối chiếu.",
+  },
+];

@@ -1,0 +1,181 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch09-l01";
+
+/** 15 questions for "Phân tích yêu cầu" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03. */
+export const questionsCh09L01: Question[] = [
+  {
+    questionId: "ch09-l01-q01", lessonId: L, conceptId: "user-story", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền khuôn user story.",
+    template: "Là [ai], tôi muốn [làm gì] [[b1]] [được gì].",
+    blanks: [{ id: "b1", accepted: ["để"], width: 4 }],
+    explanation: "Phần “để” nói lý do — giúp chọn giải pháp đúng.",
+  },
+  {
+    questionId: "ch09-l01-q02", lessonId: L, conceptId: "acceptance-criteria", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Tiêu chí chấp nhận nào kiểm tra được?",
+    options: [
+      { id: "a", text: "Bấm Lưu khi thiếu công đoạn thì hiện thông báo lỗi và không lưu", feedback: "Đúng — trả lời được bằng đạt/không đạt." },
+      { id: "b", text: "Form nhập lỗi phải thân thiện", feedback: "Mơ hồ." },
+      { id: "c", text: "Trang đẹp và hiện đại", feedback: "Chủ quan." },
+    ],
+    answer: "a",
+    explanation: "Tiêu chí chấp nhận sau này thành ca kiểm thử.",
+  },
+  {
+    questionId: "ch09-l01-q03", lessonId: L, conceptId: "spec-md", learningObjective: "o4", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Tài liệu Best practices gợi ý: khi chưa nghĩ kỹ, nhờ Claude phỏng vấn bạn cho tới khi đủ để viết đặc tả, rồi ghi vào SPEC.md.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Claude hỏi lại những phần bạn chưa chốt, thường dạng nhiều lựa chọn.",
+  },
+  {
+    questionId: "ch09-l01-q04", lessonId: L, conceptId: "measurable-goal", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Mục tiêu nào đo được?",
+    options: [
+      { id: "a", text: "Tổ trưởng xem được số lỗi theo công đoạn trong ngày, thay vì đợi cuối tuần", feedback: "Đúng." },
+      { id: "b", text: "Làm cho công việc QA tốt hơn", feedback: "Quá chung chung." },
+      { id: "c", text: "Ứng dụng công nghệ hiện đại", feedback: "Không đo được." },
+    ],
+    answer: "a",
+    explanation: "Mục tiêu đo được giúp biết dự án có thành công không.",
+  },
+  {
+    questionId: "ch09-l01-q05", lessonId: L, conceptId: "fresh-session", learningObjective: "o4", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Có SPEC.md rồi, Best practices gợi ý mở phiên mới để xây, để bắt đầu với context sạch và định nghĩa “xong” bằng văn bản.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "SPEC.md cũng là file để review đối chiếu sau này.",
+  },
+  {
+    questionId: "ch09-l01-q06", lessonId: L, conceptId: "scope-mvp", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Tổ trưởng muốn: ghi lỗi, thống kê tuần, gửi tin nhắn khi lỗi nặng, xuất Excel, đăng nhập bằng vân tay. Bản đầu (MVP) nên gồm gì?",
+    options: [
+      { id: "a", text: "Ghi lỗi và thống kê tuần; các mục còn lại để sau", feedback: "Đúng — lõi của vấn đề." },
+      { id: "b", text: "Tất cả cho đầy đủ", feedback: "Kéo dài, khó kiểm thử, chậm có bản dùng được." },
+      { id: "c", text: "Chỉ đăng nhập vân tay", feedback: "Không giải quyết vấn đề chính." },
+    ],
+    answer: "a",
+    explanation: "MVP gắn trực tiếp với mục tiêu; ghi rõ phần để sau trong SPEC.md.",
+  },
+  {
+    questionId: "ch09-l01-q07", lessonId: L, conceptId: "non-functional", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Dòng nào là yêu cầu phi chức năng? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Chạy tốt trên điện thoại Android giá rẻ ở xưởng", feedback: "Đúng — điều kiện thiết bị." },
+      { id: "b", text: "Không lưu số điện thoại cá nhân của công nhân", feedback: "Đúng — dữ liệu cá nhân." },
+      { id: "c", text: "Khoảng 60 người dùng cùng lúc vào giờ giao ca", feedback: "Đúng — quy mô." },
+      { id: "d", text: "Công nhân ghi lỗi gồm công đoạn và mô tả", feedback: "Đây là yêu cầu chức năng." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Phi chức năng mô tả hệ thống phải chạy trong điều kiện nào.",
+  },
+  {
+    questionId: "ch09-l01-q08", lessonId: L, conceptId: "ambiguity", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "intermediate",
+    questionType: "find-error",
+    prompt: "Đánh dấu các chỗ mơ hồ trong đoạn yêu cầu dưới đây.",
+    segments: [
+      { id: "s1", text: "Công nhân ghi lỗi gồm công đoạn, mô tả, mức độ;", isError: false },
+      { id: "s2", text: "trang phải tải nhanh;", isError: true, why: "Nhanh là bao nhiêu giây, trên thiết bị nào?" },
+      { id: "s3", text: "tổ trưởng xem số lỗi theo công đoạn trong tuần;", isError: false },
+      { id: "s4", text: "giao diện thân thiện với mọi người.", isError: true, why: "Thân thiện cần tiêu chí cụ thể: chữ lớn, tối đa 3 ô nhập…" },
+    ],
+    explanation: "Đổi chữ mơ hồ thành con số hoặc tiêu chí đạt/không đạt.",
+  },
+  {
+    questionId: "ch09-l01-q09", lessonId: L, conceptId: "interview-me", learningObjective: "o4", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn có ý tưởng nhưng chưa chốt nhiều chi tiết (ai được sửa lỗi đã ghi? giữ dữ liệu bao lâu?). Bước tiếp theo hợp lý?",
+    options: [
+      { id: "a", text: "Nhờ Claude phỏng vấn bạn cho tới khi đủ để viết đặc tả, rồi ghi SPEC.md", feedback: "Đúng." },
+      { id: "b", text: "Bảo Claude cứ code, chi tiết tính sau", feedback: "Claude phải đoán; dễ làm lại." },
+      { id: "c", text: "Tự viết đặc tả 30 trang trước khi hỏi ai", feedback: "Tốn công, vẫn dễ sót." },
+    ],
+    answer: "a",
+    explanation: "Phỏng vấn giúp lộ ra những câu hỏi bạn chưa nghĩ tới.",
+  },
+  {
+    questionId: "ch09-l01-q10", lessonId: L, conceptId: "be-ambitious", learningObjective: "o4", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Theo Best practices, vì sao nên nói “be ambitious” khi bạn muốn bản đầy đủ (trạng thái rỗng, lỗi, điều hướng bàn phím)?",
+    options: [
+      { id: "a", text: "Claude thường hiểu yêu cầu một cách dè dặt và làm bản nhỏ nhất thoả yêu cầu, vì không thấy bạn mong đợi bao nhiêu", feedback: "Đúng." },
+      { id: "b", text: "Vì đó là lệnh bí mật tăng sức mạnh model", feedback: "Đây là thông tin về phạm vi, không phải lệnh tăng sức mạnh." },
+      { id: "c", text: "Vì Claude chỉ làm việc khi được khen", feedback: "Không đúng." },
+    ],
+    answer: "a",
+    explanation: "“be ambitious” là cách nói rõ phạm vi — điều chỉ bạn biết.",
+  },
+  {
+    questionId: "ch09-l01-q11", lessonId: L, conceptId: "out-of-scope", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Ghi rõ “ngoài phạm vi” trong SPEC.md giúp Claude không tự làm thêm những thứ bạn chưa cần.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Phạm vi rõ ràng giúp bản đầu nhỏ, kiểm thử nhanh.",
+  },
+  {
+    questionId: "ch09-l01-q12", lessonId: L, conceptId: "acceptance-criteria", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "fix-prompt",
+    prompt: "Viết lại tiêu chí dưới đây thành 2–3 tiêu chí chấp nhận kiểm tra được.",
+    source: "Form ghi lỗi phải dễ dùng và không bị lỗi.",
+    rubric: [
+      { id: "list", label: "Có ít nhất 2 tiêu chí", weight: 1, check: { kind: "minMatches", pattern: "^\\s*[-*\\d]", value: 2 }, pass: "Có danh sách tiêu chí.", fail: "Liệt kê 2–3 tiêu chí." },
+      { id: "testable", label: "Có điều kiện cụ thể", weight: 1, check: { kind: "anyKeyword", keywords: ["thiếu", "bấm", "hiện", "không lưu", "tối đa", "giây"] }, pass: "Có điều kiện cụ thể.", fail: "Mỗi tiêu chí nêu hành động và kết quả cụ thể." },
+      { id: "no-vague", label: "Không còn chữ mơ hồ", weight: 1, check: { kind: "noKeyword", keywords: ["dễ dùng", "thân thiện", "đẹp"] }, pass: "Không còn chữ mơ hồ.", fail: "Bỏ chữ “dễ dùng”, thay bằng tiêu chí đo được." },
+    ],
+    passScore: 0.67,
+    referenceAnswer:
+      "- Bấm Lưu khi thiếu công đoạn hoặc mô tả thì hiện thông báo lỗi ngay dưới ô đó và không lưu.\n- Form có tối đa 4 ô nhập, nhập xong một lỗi trong dưới 30 giây trên điện thoại.\n- Lưu xong thì lỗi mới hiện ở đầu danh sách mà không cần tải lại trang.",
+    explanation: "“Dễ dùng” thành số ô nhập và thời gian; “không lỗi” thành hành vi cụ thể.",
+  },
+  {
+    questionId: "ch09-l01-q13", lessonId: L, conceptId: "user-problem", learningObjective: "o1", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Quản đốc nói: “Tôi muốn có app.” Câu hỏi nào nên hỏi đầu tiên?",
+    options: [
+      { id: "a", text: "“Hiện giờ việc gì đang khó hay mất thời gian, và ai gặp khó khăn đó?”", feedback: "Đúng — tìm vấn đề và người dùng." },
+      { id: "b", text: "“Anh muốn màu xanh hay màu đỏ?”", feedback: "Chi tiết giao diện, chưa phải lúc." },
+      { id: "c", text: "“Dùng framework nào?”", feedback: "Giải pháp kỹ thuật đến sau." },
+    ],
+    answer: "a",
+    explanation: "Vấn đề và người dùng quyết định mọi thứ phía sau.",
+  },
+  {
+    questionId: "ch09-l01-q14", lessonId: L, conceptId: "spec-md", learningObjective: "o4", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "ordering",
+    prompt: "Sắp xếp quy trình từ ý tưởng tới lúc bắt đầu xây.",
+    items: [
+      { id: "a", text: "Viết ý tưởng một câu" },
+      { id: "b", text: "Nhờ Claude phỏng vấn bạn" },
+      { id: "c", text: "Claude viết SPEC.md" },
+      { id: "d", text: "Duyệt SPEC.md: tiêu chí kiểm tra được, không chữ mơ hồ" },
+      { id: "e", text: "Commit SPEC.md" },
+      { id: "f", text: "Mở phiên mới, xây từ SPEC.md" },
+    ],
+    explanation: "Đặc tả được duyệt và commit trước khi viết dòng code đầu tiên.",
+  },
+  {
+    questionId: "ch09-l01-q15", lessonId: L, conceptId: "user-story", learningObjective: "o2", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết 2 user story (mỗi story kèm 2 tiêu chí chấp nhận) và một mục ngoài phạm vi cho tình huống dưới đây.",
+    source: "Phòng hành chính muốn web đặt phòng họp: nhân viên xem phòng trống và đặt theo khung giờ; trưởng phòng hành chính huỷ được lượt đặt sai. Chưa cần đồng bộ lịch Google.",
+    rubric: [
+      { id: "stories", label: "Có 2 user story", weight: 1, check: { kind: "minMatches", pattern: "la [a-z][^\\n]*toi muon", value: 2 }, pass: "Có 2 story.", fail: "Viết 2 story dạng “Là…, tôi muốn… để…”." },
+      { id: "criteria", label: "Có tiêu chí chấp nhận", weight: 1, check: { kind: "minMatches", pattern: "^\\s*[-*]", value: 4 }, pass: "Có tiêu chí.", fail: "Mỗi story 2 tiêu chí (gạch đầu dòng)." },
+      { id: "conflict", label: "Xử lý đặt trùng giờ", weight: 1, check: { kind: "anyKeyword", keywords: ["trùng", "đã có người đặt", "không cho đặt"] }, pass: "Có trường hợp trùng.", fail: "Thêm tiêu chí: không cho đặt trùng khung giờ." },
+      { id: "out", label: "Ngoài phạm vi", weight: 1, check: { kind: "anyKeyword", keywords: ["google", "ngoài phạm vi"] }, pass: "Có ngoài phạm vi.", fail: "Ghi đồng bộ lịch Google là ngoài phạm vi." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Story 1: Là nhân viên, tôi muốn xem phòng trống và đặt theo khung giờ để không phải gọi điện hỏi.\n- Chọn ngày thì hiện các phòng và khung giờ còn trống.\n- Đặt vào khung đã có người đặt thì báo trùng và không cho đặt.\nStory 2: Là trưởng phòng hành chính, tôi muốn huỷ lượt đặt sai để phòng được giải phóng.\n- Chỉ trưởng phòng hành chính thấy nút Huỷ.\n- Huỷ xong khung giờ hiện lại là trống.\nNgoài phạm vi: đồng bộ lịch Google.",
+    explanation: "Story + tiêu chí + phạm vi là bộ khung của một SPEC.md tốt.",
+  },
+];

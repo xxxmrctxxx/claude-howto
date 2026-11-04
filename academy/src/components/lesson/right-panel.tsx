@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { bankFor } from "@/content/registry";
+import { useLessonData } from "@/components/lesson/lesson-data";
 import { bankStatus } from "@/lib/engine/question/adaptive";
 import { detectBlocks, evaluatePrompt } from "@/lib/engine/prompt/evaluate";
 import { saveNote } from "@/lib/progress/actions";
@@ -133,7 +133,7 @@ function Notes({ lessonId }: { lessonId: string }) {
 
 function QuizStatus({ lesson }: { lesson: Lesson }) {
   const state = useProgress();
-  const bank = bankFor(lesson.id);
+  const { bank } = useLessonData();
   const history = state.attempts.filter((a) => a.lessonId === lesson.id);
   const st = bankStatus(bank, history);
   const mastery = lesson.concepts

@@ -5,14 +5,16 @@ import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
-import { bankFor, getChapterById, LESSONS, publishedLessonIds } from "@/content/registry";
+import { useLessonData } from "@/components/lesson/lesson-data";
+import { getChapterById, LESSON_REFS, publishedLessonIds } from "@/content/catalog";
 import { scoreRubric, type RubricOutcome } from "@/lib/engine/question/rubric";
 import { awardXp, completeLesson, markSection, patchLesson, reopenLesson, toggleBookmark, visitLesson } from "@/lib/progress/actions";
 import { XP } from "@/lib/progress/gamification";
 import { updateProgress, useProgress, useProgressReady } from "@/lib/progress/store";
-import type { ExerciseBlock, MissionBlock, WidgetId } from "@/lib/types/content";
+import type { ExerciseBlock, GenericSim, MissionBlock, WidgetId } from "@/lib/types/content";
 import { cn } from "@/lib/utils";
 import { CopyButton } from "./copy-button";
+import { GenericSimView } from "./generic-sims";
 import { WIDGETS } from "./widgets";
 
 /** Records the visit and the section currently in view ("bài đang học dở"). */
@@ -41,10 +43,9 @@ export function SectionTracker({ lessonId, sectionIds }: { lessonId: string; sec
 }
 
 export function completeLessonAction(lessonId: string) {
-  const lesson = LESSONS[lessonId];
-  const chapter = getChapterById(lesson.chapterId);
+  const chapter = getChapterById(LESSON_REFS[lessonId].chapterId);
   // The chapter milestone only counts once EVERY lesson of the chapter is published and done.
-  const fullyPublished = chapter?.outline.every((o) => o.lessonId && LESSONS[o.lessonId]);
+  const fullyPublished = chapter?.outline.every((o) => o.lessonId);
   updateProgress((s) =>
     completeLesson(
       s,
@@ -87,11 +88,13 @@ export function LessonActions({ lessonId }: { lessonId: string }) {
   );
 }
 
-export function SimulationView({ lessonId, widget }: { lessonId: string; widget: WidgetId }) {
-  const Widget = WIDGETS[widget];
+export function SimulationView({ lessonId, widget, sim }: { lessonId: string; widget?: WidgetId; sim?: GenericSim }) {
+  const Custom = widget ? WIDGETS[widget] : undefined;
   const state = useProgress();
   const done = state.lessons[lessonId]?.simulationDone;
-  if (!Widget) return <p className="text-danger">Thiếu widget “{widget}”.</p>;
+  if (!Custom && !sim) return <p className="text-danger">Thiếu mô phỏng.</p>;
+  const onComplete = () =>
+    updateProgress((s) => awardXp(patchLesson(s, lessonId, { simulationDone: true }), `sim:${lessonId}`, XP.simulation, "Hoàn thành mô phỏng tương tác"));
   return (
     <div>
       {done && (
@@ -99,13 +102,7 @@ export function SimulationView({ lessonId, widget }: { lessonId: string; widget:
           <CheckCircle2 /> Bạn đã hoàn thành mô phỏng này
         </Badge>
       )}
-      <Widget
-        onComplete={() =>
-          updateProgress((s) =>
-            awardXp(patchLesson(s, lessonId, { simulationDone: true }), `sim:${lessonId}`, XP.simulation, "Hoàn thành mô phỏng tương tác"),
-          )
-        }
-      />
+      {Custom ? <Custom onComplete={onComplete} /> : <GenericSimView sim={sim!} onComplete={onComplete} />}
     </div>
   );
 }
@@ -254,7 +251,7 @@ export function MissionView({ lessonId, block }: { lessonId: string; block: Miss
 export function AnswersReview({ lessonId }: { lessonId: string }) {
   const state = useProgress();
   const ready = useProgressReady();
-  const bank = bankFor(lessonId);
+  const { bank } = useLessonData();
   const latest = useMemo(() => {
     const m = new Map<string, boolean>();
     for (const a of state.attempts) if (a.lessonId === lessonId) m.set(a.questionId, a.correct);

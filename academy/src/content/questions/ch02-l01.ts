@@ -1,0 +1,176 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch02-l01";
+
+/** 15 questions for "Tạo tài khoản" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh02L01: Question[] = [
+  {
+    questionId: "ch02-l01-q01", lessonId: L, conceptId: "access-points", learningObjective: "o1", thinkingSkill: "apply", difficulty: "beginner",
+    questionType: "scenario",
+    prompt: "Chị Hoa dùng laptop Windows ở văn phòng và iPhone khi đi công tác. Chị nên dùng Claude thế nào?",
+    options: [
+      { id: "a", text: "Trên laptop dùng claude.ai hoặc ứng dụng Windows, trên iPhone dùng ứng dụng iOS — đăng nhập cùng một tài khoản", feedback: "Đúng." },
+      { id: "b", text: "Tạo hai tài khoản riêng cho laptop và iPhone", feedback: "Không cần — một tài khoản dùng mọi nơi." },
+      { id: "c", text: "Chỉ dùng được trên laptop", feedback: "Có ứng dụng iOS và Android." },
+    ],
+    answer: "a",
+    explanation: "Claude có bản web (claude.ai), ứng dụng máy tính Mac/Windows và ứng dụng iOS/Android.",
+  },
+  {
+    questionId: "ch02-l01-q02", lessonId: L, conceptId: "eligibility", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Theo Help Center, độ tuổi tối thiểu để dùng Claude là bao nhiêu?",
+    options: [
+      { id: "a", text: "18 tuổi", feedback: "Đúng." },
+      { id: "b", text: "13 tuổi", feedback: "Không đúng." },
+      { id: "c", text: "Không giới hạn", feedback: "Có giới hạn độ tuổi." },
+    ],
+    answer: "a",
+    explanation: "Ngoài ra phải đang ở khu vực được hỗ trợ.",
+  },
+  {
+    questionId: "ch02-l01-q03", lessonId: L, conceptId: "no-password", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Khi tạo tài khoản Claude, bạn phải đặt một mật khẩu dài ít nhất 8 ký tự.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Tài khoản Claude không có mật khẩu: đăng nhập bằng Google hoặc liên kết gửi qua email.",
+  },
+  {
+    questionId: "ch02-l01-q04", lessonId: L, conceptId: "phone-verification", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Mọi tài khoản Claude mới đều phải xác minh số điện thoại, và không có cách bỏ qua bước này.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Help Center: We require phone verification for all new users.",
+  },
+  {
+    questionId: "ch02-l01-q05", lessonId: L, conceptId: "google-login", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Ngoài đăng nhập bằng email, nút nào trên trang đăng nhập cho phép dùng tài khoản Google?",
+    options: [
+      { id: "a", text: "Continue with Google", feedback: "Đúng." },
+      { id: "b", text: "Forgot password", feedback: "Claude không có mật khẩu." },
+      { id: "c", text: "Sign in with SMS", feedback: "SMS chỉ để xác minh số." },
+    ],
+    answer: "a",
+    explanation: "Hai cách chính: Continue with Google và Continue with email.",
+  },
+  {
+    questionId: "ch02-l01-q06", lessonId: L, conceptId: "cross-device-code", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn bấm Continue with email trên laptop, nhưng mở thư đăng nhập và bấm liên kết trên điện thoại. Điều gì xảy ra và bạn làm gì?",
+    options: [
+      { id: "a", text: "Liên kết hiện một mã xác minh; nhập mã đó trên laptop", feedback: "Đúng." },
+      { id: "b", text: "Laptop tự đăng nhập, không cần làm gì", feedback: "Khác thiết bị thì cần nhập mã." },
+      { id: "c", text: "Phải tạo tài khoản mới trên điện thoại", feedback: "Không cần." },
+    ],
+    answer: "a",
+    explanation: "Mở liên kết trên cùng thiết bị thì đăng nhập ngay; khác thiết bị thì dùng mã.",
+  },
+  {
+    questionId: "ch02-l01-q07", lessonId: L, conceptId: "voip-not-accepted", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "multiple-choice",
+    prompt: "Loại số điện thoại nào KHÔNG được chấp nhận để xác minh? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Số VoIP / Google Voice", feedback: "Đúng — không được chấp nhận." },
+      { id: "b", text: "Số cố định (máy bàn)", feedback: "Đúng — không được chấp nhận." },
+      { id: "c", text: "Số tạo từ ứng dụng", feedback: "Đúng — không được chấp nhận." },
+      { id: "d", text: "Số di động thật nhận được SMS ở khu vực được hỗ trợ", feedback: "Loại này được chấp nhận." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Số không nhận được tin nhắn văn bản cũng không dùng được.",
+  },
+  {
+    questionId: "ch02-l01-q08", lessonId: L, conceptId: "three-accounts", learningObjective: "o3", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "fill-blank",
+    prompt: "Điền số.",
+    template: "Một số điện thoại xác minh được tối đa [[b1]] tài khoản Claude.",
+    blanks: [{ id: "b1", accepted: ["3", "ba"], width: 3 }],
+    explanation: "Vượt quá sẽ báo số đã được dùng quá nhiều lần.",
+  },
+  {
+    questionId: "ch02-l01-q09", lessonId: L, conceptId: "number-permanent", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn sắp đổi nhà mạng và bỏ số di động hiện tại trong tháng tới. Nên xác minh tài khoản Claude bằng số nào?",
+    options: [
+      { id: "a", text: "Số mới mà bạn sẽ giữ lâu dài", feedback: "Đúng — sau khi xác minh không đổi được số." },
+      { id: "b", text: "Số cũ, sau này đổi lại cũng được", feedback: "Số đã xác minh không đổi được." },
+      { id: "c", text: "Số máy bàn của công ty", feedback: "Số cố định không được chấp nhận." },
+    ],
+    answer: "a",
+    explanation: "Help Center: once verified, the number can't be changed.",
+  },
+  {
+    questionId: "ch02-l01-q10", lessonId: L, conceptId: "email-link", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Sau khi chọn Continue with email, bạn sẽ nhận được gì?",
+    options: [
+      { id: "a", text: "Thư có tiêu đề “Secure link to log in to Claude.ai” chứa liên kết đăng nhập", feedback: "Đúng." },
+      { id: "b", text: "Mật khẩu tạm thời", feedback: "Không có mật khẩu." },
+      { id: "c", text: "Cuộc gọi thoại", feedback: "Không có cuộc gọi." },
+    ],
+    answer: "a",
+    explanation: "Dùng cùng email trên mọi thiết bị để vào đúng một tài khoản.",
+  },
+  {
+    questionId: "ch02-l01-q11", lessonId: L, conceptId: "free-limit", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Gói Free có giới hạn sử dụng theo phiên, đặt lại sau mỗi 5 giờ.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Giới hạn còn có thể thay đổi theo nhu cầu sử dụng; gói trả phí có nhiều lượt hơn.",
+  },
+  {
+    questionId: "ch02-l01-q12", lessonId: L, conceptId: "login-troubleshoot", learningObjective: "o4", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Nhân viên dùng email công ty để đăng ký nhưng không bao giờ thấy thư đăng nhập, kể cả trong thư rác. Đồng nghiệp dùng Gmail thì nhận bình thường. Nguyên nhân và cách xử lý hợp lý nhất?",
+    options: [
+      { id: "a", text: "Bộ lọc thư của công ty giữ lại thư; nhờ bộ phận IT cho phép @mail.anthropic.com", feedback: "Đúng." },
+      { id: "b", text: "Claude không hỗ trợ email công ty", feedback: "Có hỗ trợ; vấn đề nằm ở bộ lọc." },
+      { id: "c", text: "Đổi số điện thoại", feedback: "Không liên quan đến thư đăng nhập." },
+    ],
+    answer: "a",
+    explanation: "Help Center: email doanh nghiệp, chính phủ, .edu có thể cần IT điều chỉnh bảo mật thư.",
+  },
+  {
+    questionId: "ch02-l01-q13", lessonId: L, conceptId: "login-troubleshoot", learningObjective: "o4", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "matching",
+    prompt: "Ghép sự cố với cách xử lý theo Help Center.",
+    pairs: [
+      { id: "p1", left: "Hơn 5 phút chưa nhận SMS", right: "Bấm Try again, nhập lại đúng số" },
+      { id: "p2", left: "Báo “Error sending code”", right: "Dùng một số khác" },
+      { id: "p3", left: "Mã SMS bị từ chối", right: "Xin mã mới nhất và nhập ngay" },
+      { id: "p4", left: "Báo số đã dùng quá nhiều lần", right: "Dùng số khác hoặc liên hệ Support để gỡ liên kết" },
+    ],
+    explanation: "Mã có hạn; mỗi số tối đa 3 tài khoản.",
+  },
+  {
+    questionId: "ch02-l01-q14", lessonId: L, conceptId: "phone-verification", learningObjective: "o3", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn hướng dẫn đồng nghiệp tạo tài khoản như dưới đây. Chọn các ý SAI.",
+    segments: [
+      { id: "s1", text: "Dùng số Google Voice cho nhanh, khỏi lộ số thật.", isError: true, why: "Google Voice/VoIP không được chấp nhận." },
+      { id: "s2", text: "Dùng email bạn sẽ dùng lâu dài và đăng nhập bằng cùng email trên mọi thiết bị.", isError: false },
+      { id: "s3", text: "Xác minh tạm bằng số cũ, mai đổi sang số mới sau.", isError: true, why: "Số đã xác minh không đổi được." },
+      { id: "s4", text: "Không thấy thư đăng nhập thì kiểm tra thư rác.", isError: false },
+    ],
+    explanation: "Số di động thật, giữ lâu dài; email ổn định.",
+  },
+  {
+    questionId: "ch02-l01-q15", lessonId: L, conceptId: "eligibility", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết checklist (4–5 dòng) để một nhóm 10 nhân viên mới tự tạo tài khoản Claude đúng ngay từ đầu.",
+    source: "Nhóm làm việc tại TP.HCM, ai cũng trên 18 tuổi. Công ty có bộ lọc thư chặt. Một số người chỉ có số máy bàn ở bàn làm việc và số di động cá nhân. Họ dùng cả máy tính và điện thoại.",
+    rubric: [
+      { id: "login", label: "Cách đăng nhập", weight: 1, check: { kind: "anyKeyword", keywords: ["google", "email"] }, pass: "Có cách đăng nhập.", fail: "Nêu Continue with Google hoặc email." },
+      { id: "mobile", label: "Số di động thật, giữ lâu dài", weight: 1, check: { kind: "regex", pattern: "di dong[^\\n]*(sms|lau dai|ca nhan|that)" }, pass: "Có quy định số.", fail: "Số di động thật nhận SMS, giữ lâu dài." },
+      { id: "filter", label: "Bộ lọc thư công ty", weight: 1, check: { kind: "anyKeyword", keywords: ["mail.anthropic.com", "thư rác", "bộ phận it", "it"] }, pass: "Có xử lý thư bị lọc.", fail: "Nhờ IT cho phép @mail.anthropic.com; xem thư rác." },
+      { id: "no-share", label: "Mỗi người một tài khoản", weight: 1, check: { kind: "anyKeyword", keywords: ["mỗi người", "không dùng chung", "riêng"] }, pass: "Có tài khoản riêng.", fail: "Mỗi người một tài khoản, không dùng chung." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "1. Mỗi người tự tạo tài khoản riêng, không dùng chung email hay tài khoản.\n2. Đăng ký bằng Continue with Google hoặc Continue with email; nhờ bộ phận IT cho phép @mail.anthropic.com, không thấy thư thì xem thư rác.\n3. Xác minh bằng số di động cá nhân nhận SMS, giữ lâu dài — không dùng số máy bàn hay số ảo.\n4. Trên máy tính và điện thoại, đăng nhập bằng cùng một email.\n5. Gửi một câu hỏi đầu tiên để kiểm tra tài khoản đã dùng được.",
+    explanation: "Checklist tốt chặn trước các lỗi hay gặp: số không hợp lệ, thư bị lọc, dùng chung tài khoản.",
+  },
+];

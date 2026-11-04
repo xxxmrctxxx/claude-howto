@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch02-l02";
+
+/** 15 questions for "Tìm hiểu giao diện" — 5 beginner, 6 intermediate, 4 advanced. Facts checked 2026-11-03 (Claude Help Center). */
+export const questionsCh02L02: Question[] = [
+  {
+    questionId: "ch02-l02-q01", lessonId: L, conceptId: "plus-button", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Muốn đính kèm một file vào cuộc chat, bấm vào đâu?",
+    options: [
+      { id: "a", text: "Nút + ở góc dưới bên trái ô nhập → Add files or photos", feedback: "Đúng." },
+      { id: "b", text: "Biểu tượng con ma", feedback: "Đó là chat ẩn danh." },
+      { id: "c", text: "Tên model dưới ô nhập", feedback: "Đó là bộ chọn model." },
+    ],
+    answer: "a",
+    explanation: "Cũng có thể kéo thả file vào cửa sổ chat hoặc dán ảnh.",
+  },
+  {
+    questionId: "ch02-l02-q02", lessonId: L, conceptId: "model-selector", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Trên web và ứng dụng máy tính, tên model đang dùng hiện ở đâu?",
+    options: [
+      { id: "a", text: "Bên dưới ô nhập; bấm vào để đổi model", feedback: "Đúng." },
+      { id: "b", text: "Chỉ trong email chào mừng", feedback: "Không đúng." },
+      { id: "c", text: "Ở cuối mỗi câu trả lời và không đổi được", feedback: "Đổi được qua bộ chọn model." },
+    ],
+    answer: "a",
+    explanation: "Trên điện thoại, bộ chọn model nằm ở đầu màn hình.",
+  },
+  {
+    questionId: "ch02-l02-q03", lessonId: L, conceptId: "incognito-icon", learningObjective: "o3", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Bấm biểu tượng con ma ở góc trên bên phải của chat mới sẽ mở chat ẩn danh — không lưu vào lịch sử chat và bộ nhớ.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Chat ẩn danh có viền đen và nhãn Incognito chat.",
+  },
+  {
+    questionId: "ch02-l02-q04", lessonId: L, conceptId: "slash-menu", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền ký tự.",
+    template: "Ngoài nút +, bạn có thể gõ ký tự [[b1]] trong ô nhập để mở nhanh các lệnh và tuỳ chọn.",
+    blanks: [{ id: "b1", accepted: ["/"], width: 3 }],
+    explanation: "Help Center: click the + button or type “/” for more options and commands.",
+  },
+  {
+    questionId: "ch02-l02-q05", lessonId: L, conceptId: "sidebar", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Thanh bên bên trái chứa những gì? Chọn tất cả ý đúng.",
+    options: [
+      { id: "a", text: "Danh sách hội thoại (Chats and tasks)", feedback: "Đúng." },
+      { id: "b", text: "Projects", feedback: "Đúng." },
+      { id: "c", text: "Tab Artifacts", feedback: "Đúng." },
+      { id: "d", text: "Mã xác minh số điện thoại", feedback: "Không nằm ở thanh bên." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Thanh bên giúp bắt đầu mới và quay lại công việc cũ.",
+  },
+  {
+    questionId: "ch02-l02-q06", lessonId: L, conceptId: "chat-menu", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Thanh bên có rất nhiều hội thoại tên chung chung. Bạn muốn đặt lại tên “Báo cáo lỗi tuần 44” cho một hội thoại. Làm thế nào?",
+    options: [
+      { id: "a", text: "Bấm nút ⋮ cạnh hội thoại → Rename", feedback: "Đúng." },
+      { id: "b", text: "Gõ vào ô chat “đổi tên cuộc chat này”", feedback: "Đổi tên làm trên giao diện." },
+      { id: "c", text: "Xoá rồi tạo hội thoại mới", feedback: "Mất nội dung cũ." },
+    ],
+    answer: "a",
+    explanation: "Trên iOS: chạm giữ hội thoại; trên Android: menu ⋮ trong hội thoại.",
+  },
+  {
+    questionId: "ch02-l02-q07", lessonId: L, conceptId: "model-selector", learningObjective: "o2", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Gõ “hãy chuyển sang model mạnh nhất” vào ô chat là cách đổi model được Help Center hướng dẫn.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Đổi model bằng cách bấm tên model đang dùng để mở bộ chọn model.",
+  },
+  {
+    questionId: "ch02-l02-q08", lessonId: L, conceptId: "settings-your-claude", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Bạn không muốn Claude tự tạo bộ nhớ từ các cuộc chat nữa. Vào đâu?",
+    options: [
+      { id: "a", text: "Settings > Your Claude, tắt “Generate memory from chats”", feedback: "Đúng." },
+      { id: "b", text: "Nút + → Add files or photos", feedback: "Đó là đính kèm file." },
+      { id: "c", text: "Tab Artifacts", feedback: "Không liên quan đến bộ nhớ." },
+    ],
+    answer: "a",
+    explanation: "Khi tắt có hai lựa chọn: Pause memory (giữ bộ nhớ cũ) hoặc Reset memory (xoá vĩnh viễn).",
+  },
+  {
+    questionId: "ch02-l02-q09", lessonId: L, conceptId: "capabilities", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Artifact và việc đọc file XLSX cần bật khả năng nào trong Settings > Capabilities?",
+    options: [
+      { id: "a", text: "Cloud code execution and file creation", feedback: "Đúng." },
+      { id: "b", text: "Chat ẩn danh", feedback: "Không liên quan." },
+      { id: "c", text: "Đổi ngôn ngữ", feedback: "Không liên quan." },
+    ],
+    answer: "a",
+    explanation: "Theo các bài Upload files và Artifacts của Help Center.",
+  },
+  {
+    questionId: "ch02-l02-q10", lessonId: L, conceptId: "artifacts-tab", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Tuần trước Claude tạo cho bạn một trang dashboard nhỏ, nhưng bạn không nhớ nó ở hội thoại nào. Tìm nhanh nhất ở đâu?",
+    options: [
+      { id: "a", text: "Tab Artifacts ở thanh bên — nơi lưu mọi artifact", feedback: "Đúng." },
+      { id: "b", text: "Mở lần lượt từng hội thoại", feedback: "Mất thời gian." },
+      { id: "c", text: "Bộ chọn model", feedback: "Không chứa artifact." },
+    ],
+    answer: "a",
+    explanation: "Trên điện thoại cũng có tab Artifacts.",
+  },
+  {
+    questionId: "ch02-l02-q11", lessonId: L, conceptId: "chat-input", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép thành phần giao diện với công dụng.",
+    pairs: [
+      { id: "p1", left: "Ô nhập và nút gửi", right: "Gửi yêu cầu cho Claude" },
+      { id: "p2", left: "Nút +", right: "Đính kèm file, ảnh và mở tuỳ chọn" },
+      { id: "p3", left: "Tên model dưới ô nhập", right: "Mở bộ chọn model" },
+      { id: "p4", left: "Biểu tượng con ma", right: "Bắt đầu chat ẩn danh" },
+    ],
+    explanation: "Bốn thành phần dùng nhiều nhất.",
+  },
+  {
+    questionId: "ch02-l02-q12", lessonId: L, conceptId: "ui-changes", learningObjective: "o4", thinkingSkill: "apply", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Sau một bản cập nhật, bạn không thấy nút quen thuộc ở chỗ cũ. Cách tự tìm hợp lý nhất?",
+    options: [
+      { id: "a", text: "Rê chuột đọc nhãn, thử nút + hoặc gõ /, rồi tra Help Center", feedback: "Đúng." },
+      { id: "b", text: "Cài lại trình duyệt", feedback: "Không giải quyết được." },
+      { id: "c", text: "Kết luận tính năng đã bị bỏ", feedback: "Thường chỉ đổi vị trí hoặc tên." },
+    ],
+    answer: "a",
+    explanation: "Giao diện thay đổi theo thời gian; Help Center được cập nhật theo.",
+  },
+  {
+    questionId: "ch02-l02-q13", lessonId: L, conceptId: "effort-thinking", learningObjective: "o2", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Bạn chỉ nhờ Claude sửa lỗi chính tả trong vài email ngắn, nhưng thấy mỗi câu trả lời mất nhiều thời gian vì đang bật extended thinking và effort cao. Điều chỉnh nào hợp lý?",
+    options: [
+      { id: "a", text: "Tắt extended thinking và hạ mức effort cho việc đơn giản này", feedback: "Đúng." },
+      { id: "b", text: "Bật thêm mọi công cụ", feedback: "Không giúp việc đơn giản." },
+      { id: "c", text: "Giữ nguyên vì càng cao càng tốt", feedback: "Việc đơn giản không cần suy nghĩ sâu." },
+    ],
+    answer: "a",
+    explanation: "Help Center về giới hạn sử dụng cũng khuyên tắt extended thinking khi không cần và hạ effort cho việc thường ngày.",
+  },
+  {
+    questionId: "ch02-l02-q14", lessonId: L, conceptId: "plus-button", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Một bạn viết hướng dẫn giao diện cho người mới. Chọn các ý SAI.",
+    segments: [
+      { id: "s1", text: "Đính kèm file bằng nút + hoặc kéo thả vào cửa sổ chat.", isError: false },
+      { id: "s2", text: "Muốn chat không lưu lịch sử thì vào Settings và xoá tài khoản.", isError: true, why: "Chỉ cần mở chat ẩn danh bằng biểu tượng con ma." },
+      { id: "s3", text: "Đổi model bằng cách gõ tên model vào nội dung tin nhắn.", isError: true, why: "Dùng bộ chọn model." },
+      { id: "s4", text: "Đổi tên hội thoại bằng nút ⋮ → Rename.", isError: false },
+    ],
+    explanation: "Thao tác giao diện làm bằng giao diện.",
+  },
+  {
+    questionId: "ch02-l02-q15", lessonId: L, conceptId: "sidebar", learningObjective: "o1", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết “bản đồ giao diện” ngắn (4–6 dòng) cho đồng nghiệp lần đầu mở claude.ai trên máy tính: mỗi dòng một vùng hoặc nút và công dụng.",
+    source: "Đồng nghiệp làm kế toán, cần: hỏi Claude, đính kèm file Excel, xem lại cuộc chat cũ, đổi model khi cần, và đôi khi hỏi việc riêng tư không muốn lưu.",
+    rubric: [
+      { id: "input", label: "Ô nhập/gửi", weight: 1, check: { kind: "anyKeyword", keywords: ["ô nhập", "ô chat", "nút gửi"] }, pass: "Có ô nhập.", fail: "Nêu ô nhập và nút gửi." },
+      { id: "plus", label: "Nút + để đính kèm", weight: 1, check: { kind: "regex", pattern: "(nut \\+|\\+ )[^\\n]*(dinh kem|file|add files)" }, pass: "Có nút +.", fail: "Nút + → Add files or photos để đính kèm file." },
+      { id: "sidebar", label: "Thanh bên cho chat cũ", weight: 1, check: { kind: "anyKeyword", keywords: ["thanh bên", "chats and tasks"] }, pass: "Có thanh bên.", fail: "Thanh bên trái: danh sách hội thoại." },
+      { id: "model-ghost", label: "Bộ chọn model và chat ẩn danh", weight: 1, check: { kind: "allGroups", groups: [["model"], ["con ma", "ẩn danh", "incognito"]] }, pass: "Có model và ẩn danh.", fail: "Thêm bộ chọn model và biểu tượng con ma (ẩn danh)." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "- Ô nhập ở dưới: gõ câu hỏi rồi bấm nút gửi.\n- Nút + ở góc dưới trái ô nhập: Add files or photos để đính kèm file Excel (cần bật khả năng tạo file trong Settings > Capabilities).\n- Tên model dưới ô nhập: bấm để đổi model.\n- Thanh bên trái: chat mới, Chats and tasks để xem lại cuộc chat cũ, Projects, Artifacts.\n- Biểu tượng con ma ở góc trên phải: chat ẩn danh, không lưu lịch sử.",
+    explanation: "Bản đồ ngắn giúp người mới tự tìm đường.",
+  },
+];

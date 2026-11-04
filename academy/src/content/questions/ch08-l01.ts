@@ -1,0 +1,180 @@
+import type { Question } from "@/lib/types/content";
+
+const L = "ch08-l01";
+
+/** 15 questions for "Token là gì?" — 5 beginner, 6 intermediate, 4 advanced. Prices checked 2026-11-03. */
+export const questionsCh08L01: Question[] = [
+  {
+    questionId: "ch08-l01-q01", lessonId: L, conceptId: "token", learningObjective: "o1", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Token là gì?",
+    options: [
+      { id: "a", text: "Mẩu văn bản nhỏ model xử lý: có thể là một từ, một phần từ hoặc dấu câu", feedback: "Đúng." },
+      { id: "b", text: "Mật khẩu để đăng nhập Claude", feedback: "Đó là thông tin xác thực, không phải token văn bản." },
+      { id: "c", text: "Luôn đúng bằng một từ", feedback: "Một từ có thể là nhiều token." },
+    ],
+    answer: "a",
+    explanation: "Tokenizer chia văn bản thành token; số token không trùng số từ hay số ký tự.",
+  },
+  {
+    questionId: "ch08-l01-q02", lessonId: L, conceptId: "language", learningObjective: "o1", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "true-false",
+    statement: "Cùng một nội dung, bản tiếng Việt có dấu chắc chắn tốn ít token hơn bản tiếng Anh.",
+    prompt: "Đúng hay sai?",
+    answer: false,
+    explanation: "Chữ có dấu thường bị chia nhỏ hơn, nên tiếng Việt thường tốn nhiều token hơn trên mỗi ký tự. Muốn chắc, hãy đo bằng token counting API.",
+  },
+  {
+    questionId: "ch08-l01-q03", lessonId: L, conceptId: "input-output", learningObjective: "o2", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "multiple-choice",
+    prompt: "Những thứ nào được tính là token ĐẦU VÀO? Chọn tất cả.",
+    options: [
+      { id: "a", text: "Tin nhắn bạn vừa gửi", feedback: "Đúng." },
+      { id: "b", text: "Lịch sử hội thoại trước đó", feedback: "Đúng — được gửi lại mỗi lượt." },
+      { id: "c", text: "File PDF đính kèm", feedback: "Đúng." },
+      { id: "d", text: "Câu trả lời Claude viết ra", feedback: "Đó là token đầu ra." },
+    ],
+    answer: ["a", "b", "c"],
+    explanation: "Mọi thứ gửi cho model là đầu vào; những gì model sinh ra là đầu ra.",
+  },
+  {
+    questionId: "ch08-l01-q04", lessonId: L, conceptId: "thinking-tokens", learningObjective: "o2", thinkingSkill: "understand", difficulty: "beginner",
+    questionType: "single-choice",
+    prompt: "Phần suy nghĩ (thinking) của Claude được tính phí như thế nào?",
+    options: [
+      { id: "a", text: "Như token đầu ra", feedback: "Đúng." },
+      { id: "b", text: "Miễn phí hoàn toàn", feedback: "Không — thinking được tính phí." },
+      { id: "c", text: "Như token đầu vào", feedback: "Thinking do model sinh ra nên tính như đầu ra." },
+    ],
+    answer: "a",
+    explanation: "Theo tài liệu Context windows: thinking tokens được tính như output tokens.",
+  },
+  {
+    questionId: "ch08-l01-q05", lessonId: L, conceptId: "mtok", learningObjective: "o3", thinkingSkill: "remember", difficulty: "beginner",
+    questionType: "fill-blank",
+    prompt: "Điền vào chỗ trống.",
+    template: "Trong bảng giá, “$2 / MTok” nghĩa là $2 cho mỗi [[b1]] token.",
+    blanks: [{ id: "b1", accepted: ["một triệu", "1 triệu", "triệu", "1.000.000", "1000000"], width: 10 }],
+    explanation: "MTok = million tokens = một triệu token.",
+  },
+  {
+    questionId: "ch08-l01-q06", lessonId: L, conceptId: "estimate-cost", learningObjective: "o3", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Gửi 100.000 token đầu vào cho Claude Opus 5.5 (giá $4/MTok đầu vào). Chi phí phần đầu vào khoảng bao nhiêu?",
+    options: [
+      { id: "a", text: "$0,40", feedback: "Đúng — 0,1 × $4." },
+      { id: "b", text: "$400", feedback: "Quên chia cho 1.000.000." },
+      { id: "c", text: "$4", feedback: "$4 là giá cho cả triệu token." },
+    ],
+    answer: "a",
+    explanation: "100.000 / 1.000.000 = 0,1 MTok; 0,1 × $4 = $0,40.",
+  },
+  {
+    questionId: "ch08-l01-q07", lessonId: L, conceptId: "input-output", learningObjective: "o2", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "scenario",
+    prompt: "Với Sonnet 5.5 ($2 vào, $10 ra mỗi MTok), một yêu cầu có 1.000 token vào và 1.000 token ra. Phần nào tốn tiền hơn?",
+    options: [
+      { id: "a", text: "Phần đầu ra ($0,01 so với $0,002)", feedback: "Đúng — giá ra gấp 5 lần." },
+      { id: "b", text: "Phần đầu vào", feedback: "Cùng số token nhưng giá vào thấp hơn." },
+      { id: "c", text: "Bằng nhau vì cùng 1.000 token", feedback: "Hai loại token có giá khác nhau." },
+    ],
+    answer: "a",
+    explanation: "0,001 × $10 = $0,01 đầu ra; 0,001 × $2 = $0,002 đầu vào.",
+  },
+  {
+    questionId: "ch08-l01-q08", lessonId: L, conceptId: "count-tokens", learningObjective: "o4", thinkingSkill: "remember", difficulty: "intermediate",
+    questionType: "single-choice",
+    prompt: "Khi gọi API, cách nào cho biết số token đầu vào TRƯỚC khi gửi yêu cầu thật?",
+    options: [
+      { id: "a", text: "Token counting API (endpoint count_tokens) — miễn phí, cho số ước tính sát", feedback: "Đúng." },
+      { id: "b", text: "Đếm số từ rồi nhân 1", feedback: "Số từ không bằng số token." },
+      { id: "c", text: "Gửi yêu cầu thật rồi xem hoá đơn cuối tháng", feedback: "Đó là sau khi đã tốn tiền." },
+    ],
+    answer: "a",
+    explanation: "Token counting miễn phí nhưng có giới hạn số yêu cầu mỗi phút; số đếm là ước tính, có thể lệch chút ít.",
+  },
+  {
+    questionId: "ch08-l01-q09", lessonId: L, conceptId: "tokenizer", learningObjective: "o1", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "true-false",
+    statement: "Từ Claude 4.7 trở đi, model dùng tokenizer mới; cùng một văn bản cho khoảng 30% nhiều token hơn model cũ.",
+    prompt: "Đúng hay sai?",
+    answer: true,
+    explanation: "Tài liệu Token counting và Pricing nêu điều này; hãy đếm lại token theo đúng model định dùng.",
+  },
+  {
+    questionId: "ch08-l01-q10", lessonId: L, conceptId: "mtok", learningObjective: "o3", thinkingSkill: "understand", difficulty: "intermediate",
+    questionType: "matching",
+    prompt: "Ghép model với giá (đầu vào / đầu ra mỗi MTok, bảng giá 03/11/2026).",
+    pairs: [
+      { id: "p1", left: "Claude Opus 5.5", right: "$4 / $20" },
+      { id: "p2", left: "Claude Sonnet 5.5", right: "$2 / $10" },
+      { id: "p3", left: "Claude Haiku 5.5 (prompt đến 100.000 token)", right: "$0,10 / $0,50" },
+    ],
+    explanation: "Giá thay đổi theo thời gian — luôn ghi ngày và kiểm tra trang Pricing chính thức.",
+  },
+  {
+    questionId: "ch08-l01-q11", lessonId: L, conceptId: "estimate-cost", learningObjective: "o3", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "find-error",
+    prompt: "Bảng tính chi phí dưới đây có những dòng sai. Hãy chọn chúng.",
+    segments: [
+      { id: "s1", text: "50.000 token vào × $2/MTok = $100.", isError: true, why: "Quên chia 1.000.000: đúng là 0,05 × $2 = $0,10." },
+      { id: "s2", text: "4.000 token ra tính theo giá đầu vào cho đơn giản.", isError: true, why: "Đầu ra có giá riêng, cao hơn 5 lần." },
+      { id: "s3", text: "Tổng chi phí = phần đầu vào + phần đầu ra.", isError: false },
+      { id: "s4", text: "Ghi rõ ngày tra bảng giá.", isError: false },
+    ],
+    explanation: "Hai lỗi thường gặp: quên đổi sang MTok và dùng một mức giá cho cả hai loại token.",
+  },
+  {
+    questionId: "ch08-l01-q12", lessonId: L, conceptId: "count-tokens", learningObjective: "o4", thinkingSkill: "evaluate", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Nhóm bạn lập ngân sách dựa trên số token đo trên Sonnet 4.6 từ năm ngoái, nay chuyển sang Opus 5.5. Cách làm đúng?",
+    options: [
+      { id: "a", text: "Đếm lại token với Opus 5.5 vì tokenizer mới cho nhiều token hơn, rồi tính lại theo giá mới", feedback: "Đúng." },
+      { id: "b", text: "Giữ nguyên số token cũ, chỉ đổi giá", feedback: "Số token cũng thay đổi theo tokenizer." },
+      { id: "c", text: "Không cần tính lại vì model mới luôn rẻ hơn", feedback: "Không có căn cứ." },
+    ],
+    answer: "a",
+    explanation: "Tài liệu khuyên đếm lại prompt theo model định dùng thay vì dùng lại số đo trên model cũ.",
+  },
+  {
+    questionId: "ch08-l01-q13", lessonId: L, conceptId: "thinking-tokens", learningObjective: "o2", thinkingSkill: "analyze", difficulty: "advanced",
+    questionType: "scenario",
+    prompt: "Câu trả lời của Claude ngắn nhưng số token đầu ra trên báo cáo lại lớn. Giải thích hợp lý nhất?",
+    options: [
+      { id: "a", text: "Phần thinking cũng tính như token đầu ra, dù bạn không thấy hết nó trong câu trả lời", feedback: "Đúng." },
+      { id: "b", text: "Hệ thống đếm sai", feedback: "Hãy kiểm tra thinking trước khi kết luận lỗi." },
+      { id: "c", text: "Token đầu vào bị tính hai lần", feedback: "Báo cáo đang nói về đầu ra." },
+    ],
+    answer: "a",
+    explanation: "Với việc đơn giản, trong Claude Code có thể hạ mức effort (/effort) để giảm thinking.",
+  },
+  {
+    questionId: "ch08-l01-q14", lessonId: L, conceptId: "language", learningObjective: "o1", thinkingSkill: "apply", difficulty: "intermediate",
+    questionType: "predict-output",
+    prompt: "Dùng quy tắc ước lượng của Anthropic (khoảng 2,5 ký tự mỗi token với văn bản thông thường), đoạn văn bản dưới đây khoảng bao nhiêu token?",
+    context: { label: "Dữ liệu", content: "Một tài liệu tiếng Anh dài 5.000 ký tự.", lang: "text" },
+    options: [
+      { id: "a", text: "Khoảng 2.000 token", feedback: "Đúng — 5.000 / 2,5." },
+      { id: "b", text: "Khoảng 12.500 token", feedback: "Đã nhân thay vì chia." },
+      { id: "c", text: "Đúng 5.000 token", feedback: "Một token thường dài hơn một ký tự." },
+    ],
+    answer: "a",
+    explanation: "Đây chỉ là ước lượng nhanh; con số thật phụ thuộc nội dung và tokenizer — đo bằng token counting API.",
+  },
+  {
+    questionId: "ch08-l01-q15", lessonId: L, conceptId: "estimate-cost", learningObjective: "o3", thinkingSkill: "create", difficulty: "advanced",
+    questionType: "real-task",
+    prompt: "Viết bản ước tính chi phí hằng tháng cho việc tóm tắt biên bản bằng Sonnet 5.5, trình bày phép tính từng bước.",
+    source: "Mỗi ngày 30 biên bản; mỗi biên bản khoảng 8.000 token vào và 1.000 token ra; 22 ngày làm việc/tháng. Giá Sonnet 5.5 ngày 03/11/2026: $2 vào, $10 ra mỗi MTok.",
+    rubric: [
+      { id: "item", label: "Chi phí mỗi biên bản ≈ $0,026", weight: 1, check: { kind: "regex", pattern: "0[.,]026\\b" }, pass: "Đúng $0,026/biên bản.", fail: "0,008 × 2 = $0,016; 0,001 × 10 = $0,01; cộng $0,026." },
+      { id: "day", label: "Mỗi ngày ≈ $0,78", weight: 1, check: { kind: "regex", pattern: "0[.,]78\\b" }, pass: "Đúng $0,78/ngày.", fail: "30 × $0,026 = $0,78." },
+      { id: "month", label: "Mỗi tháng ≈ $17,16", weight: 1, check: { kind: "regex", pattern: "17[.,]16\\b" }, pass: "Đúng $17,16/tháng.", fail: "22 × $0,78 = $17,16." },
+      { id: "note", label: "Ghi chú ước tính", weight: 1, check: { kind: "anyKeyword", keywords: ["ước tính", "giá niêm yết", "có thể thay đổi", "chưa tính cache"] }, pass: "Có ghi chú.", fail: "Ghi rõ đây là ước tính theo giá niêm yết." },
+    ],
+    passScore: 0.75,
+    referenceAnswer:
+      "Mỗi biên bản: vào 8.000/1.000.000 × $2 = $0,016; ra 1.000/1.000.000 × $10 = $0,01; cộng $0,026.\nMỗi ngày: 30 × $0,026 = $0,78.\nMỗi tháng: 22 × $0,78 = $17,16.\nGhi chú: ước tính theo giá niêm yết ngày 03/11/2026, chưa tính cache và thinking; giá có thể thay đổi.",
+    explanation: "Bản ước tính tốt có phép tính rõ ràng, đơn vị nhất quán và ghi chú giả định.",
+  },
+];
