@@ -68,7 +68,7 @@ export default function HomePage() {
             </h2>
             <p className="text-muted-foreground">
               {publishedLessons().length} bài đã phát hành đầy đủ / {totalPlannedLessons()} bài trong lộ trình · {allQuestions().length} câu hỏi.
-              Bài chưa phát hành được ghi rõ “Sắp ra mắt”.
+              {publishedLessons().length < totalPlannedLessons() && " Bài chưa phát hành được ghi rõ “Sắp ra mắt”."}
             </p>
           </div>
           <Link href="/hoc/" className="text-sm font-semibold text-primary hover:underline">

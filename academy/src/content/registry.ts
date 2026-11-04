@@ -88,6 +88,13 @@ import { questionsCh11L04 } from "./questions/ch11-l04";
 import { questionsCh11L05 } from "./questions/ch11-l05";
 import { questionsCh11L06 } from "./questions/ch11-l06";
 import { questionsCh11L07 } from "./questions/ch11-l07";
+import { questionsCh12L01 } from "./questions/ch12-l01";
+import { questionsCh12L02 } from "./questions/ch12-l02";
+import { questionsCh12L03 } from "./questions/ch12-l03";
+import { questionsCh12L04 } from "./questions/ch12-l04";
+import { questionsCh12L05 } from "./questions/ch12-l05";
+import { questionsCh12L06 } from "./questions/ch12-l06";
+import { questionsCh12L07 } from "./questions/ch12-l07";
 
 /**
  * Single place where content is registered. To publish a lesson:
@@ -181,6 +188,13 @@ export const QUESTION_BANKS: Record<string, Question[]> = {
   "ch11-l05": questionsCh11L05,
   "ch11-l06": questionsCh11L06,
   "ch11-l07": questionsCh11L07,
+  "ch12-l01": questionsCh12L01,
+  "ch12-l02": questionsCh12L02,
+  "ch12-l03": questionsCh12L03,
+  "ch12-l04": questionsCh12L04,
+  "ch12-l05": questionsCh12L05,
+  "ch12-l06": questionsCh12L06,
+  "ch12-l07": questionsCh12L07,
 };
 
 const indexedCache = new Map<string, IndexedQuestion[]>();

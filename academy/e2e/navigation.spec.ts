@@ -11,14 +11,12 @@ test("home shows the main sections and links to the course", async ({ page }) =>
   await expect(page.getByRole("option").first()).toBeVisible();
 });
 
-test("course page: published lessons link, planned lessons are labelled and not links", async ({ page }) => {
+test("course page: every outline lesson is published and links to its page", async ({ page }) => {
   await page.goto("/hoc/");
   await expect(page.getByRole("link", { name: /Prompt là gì\?/ }).first()).toBeVisible();
-  const planned = page.locator("section", { hasText: "Chương 12: Dự án tốt nghiệp" }).locator("li", { hasText: "Đánh giá kết quả" });
-  await expect(planned).toBeVisible();
-  await expect(planned.locator("a")).toHaveCount(0);
-  await expect(planned).toContainText("Sắp ra mắt");
-  await expect(page.getByText("Sắp ra mắt").first()).toBeVisible();
+  const last = page.locator("section", { hasText: "Chương 12: Dự án tốt nghiệp" }).locator("li", { hasText: "Đánh giá kết quả" });
+  await expect(last.locator("a")).toHaveAttribute("href", /\/hoc\/du-an-tot-nghiep\/danh-gia-ket-qua\/?$/);
+  await expect(page.getByText("Sắp ra mắt")).toHaveCount(0);
 });
 
 test("search dialog with keyboard navigation", async ({ page, isMobile }) => {

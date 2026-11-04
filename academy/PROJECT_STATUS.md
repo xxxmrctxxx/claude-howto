@@ -1,6 +1,6 @@
 # Trạng thái dự án — Claude HowTo Academy
 
-Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để phiên làm việc sau có thể tiếp tục.
+Cập nhật: 04/11/2026. File này được cập nhật sau mỗi phase để phiên làm việc sau có thể tiếp tục.
 
 ## Tổng quan
 
@@ -11,7 +11,7 @@ Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để 
 | 3 | Lesson Engine + bài mẫu đầy đủ | Hoàn thành (bài “Prompt là gì?”) |
 | 4 | Question Engine, chống trùng, kiểm tra | Hoàn thành |
 | 5 | 5 Practice Labs | Hoàn thành |
-| 6 | Nội dung các chương còn lại | Đang làm — Chương 1 (6/6), Chương 2 (7/7), Chương 3 (8/8), Chương 4 (7/7), Chương 5 (9/9), Chương 6 (9/9), Chương 7 (8/8), Chương 8 (8/8), Chương 9 (8/8), Chương 10 (6/6), Chương 11 (7/7) hoàn thành; các chương khác xem bảng |
+| 6 | Nội dung các chương còn lại | Hoàn thành — đủ 12 chương, 90/90 bài |
 | 7 | Gamification, cá nhân hoá, tìm kiếm, UX | Hoàn thành phần nền tảng |
 | 8 | Kiểm thử tổng thể, chuẩn bị production | Có CI + bộ test; xem giới hạn |
 
@@ -30,8 +30,8 @@ Cập nhật: 03/11/2026. File này được cập nhật sau mỗi phase để 
 | 9. Xây dựng website bằng Claude | Đủ 8/8 bài: Phân tích yêu cầu · Thiết kế giao diện · Tạo project · Xây dựng frontend · Xây dựng backend · Kiểm thử · Sửa lỗi · Deploy | 8 × 15 = 120 |
 | 10. Xây dựng ứng dụng thực tế | Đủ 6/6 bài: Ứng dụng quản lý công việc · Dashboard QA · Công cụ phân tích Excel · Công cụ xử lý PDF · Ứng dụng kiểm tra lỗi hình ảnh · Ứng dụng quản lý dự án kỹ thuật | 6 × 15 = 90 |
 | 11. Workflow tự động hoá | Đủ 7/7 bài: Kết nối API · Xử lý dữ liệu · Tạo báo cáo · Workflow nhiều bước · Tự động kiểm thử · Xây dựng AI Agent · An toàn và phân quyền | 7 × 15 = 105 |
-| Các chương khác | Đề cương hiển thị “Sắp ra mắt”, không có trang rỗng | — |
-| **Tổng** | **83 bài đầy đủ 12 phần (11 chương trọn vẹn)** | **1.245 câu, 0 cảnh báo trùng chưa duyệt** |
+| 12. Dự án tốt nghiệp | Đủ 7/7 bài: Tự chọn một dự án · Viết yêu cầu · Tạo kế hoạch · Triển khai · Kiểm thử · Tối ưu · Đánh giá kết quả | 7 × 15 = 105 |
+| **Tổng** | **90 bài đầy đủ 12 phần (12/12 chương)** | **1.350 câu, 0 cảnh báo trùng chưa duyệt** |
 
 Chương 3 dùng hạ tầng **bài học thuần dữ liệu**: infographic (`flow`, `compare`, `cards`, `table`, `annotated`) và mô phỏng (`classify`, `choose`, `sequence`, `highlight`, `verify`, `terminal`, `prompt-lab`) được khai báo ngay trong file bài học, không cần viết component mới. Nội dung đối chiếu trang Prompting best practices và Prompt engineering overview của Anthropic (03/11/2026).
 
@@ -50,6 +50,8 @@ Chương 9 đi trọn một dự án mẫu (web theo dõi lỗi QA `web-loi-qa`)
 Chương 10 ghép các công cụ đã học thành ứng dụng cho kỹ sư và QA/QC, đối chiếu Claude Help Center ngày 03/11/2026 (Projects, Artifacts, Dashboards, Docs, Create and edit files, Upload files) và tài liệu Vision của Claude (định dạng ảnh, giới hạn kích thước/số ảnh, hạn chế: ảnh mờ/xoay/nhỏ, toạ độ và đếm gần đúng, không nhận diện người, cần người kiểm tra). Dữ liệu mẫu (danh sách lỗi, bảng Excel, biên bản họp) là ví dụ tự soạn; mọi bài nhấn mạnh kiểm chứng số liệu và tuân thủ chính sách dữ liệu công ty.
 
 Chương 11 đối chiếu ngày 03/11/2026: Claude API Docs (API overview, Authentication, Versions, Using the Messages API, Errors, Structured outputs, Batch processing, Tool use overview), Claude Code Docs (Run Claude Code programmatically, GitHub Actions, Agent SDK overview, Agent SDK permissions) và bài Building effective agents của Anthropic. Ví dụ code dùng ID mô hình `claude-opus-5-5` và API version `2026-10-21` tại thời điểm đối chiếu — cả hai thay đổi theo thời gian, bài nhắc học viên xem Models overview và trang Versions. Bài An toàn và phân quyền có terminal mô phỏng dựng khung dự án với `.claude/settings.json` (deny) và câu `terminal-task` thứ năm; git mô phỏng chưa đọc `.gitignore` nên bài chỉ tạo `.env.example`, không tạo `.env` thật.
+
+Chương 12 là dự án tốt nghiệp: mỗi bài là một chặng (điều lệ → SPEC.md → PLAN.md → triển khai theo mốc → bốn lớp kiểm thử → tối ưu có đo → đánh giá và bàn giao), kèm dự án mẫu “Sổ tay ca số” do khoá học soạn (số liệu minh hoạ, ghi rõ trong caption). Quy trình đối chiếu Best practices, Checkpointing, Subagents, Memory, Permission modes, /code-review và Manage costs của Claude Code, cùng Pricing và Batch processing của Claude API (03/11/2026). Câu `terminal-task` thứ sáu: nhánh cho mốc + commit PLAN.md. Khi không còn bài nào chưa phát hành, các dòng “Sắp ra mắt” ở trang chủ và trang lộ trình tự ẩn.
 
 Chương 8 đối chiếu ngày 03/11/2026: trang Manage costs, Memory, Permissions, Best practices của Claude Code và Pricing, Context windows, Token counting của Anthropic. Giá theo MTok (Opus 5.5 $4/$20, Sonnet 5.5 $2/$10, Haiku 5.5 $0,10/$0,50, Fable 5.1 $10/$50; cache, Batch −50%) và số liệu tham khảo ($13/ngày/lập trình viên) **dễ thay đổi** — mọi chỗ dùng đều ghi ngày và ghi rõ là ước tính.
 
@@ -70,8 +72,8 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 - **Bài tập**: đáp án tham khảo đạt rubric của chính nó, còn khung gợi ý (placeholder) thì không — chống rubric quá dễ.
 - **Mô phỏng dữ liệu**: mỗi mô phỏng giải được đúng như khai báo (nhãn tồn tại, nhiệm vụ terminal hoàn thành bằng lệnh gợi ý, prompt-lab: đáp án ≥ 80%, khung ban đầu < 80%).
 - **Câu hỏi terminal-task**: lệnh tham khảo đạt mọi điều kiện, và trạng thái ban đầu chưa đạt sẵn.
-- **Số lượng**: 488 unit test (Vitest) và 351 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
-- **E2E** (Playwright, desktop + mobile): 6 mô phỏng Chương 1, mốc hoàn thành chương (6 bài × 50 XP + 100 XP), điều hướng, 404, tìm kiếm bằng bàn phím, quiz thích ứng đủ 15 câu không lặp + reload giữa chừng, mô phỏng lắp ráp prompt, bài tập, ghi chú/bookmark/hoàn thành sau reload, 5 lab, dark mode, responsive (không tràn ngang), ngân sách hiệu năng trang chủ, axe WCAG 2.1 AA ở chế độ sáng và tối; Chương 5: 9 bài đủ 12 phần + sơ đồ, 2 terminal mô phỏng, đối chiếu nguồn (verify), chọn tình huống, phân loại, sắp thứ tự, và một câu terminal-task chấm trong quiz; Chương 8: 8 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (phân loại, đối chiếu nguồn, đánh dấu, chọn tình huống) và XP mô phỏng tính đúng một lần. Chương 6: 9 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (gồm terminal git) và câu terminal-task với nhánh + commit. Chương 7: 8 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (đối chiếu nguồn, chọn tình huống, phân loại 6 nhóm, terminal tạo SKILL.md, đánh dấu, sắp thứ tự). Chương 2: 7 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (chọn tình huống, đối chiếu nguồn, phân loại). Chương 4: 7 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (chọn tình huống, đánh dấu, phân loại, đối chiếu nguồn, sắp thứ tự). Chương 9: 8 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (gồm terminal dựng khung dự án và commit). Chương 10: 6 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (phân loại, đánh dấu, đối chiếu nguồn, chọn tình huống). Chương 11: 7 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (đối chiếu nguồn, đánh dấu, chọn kênh, phân loại mẫu workflow, sắp thứ tự vòng tool use, terminal cấu hình an toàn).
+- **Số lượng**: 523 unit test (Vitest) và 371 E2E (Playwright, 3 test bỏ qua có chủ đích theo thiết bị).
+- **E2E** (Playwright, desktop + mobile): 6 mô phỏng Chương 1, mốc hoàn thành chương (6 bài × 50 XP + 100 XP), điều hướng, 404, tìm kiếm bằng bàn phím, quiz thích ứng đủ 15 câu không lặp + reload giữa chừng, mô phỏng lắp ráp prompt, bài tập, ghi chú/bookmark/hoàn thành sau reload, 5 lab, dark mode, responsive (không tràn ngang), ngân sách hiệu năng trang chủ, axe WCAG 2.1 AA ở chế độ sáng và tối; Chương 5: 9 bài đủ 12 phần + sơ đồ, 2 terminal mô phỏng, đối chiếu nguồn (verify), chọn tình huống, phân loại, sắp thứ tự, và một câu terminal-task chấm trong quiz; Chương 8: 8 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (phân loại, đối chiếu nguồn, đánh dấu, chọn tình huống) và XP mô phỏng tính đúng một lần. Chương 6: 9 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (gồm terminal git) và câu terminal-task với nhánh + commit. Chương 7: 8 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (đối chiếu nguồn, chọn tình huống, phân loại 6 nhóm, terminal tạo SKILL.md, đánh dấu, sắp thứ tự). Chương 2: 7 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (chọn tình huống, đối chiếu nguồn, phân loại). Chương 4: 7 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (chọn tình huống, đánh dấu, phân loại, đối chiếu nguồn, sắp thứ tự). Chương 9: 8 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (gồm terminal dựng khung dự án và commit). Chương 10: 6 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (phân loại, đánh dấu, đối chiếu nguồn, chọn tình huống). Chương 11: 7 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (đối chiếu nguồn, đánh dấu, chọn kênh, phân loại mẫu workflow, sắp thứ tự vòng tool use, terminal cấu hình an toàn). Chương 12: 7 bài đủ 12 phần + sơ đồ, mọi mô phỏng giải được (phân loại, đánh dấu, sắp thứ tự, chọn tình huống); trang lộ trình không còn bài “Sắp ra mắt” và bài cuối có liên kết.
 - **Chặn bundle phình to**: test tĩnh từ chối mọi file `"use client"` import registry hoặc chỉ mục tìm kiếm; test kiểm tra catalog khớp registry (tiêu đề, link, 12 mã phần).
 
 ## Giới hạn hiện tại (trung thực)
@@ -85,10 +87,11 @@ Thông tin về model (danh sách, mô tả, độ trễ, giá API, context wind
 
 ## Bước tiếp theo đề xuất
 
-Thứ tự còn lại (7 bài: Chương 12), kiểm thử trước khi sang chương sau:
+Toàn bộ 90 bài đã phát hành. Việc tiếp theo:
 
-1. Chương 12: dự án tốt nghiệp — xây trên Project Builder, Debug Challenge, dự án mẫu web-loi-qa (Chương 9), ứng dụng Chương 10 và tự động hoá Chương 11. Khi Chương 12 phát hành hết, sửa test điều hướng đang dùng bài “Đánh giá kết quả” làm bài sắp ra mắt.
-2. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
+1. Đối chiếu lại định kỳ các thông tin dễ đổi (giới hạn Help Center, ID mô hình, API version, giá, cờ CLI) — mỗi bài ghi ngày đối chiếu trong `updatedAt` và `sources`.
+2. Mở rộng ngân hàng câu hỏi (hiện 15 câu/bài) và thêm câu `terminal-task` khi phù hợp.
+3. Cân nhắc adapter lưu trữ phía máy chủ khi cần đồng bộ nhiều thiết bị.
 
 ## Triển khai
 

@@ -9,12 +9,13 @@ import { LESSONS } from "@/content/registry";
 export const metadata: Metadata = { title: "Lộ trình học", description: "12 chương từ Claude AI cơ bản đến dự án tốt nghiệp." };
 
 export default function CoursePage() {
+  const hasPlanned = course.chapters.some((ch) => ch.outline.some((o) => !o.lessonId));
   return (
     <div className="mx-auto max-w-7xl px-4 py-10">
       <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">Lộ trình học</h1>
       <p className="mt-2 max-w-3xl text-muted-foreground">
         Thứ tự chương là thứ tự học được khuyến nghị. Bài đã phát hành có đủ 12 phần (mục tiêu, giải thích, hình minh hoạ, sơ đồ, ví dụ sai/đúng,
-        mô phỏng, từng bước, bài tập, câu hỏi, đáp án, tóm tắt, nhiệm vụ thực tế). Bài “Sắp ra mắt” chưa có nội dung và không thể mở.
+        mô phỏng, từng bước, bài tập, câu hỏi, đáp án, tóm tắt, nhiệm vụ thực tế).{hasPlanned && " Bài “Sắp ra mắt” chưa có nội dung và không thể mở."}
       </p>
       <div className="mt-8">
         <Roadmap />
